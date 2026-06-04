@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olas de Matanzas — Propuestas de sitio web</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #ffffff;
+    color: #000000;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 64px 28px 96px; }
+
+  header { border-bottom: 1px solid #e3e3e3; padding-bottom: 36px; margin-bottom: 8px; }
+  .eyebrow { font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: #666; margin-bottom: 14px; }
+  h1 { font-size: 34px; line-height: 1.2; font-weight: 700; letter-spacing: -.02em; }
+  header p { margin-top: 16px; font-size: 16px; color: #333; max-width: 720px; }
+
+  .note {
+    margin: 28px 0 0;
+    padding: 16px 18px;
+    border: 1px solid #000;
+    border-radius: 8px;
+    font-size: 14.5px;
+  }
+  .note strong { font-weight: 700; }
+
+  .version { padding: 56px 0; border-bottom: 1px solid #e3e3e3; }
+  .version:last-of-type { border-bottom: none; }
+  .grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: start; }
+
+  .shot {
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    position: relative;
+    max-height: 460px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04);
+    transition: box-shadow .2s ease, transform .2s ease;
+  }
+  .shot:hover { box-shadow: 0 12px 34px rgba(0,0,0,.16); transform: translateY(-2px); }
+  .browserbar {
+    display: flex; align-items: center; gap: 6px;
+    padding: 9px 12px; background: #f3f3f3; border-bottom: 1px solid #e3e3e3;
+  }
+  .browserbar span { width: 9px; height: 9px; border-radius: 50%; background: #cfcfcf; }
+  .shot .scrollarea { max-height: 420px; overflow: hidden; }
+  .shot img { display: block; width: 100%; height: auto; }
+  .shot .open {
+    position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%);
+    background: #000; color: #fff; font-size: 13px; letter-spacing: .04em;
+    padding: 9px 18px; border-radius: 999px; opacity: 0; transition: opacity .2s ease;
+    pointer-events: none; white-space: nowrap;
+  }
+  .shot:hover .open { opacity: 1; }
+  .fade {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 90px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), #ffffff);
+    pointer-events: none;
+  }
+
+  .desc .vtag { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: #777; }
+  .desc h2 { font-size: 23px; font-weight: 700; letter-spacing: -.01em; margin: 6px 0 14px; }
+  .desc p { font-size: 15.5px; color: #2a2a2a; margin-bottom: 14px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 7px; margin: 16px 0 22px; }
+  .tags span { font-size: 12.5px; border: 1px solid #cfcfcf; border-radius: 999px; padding: 4px 11px; color: #333; }
+  .links { display: flex; gap: 22px; flex-wrap: wrap; }
+  .links a { font-size: 14.5px; color: #000; text-decoration: none; border-bottom: 1.5px solid #000; padding-bottom: 2px; }
+  .links a:hover { opacity: .6; }
+  .links a.secondary { border-bottom-color: #bbb; color: #555; }
+
+  footer { margin-top: 64px; font-size: 13.5px; color: #777; text-align: center; }
+
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: 1fr; gap: 22px; }
+    .shot { max-height: 380px; }
+    .shot .scrollarea { max-height: 340px; }
+    h1 { font-size: 27px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Propuesta de sitio web</div>
+    <h1>Olas de Matanzas — 5 propuestas de diseño</h1>
+    <p>A continuación se presentan cinco versiones completas del sitio web para el complejo
+      turístico Olas de Matanzas (OMZ). Cada propuesta mantiene el mismo contenido y la misma
+      marca, pero explora una dirección visual distinta. Haz clic en cualquier captura para abrir
+      la demostración navegable.</p>
+
+    <div class="note">
+      <strong>Importante:</strong> en estas demostraciones solo están disponibles las páginas
+      <strong>Inicio</strong> y <strong>Hotel</strong>. El resto de las secciones del menú
+      (Cabañas, Domos, Camping, Restaurant, Contacto) aún no están desarrolladas.
+    </div>
+  </header>
+
+  <!-- V1 -->
+  <section class="version">
+    <div class="grid">
+      <a class="shot" href="demos/v1/inicio.html" target="_blank" rel="noopener">
+        <div class="browserbar"><span></span><span></span><span></span></div>
+        <div class="scrollarea"><img loading="lazy" decoding="async" src="assets/v1.jpg" alt="Versión 1 — Inicio"></div>
+        <div class="fade"></div>
+        <div class="open">Abrir demostración ↗</div>
+      </a>
+      <div class="desc">
+        <div class="vtag">Versión 1</div>
+        <h2>Editorial y luminosa</h2>
+        <p>Tipografía grande y de carácter (Schibsted Grotesk) sobre fondos claros y cálidos,
+          con un acento verde mar. Portada a pantalla completa con la ola como protagonista y un
+          titular contundente. Transmite una imagen moderna, limpia y de revista.</p>
+        <div class="tags"><span>Claro / cálido</span><span>Tipografía grande</span><span>Acento verde mar</span><span>Moderno</span></div>
+        <div class="links">
+          <a href="demos/v1/inicio.html" target="_blank" rel="noopener">Ver Inicio →</a>
+          <a class="secondary" href="demos/v1/hotel.html" target="_blank" rel="noopener">Ver página Hotel</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- V2 -->
+  <section class="version">
+    <div class="grid">
+      <a class="shot" href="demos/v2/inicio.html" target="_blank" rel="noopener">
+        <div class="browserbar"><span></span><span></span><span></span></div>
+        <div class="scrollarea"><img loading="lazy" decoding="async" src="assets/v2.jpg" alt="Versión 2 — Inicio"></div>
+        <div class="fade"></div>
+        <div class="open">Abrir demostración ↗</div>
+      </a>
+      <div class="desc">
+        <div class="vtag">Versión 2</div>
+        <h2>Boutique y elegante</h2>
+        <p>Tipografía serif refinada (Cormorant Garamond) con detalles en cursiva y una paleta
+          arena y verde apagado. Portada centrada con el monograma OMZ y el lema “entre mar y
+          bosque”. Una propuesta más sofisticada y emocional, estilo hotel boutique.</p>
+        <div class="tags"><span>Serif elegante</span><span>Tonos arena</span><span>Centrado</span><span>Boutique</span></div>
+        <div class="links">
+          <a href="demos/v2/inicio.html" target="_blank" rel="noopener">Ver Inicio →</a>
+          <a class="secondary" href="demos/v2/hotel.html" target="_blank" rel="noopener">Ver página Hotel</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- V3 -->
+  <section class="version">
+    <div class="grid">
+      <a class="shot" href="demos/v3/inicio.html" target="_blank" rel="noopener">
+        <div class="browserbar"><span></span><span></span><span></span></div>
+        <div class="scrollarea"><img loading="lazy" decoding="async" src="assets/v3.jpg" alt="Versión 3 — Inicio"></div>
+        <div class="fade"></div>
+        <div class="open">Abrir demostración ↗</div>
+      </a>
+      <div class="desc">
+        <div class="vtag">Versión 3</div>
+        <h2>Minimalista en blanco y negro</h2>
+        <p>Diseño de máximo contraste: solo blanco y negro, tipografía Archivo en mayúsculas con
+          amplio espaciado y un menú muy sobrio. La fotografía de la arquitectura frente al mar es
+          la única que aporta color. Look arquitectónico, serio y atemporal.</p>
+        <div class="tags"><span>Blanco y negro</span><span>Minimalista</span><span>Arquitectónico</span><span>Atemporal</span></div>
+        <div class="links">
+          <a href="demos/v3/inicio.html" target="_blank" rel="noopener">Ver Inicio →</a>
+          <a class="secondary" href="demos/v3/hotel.html" target="_blank" rel="noopener">Ver página Hotel</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- V4 -->
+  <section class="version">
+    <div class="grid">
+      <a class="shot" href="demos/v4/inicio.html" target="_blank" rel="noopener">
+        <div class="browserbar"><span></span><span></span><span></span></div>
+        <div class="scrollarea"><img loading="lazy" decoding="async" src="assets/v4.jpg" alt="Versión 4 — Inicio"></div>
+        <div class="fade"></div>
+        <div class="open">Abrir demostración ↗</div>
+      </a>
+      <div class="desc">
+        <div class="vtag">Versión 4</div>
+        <h2>Surf y energía</h2>
+        <p>La propuesta más atrevida: tipografía Bricolage Grotesque, fondo oscuro cálido y acentos
+          vivos en azul eléctrico y naranja. Detalles tipo “marca surfista” (coordenadas 34°S,
+          indicador de scroll) y un tono cercano y desenfadado. Pensada para un público joven y activo.</p>
+        <div class="tags"><span>Oscuro</span><span>Azul + naranja</span><span>Surf / juvenil</span><span>Atrevido</span></div>
+        <div class="links">
+          <a href="demos/v4/inicio.html" target="_blank" rel="noopener">Ver Inicio →</a>
+          <a class="secondary" href="demos/v4/hotel.html" target="_blank" rel="noopener">Ver página Hotel</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- V5 -->
+  <section class="version">
+    <div class="grid">
+      <a class="shot" href="demos/v5/inicio.html" target="_blank" rel="noopener">
+        <div class="browserbar"><span></span><span></span><span></span></div>
+        <div class="scrollarea"><img loading="lazy" decoding="async" src="assets/v5.jpg" alt="Versión 5 — Inicio"></div>
+        <div class="fade"></div>
+        <div class="open">Abrir demostración ↗</div>
+      </a>
+      <div class="desc">
+        <div class="vtag">Versión 5</div>
+        <h2>Equilibrada y depurada</h2>
+        <p>Toma la base de la Versión 4 pero la lleva a un terreno más neutro y refinado: misma
+          tipografía moderna, botones sobrios y una paleta calmada que deja respirar la fotografía.
+          El punto medio entre el carácter de la 4 y la limpieza de la 3.</p>
+        <div class="tags"><span>Neutro / cálido</span><span>Moderno</span><span>Sobrio</span><span>Equilibrado</span></div>
+        <div class="links">
+          <a href="demos/v5/inicio.html" target="_blank" rel="noopener">Ver Inicio →</a>
+          <a class="secondary" href="demos/v5/hotel.html" target="_blank" rel="noopener">Ver página Hotel</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Olas de Matanzas (OMZ) · Matanzas, Chile — Solo disponibles las páginas Inicio y Hotel en cada demostración.
+  </footer>
+
+</div>
+</body>
+</html>

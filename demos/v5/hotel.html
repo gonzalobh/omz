@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel — Olas de Matanzas</title>
+<meta name="description" content="Habitaciones con baño privado, TV satelital y terraza con vista al mar en Olas de Matanzas, Chile.">
+<link rel="icon" type="image/png" href="assets/a-956e8caaf162.png">
+<link rel="apple-touch-icon" href="assets/a-59e77ee6aef2.png">
+<style>
+/* =========================================================
+   OLAS DE MATANZAS — V5 · surf atmosphere
+   sand + ink + electric blue · Bricolage Grotesque
+   ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+  --ink:#000;           /* black */
+  --ink2:#000;
+  --sand:#fff;          /* white */
+  --cream:#fff;
+  --blue:#000;          /* accents resolved to b/w via overrides */
+  --coral:#000;
+  --white:#fff;
+  --display:'Bricolage Grotesque',system-ui,sans-serif;
+  --body:'Hanken Grotesk',system-ui,sans-serif;
+  --mono:'Space Mono',ui-monospace,monospace;
+  --maxw:1400px;
+  --gut:clamp(20px,5vw,80px);
+  --r:24px; --r-lg:34px; --r-btn:999px;
+  --e:cubic-bezier(.76,0,.24,1);
+  --e2:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:var(--body);background:var(--sand);color:var(--ink);line-height:1.6;overflow-x:hidden;font-weight:400}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--blue);color:#fff}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut)}
+.section{padding:clamp(78px,11vw,160px) 0}
+h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:.98;letter-spacing:-.02em}
+.mono{font-family:var(--mono);font-size:.72rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase}
+.eyebrow{font-family:var(--mono);font-size:.72rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;display:inline-block;color:var(--blue)}
+.ink{background:var(--ink);color:var(--cream)}
+.ink h1,.ink h2,.ink h3,.ink h4{color:var(--cream)}
+.ink .eyebrow{color:var(--coral)}
+
+/* film grain atmosphere */
+.grain{position:fixed;inset:0;z-index:95;pointer-events:none;opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--blue);z-index:96;transition:width .1s linear}
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+.r{opacity:0;transform:translateY(34px);transition:opacity 1s var(--e2),transform 1s var(--e2)}
+.r.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.4s}
+.ri{position:relative;overflow:hidden;border-radius:var(--r)}
+.ri::after{content:"";position:absolute;inset:0;background:var(--sand);transform:translateY(0);transition:transform 1.1s var(--e);z-index:3;pointer-events:none}
+.ink .ri::after{background:var(--ink)}
+.ri.in::after{transform:translateY(-100.5%)}
+.ri img{transform:scale(1.16);transition:transform 1.7s var(--e2)}
+.ri.in img{transform:scale(1)}
+/* word rise */
+.words .w{display:inline-block;overflow:hidden;vertical-align:top}
+.words .w span{display:inline-block;transform:translateY(105%);transition:transform .9s var(--e2)}
+.words.in .w span{transform:none}
+.words.in .w:nth-child(2) span{transition-delay:.05s}
+.words.in .w:nth-child(3) span{transition-delay:.1s}
+.words.in .w:nth-child(4) span{transition-delay:.15s}
+.words.in .w:nth-child(5) span{transition-delay:.2s}
+.words.in .w:nth-child(6) span{transition-delay:.25s}
+.words.in .w:nth-child(7) span{transition-delay:.3s}
+.words.in .w:nth-child(8) span{transition-delay:.35s}
+.words.in .w:nth-child(9) span{transition-delay:.4s}
+.words.in .w:nth-child(n+10) span{transition-delay:.45s}
+@media(prefers-reduced-motion:reduce){
+  .r{opacity:1!important;transform:none!important}
+  .ri::after{display:none!important}.ri img{transform:none!important}
+  .words .w span{transform:none!important}
+}
+
+/* =========================================================
+   NAV
+   ========================================================= */
+.nav{position:fixed;inset:0 0 auto 0;z-index:60;display:flex;align-items:center;justify-content:space-between;
+  padding:24px var(--gut);transition:background .55s var(--e2),padding .55s var(--e2)}
+.nav.scrolled{background:var(--ink);padding:13px var(--gut)}
+.nav__logo{height:38px;width:auto;display:block}
+.nav__links{display:flex;gap:clamp(16px,2vw,34px);align-items:center}
+.nav__links a{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;position:relative;padding:6px 0}
+.nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--blue);transition:width .4s var(--e2)}
+.nav__links a:hover::after,.nav__links a.active::after{width:100%}
+.nav__cta{font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);
+  background:var(--blue);color:#fff;padding:13px 26px;border-radius:var(--r-btn);transition:background .4s var(--e2),transform .25s var(--e2)}
+.nav__cta:hover{background:var(--coral)}
+.nav__burger{display:none;flex-direction:column;gap:6px;cursor:pointer;background:none;border:0;padding:6px}
+.nav__burger span{width:26px;height:2px;background:#fff;transition:.4s var(--e2)}
+@media(max-width:980px){.nav__links,.nav__cta{display:none}.nav__burger{display:flex}}
+
+.nav__mobile{display:none}
+@media(max-width:980px){
+  .nav__mobile{position:fixed;inset:0;z-index:65;background:var(--ink);color:var(--cream);transform:translateY(-101%);
+    transition:transform .6s var(--e);display:flex;flex-direction:column;padding:18px var(--gut) 34px}
+  .nav__mobile.open{transform:none}
+  .nav__mobile-top{display:flex;align-items:center;justify-content:space-between;height:46px}
+  .nav__mobile-logo{height:32px;width:auto}
+  .nav__mobile-close{background:none;border:0;color:#fff;cursor:pointer;padding:8px;margin-right:-8px;display:flex}
+  .nav__mobile-links{display:flex;flex-direction:column;margin-top:8px;flex:1;justify-content:center}
+  .nav__mobile-links a{font-family:var(--display);font-size:clamp(2.2rem,12vw,3.6rem);font-weight:700;color:#fff;
+    letter-spacing:-.02em;line-height:1;padding:15px 0;border-top:1px solid rgba(255,255,255,.16);display:flex;align-items:center;gap:16px;
+    opacity:0;transform:translateY(16px);transition:opacity .5s var(--e2),transform .5s var(--e2)}
+  .nav__mobile-links a:last-child{border-bottom:1px solid rgba(255,255,255,.16)}
+  .nav__mobile-links .ix{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--coral);align-self:flex-start;margin-top:8px}
+  .nav__mobile.open .nav__mobile-links a{opacity:1;transform:none}
+  .nav__mobile.open .nav__mobile-links a:nth-child(1){transition-delay:.08s}.nav__mobile.open .nav__mobile-links a:nth-child(2){transition-delay:.14s}
+  .nav__mobile.open .nav__mobile-links a:nth-child(3){transition-delay:.2s}.nav__mobile.open .nav__mobile-links a:nth-child(4){transition-delay:.26s}
+  .nav__mobile.open .nav__mobile-links a:nth-child(5){transition-delay:.32s}.nav__mobile.open .nav__mobile-links a:nth-child(6){transition-delay:.38s}
+  .nav__mobile-foot{opacity:0;transition:opacity .5s var(--e2) .42s}.nav__mobile.open .nav__mobile-foot{opacity:1}
+  .nav__mobile-cta{display:flex;align-items:center;justify-content:center;width:100%;background:var(--blue);color:#fff;
+    font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;padding:18px;border-radius:var(--r-btn);font-weight:700}
+  .nav__mobile-contact{display:flex;justify-content:center;gap:24px;margin-top:18px;font-family:var(--mono);font-size:.74rem;color:var(--cream)}
+}
+
+/* =========================================================
+   HERO (video)
+   ========================================================= */
+.hero{position:relative;height:100svh;min-height:640px;overflow:hidden;background:#000}
+.hero__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.hero__cap{position:absolute;z-index:2;color:#fff;font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase}
+.hero__cap--l{left:var(--gut);bottom:38px}
+.hero__cap--l b{color:var(--coral);font-weight:400}
+.hero__cap--r{right:var(--gut);bottom:38px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.hero__cap--r::after{content:"";width:2px;height:44px;background:var(--blue);animation:cue 2.2s var(--e2) infinite}
+@keyframes cue{0%,100%{transform:scaleY(.35);transform-origin:top;opacity:.5}50%{transform:scaleY(1);opacity:1}}
+.hero__black{position:absolute;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:4;opacity:1;transition:opacity .95s var(--e)}
+.hero__black.clear{opacity:0;pointer-events:none}
+.hero__logo{width:clamp(230px,32vw,440px);height:auto;opacity:0;transform:scale(.94);transition:opacity .8s var(--e2),transform 1.4s var(--e2)}
+.hero__logo.on{opacity:1;transform:none}
+@media(max-width:600px){.hero__cap--l{display:none}}
+
+/* =========================================================
+   MANIFESTO
+   ========================================================= */
+.mani{padding:clamp(90px,13vw,190px) 0}
+.mani .eyebrow{margin-bottom:34px}
+.mani h2{font-size:clamp(2.3rem,6.4vw,5.6rem);font-weight:700;line-height:1.02;max-width:18ch;letter-spacing:-.025em}
+.mani h2 em{font-style:italic;font-weight:600}
+.mani h2 .hl{color:var(--blue)}
+.mani h2 .hlc{color:var(--coral)}
+.mani__sub{margin-top:40px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.mani__sub p{max-width:46ch;font-size:1.1rem}
+.tag{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid var(--ink);
+  padding:8px 16px;border-radius:var(--r-btn);white-space:nowrap}
+
+/* =========================================================
+   BAND — dual marquee (electric)
+   ========================================================= */
+.band{background:var(--blue);color:#fff;padding:26px 0;transform:rotate(-2deg) scale(1.03);margin:30px 0}
+.band__row{display:flex;width:max-content;white-space:nowrap}
+.band__row--a{animation:mLeft 26s linear infinite}
+.band__row--b{animation:mRight 30s linear infinite;margin-top:6px;opacity:.96}
+.band__i{font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,4.4vw,3.4rem);letter-spacing:-.02em;text-transform:uppercase;padding:0 26px;display:flex;align-items:center;gap:26px}
+.band__i::after{content:"≈";color:var(--ink);font-weight:700}
+.band__row--b .band__i{font-style:normal;-webkit-text-stroke:1.5px #fff;color:transparent}
+.band__row--b .band__i::after{-webkit-text-stroke:0;color:var(--coral)}
+@keyframes mLeft{to{transform:translateX(-50%)}}
+@keyframes mRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+
+/* =========================================================
+   PICKS — interactive hover-reveal list (dark)
+   ========================================================= */
+.picks{position:relative}
+.picks__head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(30px,4vw,50px)}
+.picks__head h2{font-size:clamp(2.2rem,5.5vw,4.4rem);font-weight:700;color:var(--cream)}
+.picks__head p{max-width:34ch;color:rgba(245,238,223,.7);font-size:1rem}
+.picklist{border-top:1px solid rgba(245,238,223,.18)}
+.pick{position:relative;display:flex;align-items:center;gap:22px;padding:clamp(20px,2.6vw,34px) 4px;
+  border-bottom:1px solid rgba(245,238,223,.18);color:var(--cream);transition:color .4s var(--e2),padding-left .4s var(--e2)}
+.pick__i{font-family:var(--mono);font-size:.78rem;color:var(--coral);width:38px;flex:none}
+.pick__n{font-family:var(--display);font-weight:700;font-size:clamp(2rem,5.4vw,4.2rem);letter-spacing:-.02em;line-height:1;transition:color .4s}
+.pick__d{margin-left:auto;max-width:30ch;text-align:right;color:rgba(245,238,223,.6);font-size:.95rem;transition:opacity .4s}
+.pick__arrow{flex:none;width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(245,238,223,.4);display:flex;align-items:center;justify-content:center;transition:all .4s var(--e2)}
+.pick__tag{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:var(--cream);padding:5px 10px;border-radius:999px;margin-left:14px}
+.pick__thumb{display:none}
+@media(hover:hover) and (min-width:861px){
+  .pick:hover{padding-left:26px}
+  .pick:hover .pick__n{color:var(--blue)}
+  .pick:hover .pick__arrow{background:var(--blue);border-color:var(--blue);transform:rotate(-45deg)}
+}
+.preview{position:fixed;top:0;left:0;width:300px;height:380px;border-radius:var(--r);overflow:hidden;z-index:40;
+  pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.85);transition:opacity .4s var(--e2),transform .5s var(--e2);will-change:transform}
+.preview.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.preview img{width:100%;height:100%;object-fit:cover}
+.preview::after{content:"";position:absolute;inset:0;border:2px solid var(--blue);border-radius:var(--r)}
+@media(max-width:860px){
+  .preview{display:none}
+  .pick{flex-wrap:wrap}
+  .pick__d{margin-left:54px;text-align:left;width:100%;order:4;max-width:none}
+  .pick__thumb{display:block;order:5;width:100%;margin:14px 0 4px 54px;border-radius:var(--r);overflow:hidden;aspect-ratio:16/10}
+  .pick__thumb img{width:100%;height:100%;object-fit:cover}
+  .pick__arrow{display:none}
+}
+
+/* =========================================================
+   FILMSTRIP gallery (auto-scroll)
+   ========================================================= */
+.film__head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(28px,3.5vw,44px)}
+.film__head h2{font-size:clamp(2.2rem,5.5vw,4.4rem);font-weight:700}
+.film{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.film__t{display:flex;gap:18px;width:max-content;animation:mLeft 42s linear infinite}
+.film:hover .film__t{animation-play-state:paused}
+.film figure{position:relative;width:clamp(240px,30vw,400px);aspect-ratio:4/5;overflow:hidden;border-radius:var(--r);cursor:zoom-in;flex:none}
+.film img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--e2)}
+.film figure:hover img{transform:scale(1.05)}
+.film figcaption{position:absolute;left:14px;bottom:14px;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(20,18,12,.55);padding:6px 11px;border-radius:999px;backdrop-filter:blur(4px)}
+
+/* =========================================================
+   TRIBE / testimonios (marquee cards on ink)
+   ========================================================= */
+.tribe__head{text-align:center;margin-bottom:clamp(36px,4.5vw,60px)}
+.tribe__head h2{color:var(--cream);font-size:clamp(2rem,5vw,3.8rem);font-weight:700;margin-top:14px}
+.tribe{overflow:hidden}
+.tribe__t{display:flex;gap:22px;width:max-content;animation:mRight 48s linear infinite}
+.tribe:hover .tribe__t{animation-play-state:paused}
+.qc{flex:none;width:clamp(300px,34vw,420px);background:var(--ink2);border:1px solid rgba(245,238,223,.12);border-radius:var(--r-lg);padding:34px}
+.qc__t{font-family:var(--display);font-weight:600;font-size:1.35rem;line-height:1.4;color:var(--cream);letter-spacing:-.01em}
+.qc__by{display:flex;align-items:center;gap:12px;margin-top:24px}
+.qc__dot{width:34px;height:34px;border-radius:50%;background:var(--blue);flex:none;display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-weight:700;color:#fff;font-size:.95rem}
+.qc__n{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream)}
+.qc__c{font-size:.82rem;color:rgba(245,238,223,.55)}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.foot{background:var(--ink);color:var(--cream);padding:clamp(70px,9vw,120px) 0 40px;position:relative;overflow:hidden}
+.foot__big{font-family:var(--display);font-weight:800;font-size:clamp(3rem,15vw,13rem);line-height:.84;letter-spacing:-.04em;color:var(--cream);
+  -webkit-text-stroke:0;margin-bottom:clamp(40px,6vw,80px)}
+.foot__big .s{color:transparent;-webkit-text-stroke:1.5px var(--cream)}
+.foot__top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:40px;align-items:start}
+.foot__logo{height:52px;width:auto;margin-bottom:22px}
+.foot__claim{font-family:var(--body);color:rgba(245,238,223,.7);max-width:26ch;font-size:.98rem}
+.foot h4{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--coral);margin-bottom:20px}
+.foot__list{display:flex;flex-direction:column;gap:12px}
+.foot__list a,.foot__list span{color:var(--cream);font-size:.98rem;transition:color .3s}
+.foot__list a:hover{color:var(--blue)}
+.foot__list .lbl{color:rgba(245,238,223,.55)}
+.foot__news p{color:rgba(245,238,223,.6);font-size:.92rem;margin-bottom:16px}
+.foot__field{display:flex;align-items:center;border:1px solid rgba(245,238,223,.35);border-radius:var(--r-btn);padding:5px 5px 5px 18px;margin-bottom:14px}
+.foot__field input{flex:1;background:none;border:0;outline:none;color:#fff;font-family:var(--body);font-size:.95rem;padding:9px 0}
+.foot__field input::placeholder{color:rgba(245,238,223,.5)}
+.foot__sub{background:var(--blue);border:0;color:#fff;cursor:pointer;font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;padding:12px 20px;border-radius:var(--r-btn);font-weight:700;transition:background .3s}
+.foot__sub:hover{background:var(--coral)}
+.foot__social{display:flex;gap:13px;margin-top:22px}
+.foot__social a{width:40px;height:40px;border-radius:999px;border:1px solid rgba(245,238,223,.32);display:flex;align-items:center;justify-content:center;transition:all .35s var(--e2)}
+.foot__social a:hover{background:var(--blue);border-color:var(--blue);color:#fff}
+.foot__bottom{margin-top:clamp(46px,6vw,80px);padding-top:24px;border-top:1px solid rgba(245,238,223,.16);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;color:rgba(245,238,223,.55)}
+@media(max-width:860px){.foot__top{grid-template-columns:1fr 1fr;gap:34px}}
+@media(max-width:520px){.foot__top{grid-template-columns:1fr}}
+
+/* =========================================================
+   HOTEL PAGE
+   ========================================================= */
+.phero{position:relative;height:82svh;min-height:520px;overflow:hidden;display:flex;align-items:flex-end;background:#000}
+.phero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kb 16s var(--e2) forwards}
+@keyframes kb{from{transform:scale(1.12)}to{transform:scale(1)}}
+.phero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,10,.2),rgba(20,16,10,.65))}
+.phero__in{position:relative;z-index:2;width:100%;padding:0 var(--gut) clamp(44px,7vh,90px)}
+.phero__in .crumb{color:var(--coral);margin-bottom:18px;display:block}
+.phero__in h1{color:#fff;font-size:clamp(2.8rem,10vw,7.5rem);font-weight:800;letter-spacing:-.03em;line-height:.9}
+.lede{max-width:880px}
+.lede p{font-size:clamp(1.3rem,2.2vw,2rem);line-height:1.3;font-weight:600;font-family:var(--display);letter-spacing:-.02em}
+.lede p+p{margin-top:18px;font-size:1.05rem;font-weight:400;line-height:1.6;font-family:var(--body)}
+.room{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(28px,5vw,72px);align-items:start}
+.room__g{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.room__g .big{grid-column:span 2;aspect-ratio:16/10;border-radius:var(--r);overflow:hidden}
+.room__g figure{overflow:hidden;aspect-ratio:1/1;cursor:zoom-in;position:relative;border-radius:var(--r)}
+.room__g .big figure{aspect-ratio:auto;height:100%;border-radius:0}
+.room__g img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--e2)}
+.room__g figure:hover img{transform:scale(1.05)}
+.room__info{position:sticky;top:110px}
+.room__info h2{font-size:clamp(2.2rem,4.4vw,3.4rem);font-weight:700}
+.room__info p{margin-top:18px;font-size:1.05rem}
+.room__specs{display:flex;gap:38px;margin-top:30px;padding-top:26px;border-top:1px solid var(--ink)}
+.spec .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+.spec .v{font-family:var(--display);font-size:2.6rem;font-weight:700;margin-top:6px}
+.spec .v small{font-size:.92rem;font-weight:400;font-family:var(--body)}
+@media(max-width:860px){.room{grid-template-columns:1fr;gap:30px}.room__info{position:static}}
+
+.inc__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.inc{background:var(--ink2);border-radius:var(--r);padding:32px clamp(20px,2vw,30px)}
+.inc__ic{margin-bottom:18px;color:var(--blue)}
+.inc h4{color:var(--cream);font-size:1.4rem;font-weight:700;letter-spacing:-.01em}
+.inc p{color:rgba(245,238,223,.65);font-size:.9rem;margin-top:10px}
+@media(max-width:860px){.inc__grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.inc__grid{grid-template-columns:1fr}}
+
+.rates{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.rates>div{padding:clamp(30px,4vw,50px);border-radius:var(--r-lg)}
+.rates .seasons{background:var(--cream);border:1px solid var(--ink)}
+.season{display:flex;justify-content:space-between;align-items:baseline;padding:18px 0;border-top:1px solid rgba(22,18,12,.18)}
+.season:first-of-type{border-top:0}
+.season .sn{font-family:var(--display);font-weight:700;font-size:1.3rem}
+.season .sw{font-family:var(--mono);font-size:.84rem}
+.rnote{margin-top:22px;font-family:var(--mono);font-size:.78rem;line-height:1.6;color:rgba(22,18,12,.6)}
+.tariffs{background:var(--blue);color:#fff}
+.tariffs .eyebrow{color:#fff}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;padding:20px 0;border-top:1px solid rgba(255,255,255,.25)}
+.prow:first-of-type{border-top:0}
+.prow .pl{font-family:var(--display);font-weight:600;font-size:1.1rem;color:#fff}
+.prow .pv{font-family:var(--display);font-weight:800;font-size:1.9rem;color:#fff}
+.prow .pv small{font-family:var(--mono);font-size:.7rem;font-weight:400;color:rgba(255,255,255,.7)}
+@media(max-width:680px){.rates{grid-template-columns:1fr}}
+
+.amen{columns:4;column-gap:40px}
+.amen li{list-style:none;break-inside:avoid;padding:13px 0;border-bottom:1px solid rgba(22,18,12,.16);display:flex;align-items:center;gap:12px;font-size:.96rem}
+.amen li svg{flex:none;color:var(--blue)}
+@media(max-width:980px){.amen{columns:3}}@media(max-width:680px){.amen{columns:2}}@media(max-width:420px){.amen{columns:1}}
+
+.cta2{text-align:center}
+.cta2 h2{color:var(--cream);font-size:clamp(2.4rem,6vw,5rem);font-weight:800;max-width:16ch;margin:0 auto;line-height:.95;letter-spacing:-.03em}
+.cta2 p{color:rgba(245,238,223,.7);margin:22px auto 0;max-width:46ch}
+.btn{display:inline-flex;align-items:center;gap:10px;margin-top:34px;background:var(--blue);color:#fff;
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;padding:18px 38px;border-radius:var(--r-btn);transition:background .4s var(--e2),transform .25s var(--e2)}
+.btn:hover{background:var(--coral)}
+.btn svg{transition:transform .4s var(--e2)}.btn:hover svg{transform:translateX(5px)}
+
+/* lightbox + toast */
+.lb{position:fixed;inset:0;z-index:200;background:rgba(20,16,10,.95);display:flex;align-items:center;justify-content:center;padding:5vw;opacity:0;pointer-events:none;transition:opacity .45s var(--e2)}
+.lb.open{opacity:1;pointer-events:auto}
+.lb img{max-width:100%;max-height:88vh;object-fit:contain;border-radius:var(--r);transform:scale(.96);transition:transform .45s var(--e2)}
+.lb.open img{transform:none}
+.lb__x{position:absolute;top:24px;right:30px;color:#fff;background:none;border:0;cursor:pointer;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+.toast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%) translateY(150%);z-index:120;background:var(--ink);color:var(--cream);
+  padding:15px 24px;font-family:var(--mono);font-size:.78rem;border-radius:999px;transition:transform .55s var(--e);display:flex;align-items:center;gap:11px;box-shadow:0 18px 50px -18px rgba(0,0,0,.5)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast .d{width:7px;height:7px;border-radius:50%;background:var(--blue)}
+
+/* =========================================================
+   V6 — solo blanco y negro (sin azul / coral / arena)
+   accents on dark backgrounds resolved to white
+   ========================================================= */
+.ink .eyebrow{color:#fff}
+.progress{background:#fff}
+.nav__links a::after{background:#fff}
+.nav__cta{background:#fff;color:#000;border:1px solid #fff}
+.nav__cta:hover{background:transparent;color:#fff}
+.nav__mobile-links .ix{color:#fff}
+.nav__mobile-cta{background:#fff;color:#000}
+.hero__cap--l b{color:#fff}
+.hero__cap--r::after{background:#fff}
+.mani h2 .hl{background:#000;color:#fff;border-radius:8px;padding:0 .14em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.mani h2 .hlc{color:#000}
+.band{background:#000;color:#fff}
+.band__i::after{color:#fff}
+.band__row--b .band__i::after{color:#fff}
+.pick__i{color:rgba(255,255,255,.5)}
+.pick:hover .pick__n{color:#fff;text-decoration:underline;text-underline-offset:8px;text-decoration-thickness:2px}
+.pick:hover .pick__arrow{background:#fff;border-color:#fff;color:#000}
+.preview::after{border-color:#fff}
+.qc__dot{background:#fff;color:#000}
+.foot h4{color:rgba(255,255,255,.5)}
+.foot__list a:hover{color:rgba(255,255,255,.55)}
+.foot__sub{background:#fff;color:#000}
+.foot__sub:hover{opacity:.7}
+.foot__social a:hover{background:#fff;border-color:#fff;color:#000}
+.phero__in .crumb{color:#fff}
+.phero::after{background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.65))}
+.spec .k{color:#000}
+.inc__ic{color:#fff}
+.tariffs{background:#000;color:#fff}
+.amen li svg{color:#000}
+.btn{background:#fff;color:#000;border:1px solid #fff}
+.btn:hover{background:transparent;color:#fff}
+.toast .d{background:#fff}
+.lb{background:rgba(0,0,0,.95)}
+.film figcaption{background:rgba(0,0,0,.6)}
+::selection{background:#000;color:#fff}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav scrolled" id="nav">
+  <a href="inicio-standalone.html" aria-label="Olas de Matanzas — inicio"><img src="assets/a-0fe6af4c2acd.png" alt="Olas de Matanzas" class="nav__logo" decoding="async"></a>
+  <div class="nav__links">
+    <a href="inicio-standalone.html">Inicio</a>
+    <a href="hotel-standalone.html" class="active">Hotel</a>
+    <a href="#" data-soon="Página de Cabañas — disponible próximamente">Cabañas</a>
+    <a href="#" data-soon="Página de Domos — disponible próximamente">Domos</a>
+    <a href="#" data-soon="Restaurant Marvento — disponible próximamente">Restaurant</a>
+    <a href="#" data-soon="Página de Camping — disponible próximamente">Camping</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <a href="#contacto" class="nav__cta" data-magnetic>Reservar</a>
+  <button class="nav__burger" aria-label="Menú"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="nav__mobile">
+  <div class="nav__mobile-top">
+    <img src="assets/a-0fe6af4c2acd.png" alt="Olas de Matanzas" class="nav__mobile-logo" decoding="async" loading="lazy">
+    <button class="nav__mobile-close" aria-label="Cerrar menú"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  </div>
+  <nav class="nav__mobile-links">
+    <a href="inicio-standalone.html"><span class="ix">01</span>Inicio</a>
+    <a href="hotel-standalone.html"><span class="ix">02</span>Hotel</a>
+    <a href="#" data-soon="Página de Cabañas — disponible próximamente"><span class="ix">03</span>Cabañas</a>
+    <a href="#" data-soon="Página de Domos — disponible próximamente"><span class="ix">04</span>Domos</a>
+    <a href="#" data-soon="Restaurant Marvento — disponible próximamente"><span class="ix">05</span>Restaurant</a>
+    <a href="#" data-soon="Página de Camping — disponible próximamente"><span class="ix">06</span>Camping</a>
+  </nav>
+  <div class="nav__mobile-foot">
+    <a href="#contacto" class="nav__mobile-cta">Reservar</a>
+    <div class="nav__mobile-contact"><a href="tel:+56996434809">+56 9 9643 4809</a><a href="mailto:info@omz.cl">info@omz.cl</a></div>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<header class="phero">
+  <img src="assets/a-1116ac5f8117.jpg" alt="Habitación del hotel con vista al mar" decoding="async" loading="lazy">
+  <div class="phero__in">
+    <span class="crumb mono">Inicio · Hotel</span>
+    <h1>Nuestras<br>habitaciones</h1>
+  </div>
+</header>
+
+<!-- LEDE -->
+<section class="section" style="padding-bottom:clamp(40px,6vw,72px)">
+  <div class="wrap lede">
+    <p class="r">Baño privado, TV satelital y terraza con vista al mar.</p>
+    <p class="r d1">Un espacio cómodo y luminoso para descansar y disfrutar de Matanzas a pasos de la playa.</p>
+  </div>
+</section>
+
+<!-- ROOM -->
+<section class="section" style="padding-top:0">
+  <div class="wrap room">
+    <div class="room__g">
+      <div class="big ri"><figure data-lb="assets/a-08f28df2a19e.jpg"><img src="assets/a-08f28df2a19e.jpg" alt="Habitación doble con escritorio y vista al mar" decoding="async" loading="lazy"></figure></div>
+      <figure class="ri" data-lb="assets/a-1fec065d0609.jpg"><img src="assets/a-1fec065d0609.jpg" alt="Habitación doble luminosa" decoding="async" loading="lazy"></figure>
+      <figure class="ri" data-lb="assets/a-4ff4632a2802.jpg"><img src="assets/a-4ff4632a2802.jpg" alt="Cabecera de madera" decoding="async" loading="lazy"></figure>
+      <figure class="ri" data-lb="assets/a-e003bfd4f415.jpg"><img src="assets/a-e003bfd4f415.jpg" alt="Baño privado" decoding="async" loading="lazy"></figure>
+      <figure class="ri" data-lb="assets/a-a877683591d2.jpg"><img src="assets/a-a877683591d2.jpg" alt="Terraza privada" decoding="async" loading="lazy"></figure>
+    </div>
+    <div class="room__info">
+      <span class="eyebrow r">Tipo de habitación</span>
+      <h2 class="r d1" style="margin-top:12px">Habitación doble</h2>
+      <p class="r d2">Habitación doble con baño privado, terraza con vista al mar y TV satelital. Amplia, limpia y bien equipada para descansar.</p>
+      <div class="room__specs r d2">
+        <div class="spec"><div class="k">Capacidad</div><div class="v">2 <small>personas</small></div></div>
+        <div class="spec"><div class="k">Superficie</div><div class="v">28 <small>m²</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INCLUDES -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="film__head">
+      <div><span class="eyebrow r">Incluye tu estadía</span><h2 class="r d1">Todo a pasos,<br>todo incluido</h2></div>
+    </div>
+    <div class="inc__grid r d1">
+      <div class="inc">
+        <div class="inc__ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17h4l3-7 3 7M10 10l-2-4H5"/></svg></div>
+        <h4>Bike Park</h4><p>Pistas y circuitos dentro del complejo.</p>
+      </div>
+      <div class="inc">
+        <div class="inc__ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M5 5c4 4 4 10 0 14M19 5c-4 4-4 10 0 14"/></svg></div>
+        <h4>Cancha de tenis</h4><p>Acceso libre para huéspedes.</p>
+      </div>
+      <div class="inc">
+        <div class="inc__ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 3h16l-1.5 13a3 3 0 0 1-3 2.7H8.5a3 3 0 0 1-3-2.7L4 3zM9 7h6"/></svg></div>
+        <h4>10% Marvento</h4><p>Descuento en el Restaurant Marvento.</p>
+      </div>
+      <div class="inc">
+        <div class="inc__ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20c2-3 5-3 8 0M8 12c2-3 5-3 8 0M6 16c2-3 5-3 8 0"/><circle cx="18" cy="6" r="2"/></svg></div>
+        <h4>Desayuno + Spa</h4><p>Según temporada y tarifas vigentes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RATES -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="film__head">
+      <div><span class="eyebrow r">Temporadas y tarifas</span><h2 class="r d1">Planifica<br>tu reserva</h2></div>
+    </div>
+    <div class="rates r d1">
+      <div class="seasons">
+        <span class="eyebrow">Temporadas</span>
+        <div class="season" style="margin-top:24px"><span class="sn">Temporada Alta</span><span class="sw">Sep – Abr</span></div>
+        <div class="season"><span class="sn">Temporada Baja</span><span class="sw">May – Ago</span></div>
+        <p class="rnote">Los fines de semana largos se consideran temporada alta. Mínimo de reserva: fin de semana completo.</p>
+      </div>
+      <div class="tariffs">
+        <span class="eyebrow">Tarifas · Habitación doble</span>
+        <div class="prow" style="margin-top:24px"><span class="pl">Temporada Alta</span><span class="pv">$160.000 <small>/ noche</small></span></div>
+        <div class="prow"><span class="pl">Temporada Baja</span><span class="pv">$140.000 <small>/ noche</small></span></div>
+        <div class="prow"><span class="pl">Cama adicional</span><span class="pv">$30.000</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div style="margin-bottom:clamp(34px,4vw,48px)">
+      <span class="eyebrow r">Servicios de la habitación</span>
+      <h2 class="r d1" style="font-size:clamp(1.9rem,4vw,2.8rem);font-weight:700;margin-top:12px">Equipamiento completo</h2>
+    </div>
+    <ul class="amen r d1" id="amen"></ul>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section ink cta2">
+  <div class="wrap">
+    <span class="eyebrow r" style="display:block;margin-bottom:18px">Reserva</span>
+    <h2 class="r d1">¿Listo para<br>entrar al agua?</h2>
+    <p class="r d2">Escríbenos y reserva tu habitación con vista al mar. Te ayudamos a planificar tu estadía.</p>
+    <a href="#contacto" class="btn r d2" data-magnetic>Reservar ahora <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h13M10 1l4 4-4 4"/></svg></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot" id="contacto">
+  <div class="wrap">
+    <div class="foot__big r">OLAS DE <span class="s">MATANZAS</span></div>
+    <div class="foot__top">
+      <div>
+        <img src="assets/a-0fe6af4c2acd.png" alt="Olas de Matanzas" class="foot__logo" decoding="async" loading="lazy">
+        <p class="foot__claim">Frente al mar y entre el bosque, en el corazón de Matanzas. Naturaleza y descanso, todo a pasos.</p>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <div class="foot__list">
+          <a href="tel:+56996434809">+56 9 9643 4809</a>
+          <a href="https://wa.me/56996434809">WhatsApp</a>
+          <a href="mailto:info@omz.cl">info@omz.cl</a>
+        </div>
+      </div>
+      <div>
+        <h4>Ubicación</h4>
+        <div class="foot__list">
+          <span class="lbl">Fundo San Luis</span>
+          <span class="lbl">Lagunillas s/n</span>
+          <span class="lbl">Matanzas 3230000, Chile</span>
+          <a href="https://maps.google.com/?q=Matanzas+Lagunillas+Chile" target="_blank">Ver en el mapa →</a>
+        </div>
+      </div>
+      <div class="foot__news">
+        <h4>Mantente al día</h4>
+        <p>Reportes de viento, eventos y disponibilidad.</p>
+        <div class="foot__field"><input type="email" placeholder="Tu correo"><button class="foot__sub">Ir</button></div>
+        <div class="foot__social">
+          <a href="#" data-soon="Instagram — demo" aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" data-soon="Facebook — demo" aria-label="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 8h-2a2 2 0 0 0-2 2v12M8 13h6"/></svg></a>
+          <a href="#" data-soon="WhatsApp — demo" aria-label="WhatsApp"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21l1.6-4A8 8 0 1 1 9 19.8L3 21z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>© 2026 Olas de Matanzas</span>
+      <span>Hotel · Cabañas · Domos · Camping · Restaurant</span>
+    </div>
+  </div>
+</footer>
+
+<div class="grain"></div>
+<div class="progress"></div>
+<div class="lb"><button class="lb__x">Cerrar ✕</button><img src="" alt="Imagen ampliada" decoding="async" loading="lazy"></div>
+<div class="toast"><span class="d"></span><span class="t-msg"></span></div>
+
+<script>
+  var amenities=["Armario","Artículos de aseo gratis","Aseo","Balcón","Bañera o ducha","Baño privado","Caja fuerte","Calefacción","Canales vía satélite","Ducha","Enchufes cerca de la cama","Entrada privada","Escritorio","Muebles de exterior","Parlante Bluetooth","Refrigerador","Ropa de cama","Secador de pelo","Sofá o silla reclinable","Televisión","Toallas","Vista al mar","Wifi"];
+  var ck='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>';
+  document.getElementById('amen').innerHTML=amenities.map(function(a){return '<li>'+ck+'<span>'+a+'</span></li>';}).join('');
+</script>
+<script>
+/* OLAS DE MATANZAS — V5 interactions */
+(function () {
+  'use strict';
+  /* duplicate marquee tracks for seamless loop (keeps HTML/embeds lean) */
+  ['.film__t', '.tribe__t'].forEach(function (sel) { var t = document.querySelector(sel); if (t) t.innerHTML += t.innerHTML; });
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canHover = matchMedia('(hover:hover) and (min-width:861px)').matches;
+
+  /* nav + progress */
+  var nav = document.querySelector('.nav'), prog = document.querySelector('.progress');
+  function onScroll() {
+    var y = window.scrollY;
+    if (y > 40) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+    if (prog) { var h = document.documentElement.scrollHeight - window.innerHeight; prog.style.width = (h > 0 ? (y / h) * 100 : 0) + '%'; }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* mobile menu */
+  var burger = document.querySelector('.nav__burger'), mobile = document.querySelector('.nav__mobile');
+  function closeMenu() { if (mobile) { mobile.classList.remove('open'); document.body.style.overflow = ''; } }
+  if (burger && mobile) {
+    burger.addEventListener('click', function () { var o = mobile.classList.toggle('open'); document.body.style.overflow = o ? 'hidden' : ''; });
+    var cb = mobile.querySelector('.nav__mobile-close'); if (cb) cb.addEventListener('click', closeMenu);
+    mobile.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+  }
+
+  /* reveals */
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.r,.ri,.words').forEach(function (el) { io.observe(el); });
+
+  /* parallax */
+  if (!reduce) {
+    var par = [].slice.call(document.querySelectorAll('[data-parallax]'));
+    var pheroImg = document.querySelector('.phero img');
+    var ticking = false;
+    function frame() {
+      var vh = window.innerHeight;
+      par.forEach(function (el) { var r = el.getBoundingClientRect(); if (r.bottom > 0 && r.top < vh) { var p = (r.top + r.height / 2 - vh / 2) / vh; var img = el.querySelector('img'); if (img) img.style.transform = 'translateY(' + (p * -30) + 'px) scale(1.08)'; } });
+      if (pheroImg) { var y = window.scrollY; if (y < vh) pheroImg.style.transform = 'translateY(' + (y * 0.16) + 'px) scale(1.05)'; }
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { requestAnimationFrame(frame); ticking = true; } }, { passive: true }); frame();
+  }
+
+  /* ===== HERO cinematic loop ===== */
+  var video = document.querySelector('.hero__video'), black = document.querySelector('.hero__black'), hlogo = document.querySelector('.hero__logo');
+  if (video && black && hlogo) {
+    var transitioning = false;
+    function toVideo() { hlogo.classList.remove('on'); black.classList.add('clear'); }
+    function toBlack() { black.classList.remove('clear'); requestAnimationFrame(function () { hlogo.classList.add('on'); }); }
+    function playSafe() { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+    function intro() { playSafe(); requestAnimationFrame(function () { hlogo.classList.add('on'); }); setTimeout(toVideo, 1700); }
+    if (document.readyState === 'complete') intro(); else window.addEventListener('load', intro);
+    setTimeout(function () { if (!black.classList.contains('clear') && !transitioning) intro(); }, 2600);
+    function interstitial() {
+      transitioning = true; toBlack();
+      setTimeout(function () { try { video.currentTime = 0; } catch (e) {} playSafe(); }, 850);
+      setTimeout(toVideo, 1700);
+      setTimeout(function () { transitioning = false; }, 2600);
+    }
+    video.addEventListener('timeupdate', function () { if (!transitioning && video.duration && video.currentTime >= video.duration - 0.55) interstitial(); });
+    video.addEventListener('ended', function () { if (!transitioning) interstitial(); });
+  }
+
+  /* ===== PICKS cursor-follow preview ===== */
+  var picks = document.querySelector('.picks'), preview = document.querySelector('.preview');
+  if (picks && preview && canHover) {
+    var pimg = preview.querySelector('img');
+    var tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+    function loop() { cx += (tx - cx) * 0.18; cy += (ty - cy) * 0.18; preview.style.left = cx + 'px'; preview.style.top = cy + 'px'; raf = requestAnimationFrame(loop); }
+    picks.addEventListener('pointermove', function (e) { tx = e.clientX; ty = e.clientY; if (!raf) { cx = tx; cy = ty; loop(); } });
+    picks.querySelectorAll('.pick').forEach(function (pk) {
+      pk.addEventListener('pointerenter', function () { var src = pk.getAttribute('data-img'); if (src) { pimg.src = src; preview.classList.add('on'); } });
+      pk.addEventListener('pointerleave', function () { preview.classList.remove('on'); });
+    });
+    picks.addEventListener('pointerleave', function () { preview.classList.remove('on'); if (raf) { cancelAnimationFrame(raf); raf = null; } });
+  }
+
+  /* ===== magnetic buttons ===== */
+  if (canHover && !reduce) {
+    document.querySelectorAll('[data-magnetic]').forEach(function (btn) {
+      btn.addEventListener('pointermove', function (e) { var r = btn.getBoundingClientRect(); btn.style.transform = 'translate(' + ((e.clientX - r.left - r.width / 2) * 0.25) + 'px,' + ((e.clientY - r.top - r.height / 2) * 0.3) + 'px)'; });
+      btn.addEventListener('pointerleave', function () { btn.style.transform = ''; });
+    });
+  }
+
+  /* toast */
+  var toast = document.querySelector('.toast'), tT;
+  function showToast(m) { if (!toast) return; toast.querySelector('.t-msg').textContent = m; toast.classList.add('show'); clearTimeout(tT); tT = setTimeout(function () { toast.classList.remove('show'); }, 2800); }
+  document.querySelectorAll('[data-soon]').forEach(function (el) { el.addEventListener('click', function (ev) { ev.preventDefault(); showToast(el.getAttribute('data-soon')); }); });
+  var sub = document.querySelector('.foot__sub'); if (sub) sub.addEventListener('click', function (e) { e.preventDefault(); showToast('¡Gracias! Te avisaremos de novedades.'); });
+
+  /* lightbox */
+  var lb = document.querySelector('.lb');
+  if (lb) {
+    var lbImg = lb.querySelector('img');
+    document.querySelectorAll('[data-lb]').forEach(function (fig) { fig.addEventListener('click', function () { lbImg.src = fig.getAttribute('data-lb'); lb.classList.add('open'); document.body.style.overflow = 'hidden'; }); });
+    function close() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+    lb.addEventListener('click', function (e) { if (e.target !== lbImg) close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  }
+})();
+
+</script>
+</body>
+</html>
