@@ -64,12 +64,18 @@ a{color:inherit}
 @keyframes waPulse{0%{box-shadow:0 0 0 0 rgba(37,163,90,.45)}70%{box-shadow:0 0 0 16px rgba(37,163,90,0)}100%{box-shadow:0 0 0 0 rgba(37,163,90,0)}}
 @media(prefers-reduced-motion:reduce){.wa-fab{animation:none}}
 @media(max-width:480px){.wa-fab__txt{display:none}.wa-fab{padding:15px}}
+
+.langsw{display:inline-flex;align-items:center;gap:1px;margin-right:10px;vertical-align:middle}
+.langsw button{font-family:var(--sans);font-size:.74rem;font-weight:700;letter-spacing:.06em;color:var(--muted);background:none;border:0;cursor:pointer;padding:6px 6px;transition:color .2s var(--ease)}
+.langsw button:hover,.langsw button.is-on{color:var(--head)}
+.langsw__sep{color:var(--line);font-size:.72rem}
 </style>
 </head>
 <body>
 <header class="top">
   <a class="top__brand" href="inicio.html" aria-label="Olas de Matanzas — inicio"><img class="top__logo" src="assets/a-4d11247dadf2.png" alt="Olas de Matanzas" decoding="async"><span class="top__sep"></span><span class="top__rest">Marvento<small>Restaurant · Olas de Matanzas</small></span></a>
   <div class="top__act">
+    <div class="langsw" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><span class="langsw__sep">/</span><button type="button" data-lang="en">EN</button></div>
     <a class="btn btn--ghost" href="inicio.html">← Volver</a>
     <a class="btn btn--solid" href="carta.pdf" target="_blank" rel="noopener">Descargar PDF</a>
   </div>
@@ -98,6 +104,29 @@ a{color:inherit}
   <img class="wa-fab__icon" src="assets/whatsapp.webp" alt="" aria-hidden="true">
   <span class="wa-fab__txt" data-wa-rot>Escríbenos</span>
 </a>
-<script>/*wa-rot*/(function(){var el=document.querySelector('[data-wa-rot]');if(!el)return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var m=['Escríbenos','¿Tienes dudas?','Reserva ahora','¿Te ayudamos?'],i=0;setInterval(function(){el.style.opacity=0;setTimeout(function(){i=(i+1)%m.length;el.textContent=m[i];el.style.opacity=1;},600);},4200);})();</script>
+<script>/*wa-rot*/(function(){var el=document.querySelector('[data-wa-rot]');if(!el)return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var i=0,DEF=['Escríbenos','¿Tienes dudas?','Reserva ahora','¿Te ayudamos?'];function M(){return window.__waMsgs||DEF;}setInterval(function(){el.style.opacity=0;setTimeout(function(){var m=M();i=(i+1)%m.length;el.textContent=m[i];el.style.opacity=1;},600);},4200);})();</script>
+<script>/*i18n*/(function(){
+var T={"← Volver": "← Back", "Descargar PDF": "Download PDF", "Descargar carta en PDF": "Download menu (PDF)", "Nuestra carta": "Our menu", "Sabores de Matanzas": "Flavors of Matanzas", "Cerrar ✕": "Close ✕", "Escríbenos": "Write to us", "Entradas": "Starters", "Ensaladas": "Salads", "Sanguches": "Sandwiches", "Fondos": "Mains", "Pastas": "Pasta", "Acompañamientos": "Sides", "Menú niños": "Kids' menu", "Postres": "Desserts", "Café Lavazza": "Lavazza coffee", "Jugos y batidos": "Juices & smoothies", "Bebidas y agua": "Drinks & water", "Sin alcohol": "Non-alcoholic", "Cervezas": "Beers", "Espumantes": "Sparkling", "Ron": "Rum", "Whiskey": "Whiskey", "Bajativos": "Digestifs", "Vinos": "Wines", "Por copa": "By the glass"};
+var A={};
+var WA={"es": ["Escríbenos", "¿Tienes dudas?", "Reserva ahora", "¿Te ayudamos?"], "en": ["Write to us", "Questions?", "Book now", "Need help?"]};
+var TITLE={"es": "Carta · Restaurant Marvento — Olas de Matanzas", "en": "Menu · Restaurant Marvento — Olas de Matanzas"};
+var orig=new Map();
+function walk(lang){
+  var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentNode;if(!p)return 2;var t=p.nodeName;if(t==='SCRIPT'||t==='STYLE'||t==='NOSCRIPT')return 2;return 1;}}),n;
+  while(n=w.nextNode()){var raw=n.nodeValue,key=raw.trim();if(!key)continue;
+    if(lang==='en'){if(T[key]!==undefined){if(!orig.has(n))orig.set(n,raw);n.nodeValue=raw.replace(key,T[key]);}}
+    else{if(orig.has(n))n.nodeValue=orig.get(n);}}
+  document.querySelectorAll('[data-soon]').forEach(function(el){var v=el.getAttribute('data-soon');
+    if(lang==='en'){if(A[v]!==undefined){if(!el.getAttribute('data-soon-es'))el.setAttribute('data-soon-es',v);el.setAttribute('data-soon',A[v]);}}
+    else{var o=el.getAttribute('data-soon-es');if(o)el.setAttribute('data-soon',o);}});
+  document.title=TITLE[lang]||TITLE.es;window.__waMsgs=WA[lang]||WA.es;window.dispatchEvent(new CustomEvent('omzlang',{detail:lang}));
+}
+function setLang(lang){lang=(lang==='en')?'en':'es';document.documentElement.lang=lang;walk(lang);
+  try{localStorage.setItem('omz_lang',lang);}catch(e){}
+  document.querySelectorAll('[data-lang]').forEach(function(b){b.classList.toggle('is-on',b.getAttribute('data-lang')===lang);});}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-lang]');if(b){e.preventDefault();setLang(b.getAttribute('data-lang'));}});
+var url=new URLSearchParams(location.search).get('lang');var saved=null;try{saved=localStorage.getItem('omz_lang');}catch(e){}
+setLang(url||saved||(((navigator.language||'es').slice(0,2)==='en')?'en':'es'));
+})();</script>
 </body>
 </html>

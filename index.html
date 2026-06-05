@@ -67,13 +67,24 @@ body{background:var(--paper);color:var(--text);font-family:var(--sans);line-heig
 .foot{border-top:1px solid var(--line);margin-top:clamp(34px,5vw,54px);padding:30px 0 50px;text-align:center}
 .foot p{font-size:.84rem;color:var(--muted)}
 .foot a{color:var(--slate);text-decoration:none}
+
+.langsw{display:inline-flex;align-items:center;gap:1px;margin-right:16px;vertical-align:middle}
+.langsw button{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.08em;color:var(--muted);background:none;border:0;cursor:pointer;padding:6px 7px;transition:color .2s var(--ease)}
+.langsw button:hover,.langsw button.is-on{color:var(--head)}
+.langsw__sep{color:var(--line);font-size:.72rem}
+@media(max-width:980px){.langsw{display:none}}
+.langsw-m{display:none}
+@media(max-width:980px){.langsw-m{display:flex;gap:6px;justify-content:center;margin-top:18px}
+.langsw-m button{font-family:var(--sans);font-size:.95rem;font-weight:700;letter-spacing:.12em;color:var(--muted);background:none;border:1px solid var(--line);cursor:pointer;padding:9px 18px}
+.langsw-m button.is-on{color:var(--head);border-color:var(--head)}}
 </style>
 </head>
 <body>
 
 <header class="top">
-  <div class="wrap">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:16px">
     <img class="top__logo" src="assets/a-4d11247dadf2.png" alt="Olas de Matanzas">
+    <div class="langsw" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><span class="langsw__sep">/</span><button type="button" data-lang="en">EN</button></div>
   </div>
 </header>
 
@@ -157,5 +168,30 @@ body{background:var(--paper);color:var(--text);font-family:var(--sans);line-heig
   </div>
 </footer>
 
+<script>/*i18n*/(function(){
+var T={"Resumen del sitio web": "Website overview", "Nueva web": "New website", "Este es un resumen simple de lo que incluye el sitio. Puedes recorrerla tú mismo desde el botón de abajo.": "This is a simple overview of what the site includes. You can explore it yourself from the button below.", "Versión de muestra · en construcción.": "Sample version · under construction.", "La página todavía está incompleta y la información (textos, precios y fotos) es tentativa, solo a modo de ejemplo. Todo es movible y modificable: el orden, el contenido y el diseño se pueden ajustar — nada está cerrado.": "The page is still incomplete and the information (text, prices and photos) is tentative, just for example. Everything is movable and editable: the order, content and design can be adjusted — nothing is final.", "Visitar la web": "Visit the site", "¿Qué contiene la web?": "What does the site include?", "El sitio tiene 3 páginas. Esto es lo que hay en cada una:": "The site has 3 pages. Here's what each one has:", "1 · Página principal (Landing)": "1 · Main page (Landing)", "Es la página de inicio, donde llega la mayoría de los visitantes. Cuenta todo el complejo en un solo recorrido hacia abajo. Incluye:": "It's the home page, where most visitors land. It tells the whole resort in a single scroll down. It includes:", "Portada": "Cover", "con una galería de fotos del lugar (mar, cabañas, naturaleza) que van cambiando solas.": "with a gallery of photos of the place (sea, cabins, nature) that change on their own.", "Alojamiento:": "Accommodation:", "las 4 formas de hospedarse — Hotel, Cabañas, Domos y Camping.": "the 4 ways to stay — Hotel, Cabins, Domes and Camping.", "presentación, un carrusel de platos y enlace a la carta completa.": "intro, a dish carousel and a link to the full menu.", "Experiencias y servicios:": "Experiences & services:", "actividades, spa, eventos y tenis.": "activities, spa, events and tennis.", "Vive OMZ:": "Experience OMZ:", "videos cortos verticales que muestran el ambiente del lugar.": "short vertical videos showing the atmosphere of the place.", "Valoraciones": "Reviews", "de Booking y Tripadvisor.": "from Booking and Tripadvisor.", "Cómo llegar:": "Getting here:", "mapa y botones para abrir la ruta en Google Maps, Waze o Apple Maps.": "map and buttons to open the route in Google Maps, Waze or Apple Maps.", "Botón de WhatsApp": "WhatsApp button", "siempre visible, para escribir y consultar al instante.": "always visible, to message and ask instantly.", "Ver la página principal": "View the main page", "2 · Página del Hotel": "2 · Hotel page", "Página con el detalle del hotel: presenta las habitaciones con sus características y fotos, para quien quiere saber más antes de reservar. Es la página a la que se llega al tocar \"Hotel\" en el alojamiento.": "Page with the hotel details: it shows the rooms with their features and photos, for those who want to know more before booking. It's the page you reach by tapping \"Hotel\" in the accommodation section.", "Ver la página del Hotel": "View the Hotel page", "3 · Carta del Restaurant": "3 · Restaurant menu", "La carta completa del Restaurant Marvento (platos, bar y vinos), ordenada por categorías y con opción de descargar el PDF. Se abre desde \"Ver carta completa\" en la sección del restaurant.": "The full menu of Restaurant Marvento (dishes, bar and wines), organized by category and with the option to download the PDF. It opens from \"View full menu\" in the restaurant section.", "Ver la carta": "View the menu", "Bueno saber": "Good to know", "Funciona en computador y celular (se adapta a cada pantalla).": "Works on desktop and mobile (it adapts to each screen).", "Las fotos y videos cargan a medida que se necesitan, para que abra rápido.": "Photos and videos load as needed, so it opens fast.", "Los botones de Reservar y WhatsApp llevan al contacto directo del complejo.": "The Book and WhatsApp buttons lead to the resort's direct contact.", "Visitar la web →": "Visit the site →"};
+var A={};
+var WA={"es": ["Escríbenos", "¿Tienes dudas?", "Reserva ahora", "¿Te ayudamos?"], "en": ["Write to us", "Questions?", "Book now", "Need help?"]};
+var TITLE={"es": "Olas de Matanzas — Resumen del sitio web", "en": "Olas de Matanzas — Website overview"};
+var orig=new Map();
+function walk(lang){
+  var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentNode;if(!p)return 2;var t=p.nodeName;if(t==='SCRIPT'||t==='STYLE'||t==='NOSCRIPT')return 2;return 1;}}),n;
+  while(n=w.nextNode()){var raw=n.nodeValue,key=raw.trim();if(!key)continue;
+    if(lang==='en'){if(T[key]!==undefined){if(!orig.has(n))orig.set(n,raw);n.nodeValue=raw.replace(key,T[key]);}}
+    else{if(orig.has(n))n.nodeValue=orig.get(n);}}
+  document.querySelectorAll('[data-soon]').forEach(function(el){var v=el.getAttribute('data-soon');
+    if(lang==='en'){if(A[v]!==undefined){if(!el.getAttribute('data-soon-es'))el.setAttribute('data-soon-es',v);el.setAttribute('data-soon',A[v]);}}
+    else{var o=el.getAttribute('data-soon-es');if(o)el.setAttribute('data-soon',o);}});
+  document.title=TITLE[lang]||TITLE.es;
+  window.__waMsgs=WA[lang]||WA.es;
+  window.dispatchEvent(new CustomEvent('omzlang',{detail:lang}));
+}
+function setLang(lang){lang=(lang==='en')?'en':'es';document.documentElement.lang=lang;walk(lang);
+  try{localStorage.setItem('omz_lang',lang);}catch(e){}
+  document.querySelectorAll('[data-lang]').forEach(function(b){b.classList.toggle('is-on',b.getAttribute('data-lang')===lang);});}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-lang]');if(b){e.preventDefault();setLang(b.getAttribute('data-lang'));}});
+var url=new URLSearchParams(location.search).get('lang');var saved=null;try{saved=localStorage.getItem('omz_lang');}catch(e){}
+setLang(url||saved||(((navigator.language||'es').slice(0,2)==='en')?'en':'es'));
+})();</script>
 </body>
 </html>
