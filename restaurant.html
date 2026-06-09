@@ -388,6 +388,15 @@ p{color:var(--text)}
 @media(max-width:860px){.mgal{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:560px){.mgal{grid-template-columns:repeat(2,1fr)}.mgal .f-big{grid-column:span 2;grid-row:span 1;aspect-ratio:4/3}}
 
+/* horizontal moving gallery (ambiance) */
+.rgal{padding:0}
+.rgal__rail{display:flex;gap:18px;overflow-x:auto;padding:4px 0 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch;cursor:grab}
+.rgal__rail::-webkit-scrollbar{display:none}
+.rgal__slide{flex:0 0 auto;width:clamp(260px,30vw,430px);scroll-snap-align:start;margin:0;cursor:pointer;overflow:hidden;aspect-ratio:3/2;background:var(--paper-2)}
+.rgal__slide img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s var(--ease)}
+.rgal__slide:hover img{transform:scale(1.05)}
+@media(max-width:680px){.rgal__slide{width:78vw}}
+
 /* menu links (carta web + pdf) */
 .menulinks{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:6px}
 .mlink{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;font-family:var(--sans);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;transition:all .4s var(--ease)}
@@ -682,6 +691,32 @@ p{color:var(--text)}
   </div>
 </section>
 
+<!-- GALERIA HORIZONTAL — AMBIENTE -->
+<section class="section" style="padding-top:0">
+  <div class="wrap" style="text-align:center;margin-bottom:clamp(34px,4vw,48px)">
+    <div class="flank up" style="color:var(--slate);margin-bottom:16px"><span class="ln"></span><span class="lbl">El espacio</span><span class="ln"></span></div>
+    <h2 class="up d1" style="font-size:clamp(2rem,4.4vw,3.2rem);font-weight:400">Terraza, fogón y atardeceres</h2>
+  </div>
+  <div class="rgal">
+    <div class="rgal__rail" id="ambRail">
+      <figure class="rgal__slide" data-lb="assets/amb-01.jpg"><img src="assets/amb-01.jpg" alt="Vista a la playa desde la terraza de Marvento" decoding="async" loading="lazy"></figure>
+      <figure class="rgal__slide" data-lb="assets/amb-02.jpg"><img src="assets/amb-02.jpg" alt="Terraza con vista al mar al atardecer" decoding="async" loading="lazy"></figure>
+      <figure class="rgal__slide" data-lb="assets/amb-03.jpg"><img src="assets/amb-03.jpg" alt="Copa de vino blanco con el atardecer de fondo" decoding="async" loading="lazy"></figure>
+      <figure class="rgal__slide" data-lb="assets/amb-04.jpg"><img src="assets/amb-04.jpg" alt="Fogón encendido al anochecer" decoding="async" loading="lazy"></figure>
+      <figure class="rgal__slide" data-lb="assets/amb-05.jpg"><img src="assets/amb-05.jpg" alt="Exterior del restaurant entre los árboles" decoding="async" loading="lazy"></figure>
+      <figure class="rgal__slide" data-lb="assets/amb-06.jpg"><img src="assets/amb-06.jpg" alt="Pareja frente al mar al atardecer" decoding="async" loading="lazy"></figure>
+      <figure class="rgal__slide" data-lb="assets/amb-07.jpg"><img src="assets/amb-07.jpg" alt="Terraza iluminada al anochecer" decoding="async" loading="lazy"></figure>
+      <figure class="rgal__slide" data-lb="assets/amb-08.jpg"><img src="assets/amb-08.jpg" alt="Plato servido con vista abierta al mar" decoding="async" loading="lazy"></figure>
+      <figure class="rgal__slide" data-lb="assets/amb-09.jpg"><img src="assets/amb-09.jpg" alt="Terraza techada del restaurant de noche" decoding="async" loading="lazy"></figure>
+      <figure class="rgal__slide" data-lb="assets/amb-10.jpg"><img src="assets/amb-10.jpg" alt="Coctelería de la casa" decoding="async" loading="lazy"></figure>
+      <figure class="rgal__slide" data-lb="assets/amb-11.jpg"><img src="assets/amb-11.jpg" alt="Reposera en la playa al atardecer" decoding="async" loading="lazy"></figure>
+      <figure class="rgal__slide" data-lb="assets/amb-12.jpg"><img src="assets/amb-12.jpg" alt="Ambiente del salón al anochecer" decoding="async" loading="lazy"></figure>
+      <figure class="rgal__slide" data-lb="assets/amb-13.jpg"><img src="assets/amb-13.jpg" alt="Mesa larga compartida en el restaurant" decoding="async" loading="lazy"></figure>
+      <figure class="rgal__slide" data-lb="assets/amb-14.jpg"><img src="assets/amb-14.jpg" alt="Cartel del Restaurant Marvento" decoding="async" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
 <!-- RESERVAS -->
 <section class="section" style="padding-top:0">
   <div class="wrap">
@@ -917,13 +952,44 @@ p{color:var(--text)}
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') groups.forEach(function(g){ g.removeAttribute('data-open'); }); });
 })();
 </script>
+<script>/*amb-rail*/
+(function(){
+  var rail=document.getElementById('ambRail'); if(!rail) return;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var lb=document.querySelector('.lb'), lbImg=lb?lb.querySelector('img'):null;
+  function openLb(src){ if(!lb||!lbImg)return; lbImg.src=src; lb.classList.add('open'); document.body.style.overflow='hidden'; }
+  var originals=[].slice.call(rail.children);
+  originals.forEach(function(s){
+    var c=s.cloneNode(true); c.setAttribute('aria-hidden','true');
+    c.addEventListener('click',function(){ var d=c.getAttribute('data-lb'); if(d) openLb(d); });
+    rail.appendChild(c);
+  });
+  if(reduce) return;
+  var first=originals[0], firstClone=rail.children[originals.length];
+  function loopW(){ return firstClone.offsetLeft - first.offsetLeft; }
+  var paused=false, resumeT;
+  function tick(){
+    if(!paused){
+      rail.scrollLeft += 0.5;
+      var L=loopW();
+      if(L>0 && rail.scrollLeft>=L) rail.scrollLeft-=L;
+    }
+    requestAnimationFrame(tick);
+  }
+  rail.addEventListener('mouseenter',function(){paused=true;});
+  rail.addEventListener('mouseleave',function(){paused=false;});
+  rail.addEventListener('pointerdown',function(){paused=true; clearTimeout(resumeT);});
+  window.addEventListener('pointerup',function(){ clearTimeout(resumeT); resumeT=setTimeout(function(){paused=false;},700); });
+  requestAnimationFrame(tick);
+})();
+</script>
 <a class="wa-fab" href="https://wa.me/56996434809?text=Hola%2C%20quisiera%20informaci%C3%B3n%20de%20Olas%20de%20Matanzas" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
   <img class="wa-fab__icon" src="assets/whatsapp.webp" alt="" aria-hidden="true">
   <span class="wa-fab__txt" data-wa-rot>Escríbenos</span>
 </a>
 <script>/*wa-rot*/(function(){var el=document.querySelector('[data-wa-rot]');if(!el)return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var i=0,DEF=['Escríbenos','¿Tienes dudas?','Reserva ahora','¿Te ayudamos?'];function M(){return window.__waMsgs||DEF;}setInterval(function(){el.style.opacity=0;setTimeout(function(){var m=M();i=(i+1)%m.length;el.textContent=m[i];el.style.opacity=1;},600);},4200);})();</script>
 <script>/*i18n*/(function(){
-var T={"Alojamiento": "Accommodation", "Frente al océano, servicio completo": "Oceanfront, full service", "desde $120.000 / noche": "from $120,000 / night", "Cabañas": "Cabins", "Entre el bosque, en familia": "In the forest, for families", "desde $95.000 / noche": "from $95,000 / night", "Domos": "Domes", "Bajo las estrellas, glamping": "Under the stars, glamping", "desde $140.000 / noche": "from $140,000 / night", "A pasos del mar, al aire libre": "Steps from the sea, outdoors", "desde $25.000 / noche": "from $25,000 / night", "Experiencias": "Experiences", "Actividades": "Activities", "Eventos": "Events", "Tenis": "Tennis", "Cómo llegar": "Getting here", "Contacto": "Contact", "Reservar": "Book now", "Inicio": "Home", "Hotel": "Hotel", "Camping": "Camping", "Restaurant": "Restaurant", "Inicio · Restaurant": "Home · Restaurant", "Restaurant Marvento": "Restaurant Marvento", "El restaurant": "The restaurant", "Frente a la playa, con una de las mejores vistas del sector.": "Beachfront, with one of the best views in the area.", "Una terraza amplia y un fogón perfectos para disfrutar del ambiente costero, el atardecer y el movimiento de los deportes náuticos. Un espacio relajado y familiar, ideal para almuerzos tranquilos, tardes frente al mar o encuentros entre amigos.": "A spacious terrace and a fire pit, perfect to enjoy the coastal atmosphere, the sunset and the buzz of water sports. A relaxed, family-friendly space, ideal for easy lunches, afternoons by the sea or get-togethers with friends.", "Nuestra carta": "Our menu", "Ceviches, pescados, pizzas y más": "Ceviches, fish, pizzas and more", "Ceviches, pescados, sandwiches, pizzas, pastas y postres caseros, con una selección de coctelería, jugos y vinos pensada para acompañar la experiencia de playa.": "Ceviches, fish, sandwiches, pizzas, pastas and homemade desserts, with a selection of cocktails, juices and wines designed to pair with the beach experience.", "Ver carta completa": "View full menu", "Descargar PDF": "Download PDF", "Galería": "Gallery", "Sabores frente al mar": "Flavors by the sea", "Horarios de atención": "Opening hours", "Temporada de invierno": "Winter season", "Lunes": "Monday", "Cerrado": "Closed", "Martes a viernes": "Tuesday to Friday", "Sábado": "Saturday", "Carta reducida entre 16:00 y 19:00": "Limited menu between 4:00 and 7:00 pm", "Domingo": "Sunday", "Atención por orden de llegada. Se recomienda llegar temprano.": "Seating on a first-come, first-served basis. We recommend arriving early.", "Reservas": "Reservations", "Escríbenos y reserva tu mesa": "Write to us and book your table", "Restaurant": "Restaurant", "Marvento": "Marvento", "Eventos · Recepción": "Events · Reception", "Coordinación": "Coordination", "Eventos y celebraciones": "Events & celebrations", "Un espacio único frente al mar": "A unique space by the sea", "Eventos de empresa": "Corporate events", "Encuentros y reuniones corporativas.": "Corporate meetings and gatherings.", "Matrimonios": "Weddings", "Celebraciones con vista abierta al mar.": "Celebrations with open sea views.", "Celebraciones privadas": "Private celebrations", "Terraza ideal para grupos.": "Terrace ideal for groups.", "Equipo preparado": "Ready team", "Diseño, coordinación y producción.": "Design, coordination and production.", "Marvento": "Marvento", "Una tarde frente al mar te espera.": "An afternoon by the sea awaits.", "Ven a disfrutar de la mejor vista de Matanzas, con buena comida y el ambiente costero. Atención por orden de llegada.": "Come enjoy the best view in Matanzas, with great food and the coastal atmosphere. Seating on a first-come, first-served basis.", "Ver la carta": "View the menu", "A pasos del mar,": "Steps from the sea,", "fácil de encontrar.": "easy to find.", "Fundo San Luis, Lagunillas s/n, Matanzas. A unas 2 horas de Santiago por la ruta de la costa. Abre la ruta en tu app favorita:": "Fundo San Luis, Lagunillas s/n, Matanzas. About 2 hours from Santiago via the coastal route. Open the route in your favorite app:", "Abrir en Google Maps": "Open in Google Maps", "Abrir en Waze": "Open in Waze", "Abrir en Apple Maps": "Open in Apple Maps", "Mar, bosque y calma frente al océano. Una pausa real en el corazón de Matanzas.": "Sea, forest and calm facing the ocean. A true pause in the heart of Matanzas.", "Fantástico": "Fantastic", "Ubicación": "Location", "Cómo llegar →": "Getting here →", "Síguenos": "Follow us", "© 2026 Olas de Matanzas. Todos los derechos reservados.": "© 2026 Olas de Matanzas. All rights reserved.", "Hotel · Cabañas · Domos · Camping": "Hotel · Cabins · Domes · Camping", "Cerrar ✕": "Close ✕", "Escríbenos": "Write to us"};
+var T={"Alojamiento": "Accommodation", "Frente al océano, servicio completo": "Oceanfront, full service", "desde $120.000 / noche": "from $120,000 / night", "Cabañas": "Cabins", "Entre el bosque, en familia": "In the forest, for families", "desde $95.000 / noche": "from $95,000 / night", "Domos": "Domes", "Bajo las estrellas, glamping": "Under the stars, glamping", "desde $140.000 / noche": "from $140,000 / night", "A pasos del mar, al aire libre": "Steps from the sea, outdoors", "desde $25.000 / noche": "from $25,000 / night", "Experiencias": "Experiences", "Actividades": "Activities", "Eventos": "Events", "Tenis": "Tennis", "Cómo llegar": "Getting here", "Contacto": "Contact", "Reservar": "Book now", "Inicio": "Home", "Hotel": "Hotel", "Camping": "Camping", "Restaurant": "Restaurant", "Inicio · Restaurant": "Home · Restaurant", "Restaurant Marvento": "Restaurant Marvento", "El restaurant": "The restaurant", "Frente a la playa, con una de las mejores vistas del sector.": "Beachfront, with one of the best views in the area.", "Una terraza amplia y un fogón perfectos para disfrutar del ambiente costero, el atardecer y el movimiento de los deportes náuticos. Un espacio relajado y familiar, ideal para almuerzos tranquilos, tardes frente al mar o encuentros entre amigos.": "A spacious terrace and a fire pit, perfect to enjoy the coastal atmosphere, the sunset and the buzz of water sports. A relaxed, family-friendly space, ideal for easy lunches, afternoons by the sea or get-togethers with friends.", "Nuestra carta": "Our menu", "Ceviches, pescados, pizzas y más": "Ceviches, fish, pizzas and more", "Ceviches, pescados, sandwiches, pizzas, pastas y postres caseros, con una selección de coctelería, jugos y vinos pensada para acompañar la experiencia de playa.": "Ceviches, fish, sandwiches, pizzas, pastas and homemade desserts, with a selection of cocktails, juices and wines designed to pair with the beach experience.", "Ver carta completa": "View full menu", "Descargar PDF": "Download PDF", "Galería": "Gallery", "Sabores frente al mar": "Flavors by the sea", "Horarios de atención": "Opening hours", "Temporada de invierno": "Winter season", "Lunes": "Monday", "Cerrado": "Closed", "Martes a viernes": "Tuesday to Friday", "Sábado": "Saturday", "Carta reducida entre 16:00 y 19:00": "Limited menu between 4:00 and 7:00 pm", "Domingo": "Sunday", "Atención por orden de llegada. Se recomienda llegar temprano.": "Seating on a first-come, first-served basis. We recommend arriving early.", "El espacio": "The space", "Terraza, fogón y atardeceres": "Terrace, fire pit and sunsets", "Reservas": "Reservations", "Escríbenos y reserva tu mesa": "Write to us and book your table", "Restaurant": "Restaurant", "Marvento": "Marvento", "Eventos · Recepción": "Events · Reception", "Coordinación": "Coordination", "Eventos y celebraciones": "Events & celebrations", "Un espacio único frente al mar": "A unique space by the sea", "Eventos de empresa": "Corporate events", "Encuentros y reuniones corporativas.": "Corporate meetings and gatherings.", "Matrimonios": "Weddings", "Celebraciones con vista abierta al mar.": "Celebrations with open sea views.", "Celebraciones privadas": "Private celebrations", "Terraza ideal para grupos.": "Terrace ideal for groups.", "Equipo preparado": "Ready team", "Diseño, coordinación y producción.": "Design, coordination and production.", "Marvento": "Marvento", "Una tarde frente al mar te espera.": "An afternoon by the sea awaits.", "Ven a disfrutar de la mejor vista de Matanzas, con buena comida y el ambiente costero. Atención por orden de llegada.": "Come enjoy the best view in Matanzas, with great food and the coastal atmosphere. Seating on a first-come, first-served basis.", "Ver la carta": "View the menu", "A pasos del mar,": "Steps from the sea,", "fácil de encontrar.": "easy to find.", "Fundo San Luis, Lagunillas s/n, Matanzas. A unas 2 horas de Santiago por la ruta de la costa. Abre la ruta en tu app favorita:": "Fundo San Luis, Lagunillas s/n, Matanzas. About 2 hours from Santiago via the coastal route. Open the route in your favorite app:", "Abrir en Google Maps": "Open in Google Maps", "Abrir en Waze": "Open in Waze", "Abrir en Apple Maps": "Open in Apple Maps", "Mar, bosque y calma frente al océano. Una pausa real en el corazón de Matanzas.": "Sea, forest and calm facing the ocean. A true pause in the heart of Matanzas.", "Fantástico": "Fantastic", "Ubicación": "Location", "Cómo llegar →": "Getting here →", "Síguenos": "Follow us", "© 2026 Olas de Matanzas. Todos los derechos reservados.": "© 2026 Olas de Matanzas. All rights reserved.", "Hotel · Cabañas · Domos · Camping": "Hotel · Cabins · Domes · Camping", "Cerrar ✕": "Close ✕", "Escríbenos": "Write to us"};
 var A={"Página de Cabañas — disponible próximamente": "Cabins page — coming soon", "Página de Domos — disponible próximamente": "Domes page — coming soon", "Página de Camping — disponible próximamente": "Camping page — coming soon", "Actividades — más información próximamente": "Activities — more info coming soon", "Spa OMZ — más información próximamente": "Spa OMZ — more info coming soon", "Eventos — más información próximamente": "Events — more info coming soon", "Tenis — más información próximamente": "Tennis — more info coming soon"};
 var WA={"es": ["Escríbenos", "¿Tienes dudas?", "Reserva ahora", "¿Te ayudamos?"], "en": ["Write to us", "Questions?", "Book now", "Need help?"]};
 var TITLE={"es": "Restaurant Marvento — Olas de Matanzas", "en": "Restaurant Marvento — Olas de Matanzas"};
