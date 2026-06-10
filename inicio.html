@@ -1118,11 +1118,20 @@ p{color:var(--text)}
   var cards=[].slice.call(document.querySelectorAll('.reel')); if(!cards.length)return;
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   if('IntersectionObserver' in window && !reduce){
-    var io=new IntersectionObserver(function(es){es.forEach(function(en){
-      var v=en.target.querySelector('video');
-      if(en.isIntersecting){ v.play().then(function(){en.target.classList.add('playing')}).catch(function(){}); }
-      else { v.pause(); en.target.classList.remove('playing'); }
-    });},{threshold:.55});
+    var ratios=new WeakMap();
+    function update(){
+      var best=null,bestR=0.5;
+      cards.forEach(function(c){var r=ratios.get(c)||0;if(r>bestR){bestR=r;best=c;}});
+      cards.forEach(function(c){
+        var v=c.querySelector('video');
+        if(c===best){ v.play().then(function(){c.classList.add('playing')}).catch(function(){}); }
+        else { v.pause(); c.classList.remove('playing'); }
+      });
+    }
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(en){ ratios.set(en.target, en.isIntersecting?en.intersectionRatio:0); });
+      update();
+    },{threshold:[0,.25,.5,.75,1]});
     cards.forEach(function(c){io.observe(c)});
   }
   var vlb=document.querySelector('.vlb'), vv=vlb?vlb.querySelector('video'):null;
