@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Restaurant Marvento — Olas de Matanzas</title>
-<meta name="description" content="Restaurant Marvento, frente a la playa de Matanzas: ceviches, pescados, pizzas y coctelería con una de las mejores vistas al mar. Terraza, fogón y atardeceres.">
+<title>Actividades — Olas de Matanzas</title>
+<meta name="description" content="Windsurf, escuela de surf, bike park, cabalgatas y tenis en Olas de Matanzas: deporte y naturaleza frente al mar, en el corazón del spot de Matanzas, Chile.">
 <link rel="icon" type="image/png" href="assets/a-956e8caaf162.png">
 <link rel="apple-touch-icon" href="assets/a-59e77ee6aef2.png">
 <style>
@@ -376,55 +376,37 @@ p{color:var(--text)}
 @media(max-width:420px){.amen{columns:1}}
 
 /* =========================================================
-   RESTAURANT — modern mosaic gallery
+   ACTIVIDADES — alternating feature blocks
    ========================================================= */
-.mgal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:clamp(8px,1vw,14px);grid-auto-flow:dense}
-.mgal figure{position:relative;margin:0;overflow:hidden;aspect-ratio:4/3;cursor:zoom-in;background:var(--paper-3)}
-.mgal figure img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
-.mgal figure:hover img{transform:scale(1.06)}
-.mgal figure::before{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(20,30,36,0),rgba(20,30,36,.28));opacity:0;transition:opacity .5s var(--ease)}
-.mgal figure:hover::before{opacity:1}
-.mgal .f-big{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
-@media(max-width:860px){.mgal{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:560px){.mgal{grid-template-columns:repeat(2,1fr)}.mgal .f-big{grid-column:span 2;grid-row:span 1;aspect-ratio:4/3}}
-
-/* horizontal moving gallery (ambiance) */
-.rgal{padding:0}
-.rgal__rail{display:flex;gap:18px;overflow-x:auto;padding:4px 0 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch;cursor:grab}
-.rgal__rail::-webkit-scrollbar{display:none}
-.rgal__slide{flex:0 0 auto;width:clamp(260px,30vw,430px);scroll-snap-align:start;margin:0;cursor:pointer;overflow:hidden;aspect-ratio:3/2;background:var(--paper-2)}
-.rgal__slide img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s var(--ease)}
-.rgal__slide:hover img{transform:scale(1.05)}
-@media(max-width:680px){.rgal__slide{width:78vw}}
-
-/* menu links (carta web + pdf) */
-.menulinks{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:6px}
-.mlink{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;font-family:var(--sans);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;transition:all .4s var(--ease)}
-.mlink--solid{background:var(--slate);color:var(--cream-soft);border:1px solid var(--slate)}
-.mlink--solid:hover{background:transparent;color:var(--slate)}
-.mlink--ghost{background:transparent;color:var(--slate);border:1px solid var(--line)}
-.mlink--ghost:hover{background:var(--slate);color:var(--cream-soft);border-color:var(--slate)}
-.mlink svg{transition:transform .4s var(--ease)}
-.mlink:hover svg{transform:translateX(4px)}
-
-/* hours table */
-.hours{max-width:680px;margin:0 auto;border:1px solid var(--line)}
-.hours__row{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:18px clamp(20px,3vw,34px);border-top:1px solid var(--line)}
-.hours__row:first-child{border-top:0}
-.hours__row.closed{color:var(--muted)}
-.hours__d{font-family:var(--serif);font-size:1.25rem;color:var(--head)}
-.hours__h{font-family:var(--sans);font-size:.96rem;color:var(--text);text-align:right}
-.hours__note{text-align:center;color:var(--muted);font-size:.92rem;margin-top:18px}
-
-/* contact cards */
-.rcontact{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line)}
-.rcontact>div{padding:clamp(28px,4vw,46px)}
-.rcontact>div:first-child{border-right:1px solid var(--line)}
-.rcontact .eyebrow{margin-bottom:18px}
-.rcontact h4{font-size:1.5rem;font-weight:500;margin-bottom:16px}
-.rcontact a,.rcontact span{display:block;color:var(--ink);font-size:1.02rem;line-height:2;transition:color .35s var(--ease)}
-.rcontact a:hover{color:var(--slate)}
-@media(max-width:680px){.rcontact{grid-template-columns:1fr}.rcontact>div:first-child{border-right:0;border-bottom:1px solid var(--line)}}
+.act{display:grid;grid-template-columns:1.04fr .96fr;gap:clamp(28px,4.5vw,66px);align-items:center;margin-bottom:clamp(64px,9vw,118px)}
+.act:last-of-type{margin-bottom:0}
+.act--rev .act__media{order:2}
+.act__media{display:flex;flex-direction:column;gap:clamp(8px,1vw,12px)}
+.act__lead{margin:0;overflow:hidden;aspect-ratio:4/3;background:var(--paper-2);cursor:zoom-in;position:relative}
+.act__lead img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+.act__lead:hover img{transform:scale(1.05)}
+.act__thumbs{display:flex;gap:clamp(8px,1vw,12px)}
+.act__thumbs figure{flex:1;margin:0;overflow:hidden;aspect-ratio:1;background:var(--paper-2);cursor:zoom-in}
+.act__thumbs img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.act__thumbs figure:hover img{transform:scale(1.07)}
+.act__num{font-family:var(--sans);font-size:.72rem;letter-spacing:.22em;color:var(--slate);opacity:.6;margin-bottom:14px}
+.act__body h2{font-family:var(--serif);font-weight:500;color:var(--head);font-size:clamp(1.9rem,3.6vw,2.9rem);line-height:1.04;margin-bottom:20px}
+.act__body p{color:var(--text);margin-bottom:14px;max-width:54ch}
+.act__meta{margin-top:26px;border-top:1px solid var(--line)}
+.act__meta .mrow{display:flex;justify-content:space-between;gap:18px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.96rem}
+.act__meta .mk{color:var(--muted)}
+.act__meta .mv{color:var(--ink);text-align:right;font-weight:500}
+.act__meta .mv a{color:var(--slate);text-decoration:none;border-bottom:1px solid var(--line)}
+.act__meta .mv a:hover{opacity:.65}
+.act__tag{display:inline-flex;align-items:center;gap:8px;margin-top:24px;padding:9px 16px;background:var(--slate);color:var(--cream-soft);font-family:var(--sans);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase}
+.act__link{display:inline-flex;align-items:center;gap:9px;margin-top:24px;font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);border-bottom:1.5px solid var(--slate);padding-bottom:4px}
+.act__link:hover{opacity:.6}
+.act__link svg{transition:transform .4s var(--ease)}
+.act__link:hover svg{transform:translateX(4px)}
+@media(max-width:840px){
+  .act{grid-template-columns:1fr;gap:26px}
+  .act--rev .act__media{order:0}
+}
 
 /* cta strip */
 .cta2{text-align:center;background:var(--paper-2)}
@@ -573,11 +555,11 @@ p{color:var(--text)}
         </a>
       </div>
     </div>
-    <a href="restaurant.html" class="active" aria-current="page">Restaurant</a>
+    <a href="restaurant.html">Restaurant</a>
     <div class="navx" data-navx>
       <a href="#" class="navx__trigger" aria-haspopup="true" aria-expanded="false">Experiencias<svg class="navx__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
       <div class="navx__panel" role="menu">
-        <a href="actividades.html" role="menuitem">Actividades</a>
+        <a href="actividades.html" role="menuitem" aria-current="page">Actividades</a>
         <a href="inicio.html#spa" role="menuitem">Spa OMZ</a>
         <a href="inicio.html#eventos" role="menuitem">Eventos</a>
         <a href="actividades.html#tenis" role="menuitem">Tenis</a>
@@ -603,9 +585,9 @@ p{color:var(--text)}
     <a href="#" data-soon="Página de Cabañas — disponible próximamente" class="m-sub">Cabañas</a>
     <a href="domos.html" class="m-sub">Domos</a>
     <a href="camping.html" class="m-sub">Camping</a>
-    <a href="restaurant.html" class="active" aria-current="page">Restaurant</a>
+    <a href="restaurant.html">Restaurant</a>
     <span class="m-label">Experiencias</span>
-    <a href="actividades.html" class="m-sub">Actividades</a>
+    <a href="actividades.html" class="m-sub active">Actividades</a>
     <a href="inicio.html#spa" class="m-sub">Spa OMZ</a>
     <a href="inicio.html#eventos" class="m-sub">Eventos</a>
     <a href="actividades.html#tenis" class="m-sub">Tenis</a>
@@ -620,166 +602,146 @@ p{color:var(--text)}
 
 <!-- PAGE HERO -->
 <header class="phero">
-  <img src="assets/mar-hero.jpg" alt="Plato del Restaurant Marvento con vista a la playa" decoding="async" loading="lazy">
+  <img src="assets/act-hero.jpg" alt="Windsurfista saltando una ola en Matanzas" decoding="async" loading="lazy">
   <div class="phero__in">
-    <span class="crumb">Inicio · Restaurant</span>
-    <h1>Restaurant Marvento</h1>
+    <span class="crumb">Inicio · Actividades</span>
+    <h1>Actividades</h1>
   </div>
 </header>
 
 <!-- INTRO -->
 <section class="section" style="padding-bottom:clamp(40px,6vw,72px)">
   <div class="wrap intro2">
-    <div class="flank up" style="color:var(--slate);margin-bottom:22px"><span class="ln"></span><span class="lbl">El restaurant</span><span class="ln"></span></div>
-    <h2 class="up d1">Frente a la playa, con una de las mejores vistas del sector.</h2>
-    <p class="up d2">Una terraza amplia y un fogón perfectos para disfrutar del ambiente costero, el atardecer y el movimiento de los deportes náuticos. Un espacio relajado y familiar, ideal para almuerzos tranquilos, tardes frente al mar o encuentros entre amigos.</p>
+    <div class="flank up" style="color:var(--slate);margin-bottom:22px"><span class="ln"></span><span class="lbl">Actividades</span><span class="ln"></span></div>
+    <h2 class="up d1">Deporte y naturaleza, a pasos del mar.</h2>
+    <p class="up d2">En el corazón del spot de Matanzas, alojamiento y deporte se integran para una experiencia completa: desde el viento y las olas hasta el bosque de pinos. Estas son las actividades que puedes vivir en OMZ.</p>
   </div>
 </section>
 
-<!-- CARTA LINKS -->
-<section class="section" style="padding-top:0;padding-bottom:clamp(40px,6vw,72px)">
-  <div class="wrap" style="text-align:center">
-    <div class="flank up" style="color:var(--slate);margin-bottom:18px"><span class="ln"></span><span class="lbl">Nuestra carta</span><span class="ln"></span></div>
-    <h2 class="up d1" style="font-size:clamp(1.9rem,4vw,2.8rem);font-weight:400;margin-bottom:14px">Ceviches, pescados, pizzas y más</h2>
-    <p class="up d2" style="max-width:60ch;margin:0 auto 30px">Ceviches, pescados, sandwiches, pizzas, pastas y postres caseros, con una selección de coctelería, jugos y vinos pensada para acompañar la experiencia de playa.</p>
-    <div class="menulinks up d2">
-      <a class="mlink mlink--solid" href="carta.html">Ver carta completa <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h13M10 1l4 4-4 4"/></svg></a>
-      <a class="mlink mlink--ghost" href="carta.pdf" target="_blank" rel="noopener">Descargar PDF <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v12M8 11l4 4 4-4M5 21h14"/></svg></a>
-    </div>
-  </div>
-</section>
-
-<!-- GALERIA -->
+<!-- ACTIVIDADES -->
 <section class="section" style="padding-top:0">
   <div class="wrap">
-    <div style="margin-bottom:clamp(34px,4vw,48px);text-align:center">
-      <span class="eyebrow up">Galería</span>
-      <h2 class="up d1" style="font-size:clamp(1.8rem,3.6vw,2.6rem);font-weight:400;margin-top:12px">Sabores frente al mar</h2>
-    </div>
-    <div class="mgal">
-      <figure class="f-big wipe" data-lb="assets/mar-01.jpg"><img src="assets/mar-01.jpg" alt="Ceviche en bowl de piedra con vista a la playa" decoding="async" loading="lazy"></figure>
-      <figure class="wipe" data-lb="assets/mar-02.jpg"><img src="assets/mar-02.jpg" alt="Risotto de choritos" decoding="async" loading="lazy"></figure>
-      <figure class="wipe" data-lb="assets/mar-03.jpg"><img src="assets/mar-03.jpg" alt="Tostada gourmet con vista al mar" decoding="async" loading="lazy"></figure>
-      <figure class="wipe" data-lb="assets/mar-04.jpg"><img src="assets/mar-04.jpg" alt="Pescado con ensalada" decoding="async" loading="lazy"></figure>
-      <figure class="f-big wipe" data-lb="assets/mar-05.jpg"><img src="assets/mar-05.jpg" alt="Pizza con vista a la playa" decoding="async" loading="lazy"></figure>
-      <figure class="wipe" data-lb="assets/mar-06.jpg"><img src="assets/mar-06.jpg" alt="Salmón sobre puré de arvejas" decoding="async" loading="lazy"></figure>
-      <figure class="wipe" data-lb="assets/mar-07.jpg"><img src="assets/mar-07.jpg" alt="Ceviche con vista al mar" decoding="async" loading="lazy"></figure>
-      <figure class="wipe" data-lb="assets/mar-08.jpg"><img src="assets/mar-08.jpg" alt="Tabla de entradas fritas" decoding="async" loading="lazy"></figure>
-      <figure class="wipe" data-lb="assets/mar-09.jpg"><img src="assets/mar-09.jpg" alt="Postre de helado con vista al mar" decoding="async" loading="lazy"></figure>
-      <figure class="wipe" data-lb="assets/mar-10.jpg"><img src="assets/mar-10.jpg" alt="Caldillo de pescado" decoding="async" loading="lazy"></figure>
-      <figure class="f-big wipe" data-lb="assets/mar-13.jpg"><img src="assets/mar-13.jpg" alt="Postre servido con vista a la playa" decoding="async" loading="lazy"></figure>
-      <figure class="wipe" data-lb="assets/mar-11.jpg"><img src="assets/mar-11.jpg" alt="Postre tipo flan con vista al mar" decoding="async" loading="lazy"></figure>
-      <figure class="wipe" data-lb="assets/mar-12.jpg"><img src="assets/mar-12.jpg" alt="Carne con papas fritas" decoding="async" loading="lazy"></figure>
-    </div>
-  </div>
-</section>
 
-<!-- HORARIOS -->
-<section class="section" style="padding-top:0">
-  <div class="wrap">
-    <div class="stays__head" style="text-align:center;margin-bottom:clamp(40px,5vw,60px)">
-      <div class="flank up" style="color:var(--slate);margin-bottom:16px"><span class="ln"></span><span class="lbl">Horarios de atención</span><span class="ln"></span></div>
-      <h2 class="up d1" style="font-size:clamp(2rem,4.4vw,3.2rem);font-weight:400">Temporada de invierno</h2>
+    <!-- 1 · Windsurf -->
+    <div class="act">
+      <div class="act__media">
+        <figure class="act__lead wipe" data-lb="assets/act-ws-1.jpg"><img src="assets/act-ws-1.jpg" alt="Windsurfista saltando una ola en Matanzas" decoding="async" loading="lazy"></figure>
+        <div class="act__thumbs">
+          <figure class="wipe d1" data-lb="assets/act-ws-2.jpg"><img src="assets/act-ws-2.jpg" alt="Windsurf entre las olas" decoding="async" loading="lazy"></figure>
+          <figure class="wipe d2" data-lb="assets/act-ws-3.jpg"><img src="assets/act-ws-3.jpg" alt="Windsurfista frente a la roca de Matanzas" decoding="async" loading="lazy"></figure>
+        </div>
+      </div>
+      <div class="act__body">
+        <div class="act__num up">01 · Olas y viento</div>
+        <h2 class="up d1">Windsurf</h2>
+        <p class="up d2">Matanzas es uno de los destinos más destacados del mundo para el windsurf de olas, reconocido por su categoría 5 estrellas y por recibir cada año el Chile World Cup Windsurf, que reúne a deportistas de élite.</p>
+        <p class="up d2">Gracias a sus vientos constantes, olas potentes y acceso directo a la playa, es un lugar ideal para riders que buscan condiciones exigentes. Desde OMZ estás en el corazón del spot: alojamiento, naturaleza y deporte a pasos del mar.</p>
+        <span class="act__tag up d2">Spot 5★ · Chile World Cup Windsurf</span>
+      </div>
     </div>
-    <div class="hours up d1">
-      <div class="hours__row closed"><span class="hours__d">Lunes</span><span class="hours__h">Cerrado</span></div>
-      <div class="hours__row"><span class="hours__d">Martes a viernes</span><span class="hours__h">13:00–16:00 · 19:00–22:00</span></div>
-      <div class="hours__row"><span class="hours__d">Sábado</span><span class="hours__h">13:00–16:00 · 19:00–22:00<br><small>Carta reducida entre 16:00 y 19:00</small></span></div>
-      <div class="hours__row"><span class="hours__d">Domingo</span><span class="hours__h">13:00–16:30</span></div>
-    </div>
-    <p class="hours__note up d1">Atención por orden de llegada. Se recomienda llegar temprano.</p>
-  </div>
-</section>
 
-<!-- GALERIA HORIZONTAL — AMBIENTE -->
-<section class="section" style="padding-top:0">
-  <div class="wrap" style="text-align:center;margin-bottom:clamp(34px,4vw,48px)">
-    <div class="flank up" style="color:var(--slate);margin-bottom:16px"><span class="ln"></span><span class="lbl">El espacio</span><span class="ln"></span></div>
-    <h2 class="up d1" style="font-size:clamp(2rem,4.4vw,3.2rem);font-weight:400">Terraza, fogón y atardeceres</h2>
-  </div>
-  <div class="rgal">
-    <div class="rgal__rail" id="ambRail">
-      <figure class="rgal__slide" data-lb="assets/amb-01.jpg"><img src="assets/amb-01.jpg" alt="Vista a la playa desde la terraza de Marvento" decoding="async" loading="lazy"></figure>
-      <figure class="rgal__slide" data-lb="assets/amb-02.jpg"><img src="assets/amb-02.jpg" alt="Terraza con vista al mar al atardecer" decoding="async" loading="lazy"></figure>
-      <figure class="rgal__slide" data-lb="assets/amb-03.jpg"><img src="assets/amb-03.jpg" alt="Copa de vino blanco con el atardecer de fondo" decoding="async" loading="lazy"></figure>
-      <figure class="rgal__slide" data-lb="assets/amb-04.jpg"><img src="assets/amb-04.jpg" alt="Fogón encendido al anochecer" decoding="async" loading="lazy"></figure>
-      <figure class="rgal__slide" data-lb="assets/amb-05.jpg"><img src="assets/amb-05.jpg" alt="Exterior del restaurant entre los árboles" decoding="async" loading="lazy"></figure>
-      <figure class="rgal__slide" data-lb="assets/amb-06.jpg"><img src="assets/amb-06.jpg" alt="Pareja frente al mar al atardecer" decoding="async" loading="lazy"></figure>
-      <figure class="rgal__slide" data-lb="assets/amb-07.jpg"><img src="assets/amb-07.jpg" alt="Terraza iluminada al anochecer" decoding="async" loading="lazy"></figure>
-      <figure class="rgal__slide" data-lb="assets/amb-08.jpg"><img src="assets/amb-08.jpg" alt="Plato servido con vista abierta al mar" decoding="async" loading="lazy"></figure>
-      <figure class="rgal__slide" data-lb="assets/amb-09.jpg"><img src="assets/amb-09.jpg" alt="Terraza techada del restaurant de noche" decoding="async" loading="lazy"></figure>
-      <figure class="rgal__slide" data-lb="assets/amb-10.jpg"><img src="assets/amb-10.jpg" alt="Coctelería de la casa" decoding="async" loading="lazy"></figure>
-      <figure class="rgal__slide" data-lb="assets/amb-11.jpg"><img src="assets/amb-11.jpg" alt="Reposera en la playa al atardecer" decoding="async" loading="lazy"></figure>
-      <figure class="rgal__slide" data-lb="assets/amb-12.jpg"><img src="assets/amb-12.jpg" alt="Ambiente del salón al anochecer" decoding="async" loading="lazy"></figure>
-      <figure class="rgal__slide" data-lb="assets/amb-13.jpg"><img src="assets/amb-13.jpg" alt="Mesa larga compartida en el restaurant" decoding="async" loading="lazy"></figure>
-      <figure class="rgal__slide" data-lb="assets/amb-14.jpg"><img src="assets/amb-14.jpg" alt="Cartel del Restaurant Marvento" decoding="async" loading="lazy"></figure>
+    <!-- 2 · Escuela de Surf -->
+    <div class="act act--rev">
+      <div class="act__media">
+        <figure class="act__lead wipe" data-lb="assets/act-su-3.jpg"><img src="assets/act-su-3.jpg" alt="Surfista en una ola en Matanzas" decoding="async" loading="lazy"></figure>
+        <div class="act__thumbs">
+          <figure class="wipe d1" data-lb="assets/act-su-2.jpg"><img src="assets/act-su-2.jpg" alt="Clase de surf en la playa" decoding="async" loading="lazy"></figure>
+          <figure class="wipe d2" data-lb="assets/act-su-1.jpg"><img src="assets/act-su-1.jpg" alt="Escuela de surf de Matanzas" decoding="async" loading="lazy"></figure>
+          <figure class="wipe d1" data-lb="assets/act-su-4.jpg"><img src="assets/act-su-4.jpg" alt="Surfista haciendo un cutback" decoding="async" loading="lazy"></figure>
+        </div>
+      </div>
+      <div class="act__body">
+        <div class="act__num up">02 · Aprende a surfear</div>
+        <h2 class="up d1">Escuela de Surf</h2>
+        <p class="up d2">Nuestros instructores cuentan con certificación ISA (International Surfing Association), son salvavidas de la Armada de Chile y locales que se criaron junto al mar. Clases teóricas y prácticas, con todo el equipo incluido.</p>
+        <div class="act__meta up d2">
+          <div class="mrow"><span class="mk">Clase individual</span><span class="mv">$30.000 p/p</span></div>
+          <div class="mrow"><span class="mk">Clase grupal (desde 2)</span><span class="mv">$25.000 c/u</span></div>
+          <div class="mrow"><span class="mk">Duración · Equipo</span><span class="mv">≈1h 15min · incluido</span></div>
+          <div class="mrow"><span class="mk">Rental surf / bodyboard</span><span class="mv">$10.000 / $15.000</span></div>
+          <div class="mrow"><span class="mk">Rental sandboard</span><span class="mv">$5.000</span></div>
+          <div class="mrow"><span class="mk">Contacto</span><span class="mv"><a href="tel:+56976245664">Sebastián +56 9 7624 5664</a></span></div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
 
-<!-- RESERVAS -->
-<section class="section" style="padding-top:0">
-  <div class="wrap">
-    <div style="margin-bottom:clamp(34px,4vw,48px);text-align:center">
-      <span class="eyebrow up">Reservas</span>
-      <h2 class="up d1" style="font-size:clamp(1.8rem,3.6vw,2.6rem);font-weight:400;margin-top:12px">Escríbenos y reserva tu mesa</h2>
-    </div>
-    <div class="rcontact up d1">
-      <div>
-        <span class="eyebrow">Restaurant</span>
-        <h4>Marvento</h4>
-        <a href="tel:+56966889094">+56 9 6688 9094</a>
-        <a href="mailto:marvento@omz.cl">marvento@omz.cl</a>
+    <!-- 3 · Bike Park -->
+    <div class="act">
+      <div class="act__media">
+        <figure class="act__lead wipe" data-lb="assets/act-bk-1.jpg"><img src="assets/act-bk-1.jpg" alt="Ciclista saltando en el Bike Park" decoding="async" loading="lazy"></figure>
+        <div class="act__thumbs">
+          <figure class="wipe d1" data-lb="assets/act-bk-2.jpg"><img src="assets/act-bk-2.jpg" alt="Curva peraltada en el Bike Park" decoding="async" loading="lazy"></figure>
+          <figure class="wipe d2" data-lb="assets/act-bk-3.jpg"><img src="assets/act-bk-3.jpg" alt="Salto en pista de Bike Park" decoding="async" loading="lazy"></figure>
+          <figure class="wipe d1" data-lb="assets/act-bk-4.jpg"><img src="assets/act-bk-4.jpg" alt="Ciclista en sendero del bosque" decoding="async" loading="lazy"></figure>
+        </div>
       </div>
-      <div>
-        <span class="eyebrow">Eventos · Recepción</span>
-        <h4>Coordinación</h4>
-        <a href="tel:+56996434809">+56 9 9643 4809</a>
-        <a href="mailto:info@omz.cl">info@omz.cl</a>
+      <div class="act__body">
+        <div class="act__num up">03 · Montaña y bosque</div>
+        <h2 class="up d1">Bike Park</h2>
+        <p class="up d2">Recorre nuestro Bike Park entre bosques de pino y miradores con vista al mar. Cuenta con 5 pistas para todos los niveles: Enduro, Downhill, Gravel, XCO y Trail Running, desde iniciación hasta máxima adrenalina.</p>
+        <p class="up d2">Desarrollado y operado por Matías Moreno, fundador de La Meseta Bikes & Coffee, instructor PMBIA con más de 30 años en deportes de montaña. Abierto los 365 días del año, incluso con lluvia.</p>
+        <div class="act__meta up d2">
+          <div class="mrow"><span class="mk">Huéspedes OMZ</span><span class="mv">Incluido (trae tu bici)</span></div>
+          <div class="mrow"><span class="mk">Pase diario externos</span><span class="mv">$5.000</span></div>
+          <div class="mrow"><span class="mk">Apertura</span><span class="mv">365 días del año</span></div>
+        </div>
+        <a class="act__link up d2" href="https://www.lameseta.cl/bike-park" target="_blank" rel="noopener">Conoce más en La Meseta <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h13M10 1l4 4-4 4"/></svg></a>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- EVENTOS -->
-<section class="section" style="padding-top:0">
-  <div class="wrap">
-    <div class="stays__head" style="text-align:center;margin-bottom:clamp(40px,5vw,60px)">
-      <div class="flank up" style="color:var(--slate);margin-bottom:16px"><span class="ln"></span><span class="lbl">Eventos y celebraciones</span><span class="ln"></span></div>
-      <h2 class="up d1" style="font-size:clamp(2rem,4.4vw,3.2rem);font-weight:400">Un espacio único frente al mar</h2>
-    </div>
-    <div class="inc__grid up d1">
-      <div class="inc">
-        <div class="inc__ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a4 4 0 0 1 8 0v2M3 12h18"/></svg></div>
-        <h4>Eventos de empresa</h4>
-        <p>Encuentros y reuniones corporativas.</p>
+    <!-- 4 · Cabalgatas -->
+    <div class="act act--rev">
+      <div class="act__media">
+        <figure class="act__lead wipe" data-lb="assets/act-cb-1.jpg"><img src="assets/act-cb-1.jpg" alt="Cabalgata por la playa de Matanzas" decoding="async" loading="lazy"></figure>
+        <div class="act__thumbs">
+          <figure class="wipe d1" data-lb="assets/act-cb-2.jpg"><img src="assets/act-cb-2.jpg" alt="Cabalgata bajando una duna hacia el mar" decoding="async" loading="lazy"></figure>
+          <figure class="wipe d2" data-lb="assets/act-cb-3.jpg"><img src="assets/act-cb-3.jpg" alt="Cabalgata por la vega de Pupuya" decoding="async" loading="lazy"></figure>
+        </div>
       </div>
-      <div class="inc">
-        <div class="inc__ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></div>
-        <h4>Matrimonios</h4>
-        <p>Celebraciones con vista abierta al mar.</p>
-      </div>
-      <div class="inc">
-        <div class="inc__ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 21V5a2 2 0 0 1 2-2h7l5 5v13M14 3v5h5M8 13h6M8 17h6"/></svg></div>
-        <h4>Celebraciones privadas</h4>
-        <p>Terraza ideal para grupos.</p>
-      </div>
-      <div class="inc">
-        <div class="inc__ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5M15 20c0-2 1-3.4 3-3.7"/></svg></div>
-        <h4>Equipo preparado</h4>
-        <p>Diseño, coordinación y producción.</p>
+      <div class="act__body">
+        <div class="act__num up">04 · Naturaleza a caballo</div>
+        <h2 class="up d1">Cabalgatas</h2>
+        <p class="up d2">Una cabalgata única por los paisajes más característicos de la zona. El recorrido inicia en un tranquilo bosque de pino, desciende por una duna hacia la vega de Pupuya y continúa por la playa hasta Matanzas. Perfecta para conectar con el ritmo del mar.</p>
+        <div class="act__meta up d2">
+          <div class="mrow"><span class="mk">Duración</span><span class="mv">≈1h 20min</span></div>
+          <div class="mrow"><span class="mk">Valor</span><span class="mv">$25.000 por persona</span></div>
+          <div class="mrow"><span class="mk">Contacto</span><span class="mv"><a href="tel:+56996428140">Beto +56 9 9642 8140</a></span></div>
+        </div>
       </div>
     </div>
+
+    <!-- 5 · Tenis -->
+    <div class="act" id="tenis">
+      <div class="act__media">
+        <figure class="act__lead wipe" data-lb="assets/act-tn-1.jpg"><img src="assets/act-tn-1.jpg" alt="Jugador de tenis en la cancha de OMZ" decoding="async" loading="lazy"></figure>
+        <div class="act__thumbs">
+          <figure class="wipe d1" data-lb="assets/act-tn-2.jpg"><img src="assets/act-tn-2.jpg" alt="Cancha de tenis rodeada de bosque" decoding="async" loading="lazy"></figure>
+          <figure class="wipe d2" data-lb="assets/act-tn-3.jpg"><img src="assets/act-tn-3.jpg" alt="Jugadoras en la cancha de tenis" decoding="async" loading="lazy"></figure>
+          <figure class="wipe d1" data-lb="assets/act-tn-4.jpg"><img src="assets/act-tn-4.jpg" alt="Niño jugando tenis" decoding="async" loading="lazy"></figure>
+        </div>
+      </div>
+      <div class="act__body">
+        <div class="act__num up">05 · En familia</div>
+        <h2 class="up d1">Tenis</h2>
+        <p class="up d2">Nuestra cancha está a pasos de la granja y en la entrada del Bike Park, rodeada por un tranquilo bosque de pino. Un espacio perfecto para jugar en familia, entrenar o simplemente activar el cuerpo durante tu estadía en OMZ.</p>
+        <div class="act__meta up d2">
+          <div class="mrow"><span class="mk">Valor por hora</span><span class="mv">$12.000</span></div>
+          <div class="mrow"><span class="mk">Huéspedes OMZ</span><span class="mv">Uso gratuito</span></div>
+          <div class="mrow"><span class="mk">Clases</span><span class="mv">Grupales e individuales (en recepción)</span></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- CTA -->
 <section class="section cta2">
   <div class="wrap">
-    <div class="flank up" style="color:var(--slate);margin-bottom:20px"><span class="ln"></span><span class="lbl">Marvento</span><span class="ln"></span></div>
-    <h2 class="up d1">Una tarde frente al mar te espera.</h2>
-    <p class="up d2">Ven a disfrutar de la mejor vista de Matanzas, con buena comida y el ambiente costero. Atención por orden de llegada.</p>
-    <a href="carta.html" class="btn up d2">Ver la carta <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h13M10 1l4 4-4 4"/></svg></a>
+    <div class="flank up" style="color:var(--slate);margin-bottom:20px"><span class="ln"></span><span class="lbl">Vive Matanzas</span><span class="ln"></span></div>
+    <h2 class="up d1">Reserva tu estadía y vívelo.</h2>
+    <p class="up d2">Aloja en el corazón del spot y combina deporte, mar y naturaleza. Te ayudamos a coordinar las actividades durante tu estadía.</p>
+    <a href="inicio.html#alojamiento" class="btn up d2">Ver alojamiento <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h13M10 1l4 4-4 4"/></svg></a>
   </div>
 </section>
 
@@ -952,47 +914,16 @@ p{color:var(--text)}
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') groups.forEach(function(g){ g.removeAttribute('data-open'); }); });
 })();
 </script>
-<script>/*amb-rail*/
-(function(){
-  var rail=document.getElementById('ambRail'); if(!rail) return;
-  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var lb=document.querySelector('.lb'), lbImg=lb?lb.querySelector('img'):null;
-  function openLb(src){ if(!lb||!lbImg)return; lbImg.src=src; lb.classList.add('open'); document.body.style.overflow='hidden'; }
-  var originals=[].slice.call(rail.children);
-  originals.forEach(function(s){
-    var c=s.cloneNode(true); c.setAttribute('aria-hidden','true');
-    c.addEventListener('click',function(){ var d=c.getAttribute('data-lb'); if(d) openLb(d); });
-    rail.appendChild(c);
-  });
-  if(reduce) return;
-  var first=originals[0], firstClone=rail.children[originals.length];
-  function loopW(){ return firstClone.offsetLeft - first.offsetLeft; }
-  var paused=false, resumeT;
-  function tick(){
-    if(!paused){
-      rail.scrollLeft += 0.5;
-      var L=loopW();
-      if(L>0 && rail.scrollLeft>=L) rail.scrollLeft-=L;
-    }
-    requestAnimationFrame(tick);
-  }
-  rail.addEventListener('mouseenter',function(){paused=true;});
-  rail.addEventListener('mouseleave',function(){paused=false;});
-  rail.addEventListener('pointerdown',function(){paused=true; clearTimeout(resumeT);});
-  window.addEventListener('pointerup',function(){ clearTimeout(resumeT); resumeT=setTimeout(function(){paused=false;},700); });
-  requestAnimationFrame(tick);
-})();
-</script>
 <a class="wa-fab" href="https://wa.me/56996434809?text=Hola%2C%20quisiera%20informaci%C3%B3n%20de%20Olas%20de%20Matanzas" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
   <img class="wa-fab__icon" src="assets/whatsapp.webp" alt="" aria-hidden="true">
   <span class="wa-fab__txt" data-wa-rot>Escríbenos</span>
 </a>
 <script>/*wa-rot*/(function(){var el=document.querySelector('[data-wa-rot]');if(!el)return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var i=0,DEF=['Escríbenos','¿Tienes dudas?','Reserva ahora','¿Te ayudamos?'];function M(){return window.__waMsgs||DEF;}setInterval(function(){el.style.opacity=0;setTimeout(function(){var m=M();i=(i+1)%m.length;el.textContent=m[i];el.style.opacity=1;},600);},4200);})();</script>
 <script>/*i18n*/(function(){
-var T={"Alojamiento": "Accommodation", "Frente al océano, servicio completo": "Oceanfront, full service", "desde $120.000 / noche": "from $120,000 / night", "Cabañas": "Cabins", "Entre el bosque, en familia": "In the forest, for families", "desde $95.000 / noche": "from $95,000 / night", "Domos": "Domes", "Bajo las estrellas, glamping": "Under the stars, glamping", "desde $140.000 / noche": "from $140,000 / night", "A pasos del mar, al aire libre": "Steps from the sea, outdoors", "desde $25.000 / noche": "from $25,000 / night", "Experiencias": "Experiences", "Actividades": "Activities", "Eventos": "Events", "Tenis": "Tennis", "Cómo llegar": "Getting here", "Contacto": "Contact", "Reservar": "Book now", "Inicio": "Home", "Hotel": "Hotel", "Camping": "Camping", "Restaurant": "Restaurant", "Inicio · Restaurant": "Home · Restaurant", "Restaurant Marvento": "Restaurant Marvento", "El restaurant": "The restaurant", "Frente a la playa, con una de las mejores vistas del sector.": "Beachfront, with one of the best views in the area.", "Una terraza amplia y un fogón perfectos para disfrutar del ambiente costero, el atardecer y el movimiento de los deportes náuticos. Un espacio relajado y familiar, ideal para almuerzos tranquilos, tardes frente al mar o encuentros entre amigos.": "A spacious terrace and a fire pit, perfect to enjoy the coastal atmosphere, the sunset and the buzz of water sports. A relaxed, family-friendly space, ideal for easy lunches, afternoons by the sea or get-togethers with friends.", "Nuestra carta": "Our menu", "Ceviches, pescados, pizzas y más": "Ceviches, fish, pizzas and more", "Ceviches, pescados, sandwiches, pizzas, pastas y postres caseros, con una selección de coctelería, jugos y vinos pensada para acompañar la experiencia de playa.": "Ceviches, fish, sandwiches, pizzas, pastas and homemade desserts, with a selection of cocktails, juices and wines designed to pair with the beach experience.", "Ver carta completa": "View full menu", "Descargar PDF": "Download PDF", "Galería": "Gallery", "Sabores frente al mar": "Flavors by the sea", "Horarios de atención": "Opening hours", "Temporada de invierno": "Winter season", "Lunes": "Monday", "Cerrado": "Closed", "Martes a viernes": "Tuesday to Friday", "Sábado": "Saturday", "Carta reducida entre 16:00 y 19:00": "Limited menu between 4:00 and 7:00 pm", "Domingo": "Sunday", "Atención por orden de llegada. Se recomienda llegar temprano.": "Seating on a first-come, first-served basis. We recommend arriving early.", "El espacio": "The space", "Terraza, fogón y atardeceres": "Terrace, fire pit and sunsets", "Reservas": "Reservations", "Escríbenos y reserva tu mesa": "Write to us and book your table", "Restaurant": "Restaurant", "Marvento": "Marvento", "Eventos · Recepción": "Events · Reception", "Coordinación": "Coordination", "Eventos y celebraciones": "Events & celebrations", "Un espacio único frente al mar": "A unique space by the sea", "Eventos de empresa": "Corporate events", "Encuentros y reuniones corporativas.": "Corporate meetings and gatherings.", "Matrimonios": "Weddings", "Celebraciones con vista abierta al mar.": "Celebrations with open sea views.", "Celebraciones privadas": "Private celebrations", "Terraza ideal para grupos.": "Terrace ideal for groups.", "Equipo preparado": "Ready team", "Diseño, coordinación y producción.": "Design, coordination and production.", "Marvento": "Marvento", "Una tarde frente al mar te espera.": "An afternoon by the sea awaits.", "Ven a disfrutar de la mejor vista de Matanzas, con buena comida y el ambiente costero. Atención por orden de llegada.": "Come enjoy the best view in Matanzas, with great food and the coastal atmosphere. Seating on a first-come, first-served basis.", "Ver la carta": "View the menu", "A pasos del mar,": "Steps from the sea,", "fácil de encontrar.": "easy to find.", "Fundo San Luis, Lagunillas s/n, Matanzas. A unas 2 horas de Santiago por la ruta de la costa. Abre la ruta en tu app favorita:": "Fundo San Luis, Lagunillas s/n, Matanzas. About 2 hours from Santiago via the coastal route. Open the route in your favorite app:", "Abrir en Google Maps": "Open in Google Maps", "Abrir en Waze": "Open in Waze", "Abrir en Apple Maps": "Open in Apple Maps", "Mar, bosque y calma frente al océano. Una pausa real en el corazón de Matanzas.": "Sea, forest and calm facing the ocean. A true pause in the heart of Matanzas.", "Fantástico": "Fantastic", "Ubicación": "Location", "Cómo llegar →": "Getting here →", "Síguenos": "Follow us", "© 2026 Olas de Matanzas. Todos los derechos reservados.": "© 2026 Olas de Matanzas. All rights reserved.", "Hotel · Cabañas · Domos · Camping": "Hotel · Cabins · Domes · Camping", "Cerrar ✕": "Close ✕", "Escríbenos": "Write to us"};
+var T={"Alojamiento": "Accommodation", "Frente al océano, servicio completo": "Oceanfront, full service", "desde $120.000 / noche": "from $120,000 / night", "Cabañas": "Cabins", "Entre el bosque, en familia": "In the forest, for families", "desde $95.000 / noche": "from $95,000 / night", "Domos": "Domes", "Bajo las estrellas, glamping": "Under the stars, glamping", "desde $140.000 / noche": "from $140,000 / night", "A pasos del mar, al aire libre": "Steps from the sea, outdoors", "desde $25.000 / noche": "from $25,000 / night", "Experiencias": "Experiences", "Actividades": "Activities", "Eventos": "Events", "Tenis": "Tennis", "Cómo llegar": "Getting here", "Contacto": "Contact", "Reservar": "Book now", "Inicio": "Home", "Hotel": "Hotel", "Camping": "Camping", "Restaurant": "Restaurant", "Spa OMZ": "Spa OMZ", "Inicio · Actividades": "Home · Activities", "Deporte y naturaleza, a pasos del mar.": "Sport and nature, steps from the sea.", "En el corazón del spot de Matanzas, alojamiento y deporte se integran para una experiencia completa: desde el viento y las olas hasta el bosque de pinos. Estas son las actividades que puedes vivir en OMZ.": "In the heart of the Matanzas spot, lodging and sport come together for a complete experience: from the wind and waves to the pine forest. These are the activities you can enjoy at OMZ.", "01 · Olas y viento": "01 · Waves & wind", "Windsurf": "Windsurf", "Matanzas es uno de los destinos más destacados del mundo para el windsurf de olas, reconocido por su categoría 5 estrellas y por recibir cada año el Chile World Cup Windsurf, que reúne a deportistas de élite.": "Matanzas is one of the world's top wave-windsurfing destinations, recognized with a 5-star rating and home each year to the Chile World Cup Windsurf, which gathers elite athletes.", "Gracias a sus vientos constantes, olas potentes y acceso directo a la playa, es un lugar ideal para riders que buscan condiciones exigentes. Desde OMZ estás en el corazón del spot: alojamiento, naturaleza y deporte a pasos del mar.": "Thanks to its steady winds, powerful waves and direct beach access, it's ideal for riders seeking demanding conditions. From OMZ you're in the heart of the spot: lodging, nature and sport steps from the sea.", "Spot 5★ · Chile World Cup Windsurf": "5★ spot · Chile World Cup Windsurf", "02 · Aprende a surfear": "02 · Learn to surf", "Escuela de Surf": "Surf School", "Nuestros instructores cuentan con certificación ISA (International Surfing Association), son salvavidas de la Armada de Chile y locales que se criaron junto al mar. Clases teóricas y prácticas, con todo el equipo incluido.": "Our instructors hold ISA (International Surfing Association) certification, are lifeguards of the Chilean Navy and locals who grew up by the sea. Theory and practice lessons, with all equipment included.", "Clase individual": "Private lesson", "$30.000 p/p": "$30,000 pp", "Clase grupal (desde 2)": "Group lesson (from 2)", "$25.000 c/u": "$25,000 each", "Duración · Equipo": "Duration · Equipment", "≈1h 15min · incluido": "≈1h 15min · included", "Rental surf / bodyboard": "Surf / bodyboard rental", "$10.000 / $15.000": "$10,000 / $15,000", "Rental sandboard": "Sandboard rental", "$5.000": "$5,000", "Contacto": "Contact", "03 · Montaña y bosque": "03 · Mountain & forest", "Bike Park": "Bike Park", "Recorre nuestro Bike Park entre bosques de pino y miradores con vista al mar. Cuenta con 5 pistas para todos los niveles: Enduro, Downhill, Gravel, XCO y Trail Running, desde iniciación hasta máxima adrenalina.": "Ride our Bike Park among pine forests and lookouts with sea views. It has 5 trails for every level: Enduro, Downhill, Gravel, XCO and Trail Running, from beginner to full adrenaline.", "Desarrollado y operado por Matías Moreno, fundador de La Meseta Bikes & Coffee, instructor PMBIA con más de 30 años en deportes de montaña. Abierto los 365 días del año, incluso con lluvia.": "Developed and run by Matías Moreno, founder of La Meseta Bikes & Coffee, a PMBIA instructor with over 30 years in mountain sports. Open 365 days a year, even in the rain.", "Huéspedes OMZ": "OMZ guests", "Incluido (trae tu bici)": "Included (bring your bike)", "Pase diario externos": "Day pass (non-guests)", "Apertura": "Open", "365 días del año": "365 days a year", "Conoce más en La Meseta": "Learn more at La Meseta", "04 · Naturaleza a caballo": "04 · Nature on horseback", "Cabalgatas": "Horseback rides", "Una cabalgata única por los paisajes más característicos de la zona. El recorrido inicia en un tranquilo bosque de pino, desciende por una duna hacia la vega de Pupuya y continúa por la playa hasta Matanzas. Perfecta para conectar con el ritmo del mar.": "A unique ride through the area's most distinctive landscapes. It starts in a quiet pine forest, descends a dune toward the Pupuya wetland and continues along the beach to Matanzas. Perfect to connect with the rhythm of the sea.", "Duración": "Duration", "≈1h 20min": "≈1h 20min", "Valor": "Price", "$25.000 por persona": "$25,000 per person", "05 · En familia": "05 · For the family", "Tenis": "Tennis", "Nuestra cancha está a pasos de la granja y en la entrada del Bike Park, rodeada por un tranquilo bosque de pino. Un espacio perfecto para jugar en familia, entrenar o simplemente activar el cuerpo durante tu estadía en OMZ.": "Our court is steps from the farm and at the entrance to the Bike Park, surrounded by a quiet pine forest. A perfect spot to play as a family, train or just get moving during your stay at OMZ.", "Valor por hora": "Price per hour", "$12.000": "$12,000", "Uso gratuito": "Free to use", "Clases": "Lessons", "Grupales e individuales (en recepción)": "Group and private (ask at reception)", "Vive Matanzas": "Experience Matanzas", "Reserva tu estadía y vívelo.": "Book your stay and live it.", "Aloja en el corazón del spot y combina deporte, mar y naturaleza. Te ayudamos a coordinar las actividades durante tu estadía.": "Stay in the heart of the spot and combine sport, sea and nature. We'll help you coordinate the activities during your stay.", "Ver alojamiento": "View accommodation", "A pasos del mar,": "Steps from the sea,", "fácil de encontrar.": "easy to find.", "Fundo San Luis, Lagunillas s/n, Matanzas. A unas 2 horas de Santiago por la ruta de la costa. Abre la ruta en tu app favorita:": "Fundo San Luis, Lagunillas s/n, Matanzas. About 2 hours from Santiago via the coastal route. Open the route in your favorite app:", "Abrir en Google Maps": "Open in Google Maps", "Abrir en Waze": "Open in Waze", "Abrir en Apple Maps": "Open in Apple Maps", "Mar, bosque y calma frente al océano. Una pausa real en el corazón de Matanzas.": "Sea, forest and calm facing the ocean. A true pause in the heart of Matanzas.", "Fantástico": "Fantastic", "Ubicación": "Location", "Cómo llegar →": "Getting here →", "Síguenos": "Follow us", "© 2026 Olas de Matanzas. Todos los derechos reservados.": "© 2026 Olas de Matanzas. All rights reserved.", "Hotel · Cabañas · Domos · Camping": "Hotel · Cabins · Domes · Camping", "Cerrar ✕": "Close ✕", "Escríbenos": "Write to us"};
 var A={"Página de Cabañas — disponible próximamente": "Cabins page — coming soon", "Página de Domos — disponible próximamente": "Domes page — coming soon", "Página de Camping — disponible próximamente": "Camping page — coming soon", "Actividades — más información próximamente": "Activities — more info coming soon", "Spa OMZ — más información próximamente": "Spa OMZ — more info coming soon", "Eventos — más información próximamente": "Events — more info coming soon", "Tenis — más información próximamente": "Tennis — more info coming soon"};
 var WA={"es": ["Escríbenos", "¿Tienes dudas?", "Reserva ahora", "¿Te ayudamos?"], "en": ["Write to us", "Questions?", "Book now", "Need help?"]};
-var TITLE={"es": "Restaurant Marvento — Olas de Matanzas", "en": "Restaurant Marvento — Olas de Matanzas"};
+var TITLE={"es": "Actividades — Olas de Matanzas", "en": "Activities — Olas de Matanzas"};
 var orig=new Map();
 function walk(lang){
   var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentNode;if(!p)return 2;var t=p.nodeName;if(t==='SCRIPT'||t==='STYLE'||t==='NOSCRIPT')return 2;return 1;}}),n;
