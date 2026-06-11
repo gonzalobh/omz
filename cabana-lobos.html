@@ -140,8 +140,9 @@ p{color:var(--text)}
   .nav__mobile.open .nav__mobile-foot{opacity:1;transform:none}
   .nav__mobile-cta{display:flex;align-items:center;justify-content:center;width:100%;background:var(--slate);color:var(--cream-soft);
     font-family:var(--sans);font-weight:600;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;padding:18px}
-  .nav__mobile-contact{display:flex;justify-content:center;gap:24px;margin-top:18px}
-  .nav__mobile-contact a{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--text)}
+  .nav__mobile-contact{display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:22px}
+  .nav__mobile-contact a{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-style:normal;font-size:.98rem;letter-spacing:.01em;color:var(--head);padding:9px 12px}
+  .nav__mobile-contact a svg{color:var(--slate);flex:0 0 auto}
 }
 
 /* =========================================================
@@ -506,7 +507,7 @@ p{color:var(--text)}
 .nav.scrolled .langsw__sep{color:var(--line)}
 @media(max-width:980px){.langsw{display:none}}
 .langsw-m{display:none}
-@media(max-width:980px){.langsw-m{display:flex;gap:6px;justify-content:center;margin-top:18px}
+@media(max-width:980px){.langsw-m{display:flex;gap:6px;justify-content:center;margin-top:26px}
 .langsw-m button{font-family:var(--sans);font-size:.95rem;font-weight:700;letter-spacing:.12em;color:var(--muted);background:none;border:1px solid var(--line);cursor:pointer;padding:9px 18px}
 .langsw-m button.is-on{color:var(--head);border-color:var(--head)}}
 </style>
@@ -608,9 +609,13 @@ p{color:var(--text)}
     <a href="#como-llegar">Cómo llegar</a>
     <a href="inicio.html#contacto">Contacto</a>
   </nav>
-  <div class="nav__mobile-foot"><div class="langsw-m" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
+  <div class="nav__mobile-foot">
     <a href="#contacto" class="nav__mobile-cta">Reservar</a>
-    <div class="nav__mobile-contact"><a href="tel:+56996434809">+56 9 9643 4809</a><a href="mailto:info@omz.cl">info@omz.cl</a></div>
+    <div class="nav__mobile-contact">
+      <a href="tel:+56996434809"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+56 9 9643 4809</a>
+      <a href="mailto:info@omz.cl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>info@omz.cl</a>
+    </div>
+    <div class="langsw-m" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
   </div>
 </div>
 
