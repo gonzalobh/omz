@@ -3,212 +3,1205 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Olas de Matanzas — Resumen del sitio web</title>
-<meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>OMZ Olas de Matanzas | Hotel, Cabañas, Domos y Camping en Matanzas</title>
+<meta name="description" content="Complejo turístico frente al mar en Matanzas, Chile: hotel, cabañas, domos y camping, además de spa, cancha de tenis, restaurant y deportes como windsurf y surf.">
+<link rel="canonical" href="https://omz-lake.vercel.app/">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="author" content="Olas de Matanzas">
+<meta name="geo.region" content="CL-LI"><meta name="geo.placename" content="Matanzas, Navidad, Chile"><meta name="geo.position" content="-33.9636;-71.8756"><meta name="ICBM" content="-33.9636, -71.8756">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Olas de Matanzas">
+<meta property="og:locale" content="es_CL"><meta property="og:locale:alternate" content="en_US">
+<meta property="og:title" content="OMZ Olas de Matanzas | Hotel, Cabañas, Domos y Camping en Matanzas"><meta property="og:description" content="Complejo turístico frente al mar en Matanzas, Chile: hotel, cabañas, domos y camping, además de spa, cancha de tenis, restaurant y deportes como windsurf y surf.">
+<meta property="og:url" content="https://omz-lake.vercel.app/"><meta property="og:image" content="https://omz-lake.vercel.app/assets/og-omz.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="OMZ Olas de Matanzas | Hotel, Cabañas, Domos y Camping en Matanzas"><meta name="twitter:description" content="Complejo turístico frente al mar en Matanzas, Chile: hotel, cabañas, domos y camping, además de spa, cancha de tenis, restaurant y deportes como windsurf y surf."><meta name="twitter:image" content="https://omz-lake.vercel.app/assets/og-omz.jpg">
+<link rel="icon" type="image/png" href="assets/a-956e8caaf162.png">
+<link rel="apple-touch-icon" href="assets/a-59e77ee6aef2.png">
 <style>
+/* =========================================================
+   OLAS DE MATANZAS — v2 · cream + slate, classic boutique
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Mulish:wght@300;400;500;600;700&display=swap');
+
 :root{
-  --paper:#f4efe6;--paper-2:#ece3d4;--slate:#3d545b;--slate-deep:#2e434a;
-  --head:#3d545b;--ink:#313f47;--text:#6c685f;--muted:#928c80;--line:#d9cfbd;
-  --cream-soft:#efe8da;
-  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Mulish',system-ui,sans-serif;
+  --paper:#f4efe6;        /* warm cream */
+  --paper-2:#ece3d4;      /* deeper cream band */
+  --paper-3:#e4dac8;
+  --slate:#3d545b;        /* primary slate-teal */
+  --slate-deep:#2e434a;
+  --head:#415a63;         /* serif heading color */
+  --ink:#313f47;          /* strong text */
+  --text:#6c685f;         /* warm grey body */
+  --muted:#928c80;
+  --line:#d9cfbd;         /* warm hairline */
+  --cream-soft:#efe8da;   /* text on slate */
+  --cream-mut:#aeb7b8;    /* muted on slate */
+
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Mulish',system-ui,sans-serif;
+
+  --maxw:1340px;
+  --gut:clamp(22px,5vw,84px);
   --ease:cubic-bezier(.19,1,.22,1);
 }
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{overflow-x:hidden;max-width:100%}
-body{background:var(--paper);color:var(--text);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:920px;margin:0 auto;padding:0 clamp(22px,5vw,40px)}
 
-/* top */
-.top{padding:clamp(26px,5vw,44px) 0 0}
-.top__logo{height:42px;width:auto;display:block}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+/*omz-mobile-guard*/html,body{overflow-x:hidden;max-width:100%}body{position:relative;width:100%;overscroll-behavior-x:none}
+body{font-family:var(--sans);background:var(--paper);color:var(--text);font-weight:400;line-height:1.65;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--slate);color:var(--paper)}
 
-/* hero */
-.hero{padding:clamp(34px,6vw,64px) 0 clamp(28px,4vw,44px);border-bottom:1px solid var(--line)}
-.eyebrow{font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--slate);margin-bottom:16px}
-.hero h1{font-family:var(--serif);font-weight:600;color:var(--head);font-size:clamp(2.2rem,6vw,3.4rem);line-height:1.04;letter-spacing:.01em}
-.hero p{font-size:1.04rem;color:var(--text);margin-top:18px;max-width:60ch}
-.cta{display:inline-flex;align-items:center;gap:10px;margin-top:28px;background:var(--slate);color:var(--cream-soft);
-  font-family:var(--sans);font-size:.8rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-  text-decoration:none;padding:16px 26px;transition:background .3s var(--ease)}
-.cta:hover{background:var(--slate-deep)}
-.cta svg{width:16px;height:11px}
-.disclaimer{margin-top:26px;background:var(--cream-soft);border-left:3px solid var(--slate);padding:16px 20px;font-size:.95rem;color:var(--ink);max-width:64ch}
-.disclaimer strong{color:var(--head);font-weight:700}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut)}
+.section{padding:clamp(72px,11vw,150px) 0}
 
-/* sections */
-.block{padding:clamp(34px,5vw,54px) 0}
-.block__lead{font-family:var(--serif);font-size:clamp(1.5rem,3.4vw,2rem);color:var(--head);font-weight:600;margin-bottom:6px}
-.block__sub{color:var(--muted);font-size:.95rem;margin-bottom:30px}
+h1,h2,h3,h4{font-family:var(--serif);color:var(--head);font-weight:500;line-height:1.04;letter-spacing:.005em}
+p{color:var(--text)}
+.eyebrow{font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--slate);display:inline-block}
+.lead{font-size:clamp(1.05rem,1.5vw,1.22rem);color:var(--ink);line-height:1.7;font-weight:400}
 
-.page{background:#fff;border:1px solid var(--line);padding:clamp(22px,3.4vw,32px);margin-bottom:18px}
-.page__head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px}
-.page__name{font-family:var(--serif);font-size:1.55rem;font-weight:600;color:var(--head);line-height:1.1}
-.page__file{font-family:var(--sans);font-size:.72rem;letter-spacing:.06em;color:var(--muted);background:var(--paper-2);padding:5px 10px}
-.page__desc{color:var(--text);font-size:.98rem;margin-bottom:16px}
-.list{list-style:none;display:grid;gap:9px;margin-bottom:20px}
-.list li{position:relative;padding-left:24px;font-size:.95rem;color:var(--ink)}
-.list li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:9px;background:var(--slate);opacity:.55}
-.link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--slate);font-family:var(--sans);
-  font-size:.76rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line);padding:11px 18px;transition:.3s var(--ease)}
-.link:hover{background:var(--paper-2)}
-.link svg{width:15px;height:10px}
+/* decorative flanking rule + label */
+.flank{display:flex;align-items:center;gap:18px;justify-content:center}
+.flank .ln{height:1px;width:48px;background:currentColor;opacity:.5;transform:scaleX(0);transform-origin:center;transition:transform 1s var(--ease) .2s}
+.flank.in .ln{transform:scaleX(1)}
+.flank .lbl{font-family:var(--serif);font-style:italic;font-size:1.05rem;letter-spacing:.02em}
 
-/* notes */
-.notes{background:var(--cream-soft);border:1px solid var(--line);padding:clamp(22px,3.4vw,30px);margin-top:6px}
-.notes h3{font-family:var(--serif);font-size:1.35rem;color:var(--head);font-weight:600;margin-bottom:12px}
-.notes ul{list-style:none;display:grid;gap:9px}
-.notes li{position:relative;padding-left:24px;font-size:.95rem;color:var(--text)}
-.notes li::before{content:"✓";position:absolute;left:0;top:0;color:var(--slate);font-weight:700}
+/* =========================================================
+   ANIMATION PRIMITIVES
+   ========================================================= */
+.up{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.up.in{opacity:1;transform:none}
+.d1{transition-delay:.10s}.d2{transition-delay:.20s}.d3{transition-delay:.30s}.d4{transition-delay:.40s}.d5{transition-delay:.50s}
 
-/* footer */
-.foot{border-top:1px solid var(--line);margin-top:clamp(34px,5vw,54px);padding:30px 0 50px;text-align:center}
-.foot p{font-size:.84rem;color:var(--muted)}
-.foot a{color:var(--slate);text-decoration:none}
+/* image wipe reveal — sliding cream panel (clip-path on self breaks IntersectionObserver) */
+.wipe{position:relative;overflow:hidden}
+.wipe::after{content:"";position:absolute;inset:0;background:var(--paper);transform:translateY(0);
+  transition:transform 1.15s var(--ease);z-index:4;pointer-events:none}
+.wipe.in::after{transform:translateY(-100.5%)}
+.wipe img{transform:scale(1.12);transition:transform 1.7s var(--ease)}
+.wipe.in img{transform:scale(1)}
+
+/* hairline draw */
+.rule{height:1px;background:var(--line);transform:scaleX(0);transform-origin:left;transition:transform 1s var(--ease)}
+.rule.in{transform:scaleX(1)}
+
+@media(prefers-reduced-motion:reduce){
+  .up,.rule,.flank .ln{opacity:1!important;transform:none!important;transition:none!important}
+  .wipe img{transform:none!important}
+  .wipe::after{display:none!important}
+}
+
+/* =========================================================
+   NAV
+   ========================================================= */
+.nav{position:fixed;inset:0 0 auto 0;z-index:60;display:flex;align-items:center;justify-content:space-between;
+  padding:24px var(--gut);transition:background .55s var(--ease),padding .55s var(--ease),box-shadow .55s var(--ease);}
+.nav::before{content:"";position:absolute;inset:0 0 auto 0;height:118px;background:linear-gradient(180deg,rgba(18,26,31,.34),rgba(18,26,31,0));pointer-events:none;z-index:-1;transition:opacity .55s var(--ease)}
+.nav.scrolled::before{opacity:0}
+.nav.scrolled{background:rgba(244,239,230,.9);backdrop-filter:blur(12px) saturate(1.1);padding:14px var(--gut);box-shadow:0 1px 0 var(--line)}
+.brand{position:relative;display:block;line-height:0}
+.nav__logo{height:42px;width:auto;display:block;transition:opacity .45s var(--ease)}
+.nav__logo--color{position:absolute;top:0;left:0;opacity:0}
+.nav.scrolled .nav__logo--white{opacity:0}
+.nav.scrolled .nav__logo--color{opacity:1}
+.nav__links{display:flex;gap:clamp(16px,1.9vw,30px);align-items:center}
+.nav__links a{font-family:var(--serif);font-size:.98rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.92);position:relative;padding:5px 0;transition:color .4s var(--ease);white-space:nowrap}
+.nav.scrolled .nav__links a{color:var(--ink)}
+.nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:currentColor;transition:width .45s var(--ease)}
+.nav__links a:hover::after,.nav__links a.active::after{width:100%}
+.nav__cta{font-family:var(--sans);font-size:.74rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  background:var(--slate);color:var(--cream-soft);padding:14px 30px;transition:background .4s var(--ease)}
+.nav__cta:hover{background:var(--slate-deep)}
+.nav.scrolled .nav__cta{background:var(--slate)}
+.nav__burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:0;padding:6px}
+.nav__burger span{width:26px;height:1.5px;background:#fff;transition:.4s var(--ease)}
+.nav.scrolled .nav__burger span{background:var(--ink)}
+
+@media(max-width:980px){
+  .nav__links,.nav__cta{display:none}
+  .nav__burger{display:flex}
+}
+
+/* mobile menu */
+.nav__mobile{display:none}
+@media(max-width:980px){
+  .nav__mobile{position:fixed;inset:0;z-index:65;background:var(--paper);transform:translateY(-101%);
+    transition:transform .62s var(--ease);display:flex;flex-direction:column;padding:18px var(--gut) 34px}
+  .nav__mobile.open{transform:none}
+  .nav__mobile-top{display:flex;align-items:center;justify-content:space-between;height:46px}
+  .nav__mobile-logo{height:32px;width:auto}
+  .nav__mobile-close{background:none;border:0;color:var(--ink);cursor:pointer;padding:8px;margin-right:-8px;display:flex}
+  .nav__mobile-links{display:flex;flex-direction:column;margin-top:6px;flex:1;justify-content:center}
+  .nav__mobile-links a{font-family:var(--serif);font-size:clamp(2.1rem,9vw,3rem);font-weight:500;color:var(--head);
+    letter-spacing:.01em;line-height:1;padding:18px 0;border-top:1px solid var(--line);display:flex;align-items:baseline;gap:18px;
+    opacity:0;transform:translateY(16px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+  .nav__mobile-links a:last-child{border-bottom:1px solid var(--line)}
+  .nav__mobile-links .ix{font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.1em;color:var(--muted);transform:translateY(-.5em)}
+  .nav__mobile.open .nav__mobile-links a{opacity:1;transform:none}
+  .nav__mobile.open .nav__mobile-links a:nth-child(1){transition-delay:.10s}
+  .nav__mobile.open .nav__mobile-links a:nth-child(2){transition-delay:.16s}
+  .nav__mobile.open .nav__mobile-links a:nth-child(3){transition-delay:.22s}
+  .nav__mobile.open .nav__mobile-links a:nth-child(4){transition-delay:.28s}
+  .nav__mobile.open .nav__mobile-links a:nth-child(5){transition-delay:.34s}
+  .nav__mobile-foot{opacity:0;transform:translateY(16px);transition:opacity .5s var(--ease) .42s,transform .5s var(--ease) .42s}
+  .nav__mobile.open .nav__mobile-foot{opacity:1;transform:none}
+  .nav__mobile-cta{display:flex;align-items:center;justify-content:center;width:100%;background:var(--slate);color:var(--cream-soft);
+    font-family:var(--sans);font-weight:600;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;padding:18px}
+  .nav__mobile-contact{display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:22px}
+  .nav__mobile-contact a{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-style:normal;font-size:.98rem;letter-spacing:.01em;color:var(--head);padding:9px 12px}
+  .nav__mobile-contact a svg{color:var(--slate);flex:0 0 auto}
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero{position:relative;height:100svh;min-height:640px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
+.hero__img{position:absolute;inset:0;background:#1a2a30}
+.hero__img img{width:100%;height:100%;object-fit:cover;animation:kb 20s var(--ease) forwards}
+@keyframes kb{from{transform:scale(1.12)}to{transform:scale(1)}}
+.hero__veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,32,38,.46),rgba(20,32,38,.18) 45%,rgba(20,32,38,.5))}
+.hero__frame{position:absolute;inset:clamp(16px,2.4vw,34px);border:1px solid rgba(244,239,230,.42);z-index:2;pointer-events:none}
+.hero__in{position:relative;z-index:3;color:#fff;padding:0 clamp(24px,6vw,90px);max-width:1120px;margin:0 auto}
+.hero__logo{width:clamp(210px,28vw,360px);height:auto;margin:20px auto 8px;
+  filter:drop-shadow(0 8px 26px rgba(0,0,0,.4));
+  opacity:0;transform:translateY(28px);animation:logoin 1.1s var(--ease) .45s forwards}
+@keyframes logoin{to{opacity:1;transform:none}}
+.hero__eyebrow{font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.9);
+  opacity:0;animation:fade 1s var(--ease) .3s forwards}
+.hero h1{color:#fff;font-weight:500;text-transform:uppercase;letter-spacing:.12em;
+  font-size:clamp(2.4rem,7.6vw,6.4rem);line-height:1;margin:22px 0 8px}
+.hero h1 .w{display:inline-block;opacity:0;transform:translateY(40px);animation:wordup 1.1s var(--ease) forwards}
+.hero h1 .w:nth-child(1){animation-delay:.45s}
+.hero h1 .w:nth-child(2){animation-delay:.58s}
+.hero h1 .w:nth-child(3){animation-delay:.71s}
+@keyframes wordup{to{opacity:1;transform:none}}
+@keyframes fade{to{opacity:1}}
+.hero__flank{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:18px;
+  opacity:0;animation:fade 1s var(--ease) 1s forwards}
+.hero__flank .ln{width:54px;height:1px;background:rgba(255,255,255,.6)}
+.hero__flank i{font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,2vw,1.4rem);color:rgba(255,255,255,.95);letter-spacing:.02em}
+.hero__sub{max-width:560px;margin:30px auto 0;color:rgba(255,255,255,.92);font-size:1.04rem;line-height:1.65;
+  opacity:0;animation:fade 1s var(--ease) 1.15s forwards}
+.hero__cue{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);z-index:3;
+  font-family:var(--sans);font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.85);
+  display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:fade 1s var(--ease) 1.4s forwards}
+.hero__cue::after{content:"";width:1px;height:42px;background:rgba(255,255,255,.55);animation:cue 2.2s var(--ease) infinite}
+@keyframes cue{0%,100%{transform:scaleY(.4);transform-origin:top;opacity:.4}50%{transform:scaleY(1);opacity:1}}
+
+/* =========================================================
+   INTRO statement
+   ========================================================= */
+.statement{text-align:center;max-width:920px;margin:0 auto}
+.statement h2{font-size:clamp(1.9rem,4.4vw,3.5rem);line-height:1.18;font-weight:400}
+.statement h2 em{font-style:italic;color:var(--slate)}
+.statement p{margin-top:26px;font-size:1.12rem;color:var(--text);max-width:62ch;margin-left:auto;margin-right:auto}
+
+/* =========================================================
+   TICKER (disciplines marquee)
+   ========================================================= */
+.ticker{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0;background:var(--paper-2)}
+.ticker__track{display:flex;white-space:nowrap;width:max-content;animation:scrollx 34s linear infinite}
+.ticker:hover .ticker__track{animation-play-state:paused}
+.ticker__item{font-family:var(--serif);font-size:clamp(1.6rem,3.4vw,2.6rem);color:var(--head);font-weight:500;letter-spacing:.02em;
+  padding:0 36px;display:flex;align-items:center;gap:36px}
+.ticker__item::after{content:"✦";font-size:.7em;color:var(--slate);opacity:.6}
+@keyframes scrollx{to{transform:translateX(-50%)}}
+
+/* =========================================================
+   ALTERNATING amenity sections
+   ========================================================= */
+.alt{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:0;min-height:clamp(440px,60vw,640px)}
+.alt__media{position:relative;height:100%;overflow:hidden}
+.alt__media img{width:100%;height:100%;object-fit:cover;min-height:clamp(360px,52vw,640px)}
+.alt__body{padding:clamp(40px,7vw,110px)}
+.alt__body .eyebrow{margin-bottom:18px}
+.alt__body h2{font-size:clamp(2rem,4.4vw,3.6rem);font-weight:400;letter-spacing:.01em}
+.alt__body p{margin-top:22px;font-size:1.08rem;max-width:48ch}
+.alt--rev .alt__media{order:2}
+.alt__list{margin-top:30px;display:flex;flex-direction:column}
+.alt__list div{display:flex;align-items:baseline;gap:16px;padding:14px 0;border-top:1px solid var(--line);
+  font-family:var(--serif);font-size:1.5rem;color:var(--head)}
+.alt__list div span{font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.1em;color:var(--muted)}
+@media(max-width:860px){
+  .alt{grid-template-columns:1fr}
+  .alt--rev .alt__media{order:0}
+  .alt__media{min-height:64vw}
+}
+
+/* =========================================================
+   ALOJAMIENTOS (services)
+   ========================================================= */
+.stays__head{text-align:center;max-width:680px;margin:0 auto clamp(48px,6vw,72px)}
+.stays__head h2{font-size:clamp(2.2rem,5vw,4rem);font-weight:400;margin-top:14px}
+.stays{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2vw,26px)}
+.stay{position:relative;overflow:hidden;cursor:pointer;display:block}
+.stay__media{position:relative;overflow:hidden;height:100%}
+.stay__media img{width:100%;height:100%;object-fit:cover;transition:transform 1.3s var(--ease)}
+.stay:hover .stay__media img{transform:scale(1.06)}
+.stay__media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,30,35,0) 38%,rgba(22,32,37,.72))}
+.stay__body{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:30px 30px 28px;color:#fff}
+.stay__name{font-family:var(--serif);font-size:clamp(1.6rem,2.6vw,2.1rem);font-weight:500;color:#fff;letter-spacing:.02em}
+.stay__line{font-family:var(--sans);font-size:.9rem;color:rgba(255,255,255,.85);margin-top:6px;max-width:34ch}
+.stay__go{margin-top:16px;display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+.stay__go svg{transition:transform .45s var(--ease)}
+.stay:hover .stay__go svg{transform:translateX(5px)}
+.stay__tag{position:absolute;top:18px;left:18px;z-index:3;font-family:var(--sans);font-size:.6rem;font-weight:600;letter-spacing:.18em;
+  text-transform:uppercase;background:var(--paper);color:var(--slate);padding:7px 13px}
+.stay--lg{grid-column:span 7;min-height:clamp(380px,46vw,560px)}
+.stay--sm{grid-column:span 5;min-height:clamp(380px,46vw,560px)}
+.stay--third{grid-column:span 4;min-height:clamp(320px,34vw,440px)}
+.stay--half{grid-column:span 6;min-height:clamp(320px,40vw,470px)}
+@media(max-width:860px){
+  .stay--lg,.stay--sm{grid-column:span 12;min-height:74vw}
+  .stay--third{grid-column:span 12;min-height:74vw}
+.stay--half{grid-column:span 12;min-height:74vw}
+}
+
+/* =========================================================
+   GALLERY strip (instagram-style)
+   ========================================================= */
+.strip{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+.strip figure{position:relative;overflow:hidden;aspect-ratio:1/1.15;cursor:zoom-in}
+.strip img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),filter .6s var(--ease)}
+.strip figure:hover img{transform:scale(1.08)}
+.strip figure::after{content:"";position:absolute;inset:0;background:var(--slate);opacity:0;transition:opacity .5s var(--ease);mix-blend-mode:multiply}
+.strip figure:hover::after{opacity:.16}
+@media(max-width:860px){.strip{grid-template-columns:repeat(2,1fr)}}
+.strip--3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:860px){.strip--3{grid-template-columns:repeat(1,1fr)}}
+
+/* =========================================================
+   TESTIMONIOS (on slate)
+   ========================================================= */
+.testi{background:var(--slate);color:var(--cream-soft)}
+.testi .eyebrow{color:var(--cream-mut)}
+.testi__head{text-align:center;margin-bottom:clamp(44px,5vw,68px)}
+.testi__head h2{color:var(--cream-soft);font-size:clamp(2rem,4.4vw,3.4rem);font-weight:400;margin-top:14px}
+.testi__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,4vw,60px)}
+.quote{display:flex;flex-direction:column;gap:20px;text-align:center;align-items:center}
+.quote__mk{font-family:var(--serif);font-size:3rem;line-height:.4;color:rgba(239,232,218,.5)}
+.quote__t{font-family:var(--serif);font-size:1.5rem;line-height:1.5;color:var(--cream-soft);font-weight:400}
+.quote__by{margin-top:8px}
+.quote__n{font-family:var(--sans);font-weight:600;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#fff}
+.quote__c{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--cream-mut);margin-top:6px}
+.quote .rule{background:rgba(239,232,218,.3);width:40px;margin-top:4px}
+@media(max-width:860px){.testi__grid{grid-template-columns:1fr;gap:48px}}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.foot{background:var(--slate-deep);color:var(--cream-soft);padding:clamp(64px,8vw,110px) 0 42px;position:relative;overflow:hidden}
+.foot__mono{position:absolute;right:-2%;top:8%;font-family:var(--serif);font-style:italic;font-size:clamp(12rem,28vw,32rem);
+  line-height:.7;color:rgba(239,232,218,.05);pointer-events:none;user-select:none}
+.foot__grid{position:relative;display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr;gap:40px}
+.foot__brand .bn{font-family:var(--serif);font-weight:500;font-size:1.5rem;letter-spacing:.2em;text-transform:uppercase;color:#fff}
+.foot__logo{width:clamp(180px,15vw,225px);height:auto;margin-bottom:22px;display:block}
+.foot__brand .bt{font-family:var(--serif);font-style:italic;font-size:.95rem;color:var(--cream-mut);margin-top:8px}
+.foot__brand p{color:var(--cream-mut);margin-top:22px;max-width:30ch;font-size:.96rem}
+.foot h4{color:var(--cream-mut);font-family:var(--sans);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;font-weight:600;margin-bottom:22px}
+.foot__list{display:flex;flex-direction:column;gap:12px}
+.foot__list a,.foot__list span{color:var(--cream-soft);font-size:.98rem;transition:color .35s var(--ease)}
+.foot__list a:hover{color:#fff}
+.foot__list .lbl{color:var(--cream-mut);font-size:.96rem}
+.foot__news p{color:var(--cream-mut);font-size:.94rem;margin-bottom:18px}
+.foot__field{display:flex;border-bottom:1px solid rgba(239,232,218,.32);padding-bottom:10px;margin-bottom:20px}
+.foot__field input{flex:1;background:none;border:0;outline:none;color:#fff;font-family:var(--sans);font-size:.95rem}
+.foot__field input::placeholder{color:var(--cream-mut)}
+.foot__sub{background:transparent;border:1px solid rgba(239,232,218,.4);color:var(--cream-soft);cursor:pointer;
+  font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;padding:13px 24px;transition:all .4s var(--ease)}
+.foot__sub:hover{background:var(--cream-soft);color:var(--slate-deep);border-color:var(--cream-soft)}
+.foot__social{display:flex;gap:16px;margin-top:24px}
+.foot__social a{width:38px;height:38px;border:1px solid rgba(239,232,218,.3);display:flex;align-items:center;justify-content:center;
+  color:var(--cream-soft);transition:all .4s var(--ease)}
+.foot__social a:hover{background:var(--cream-soft);color:var(--slate-deep)}
+.foot__bottom{position:relative;margin-top:clamp(48px,6vw,80px);padding-top:26px;border-top:1px solid rgba(239,232,218,.16);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.8rem;color:var(--cream-mut)}
+@media(max-width:860px){.foot__grid{grid-template-columns:1fr 1fr;gap:36px}}
+@media(max-width:520px){.foot__grid{grid-template-columns:1fr}}
+
+/* =========================================================
+   HOTEL PAGE
+   ========================================================= */
+.phero{position:relative;height:78svh;min-height:520px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
+.phero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kb 18s var(--ease) forwards}
+.phero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,30,36,.4),rgba(20,30,36,.55))}
+.phero__frame{position:absolute;inset:clamp(16px,2.4vw,34px);border:1px solid rgba(244,239,230,.4);z-index:2}
+.phero__in{position:relative;z-index:3;color:#fff;padding:0 clamp(24px,6vw,90px);max-width:1200px;margin:0 auto}
+.phero__in .crumb{font-family:var(--sans);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+.phero__in h1{color:#fff;font-weight:500;text-transform:uppercase;letter-spacing:.1em;font-size:clamp(2.2rem,6vw,4.6rem);margin-top:18px}
+
+.intro2{text-align:center;max-width:760px;margin:0 auto}
+.intro2 h2{font-size:clamp(1.9rem,4vw,3rem);font-weight:400}
+.intro2 p{margin-top:22px;font-size:1.1rem}
+
+/* room */
+.room{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(28px,5vw,72px);align-items:start}
+.room__g{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.room__g .big{grid-column:span 2;aspect-ratio:16/10;overflow:hidden}
+.room__g figure{overflow:hidden;aspect-ratio:1/1;cursor:zoom-in;position:relative}
+.room__g img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+.room__g figure:hover img{transform:scale(1.06)}
+.room__info{position:sticky;top:120px}
+.room__info h2{font-size:clamp(2rem,3.8vw,3rem);font-weight:400}
+.room__info p{margin-top:18px;font-size:1.05rem}
+.room__specs{display:flex;gap:40px;margin-top:30px;padding-top:26px;border-top:1px solid var(--line)}
+.spec .k{font-family:var(--sans);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.spec .v{font-family:var(--serif);font-size:2.2rem;color:var(--head);margin-top:6px}
+.spec .v small{font-family:var(--sans);font-size:.92rem;color:var(--text)}
+@media(max-width:860px){.room{grid-template-columns:1fr;gap:30px}.room__info{position:static}}
+
+/* includes */
+.inc__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
+.inc{padding:36px clamp(20px,2vw,32px);border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.inc:nth-child(4n){border-right:0}
+.inc__ic{color:var(--slate);margin-bottom:18px}
+.inc h4{font-size:1.5rem;font-weight:500;line-height:1.15}
+.inc p{font-size:.92rem;margin-top:10px}
+@media(max-width:860px){.inc__grid{grid-template-columns:1fr 1fr}.inc:nth-child(4n){border-right:1px solid var(--line)}.inc:nth-child(2n){border-right:0}}
+@media(max-width:520px){.inc__grid{grid-template-columns:1fr}.inc{border-right:0!important}}
+
+/* rates */
+.rates{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line)}
+.rates>div{padding:clamp(30px,4vw,52px)}
+.rates .seasons{border-right:1px solid var(--line)}
+.rates .eyebrow{margin-bottom:26px}
+.season{display:flex;justify-content:space-between;align-items:baseline;padding:18px 0;border-top:1px solid var(--line)}
+.season:first-of-type{border-top:0}
+.season .sn{font-family:var(--serif);font-size:1.4rem;color:var(--head)}
+.season .sw{font-family:var(--sans);font-size:.92rem;color:var(--text)}
+.rnote{margin-top:22px;font-size:.86rem;color:var(--muted);line-height:1.6}
+.tariffs{background:var(--slate);color:var(--cream-soft)}
+.tariffs .eyebrow{color:var(--cream-mut)}
+.prow{display:flex;justify-content:space-between;align-items:flex-end;padding:20px 0;border-top:1px solid rgba(239,232,218,.18)}
+.prow:first-of-type{border-top:0}
+.prow .pl{font-family:var(--serif);font-size:1.3rem;color:var(--cream-soft)}
+.prow .pv{font-family:var(--serif);font-size:1.9rem;color:#fff}
+.prow .pv small{font-family:var(--sans);font-size:.78rem;color:var(--cream-mut)}
+@media(max-width:680px){.rates{grid-template-columns:1fr}.rates .seasons{border-right:0;border-bottom:1px solid var(--line)}}
+
+/* amenities */
+.amen{columns:4;column-gap:46px}
+.amen li{list-style:none;break-inside:avoid;padding:13px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;font-size:.98rem;color:var(--ink)}
+.amen li svg{flex:none;color:var(--slate)}
+@media(max-width:980px){.amen{columns:3}}
+@media(max-width:680px){.amen{columns:2}}
+@media(max-width:420px){.amen{columns:1}}
+
+/* cta strip */
+.cta2{text-align:center;background:var(--paper-2)}
+.cta2 h2{font-size:clamp(2rem,4.4vw,3.4rem);font-weight:400;max-width:18ch;margin:0 auto}
+.cta2 p{margin:20px auto 0;max-width:48ch}
+.btn{display:inline-flex;align-items:center;gap:10px;margin-top:32px;background:var(--slate);color:var(--cream-soft);
+  font-family:var(--sans);font-weight:600;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;padding:17px 36px;
+  border:1px solid var(--slate);transition:all .45s var(--ease)}
+.btn:hover{background:transparent;color:var(--slate)}
+.btn svg{transition:transform .45s var(--ease)}
+.btn:hover svg{transform:translateX(5px)}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:200;background:rgba(28,38,42,.95);display:flex;align-items:center;justify-content:center;padding:5vw;
+  opacity:0;pointer-events:none;transition:opacity .45s var(--ease)}
+.lb.open{opacity:1;pointer-events:auto}
+.lb img{max-width:100%;max-height:88vh;object-fit:contain;transform:scale(.96);transition:transform .45s var(--ease)}
+.lb.open img{transform:none}
+.lb__x{position:absolute;top:26px;right:32px;color:#fff;background:none;border:0;cursor:pointer;
+  font-family:var(--sans);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%) translateY(140%);z-index:120;background:var(--slate-deep);opacity:0;visibility:hidden;pointer-events:none;
+  color:var(--cream-soft);padding:15px 24px;font-family:var(--sans);font-size:.84rem;font-weight:500;letter-spacing:.02em;
+  box-shadow:0 18px 50px -20px rgba(0,0,0,.5);transition:transform .55s var(--ease),opacity .4s var(--ease),visibility .4s var(--ease);display:flex;align-items:center;gap:11px}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;visibility:visible}
+.toast .d{width:6px;height:6px;border-radius:50%;background:var(--cream-soft)}
+
+</style>
+<style id="omz-nav-x">
+.navx{position:relative;display:inline-flex;align-items:center}
+.navx__trigger{cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.navx__chev{width:11px;height:11px;transition:transform .35s var(--ease);opacity:.85}
+.navx[data-open] .navx__chev{transform:rotate(180deg)}
+.navx__trigger::before{content:"";position:absolute;left:-8px;right:-8px;top:100%;height:20px}
+.navx__panel{position:absolute;top:calc(100% + 16px);left:-12px;background:var(--paper);border:1px solid var(--line);
+  box-shadow:0 26px 64px -30px rgba(46,67,74,.5);padding:12px;min-width:236px;border-radius:4px;
+  opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .3s var(--ease),transform .3s var(--ease),visibility .3s;z-index:80}
+.navx[data-open] .navx__panel{opacity:1;visibility:visible;transform:none}
+.navx__panel--mega{position:fixed;top:90px;left:50%;width:min(1060px,94vw);transform:translateX(-50%) translateY(10px);display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:18px}
+.navx[data-open] .navx__panel--mega{transform:translateX(-50%)}
+.nav.scrolled .navx__panel--mega{top:66px}
+@media(max-width:1100px){.navx__panel--mega{grid-template-columns:repeat(2,1fr);width:min(560px,94vw)}}
+.navx__panel--exp{grid-template-columns:repeat(3,1fr);width:min(820px,94vw)}
+@media(max-width:1100px){.navx__panel--exp{grid-template-columns:repeat(2,1fr);width:min(560px,94vw)}}
+/* restaurant mega panel — horizontal, matches accommodation panel height */
+.navx__panel--rest{display:grid;grid-template-columns:minmax(0,320px) 1fr;align-items:center;width:min(680px,94vw);min-height:230px;padding:14px;gap:18px}
+.restcard__media{display:block;overflow:hidden;background:var(--paper-2);aspect-ratio:2/1}
+.restcard__media img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+.navx__panel--rest:hover .restcard__media img{transform:scale(1.04)}
+.restcard__body{padding:2px 4px;display:flex;flex-direction:column;justify-content:center}
+.restcard__eyebrow{font-family:var(--serif);font-size:1.3rem;font-weight:500;color:var(--head);display:block;margin-bottom:6px;line-height:1.1}
+.restcard__line{color:var(--text);font-size:.88rem;line-height:1.45;margin-bottom:14px}
+.restcard__links{display:flex;gap:7px;flex-wrap:wrap}
+.restcard__links a{font-family:var(--sans)!important;font-size:.6rem!important;letter-spacing:.1em;text-transform:uppercase;font-weight:600!important;padding:9px 12px!important;border:1px solid var(--line);color:var(--slate)!important;transition:all .3s var(--ease);background:transparent!important}
+.restcard__links a:first-child{background:var(--slate)!important;color:var(--cream-soft)!important;border-color:var(--slate)}
+.restcard__links a:hover{background:var(--slate)!important;color:var(--cream-soft)!important;border-color:var(--slate)}
+@media(max-width:560px){.navx__panel--rest{grid-template-columns:1fr;width:min(440px,94vw);min-height:0;gap:14px}.restcard__media{aspect-ratio:16/9}}
+.navx__panel a{text-transform:none!important;letter-spacing:0!important;color:var(--ink)!important;padding:0}
+.navx__panel a::after{display:none!important}
+.navx__card{display:flex;flex-direction:column;padding:10px!important;border:1px solid transparent;border-radius:0;transition:background .25s var(--ease),border-color .25s var(--ease)}
+.navx__card:hover{background:var(--paper-2);border-color:var(--line)}
+.navx__card-thumb{width:100%;height:132px;object-fit:cover;border-radius:0;display:block;margin-bottom:11px}
+.navx__card-name{font-family:var(--serif)!important;font-size:1.5rem;font-weight:600;color:var(--head)!important;line-height:1.05;margin-bottom:3px}
+.navx__card-desc{font-size:.92rem;color:var(--text)!important;letter-spacing:.005em;line-height:1.35}
+.navx__card-price{font-size:.92rem;font-weight:600;color:var(--slate)!important;margin-top:7px}
+.navx__panel:not(.navx__panel--mega) a{display:block;font-family:var(--serif)!important;font-size:1.22rem;font-weight:500;
+  color:var(--head)!important;padding:8px 12px!important;border-radius:5px;transition:background .22s var(--ease)}
+.navx__panel:not(.navx__panel--mega) a:hover{background:var(--paper-2)}
+.m-label{font-family:var(--sans);font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);
+  display:block;padding:20px 0 2px}
+@media (max-width:860px){
+  .nav__mobile-links{overflow-y:auto;justify-content:flex-start!important;gap:0!important;padding-top:6px}
+  .nav__mobile-links a{font-size:clamp(1.55rem,7.5vw,2rem)!important;padding:11px 0!important;border-top:none!important;border-bottom:none!important}
+  .nav__mobile-links a:last-child{border-bottom:none!important}
+  .nav__mobile-links .m-sub{font-size:clamp(1.12rem,5.4vw,1.42rem)!important;padding:6px 0 6px 2px!important;color:var(--text)!important}
+  .nav__mobile-links .m-sub.active{color:var(--head)!important}
+  .m-label{padding:14px 0 2px}
+}
+
+.xp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.4vw,18px)}
+.xp{position:relative;display:block;overflow:hidden;text-decoration:none;cursor:pointer;min-height:clamp(360px,29vw,450px)}
+.xp__media{position:absolute;inset:0;overflow:hidden}
+.xp__media img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.xp:hover .xp__media img{transform:scale(1.06)}
+.xp__media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,30,35,0) 40%,rgba(20,30,35,.74))}
+.xp__body{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:28px 28px 26px;color:#fff}
+.xp__name{font-family:var(--serif);font-size:clamp(1.6rem,2.3vw,2rem);font-weight:500;color:#fff;letter-spacing:.02em;line-height:1}
+.xp__line{font-family:var(--sans);font-size:.9rem;color:rgba(255,255,255,.86);margin-top:7px;max-width:34ch}
+.xp__go{margin-top:15px;display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#fff}
+.xp__go svg{transition:transform .45s var(--ease)}
+.xp:hover .xp__go svg{transform:translateX(5px)}
+@media(max-width:1000px){.xp-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.xp-grid{grid-template-columns:1fr}}
+
+.rgal{padding:clamp(8px,1.6vw,24px) 0 clamp(54px,7vw,88px)}
+.rgal__head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;max-width:var(--maxw);margin:0 auto;padding:0 var(--gut) clamp(22px,3vw,32px)}
+.rgal__ey{display:flex;align-items:center;gap:12px;color:var(--slate);margin-bottom:10px}
+.rgal__ey .ln{width:34px;height:1px;background:#c9bca4}
+.rgal__ey .lbl{font-size:.7rem;letter-spacing:.26em;text-transform:uppercase}
+.rgal__head h2{font-family:var(--serif);font-weight:500;color:var(--head);font-size:clamp(2rem,3.4vw,2.8rem);line-height:1}
+.rgal__nav{display:flex;gap:10px;flex:0 0 auto}
+.rgal__btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--slate);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease)}
+.rgal__btn:hover{background:var(--slate);color:var(--cream-soft);border-color:var(--slate)}
+.rgal__rail{display:flex;gap:18px;overflow-x:auto;padding:4px var(--gut) 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch;cursor:grab}
+.rgal__rail::-webkit-scrollbar{display:none}
+.rgal__slide{flex:0 0 auto;width:clamp(260px,30vw,430px);scroll-snap-align:start;margin:0;cursor:pointer;overflow:hidden;aspect-ratio:3/2;background:var(--paper-2)}
+.rgal__slide img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s var(--ease)}
+.rgal__slide:hover img{transform:scale(1.05)}
+@media(max-width:680px){.rgal__slide{width:78vw}}
+
+.alt__cta{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--slate);text-decoration:none;border-bottom:1.5px solid var(--slate);padding-bottom:5px;transition:opacity .3s var(--ease)}
+.alt__cta:hover{opacity:.6}
+.rgal__link{align-self:flex-end;font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);text-decoration:none;border-bottom:1.5px solid var(--slate);padding-bottom:4px;white-space:nowrap}
+.rgal__link:hover{opacity:.6}
+
+.ratings{background:var(--paper);padding:clamp(28px,3.6vw,44px) var(--gut);border-top:1px solid var(--line)}
+.ratings__in{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:center;gap:clamp(26px,5vw,60px);flex-wrap:wrap}
+.rt{display:flex;align-items:center;gap:13px}
+.rt__logo{height:32px;width:auto;display:block}
+.rt__name{font-family:var(--sans);font-weight:700;font-size:1.02rem;letter-spacing:.005em;color:#00AA6C}
+.rt__col{display:flex;flex-direction:column;line-height:1.05}
+.rt__score{font-family:var(--serif);font-size:1.45rem;font-weight:600;color:var(--head)}
+.rt__score small{font-family:var(--sans);font-size:.78rem;color:var(--muted);font-weight:600;margin-left:3px}
+.rt__lbl{font-family:var(--sans);font-size:.7rem;letter-spacing:.04em;color:var(--muted);margin-top:3px}
+.rt__div{width:1px;height:40px;background:var(--line)}
+@media(max-width:520px){.rt__div{display:none}}
+
+.howto{display:flex;flex-direction:column;gap:9px;margin-top:8px}
+.howto__t{font-family:var(--sans);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cream-mut);margin-bottom:3px}
+.howto a{display:inline-flex;align-items:center;gap:9px;color:var(--cream-soft);font-size:.95rem;width:max-content;transition:color .3s var(--ease)}
+.howto a:hover{color:#fff}
+.howto a svg{flex:0 0 auto;opacity:.85}
+.wa-btn{display:inline-flex;align-items:center;gap:10px;margin-top:16px;background:#2f7d5b;color:#fff;font-family:var(--sans);font-size:.82rem;font-weight:600;letter-spacing:.03em;padding:13px 20px;text-decoration:none;transition:background .3s var(--ease);width:max-content;max-width:100%}
+.wa-btn:hover{background:#276b4e}
+.wa-btn svg{flex:0 0 auto}
+
+.getto{background:var(--paper-2);padding:clamp(54px,7vw,94px) 0}
+.getto__in{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);display:grid;grid-template-columns:1fr 1.12fr;gap:clamp(30px,5vw,64px);align-items:center}
+.getto__eye{font-family:var(--sans);font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--slate);margin-bottom:14px;display:block}
+.getto h2{font-family:var(--serif);font-weight:500;color:var(--head);font-size:clamp(2rem,3.6vw,3rem);line-height:1.04;margin-bottom:16px}
+.getto p{color:var(--text);font-size:1rem;line-height:1.6;margin-bottom:26px;max-width:46ch}
+.getto__btns{display:flex;flex-wrap:wrap;gap:12px}
+.getto__btn{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--slate);color:var(--slate);background:transparent;font-family:var(--sans);font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:13px 18px;text-decoration:none;transition:background .3s var(--ease),color .3s var(--ease)}
+.getto__btn:hover{background:var(--slate);color:var(--cream-soft)}
+.getto__btn svg{flex:0 0 auto}
+.getto__map{position:relative;aspect-ratio:4/3;border:1px solid var(--line);overflow:hidden;background:var(--paper-3)}
+.getto__map iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(.82) sepia(.16) brightness(1.06) contrast(.9)}
+@media(max-width:860px){.getto__in{grid-template-columns:1fr;gap:26px} .getto__map{aspect-ratio:16/10}}
+
+
+
+
+.foot__rates{display:flex;flex-direction:column;gap:9px;margin-top:22px}
+.fr{font-family:var(--sans);font-size:.92rem;color:#fff;display:inline-flex;align-items:baseline;gap:9px}
+.fr__n{font-weight:700;color:#fff}
+.fr__sc{font-family:var(--serif);font-size:1.08rem;color:#fff}
+.fr__lb{color:var(--cream-mut);font-size:.82rem}
+.wa-fab{position:fixed;right:clamp(16px,2.5vw,26px);bottom:clamp(16px,2.5vw,26px);z-index:200;display:inline-flex;align-items:center;gap:11px;background:#25a35a;color:#fff;padding:14px 20px;text-decoration:none;filter:drop-shadow(0 12px 26px rgba(18,50,34,.45));animation:waPulse 2.8s infinite}
+.wa-fab:hover{background:#1f8f4e}
+.wa-fab__icon{width:24px;height:24px;flex:0 0 auto;display:block}
+.wa-fab__txt{font-family:var(--sans);font-size:.86rem;font-weight:600;letter-spacing:.01em;white-space:nowrap;width:150px;text-align:center;display:inline-block;transition:opacity .6s ease}
+@keyframes waPulse{0%{box-shadow:0 0 0 0 rgba(37,163,90,.45)}70%{box-shadow:0 0 0 16px rgba(37,163,90,0)}100%{box-shadow:0 0 0 0 rgba(37,163,90,0)}}
+@media(prefers-reduced-motion:reduce){.wa-fab{animation:none}}
+@media(max-width:480px){.wa-fab__txt{display:none}.wa-fab{padding:15px}}
+
+.reels{padding:clamp(54px,7vw,92px) 0;background:var(--paper)}
+.reels__head{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut) clamp(22px,3vw,32px);text-align:center}
+.reels__ey{font-family:var(--sans);font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--slate);display:block;margin-bottom:10px}
+.reels__head h2{font-family:var(--serif);font-weight:500;color:var(--head);font-size:clamp(2rem,3.6vw,2.9rem);line-height:1}
+.reels__rail{display:flex;gap:16px;overflow-x:auto;padding:4px var(--gut) 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.reels__rail::-webkit-scrollbar{display:none}
+.reel{flex:0 0 auto;width:clamp(216px,22vw,268px);aspect-ratio:9/16;position:relative;overflow:hidden;background:var(--paper-2);cursor:pointer}
+.reel video,.reel__poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.reel__poster{z-index:1}
+.reel video{z-index:2;opacity:0;transition:opacity .55s var(--ease)}
+.reel.playing video{opacity:1}
+.reel::after{content:"";position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,rgba(20,30,35,0) 62%,rgba(20,30,35,.42));pointer-events:none}
+.reel__play{position:absolute;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.65);display:flex;align-items:center;justify-content:center;color:#fff;transition:opacity .4s var(--ease)}
+.reel.playing .reel__play{opacity:0}
+.vlb{position:fixed;inset:0;z-index:300;background:rgba(16,24,28,.93);display:none;align-items:center;justify-content:center;padding:20px}
+.vlb.open{display:flex}
+.vlb video{width:auto;max-width:min(94vw,420px);max-height:90vh;aspect-ratio:9/16;background:#000;display:block}
+.vlb__x{position:absolute;top:18px;right:20px;background:none;border:0;color:#fff;font-family:var(--sans);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+
+.hero__slides{position:absolute;inset:0;background:#1a2a30}
+.hero__slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease;will-change:opacity}
+.hero__slide.is-active{opacity:1}
+.hero__slide img{width:100%;height:100%;object-fit:cover;animation:kbz 9s linear infinite alternate;will-change:transform}
+@keyframes kbz{from{transform:scale(1.06)}to{transform:scale(1.30)}}
+@media(prefers-reduced-motion:reduce){.hero__slide img{animation:none;transform:scale(1)}}
 
 .langsw{display:inline-flex;align-items:center;gap:1px;margin-right:16px;vertical-align:middle}
-.langsw button{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.08em;color:var(--muted);background:none;border:0;cursor:pointer;padding:6px 7px;transition:color .2s var(--ease)}
-.langsw button:hover,.langsw button.is-on{color:var(--head)}
-.langsw__sep{color:var(--line);font-size:.72rem}
+.langsw button{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.08em;color:rgba(255,255,255,.78);background:none;border:0;cursor:pointer;padding:6px 7px;transition:color .2s var(--ease)}
+.langsw button:hover{color:#fff}
+.langsw button.is-on{color:#fff}
+.langsw__sep{color:rgba(255,255,255,.45);font-size:.72rem}
+.nav.scrolled .langsw button{color:var(--muted)}
+.nav.scrolled .langsw button:hover,.nav.scrolled .langsw button.is-on{color:var(--head)}
+.nav.scrolled .langsw__sep{color:var(--line)}
 @media(max-width:980px){.langsw{display:none}}
 .langsw-m{display:none}
-@media(max-width:980px){.langsw-m{display:flex;gap:6px;justify-content:center;margin-top:18px}
+@media(max-width:980px){.langsw-m{display:flex;gap:6px;justify-content:center;margin-top:26px}
 .langsw-m button{font-family:var(--sans);font-size:.95rem;font-weight:700;letter-spacing:.12em;color:var(--muted);background:none;border:1px solid var(--line);cursor:pointer;padding:9px 18px}
 .langsw-m button.is-on{color:var(--head);border-color:var(--head)}}
 </style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": ["Resort", "LodgingBusiness"], "@id": "https://omz-lake.vercel.app/#resort", "name": "Olas de Matanzas", "alternateName": ["OMZ", "OMZ Olas de Matanzas"], "url": "https://omz-lake.vercel.app/inicio.html", "description": "Complejo turístico frente al mar en Matanzas, Chile: hotel, cabañas, domos y camping, además de spa, cancha de tenis, restaurant y deportes como windsurf y surf.", "image": ["https://omz-lake.vercel.app/assets/og-omz.jpg", "https://omz-lake.vercel.app/assets/caba-pelicanos-1.jpg", "https://omz-lake.vercel.app/assets/mar-hero.jpg"], "logo": "https://omz-lake.vercel.app/assets/og-omz.jpg", "telephone": "+56996434809", "email": "info@omz.cl", "priceRange": "$$ - $$$", "currenciesAccepted": "CLP", "address": {"@type": "PostalAddress", "streetAddress": "Fundo San Luis, Lagunillas s/n", "addressLocality": "Matanzas", "addressRegion": "Región de O'Higgins", "postalCode": "3230000", "addressCountry": "CL"}, "geo": {"@type": "GeoCoordinates", "latitude": -33.9636, "longitude": -71.8756}, "hasMap": "https://www.google.com/maps/search/?api=1&query=-33.9636,-71.8756", "sameAs": ["https://www.instagram.com/olasdematanzas/"], "petsAllowed": true, "amenityFeature": [{"@type": "LocationFeatureSpecification", "name": "Frente al mar", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Spa", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Cancha de tenis", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Bike Park", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Hot tub privado", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Restaurant", "value": true}, {"@type": "LocationFeatureSpecification", "name": "WiFi", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Estacionamiento", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Quincho y parrillas", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Apto para mascotas (camping)", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Vista al océano", "value": true}, {"@type": "LocationFeatureSpecification", "name": "Acceso a la playa", "value": true}], "makesOffer": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Hotel"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Cabañas"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Domos / Glamping"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Camping"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Spa"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Restaurant"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Eventos y matrimonios"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Windsurf"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Surf"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Bike Park"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Tenis"}}], "containsPlace": [{"@type": "Hotel", "name": "Hotel OMZ", "url": "https://omz-lake.vercel.app/hotel.html"}, {"@type": "LodgingBusiness", "name": "Cabañas OMZ", "url": "https://omz-lake.vercel.app/cabanas.html"}, {"@type": "Campground", "name": "Camping OMZ", "url": "https://omz-lake.vercel.app/camping.html"}, {"@type": "DaySpa", "name": "Spa OMZ", "url": "https://omz-lake.vercel.app/spa.html"}]}, {"@type": "Restaurant", "@id": "https://omz-lake.vercel.app/#restaurant", "name": "Restaurant Marvento", "url": "https://omz-lake.vercel.app/restaurant.html", "servesCuisine": ["Chilena", "Mariscos", "Cocina de mar"], "image": "https://omz-lake.vercel.app/assets/mar-hero.jpg", "telephone": "+56966889094", "priceRange": "$$", "address": {"@type": "PostalAddress", "addressLocality": "Matanzas", "addressRegion": "Región de O'Higgins", "addressCountry": "CL"}, "geo": {"@type": "GeoCoordinates", "latitude": -33.9636, "longitude": -71.8756}, "containedInPlace": {"@id": "https://omz-lake.vercel.app/#resort"}}, {"@type": "WebSite", "@id": "https://omz-lake.vercel.app/#website", "url": "https://omz-lake.vercel.app/", "name": "Olas de Matanzas", "inLanguage": ["es", "en"], "publisher": {"@id": "https://omz-lake.vercel.app/#resort"}}, {"@type": "FAQPage", "@id": "https://omz-lake.vercel.app/inicio.html#faq", "mainEntity": [{"@type": "Question", "name": "¿Qué tipos de alojamiento ofrece Olas de Matanzas (OMZ)?", "acceptedAnswer": {"@type": "Answer", "text": "OMZ ofrece hotel, cabañas, domos de glamping y camping, todos frente al mar en Matanzas, Chile."}}, {"@type": "Question", "name": "¿OMZ tiene spa?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. El Spa OMZ ofrece hot tubs, masajes y terapias complementarias entre el bosque y el mar, además de la Sala Atma de yoga."}}, {"@type": "Question", "name": "¿Hay cancha de tenis?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, OMZ cuenta con cancha de tenis, además de bike park y deportes como windsurf y surf."}}, {"@type": "Question", "name": "¿Dónde está ubicado OMZ?", "acceptedAnswer": {"@type": "Answer", "text": "En Matanzas, comuna de Navidad, Región de O'Higgins, Chile, frente a la playa, a unas 2 horas de Santiago por la ruta de la costa."}}, {"@type": "Question", "name": "¿OMZ tiene restaurant?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, el Restaurant Marvento está frente a la playa de Matanzas, con una de las mejores vistas del lugar."}}, {"@type": "Question", "name": "¿Se admiten mascotas?", "acceptedAnswer": {"@type": "Answer", "text": "El camping de OMZ es pet friendly."}}, {"@type": "Question", "name": "¿Se pueden hacer matrimonios o eventos?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, OMZ realiza matrimonios y eventos corporativos frente al mar, con salón, terrazas y la Sala Atma para hasta 170 personas."}}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://omz-lake.vercel.app/inicio.html"}]}]}</script>
 </head>
 <body>
 
-<header class="top">
-  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:16px">
-    <img class="top__logo" src="assets/a-4d11247dadf2.png" alt="Olas de Matanzas">
-    <div class="langsw" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><span class="langsw__sep">/</span><button type="button" data-lang="en">EN</button></div>
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="inicio.html" class="brand" aria-label="Olas de Matanzas — inicio">
+    <img src="assets/a-0fe6af4c2acd.png" alt="Olas de Matanzas" class="nav__logo nav__logo--white" decoding="async">
+    <img src="assets/a-4d11247dadf2.png" alt="Olas de Matanzas" class="nav__logo nav__logo--color" decoding="async" loading="lazy">
+  </a>
+  <div class="nav__links">
+    <div class="navx" data-navx>
+      <a href="#" class="navx__trigger" aria-haspopup="true" aria-expanded="false">Alojamiento<svg class="navx__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+      <div class="navx__panel navx__panel--mega" role="menu">
+        <a href="hotel.html" class="navx__card" role="menuitem">
+          <img class="navx__card-thumb" src="assets/a-0d48ff388fba.jpg" alt="Habitación de hotel con vista al mar" loading="lazy" decoding="async"><span class="navx__card-name">Hotel</span>
+          <span class="navx__card-desc">Frente al océano, servicio completo</span>
+          <span class="navx__card-price">desde $120.000 / noche</span>
+        </a>
+        <a href="cabanas.html" class="navx__card" role="menuitem">
+          <img class="navx__card-thumb" src="assets/a-4797037977da.jpg" alt="Cabaña moderna frente al océano" loading="lazy" decoding="async"><span class="navx__card-name">Cabañas</span>
+          <span class="navx__card-desc">Entre el bosque, en familia</span>
+          <span class="navx__card-price">desde $95.000 / noche</span>
+        </a>
+        <a href="domos.html" class="navx__card" role="menuitem">
+          <img class="navx__card-thumb" src="assets/domo-6.jpg" alt="Interior de domo con respaldo de madera" loading="lazy" decoding="async"><span class="navx__card-name">Domos</span>
+          <span class="navx__card-desc">Bajo las estrellas, glamping</span>
+          <span class="navx__card-price">desde $140.000 / noche</span>
+        </a>
+        <a href="camping.html" class="navx__card" role="menuitem">
+          <img class="navx__card-thumb" src="assets/a-b82caf97021b.jpg" alt="Zona de camping entre el bosque" loading="lazy" decoding="async"><span class="navx__card-name">Camping</span>
+          <span class="navx__card-desc">A pasos del mar, al aire libre</span>
+          <span class="navx__card-price">desde $25.000 / noche</span>
+        </a>
+      </div>
+    </div>
+    <div class="navx" data-navx>
+      <a href="#" class="navx__trigger" aria-haspopup="true" aria-expanded="false">Restaurant<svg class="navx__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+      <div class="navx__panel navx__panel--mega navx__panel--rest" role="menu">
+        <a class="restcard__media" href="restaurant.html" role="menuitem" aria-label="Ver Restaurant Marvento"><img src="assets/mar-01.jpg" alt="Plato del Restaurant Marvento con vista a la playa" loading="lazy" decoding="async"></a>
+        <div class="restcard__body">
+          <span class="restcard__eyebrow">Restaurant Marvento</span>
+          <p class="restcard__line">Frente a la playa, con una de las mejores vistas de Matanzas.</p>
+          <div class="restcard__links">
+            <a href="restaurant.html" role="menuitem">Ver restaurant</a>
+            <a href="carta.html" role="menuitem">Ver carta</a>
+            <a href="carta.pdf" target="_blank" rel="noopener" role="menuitem">Descargar PDF</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navx" data-navx>
+      <a href="#" class="navx__trigger" aria-haspopup="true" aria-expanded="false">Experiencias<svg class="navx__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+      <div class="navx__panel navx__panel--mega navx__panel--exp" role="menu">
+        <a href="actividades.html" class="navx__card" role="menuitem">
+          <img class="navx__card-thumb" src="assets/actividades.jpg" alt="Actividades al aire libre" loading="lazy" decoding="async"><span class="navx__card-name">Actividades</span>
+          <span class="navx__card-desc">Windsurf, surf, bike park y tenis</span>
+        </a>
+        <a href="spa.html" class="navx__card" role="menuitem">
+          <img class="navx__card-thumb" src="assets/spa.jpg" alt="Spa OMZ entre el bosque" loading="lazy" decoding="async"><span class="navx__card-name">Spa OMZ</span>
+          <span class="navx__card-desc">Bienestar entre el bosque y el mar</span>
+        </a>
+        <a href="eventos.html" class="navx__card" role="menuitem">
+          <img class="navx__card-thumb" src="assets/eventos.jpg" alt="Eventos frente al mar" loading="lazy" decoding="async"><span class="navx__card-name">Eventos</span>
+          <span class="navx__card-desc">Matrimonios y encuentros corporativos</span>
+        </a>
+      </div>
+    </div>
+    <a href="#como-llegar">Cómo llegar</a>
+    <a href="#contacto">Contacto</a>
   </div>
+  <div class="langsw" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><span class="langsw__sep">/</span><button type="button" data-lang="en">EN</button></div>
+  <a href="#contacto" class="nav__cta">Reservar</a>
+  <button class="nav__burger" aria-label="Menú"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="nav__mobile">
+  <div class="nav__mobile-top">
+    <img src="assets/a-4d11247dadf2.png" alt="Olas de Matanzas" class="nav__mobile-logo" decoding="async" loading="lazy">
+    <button class="nav__mobile-close" aria-label="Cerrar menú"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  </div>
+  <nav class="nav__mobile-links">
+    <a href="inicio.html">Inicio</a>
+    <span class="m-label">Alojamiento</span>
+    <a href="hotel.html" class="m-sub">Hotel</a>
+    <a href="cabanas.html" class="m-sub">Cabañas</a>
+    <a href="domos.html" class="m-sub">Domos</a>
+    <a href="camping.html" class="m-sub">Camping</a>
+    <span class="m-label">Restaurant</span>
+    <a href="restaurant.html" class="m-sub">Ver restaurant</a>
+    <a href="carta.html" class="m-sub">Ver carta</a>
+    <a href="carta.pdf" target="_blank" rel="noopener" class="m-sub">Descargar PDF</a>
+    <span class="m-label">Experiencias</span>
+    <a href="actividades.html" class="m-sub">Actividades</a>
+    <a href="spa.html" class="m-sub">Spa OMZ</a>
+    <a href="eventos.html" class="m-sub">Eventos</a>
+    <a href="#como-llegar">Cómo llegar</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <div class="nav__mobile-foot">
+    <a href="#contacto" class="nav__mobile-cta">Reservar</a>
+    <div class="nav__mobile-contact">
+      <a href="tel:+56996434809"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+56 9 9643 4809</a>
+      <a href="mailto:info@omz.cl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>info@omz.cl</a>
+    </div>
+    <div class="langsw-m" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero__slides">
+     <div class="hero__slide is-active"><img src="assets/hero-0.webp" alt="Windsurfista sobre una gran ola en Matanzas" decoding="async" loading="eager" fetchpriority="high"></div>
+     <div class="hero__slide"><img src="assets/hero-2.webp" alt="Cabaña de OMZ entre flores frente al mar" decoding="async" loading="lazy"></div>
+     <div class="hero__slide"><img src="assets/hero-3.webp" alt="Interior de cabaña con vista al océano" decoding="async" loading="lazy"></div>
+     <div class="hero__slide"><img src="assets/hero-4.webp" alt="Habitación del hotel OMZ" decoding="async" loading="lazy"></div>
+     <div class="hero__slide"><img src="assets/hero-1.webp" alt="Cabalgata por la playa" decoding="async" loading="lazy"></div>
+     <div class="hero__slide"><img src="assets/hero-5.webp" alt="Mountain bike en el bosque de Matanzas" decoding="async" loading="lazy"></div>
+     <div class="hero__slide"><img src="assets/hero-6.webp" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></div>
+   </div>
+   <div class="hero__veil"></div>
+  <div class="hero__in">
+    <span class="hero__eyebrow">Complejo frente al mar</span>
+    <img src="assets/a-0fe6af4c2acd.png" alt="Olas de Matanzas" class="hero__logo" decoding="async" loading="lazy">
+    <div class="hero__flank"><span class="ln"></span><i>entre mar y bosque</i><span class="ln"></span></div>
+    <p class="hero__sub">Diseñado para disfrutar la naturaleza y desconectar del ritmo diario, a pasos del océano.</p>
+  </div>
+  <div class="hero__cue">Descubre</div>
 </header>
 
-<section class="hero">
-  <div class="wrap">
-    <div class="eyebrow">Resumen del sitio web</div>
-    <h1>Nueva web<br>Olas de Matanzas</h1>
-    <p>Este es un resumen simple de lo que incluye el sitio. Puedes recorrerla tú mismo desde el botón de abajo.</p>
-    <div class="disclaimer"><strong>Versión de muestra · en construcción.</strong> La página todavía está incompleta y la información (textos, precios y fotos) es tentativa, solo a modo de ejemplo. Todo es movible y modificable: el orden, el contenido y el diseño se pueden ajustar — nada está cerrado.</div>
-    <a class="cta" href="inicio.html">Visitar la web
-      <svg viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5.5h13M10 1l4 4.5-4 4.5"/></svg>
-    </a>
+<!-- STATEMENT -->
+<section class="section" style="padding-bottom:clamp(20px,2.5vw,40px)">
+  <div class="wrap statement">
+    <div class="flank up" style="color:var(--slate);margin-bottom:26px"><span class="ln"></span><span class="lbl">El lugar</span><span class="ln"></span></div>
+    <h2 class="up d1">Un entorno ideal para quienes buscan experiencias auténticas entre <em>mar y bosque</em>.</h2>
+    <p class="up d2">Estamos ubicados en el corazón de Matanzas, con accesos cómodos, vistas abiertas al océano y todo a pasos, sin necesidad de auto. Una pausa real frente al Pacífico.</p>
   </div>
 </section>
 
-<section class="block">
+<!-- STAYS -->
+<section class="section" id="estilos" style="padding-top:clamp(32px,4vw,56px)">
   <div class="wrap">
-    <div class="block__lead">¿Qué contiene la web?</div>
-    <div class="block__sub">El sitio tiene 6 páginas. Esto es lo que hay en cada una:</div>
-
-    <!-- Landing -->
-    <article class="page">
-      <div class="page__head">
-        <div class="page__name">1 · Página principal (Landing)</div>
-        <span class="page__file">inicio.html</span>
-      </div>
-      <p class="page__desc">Es la página de inicio, donde llega la mayoría de los visitantes. Cuenta todo el complejo en un solo recorrido hacia abajo. Incluye:</p>
-      <ul class="list">
-        <li><strong>Portada</strong> con una galería de fotos del lugar (mar, cabañas, naturaleza) que van cambiando solas.</li>
-        <li><strong>Alojamiento:</strong> las 4 formas de hospedarse — Hotel, Cabañas, Domos y Camping.</li>
-        <li><strong>Restaurant Marvento:</strong> presentación, un carrusel de platos y enlace a la carta completa.</li>
-        <li><strong>Experiencias y servicios:</strong> actividades, spa, eventos y tenis.</li>
-        <li><strong>Vive OMZ:</strong> videos cortos verticales que muestran el ambiente del lugar.</li>
-        <li><strong>Valoraciones</strong> de Booking y Tripadvisor.</li>
-        <li><strong>Cómo llegar:</strong> mapa y botones para abrir la ruta en Google Maps, Waze o Apple Maps.</li>
-        <li><strong>Botón de WhatsApp</strong> siempre visible, para escribir y consultar al instante.</li>
-      </ul>
-      <a class="link" href="inicio.html">Ver la página principal
-        <svg viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5.5h13M10 1l4 4.5-4 4.5"/></svg>
+    <div class="stays__head">
+      <div class="flank up" style="color:var(--slate);margin-bottom:18px"><span class="ln"></span><span class="lbl">Alojamiento</span><span class="ln"></span></div>
+      <h2 class="up d1">Elige tu estilo de estadía</h2>
+    </div>
+    <div class="stays">
+      <a href="hotel.html" class="stay stay--lg wipe">
+        <div class="stay__media"><img src="assets/a-0d48ff388fba.jpg" alt="Habitación de hotel con vista al mar" decoding="async" loading="lazy"></div>
+        <div class="stay__body">
+          <div class="stay__name">Hotel</div>
+          <div class="stay__line">Habitaciones con vista al mar, baño privado y terraza.</div>
+          <span class="stay__go">Ver habitaciones <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
+        </div>
       </a>
-    </article>
-
-    <!-- Hotel -->
-    <article class="page">
-      <div class="page__head">
-        <div class="page__name">2 · Página del Hotel</div>
-        <span class="page__file">hotel.html</span>
-      </div>
-      <p class="page__desc">Página con el detalle del hotel: presenta las habitaciones con sus características y fotos, para quien quiere saber más antes de reservar. Es la página a la que se llega al tocar "Hotel" en el alojamiento.</p>
-      <a class="link" href="hotel.html">Ver la página del Hotel
-        <svg viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5.5h13M10 1l4 4.5-4 4.5"/></svg>
+      <a href="cabanas.html" class="stay stay--sm wipe d1">
+        <div class="stay__media"><img src="assets/a-4797037977da.jpg" alt="Cabaña moderna frente al océano" decoding="async" loading="lazy"></div>
+        <div class="stay__body">
+          <div class="stay__name">Cabañas</div>
+          <div class="stay__line">Rodeadas de naturaleza, con vistas abiertas.</div>
+          <span class="stay__go">Ver más <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
+        </div>
       </a>
-    </article>
-
-    <!-- Domos -->
-    <article class="page">
-      <div class="page__head">
-        <div class="page__name">3 · Página de Domos</div>
-        <span class="page__file">domos.html</span>
-      </div>
-      <p class="page__desc">Página con el detalle de los Domos: 4 domos para hasta 4 personas entre el bosque de pinos, con sus características, fotos y tarifas. Es la página a la que se llega al tocar "Domos" en el alojamiento.</p>
-      <a class="link" href="domos.html">Ver la página de Domos
-        <svg viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5.5h13M10 1l4 4.5-4 4.5"/></svg>
+      <a href="domos.html" class="stay stay--half wipe">
+        <div class="stay__media"><img src="assets/a-dcabbb4bb3f0.jpg" alt="Interior de domo en el bosque" decoding="async" loading="lazy"></div>
+        <div class="stay__body">
+          <div class="stay__name">Domos</div>
+          <div class="stay__line">En el bosque, para una noche distinta.</div>
+          <span class="stay__go">Ver domos <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
+        </div>
       </a>
-    </article>
-
-    <!-- Camping -->
-    <article class="page">
-      <div class="page__head">
-        <div class="page__name">4 · Página de Camping</div>
-        <span class="page__file">camping.html</span>
-      </div>
-      <p class="page__desc">Página con el detalle del Camping: sitios para hasta 4 personas en el bosque de pinos, con instalaciones, fotos y tarifas. Es la página a la que se llega al tocar "Camping" en el alojamiento.</p>
-      <a class="link" href="camping.html">Ver la página de Camping
-        <svg viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5.5h13M10 1l4 4.5-4 4.5"/></svg>
+      <a href="camping.html" class="stay stay--half wipe d1">
+        <div class="stay__media"><img src="assets/a-b82caf97021b.jpg" alt="Zona de camping entre el bosque" decoding="async" loading="lazy"></div>
+        <div class="stay__body">
+          <div class="stay__name">Camping</div>
+          <div class="stay__line">Con baño privado, a pasos de la playa.</div>
+          <span class="stay__go">Ver más <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
+        </div>
       </a>
-    </article>
-
-    <!-- Restaurant -->
-    <article class="page">
-      <div class="page__head">
-        <div class="page__name">5 · Página del Restaurant</div>
-        <span class="page__file">restaurant.html</span>
-      </div>
-      <p class="page__desc">Página del Restaurant Marvento: presentación, galería de platos, horarios, reservas y eventos, con enlaces a la carta web y al PDF. Es la página a la que se llega al tocar "Restaurant" en el menú.</p>
-      <a class="link" href="restaurant.html">Ver la página del Restaurant
-        <svg viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5.5h13M10 1l4 4.5-4 4.5"/></svg>
-      </a>
-    </article>
-
-    <!-- Carta -->
-    <article class="page">
-      <div class="page__head">
-        <div class="page__name">6 · Carta del Restaurant</div>
-        <span class="page__file">carta.html</span>
-      </div>
-      <p class="page__desc">La carta completa del Restaurant Marvento (platos, bar y vinos), ordenada por categorías y con opción de descargar el PDF. Se abre desde "Ver carta completa" en la sección del restaurant.</p>
-      <a class="link" href="carta.html">Ver la carta
-        <svg viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5.5h13M10 1l4 4.5-4 4.5"/></svg>
-      </a>
-    </article>
-
-    <div class="notes">
-      <h3>Bueno saber</h3>
-      <ul>
-        <li>Funciona en computador y celular (se adapta a cada pantalla).</li>
-        <li>Las fotos y videos cargan a medida que se necesitan, para que abra rápido.</li>
-        <li>Los botones de Reservar y WhatsApp llevan al contacto directo del complejo.</li>
-      </ul>
     </div>
   </div>
 </section>
 
-<footer class="foot">
+<!-- RESTAURANT -->
+<section class="alt" id="restaurant">
+  <div class="alt__media wipe" data-parallax><img src="assets/a-d609497bd5ba.jpg" alt="Plato de mariscos con vista al mar en Restaurant Marvento" decoding="async" loading="lazy"></div>
+  <div class="alt__body">
+    <span class="eyebrow up">Restaurant Marvento</span>
+    <h2 class="up d1">Cocina<br>frente al mar.</h2>
+    <p class="up d2">Productos del mar y de la zona, servidos con vista directa al Pacífico. Pescados, mariscos y preparaciones de temporada. Los huéspedes del hotel disfrutan de un 10% de descuento.</p>
+  </div>
+</section>
+
+<!-- RESTAURANT — GALERIA -->
+<section class="rgal" id="carta">
+  <div class="rgal__head">
+    <div>
+      <div class="rgal__ey up"><span class="ln"></span><span class="lbl">La carta</span></div>
+      <h2 class="up d1">Sabores de Matanzas</h2>
+    </div>
+    <a href="carta.html" class="rgal__link up d1">Ver carta completa →</a>
+  </div>
+  <div class="rgal__rail" id="rgalRail">
+    <figure class="rgal__slide" data-lb="assets/rest-01.jpg"><img src="assets/rest-01.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
+    <figure class="rgal__slide" data-lb="assets/rest-02.jpg"><img src="assets/rest-02.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
+    <figure class="rgal__slide" data-lb="assets/rest-03.jpg"><img src="assets/rest-03.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
+    <figure class="rgal__slide" data-lb="assets/rest-04.jpg"><img src="assets/rest-04.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
+    <figure class="rgal__slide" data-lb="assets/rest-05.jpg"><img src="assets/rest-05.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
+    <figure class="rgal__slide" data-lb="assets/rest-06.jpg"><img src="assets/rest-06.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
+    <figure class="rgal__slide" data-lb="assets/rest-07.jpg"><img src="assets/rest-07.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
+    <figure class="rgal__slide" data-lb="assets/rest-08.jpg"><img src="assets/rest-08.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
+    <figure class="rgal__slide" data-lb="assets/rest-09.jpg"><img src="assets/rest-09.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
+    <figure class="rgal__slide" data-lb="assets/rest-10.jpg"><img src="assets/rest-10.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
+  </div>
+</section>
+
+<!-- EXPERIENCIAS Y SERVICIOS -->
+<section class="section" id="experiencias">
   <div class="wrap">
-    <p>Olas de Matanzas · Matanzas, Navidad — Chile · <a href="inicio.html">Visitar la web →</a></p>
+    <div class="stays__head">
+      <div class="flank up" style="color:var(--slate);margin-bottom:18px"><span class="ln"></span><span class="lbl">Experiencias y servicios</span><span class="ln"></span></div>
+      <h2 class="up d1">Todo a pasos, sin salir del complejo</h2>
+    </div>
+    <div class="xp-grid">
+      <a id="actividades" href="actividades.html" class="xp wipe d1">
+        <div class="xp__media"><img src="assets/actividades.jpg" alt="Ciclista de montaña en el bosque de pinos" decoding="async" loading="lazy"></div>
+        <div class="xp__body">
+          <div class="xp__name">Actividades</div>
+          <div class="xp__line">Bici, trekking, surf y deportes de viento entre mar y bosque.</div>
+          <span class="xp__go">Ver <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
+        </div>
+      </a>
+      <a id="spa" href="spa.html" class="xp wipe d2">
+        <div class="xp__media"><img src="assets/spa.jpg" alt="Rincón de descanso del Spa OMZ" decoding="async" loading="lazy"></div>
+        <div class="xp__body">
+          <div class="xp__name">Spa OMZ</div>
+          <div class="xp__line">Tinajas de agua caliente al aire libre, masajes y descanso.</div>
+          <span class="xp__go">Ver <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
+        </div>
+      </a>
+      <a id="eventos" href="eventos.html" class="xp wipe d3">
+        <div class="xp__media"><img src="assets/eventos.jpg" alt="Pareja celebrando su matrimonio frente al mar" decoding="async" loading="lazy"></div>
+        <div class="xp__body">
+          <div class="xp__name">Eventos</div>
+          <div class="xp__line">Matrimonios y celebraciones frente al Pacífico.</div>
+          <span class="xp__go">Ver <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- VIVE OMZ (reels) -->
+<section class="reels" id="vive">
+  <div class="reels__head">
+    <span class="reels__ey up">Vive OMZ</span>
+    <h2 class="up d1">El lugar, en movimiento</h2>
+  </div>
+  <div class="reels__rail">
+    <div class="reel" data-reel="assets/reel-01.mp4">
+      <img class="reel__poster" src="assets/reel-01.jpg" alt="Olas de Matanzas en video" loading="lazy" decoding="async">
+      <video src="assets/reel-01.mp4" muted loop playsinline preload="none"></video>
+      <span class="reel__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+    </div>
+    <div class="reel" data-reel="assets/reel-02.mp4">
+      <img class="reel__poster" src="assets/reel-02.jpg" alt="Olas de Matanzas en video" loading="lazy" decoding="async">
+      <video src="assets/reel-02.mp4" muted loop playsinline preload="none"></video>
+      <span class="reel__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+    </div>
+    <div class="reel" data-reel="assets/reel-03.mp4">
+      <img class="reel__poster" src="assets/reel-03.jpg" alt="Olas de Matanzas en video" loading="lazy" decoding="async">
+      <video src="assets/reel-03.mp4" muted loop playsinline preload="none"></video>
+      <span class="reel__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+    </div>
+    <div class="reel" data-reel="assets/reel-04.mp4">
+      <img class="reel__poster" src="assets/reel-04.jpg" alt="Olas de Matanzas en video" loading="lazy" decoding="async">
+      <video src="assets/reel-04.mp4" muted loop playsinline preload="none"></video>
+      <span class="reel__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+    </div>
+    <div class="reel" data-reel="assets/reel-05.mp4">
+      <img class="reel__poster" src="assets/reel-05.jpg" alt="Olas de Matanzas en video" loading="lazy" decoding="async">
+      <video src="assets/reel-05.mp4" muted loop playsinline preload="none"></video>
+      <span class="reel__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+    </div>
+    <div class="reel" data-reel="assets/reel-06.mp4">
+      <img class="reel__poster" src="assets/reel-06.jpg" alt="Olas de Matanzas en video" loading="lazy" decoding="async">
+      <video src="assets/reel-06.mp4" muted loop playsinline preload="none"></video>
+      <span class="reel__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+    </div>
+    <div class="reel" data-reel="assets/reel-07.mp4">
+      <img class="reel__poster" src="assets/reel-07.jpg" alt="Olas de Matanzas en video" loading="lazy" decoding="async">
+      <video src="assets/reel-07.mp4" muted loop playsinline preload="none"></video>
+      <span class="reel__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+    </div>
+    <div class="reel" data-reel="assets/reel-08.mp4">
+      <img class="reel__poster" src="assets/reel-08.jpg" alt="Olas de Matanzas en video" loading="lazy" decoding="async">
+      <video src="assets/reel-08.mp4" muted loop playsinline preload="none"></video>
+      <span class="reel__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    <span class="ticker__item">Windsurf</span><span class="ticker__item">Kitesurf</span><span class="ticker__item">Wingfoil</span><span class="ticker__item">Surf</span>
+    <span class="ticker__item">Windsurf</span><span class="ticker__item">Kitesurf</span><span class="ticker__item">Wingfoil</span><span class="ticker__item">Surf</span>
+  </div>
+</div>
+
+<!-- ALT 1 — frente al mar -->
+<section class="alt">
+  <div class="alt__media wipe" data-parallax><img src="assets/a-26041856ab5c.jpg" alt="Terraza con reposeras y vista al mar" decoding="async" loading="lazy"></div>
+  <div class="alt__body">
+    <span class="eyebrow up">Frente al océano</span>
+    <h2 class="up d1">Mar abierto,<br>calma de bosque.</h2>
+    <p class="up d2">Un complejo pensado para que cada visita se sienta distinta: aire de mar, sombra de bosque y la libertad de moverse caminando. Vistas abiertas al Pacífico desde cada rincón.</p>
+  </div>
+</section>
+
+<!-- ALT 2 — viento y olas -->
+<section class="alt alt--rev">
+  <div class="alt__media wipe" data-parallax><img src="assets/a-1534a13b1884.jpg" alt="Surfista en el mar de Matanzas" decoding="async" loading="lazy"></div>
+  <div class="alt__body">
+    <span class="eyebrow up">Condiciones naturales</span>
+    <h2 class="up d1">Viento y olas,<br>todo el año.</h2>
+    <p class="up d2">Matanzas es reconocido a nivel mundial por sus condiciones para los deportes de viento y mar.</p>
+    <div class="alt__list">
+      <div class="up d2"><span>01</span>Windsurf</div>
+      <div class="up d2"><span>02</span>Kitesurf</div>
+      <div class="up d3"><span>03</span>Wingfoil</div>
+      <div class="up d3"><span>04</span>Surf</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- TESTIMONIOS -->
+<section class="section testi">
+  <div class="wrap">
+    <div class="testi__head">
+      <span class="eyebrow up">Experiencias</span>
+      <h2 class="up d1">Lo que dicen quienes vuelven</h2>
+    </div>
+    <div class="testi__grid">
+      <figure class="quote up d1">
+        <span class="quote__mk">”</span>
+        <blockquote class="quote__t">Combinación de mar, bosque, tranquilidad, buena comida y noches silenciosas. Habitación amplia, limpia y bien equipada.</blockquote>
+        <span class="rule"></span>
+        <figcaption class="quote__by"><div class="quote__n">Tito Ramírez</div><div class="quote__c">Buenos Aires, Argentina</div></figcaption>
+      </figure>
+      <figure class="quote up d2">
+        <span class="quote__mk">”</span>
+        <blockquote class="quote__t">Más que un lugar para dormir es una experiencia inolvidable, desde que llegas hasta el check out.</blockquote>
+        <span class="rule"></span>
+        <figcaption class="quote__by"><div class="quote__n">Mario Ruiz</div><div class="quote__c">Santiago, Chile</div></figcaption>
+      </figure>
+      <figure class="quote up d3">
+        <span class="quote__mk">”</span>
+        <blockquote class="quote__t">Lugar de espléndidas vistas, nos invita al relajo total. Cumple todas las expectativas.</blockquote>
+        <span class="rule"></span>
+        <figcaption class="quote__by"><div class="quote__n">Marta Arriaza</div><div class="quote__c">Viña del Mar, Chile</div></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- COMO LLEGAR -->
+<section class="getto" id="como-llegar">
+  <div class="getto__in">
+    <div>
+      <span class="getto__eye up">Cómo llegar</span>
+      <h2 class="up d1">A pasos del mar,<br>fácil de encontrar.</h2>
+      <p class="up d2">Fundo San Luis, Lagunillas s/n, Matanzas. A unas 2 horas de Santiago por la ruta de la costa. Abre la ruta en tu app favorita:</p>
+      <div class="getto__btns up d2">
+        <a class="getto__btn" href="https://www.google.com/maps/search/?api=1&query=OMZ%20Olas%20de%20Matanzas%2C%20Matanzas%2C%20Chile" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10.2" r="2.3"/></svg> Abrir en Google Maps</a>
+        <a class="getto__btn" href="https://waze.com/ul?q=OMZ%20Olas%20de%20Matanzas%20Matanzas%20Chile&navigate=yes" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10.2" r="2.3"/></svg> Abrir en Waze</a>
+        <a class="getto__btn" href="https://maps.apple.com/?q=OMZ%20Olas%20de%20Matanzas%2C%20Matanzas%2C%20Chile" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10.2" r="2.3"/></svg> Abrir en Apple Maps</a>
+      </div>
+    </div>
+    <div class="getto__map wipe">
+      <iframe src="https://maps.google.com/maps?q=OMZ%20Olas%20de%20Matanzas%2C%20Matanzas%2C%20Chile&z=14&output=embed" loading="lazy" title="Mapa — Olas de Matanzas, Matanzas" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot" id="contacto">
+  <span class="foot__mono">Om</span>
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <img src="assets/a-0fe6af4c2acd.png" alt="Olas de Matanzas" class="foot__logo" decoding="async" loading="lazy">
+        <p>Mar, bosque y calma frente al océano. Una pausa real en el corazón de Matanzas.</p>
+        <div class="foot__rates">
+          <span class="fr"><span class="fr__n">Booking.com</span><span class="fr__sc">9,0</span><span class="fr__lb">Fantástico</span></span>
+          <span class="fr"><span class="fr__n">Tripadvisor</span><span class="fr__sc">4,4</span><span class="fr__lb">/ 5,0</span></span>
+        </div>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <div class="foot__list">
+          <a href="tel:+56996434809">+56 9 9643 4809</a>
+          <a href="mailto:info@omz.cl">info@omz.cl</a>
+        </div>
+      </div>
+      <div>
+        <h4>Ubicación</h4>
+        <div class="foot__list">
+          <span class="lbl">Fundo San Luis</span>
+          <span class="lbl">Lagunillas s/n</span>
+          <span class="lbl">Matanzas 3230000, Chile</span>
+          <a href="#como-llegar">Cómo llegar →</a>
+        </div>
+      </div>
+      <div class="foot__news">
+        <h4>Síguenos</h4>
+        <div class="foot__social">
+          <a href="https://www.instagram.com/olasdematanzas/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" data-soon="Facebook — demo" aria-label="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 8h-2a2 2 0 0 0-2 2v12M8 13h6"/></svg></a>
+          <a href="https://wa.me/56996434809" target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21l1.6-4A8 8 0 1 1 9 19.8L3 21z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>© 2026 Olas de Matanzas. Todos los derechos reservados.</span>
+      <span>Hotel · Cabañas · Domos · Camping</span>
+    </div>
   </div>
 </footer>
 
+<div class="lb"><button class="lb__x">Cerrar ✕</button><img src="" alt="Imagen ampliada" decoding="async" loading="lazy"></div>
+<div class="toast"><span class="d"></span><span class="t-msg"></span></div>
+<script>
+/* OLAS DE MATANZAS — v2 interactions */
+(function () {
+  'use strict';
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* nav scroll */
+  var nav = document.querySelector('.nav');
+  function navState() { if (window.scrollY > 36) nav.classList.add('scrolled'); else nav.classList.remove('scrolled'); }
+  window.addEventListener('scroll', navState, { passive: true }); navState();
+
+  /* mobile menu */
+  var burger = document.querySelector('.nav__burger');
+  var mobile = document.querySelector('.nav__mobile');
+  function closeMenu() { if (mobile) { mobile.classList.remove('open'); document.body.style.overflow = ''; } }
+  if (burger && mobile) {
+    burger.addEventListener('click', function () {
+      var open = mobile.classList.toggle('open');
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    var cb = mobile.querySelector('.nav__mobile-close');
+    if (cb) cb.addEventListener('click', closeMenu);
+    mobile.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+  }
+
+  /* reveal observer — handles .up, .wipe, .rule, .flank */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.up,.wipe,.rule,.flank').forEach(function (el) { io.observe(el); });
+
+  /* subtle parallax on alt media + hero */
+  var parX = [].slice.call(document.querySelectorAll('[data-parallax]'));
+  var heroImg = document.querySelector('.hero__img img, .phero img');
+  if (!reduce) {
+    var ticking = false;
+    function frame() {
+      var vh = window.innerHeight;
+      parX.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < vh) {
+          var prog = (r.top + r.height / 2 - vh / 2) / vh; // -0.5..0.5
+          var img = el.querySelector('img');
+          if (img) img.style.transform = 'translateY(' + (prog * -34) + 'px) scale(1.08)';
+        }
+      });
+      if (heroImg) {
+        var y = window.scrollY;
+        if (y < window.innerHeight) heroImg.style.transform = 'translateY(' + (y * 0.16) + 'px) scale(1.04)';
+      }
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { requestAnimationFrame(frame); ticking = true; } }, { passive: true });
+    frame();
+  }
+
+  /* toast */
+  var toast = document.querySelector('.toast'), tT;
+  function showToast(m) { if (!toast) return; toast.querySelector('.t-msg').textContent = m; toast.classList.add('show'); clearTimeout(tT); tT = setTimeout(function () { toast.classList.remove('show'); }, 2800); }
+  document.querySelectorAll('[data-soon]').forEach(function (el) {
+    el.addEventListener('click', function (ev) { ev.preventDefault(); showToast(el.getAttribute('data-soon')); });
+  });
+
+  /* newsletter (demo) */
+  var sub = document.querySelector('.foot__sub');
+  if (sub) sub.addEventListener('click', function (e) { e.preventDefault(); showToast('¡Gracias! Te avisaremos de novedades.'); });
+
+  /* lightbox */
+  var lb = document.querySelector('.lb');
+  if (lb) {
+    var lbImg = lb.querySelector('img');
+    document.querySelectorAll('[data-lb]').forEach(function (fig) {
+      fig.addEventListener('click', function () { lbImg.src = fig.getAttribute('data-lb'); lb.classList.add('open'); document.body.style.overflow = 'hidden'; });
+    });
+    function lbClose() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+    lb.addEventListener('click', function (e) { if (e.target !== lbImg) lbClose(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lbClose(); });
+  }
+})();
+
+</script>
+<script>
+(function(){
+  var groups=[].slice.call(document.querySelectorAll('.navx[data-navx]'));
+  groups.forEach(function(g){
+    var t=g.querySelector('.navx__trigger');
+    var tmr;
+    function open(){ clearTimeout(tmr); g.setAttribute('data-open',''); if(t) t.setAttribute('aria-expanded','true'); }
+    function close(){ g.removeAttribute('data-open'); if(t) t.setAttribute('aria-expanded','false'); }
+    function closeSoon(){ clearTimeout(tmr); tmr=setTimeout(close,180); }
+    g.addEventListener('mouseenter',open);
+    g.addEventListener('mouseleave',closeSoon);
+    if(t){
+      t.addEventListener('click',function(e){ e.preventDefault(); g.hasAttribute('data-open')?close():open(); });
+      t.addEventListener('focus',open);
+    }
+    g.addEventListener('focusout',function(e){ if(!g.contains(e.relatedTarget)) close(); });
+  });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') groups.forEach(function(g){ g.removeAttribute('data-open'); }); });
+})();
+</script>
+<script>
+(function(){
+  var rail=document.getElementById('rgalRail'); if(!rail) return;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var lb=document.querySelector('.lb'), lbImg=lb?lb.querySelector('img'):null;
+  function openLb(src){ if(!lb||!lbImg)return; lbImg.src=src; lb.classList.add('open'); document.body.style.overflow='hidden'; }
+  var originals=[].slice.call(rail.children);
+  originals.forEach(function(s){
+    var c=s.cloneNode(true); c.setAttribute('aria-hidden','true');
+    c.addEventListener('click',function(){ var d=c.getAttribute('data-lb'); if(d) openLb(d); });
+    rail.appendChild(c);
+  });
+  if(reduce) return;
+  var first=originals[0], firstClone=rail.children[originals.length];
+  function loopW(){ return firstClone.offsetLeft - first.offsetLeft; }
+  var paused=false, resumeT;
+  function tick(){
+    if(!paused){
+      rail.scrollLeft += 0.5;
+      var L=loopW();
+      if(L>0 && rail.scrollLeft>=L) rail.scrollLeft-=L;
+    }
+    requestAnimationFrame(tick);
+  }
+  rail.addEventListener('mouseenter',function(){paused=true;});
+  rail.addEventListener('mouseleave',function(){paused=false;});
+  rail.addEventListener('pointerdown',function(){paused=true; clearTimeout(resumeT);});
+  window.addEventListener('pointerup',function(){ clearTimeout(resumeT); resumeT=setTimeout(function(){paused=false;},700); });
+  requestAnimationFrame(tick);
+})();
+</script>
+<a class="wa-fab" href="https://wa.me/56996434809?text=Hola%2C%20quisiera%20informaci%C3%B3n%20de%20Olas%20de%20Matanzas" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <img class="wa-fab__icon" src="assets/whatsapp.webp" alt="" aria-hidden="true">
+  <span class="wa-fab__txt" data-wa-rot>Escríbenos</span>
+</a>
+<script>/*wa-rot*/(function(){var el=document.querySelector('[data-wa-rot]');if(!el)return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var i=0,DEF=['Escríbenos','¿Tienes dudas?','Reserva ahora','¿Te ayudamos?'];function M(){return window.__waMsgs||DEF;}setInterval(function(){el.style.opacity=0;setTimeout(function(){var m=M();i=(i+1)%m.length;el.textContent=m[i];el.style.opacity=1;},600);},4200);})();</script>
+<div class="vlb"><button class="vlb__x">Cerrar ✕</button><video controls playsinline></video></div>
+<script>/*reels*/(function(){
+  var cards=[].slice.call(document.querySelectorAll('.reel')); if(!cards.length)return;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if('IntersectionObserver' in window && !reduce){
+    var ratios=new WeakMap();
+    function update(){
+      var best=null,bestR=0.5;
+      cards.forEach(function(c){var r=ratios.get(c)||0;if(r>bestR){bestR=r;best=c;}});
+      cards.forEach(function(c){
+        var v=c.querySelector('video');
+        if(c===best){ v.play().then(function(){c.classList.add('playing')}).catch(function(){}); }
+        else { v.pause(); c.classList.remove('playing'); }
+      });
+    }
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(en){ ratios.set(en.target, en.isIntersecting?en.intersectionRatio:0); });
+      update();
+    },{threshold:[0,.25,.5,.75,1]});
+    cards.forEach(function(c){io.observe(c)});
+  }
+  var vlb=document.querySelector('.vlb'), vv=vlb?vlb.querySelector('video'):null;
+  function openV(src){ if(!vlb)return; vv.src=src; vlb.classList.add('open'); vv.currentTime=0; vv.play().catch(function(){}); document.body.style.overflow='hidden'; }
+  function closeV(){ if(!vlb)return; vv.pause(); vlb.classList.remove('open'); document.body.style.overflow=''; }
+  cards.forEach(function(c){ c.addEventListener('click',function(){ openV(c.getAttribute('data-reel')); }); });
+  if(vlb){ vlb.addEventListener('click',function(e){ if(e.target===vlb||e.target.closest('.vlb__x')) closeV(); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeV(); }); }
+})();</script>
+<script>/*hero-slider*/(function(){
+  var s=[].slice.call(document.querySelectorAll('.hero__slide'));if(s.length<2)return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var i=0;setInterval(function(){s[i].classList.remove('is-active');i=(i+1)%s.length;s[i].classList.add('is-active');},6000);
+})();</script>
 <script>/*i18n*/(function(){
-var T={"Resumen del sitio web": "Website overview", "Nueva web": "New website", "Este es un resumen simple de lo que incluye el sitio. Puedes recorrerla tú mismo desde el botón de abajo.": "This is a simple overview of what the site includes. You can explore it yourself from the button below.", "Versión de muestra · en construcción.": "Sample version · under construction.", "La página todavía está incompleta y la información (textos, precios y fotos) es tentativa, solo a modo de ejemplo. Todo es movible y modificable: el orden, el contenido y el diseño se pueden ajustar — nada está cerrado.": "The page is still incomplete and the information (text, prices and photos) is tentative, just for example. Everything is movable and editable: the order, content and design can be adjusted — nothing is final.", "Visitar la web": "Visit the site", "¿Qué contiene la web?": "What does the site include?", "El sitio tiene 6 páginas. Esto es lo que hay en cada una:": "The site has 6 pages. Here's what each one has:", "1 · Página principal (Landing)": "1 · Main page (Landing)", "Es la página de inicio, donde llega la mayoría de los visitantes. Cuenta todo el complejo en un solo recorrido hacia abajo. Incluye:": "It's the home page, where most visitors land. It tells the whole resort in a single scroll down. It includes:", "Portada": "Cover", "con una galería de fotos del lugar (mar, cabañas, naturaleza) que van cambiando solas.": "with a gallery of photos of the place (sea, cabins, nature) that change on their own.", "Alojamiento:": "Accommodation:", "las 4 formas de hospedarse — Hotel, Cabañas, Domos y Camping.": "the 4 ways to stay — Hotel, Cabins, Domes and Camping.", "presentación, un carrusel de platos y enlace a la carta completa.": "intro, a dish carousel and a link to the full menu.", "Experiencias y servicios:": "Experiences & services:", "actividades, spa, eventos y tenis.": "activities, spa, events and tennis.", "Vive OMZ:": "Experience OMZ:", "videos cortos verticales que muestran el ambiente del lugar.": "short vertical videos showing the atmosphere of the place.", "Valoraciones": "Reviews", "de Booking y Tripadvisor.": "from Booking and Tripadvisor.", "Cómo llegar:": "Getting here:", "mapa y botones para abrir la ruta en Google Maps, Waze o Apple Maps.": "map and buttons to open the route in Google Maps, Waze or Apple Maps.", "Botón de WhatsApp": "WhatsApp button", "siempre visible, para escribir y consultar al instante.": "always visible, to message and ask instantly.", "Ver la página principal": "View the main page", "2 · Página del Hotel": "2 · Hotel page", "Página con el detalle del hotel: presenta las habitaciones con sus características y fotos, para quien quiere saber más antes de reservar. Es la página a la que se llega al tocar \"Hotel\" en el alojamiento.": "Page with the hotel details: it shows the rooms with their features and photos, for those who want to know more before booking. It's the page you reach by tapping \"Hotel\" in the accommodation section.", "Ver la página del Hotel": "View the Hotel page", "3 · Página de Domos": "3 · Domes page", "Página con el detalle de los Domos: 4 domos para hasta 4 personas entre el bosque de pinos, con sus características, fotos y tarifas. Es la página a la que se llega al tocar \"Domos\" en el alojamiento.": "Page with the Domes details: 4 domes for up to 4 guests in the pine forest, with their features, photos and rates. It's the page you reach by tapping \"Domes\" in the accommodation section.", "Ver la página de Domos": "View the Domes page", "4 · Página de Camping": "4 · Camping page", "Página con el detalle del Camping: sitios para hasta 4 personas en el bosque de pinos, con instalaciones, fotos y tarifas. Es la página a la que se llega al tocar \"Camping\" en el alojamiento.": "Page with the Camping details: sites for up to 4 guests in the pine forest, with facilities, photos and rates. It's the page you reach by tapping \"Camping\" in the accommodation section.", "Ver la página de Camping": "View the Camping page", "5 · Página del Restaurant": "5 · Restaurant page", "Página del Restaurant Marvento: presentación, galería de platos, horarios, reservas y eventos, con enlaces a la carta web y al PDF. Es la página a la que se llega al tocar \"Restaurant\" en el menú.": "Restaurant Marvento page: intro, dish gallery, hours, reservations and events, with links to the web menu and the PDF. It's the page you reach by tapping \"Restaurant\" in the menu.", "Ver la página del Restaurant": "View the Restaurant page", "6 · Carta del Restaurant": "6 · Restaurant menu", "La carta completa del Restaurant Marvento (platos, bar y vinos), ordenada por categorías y con opción de descargar el PDF. Se abre desde \"Ver carta completa\" en la sección del restaurant.": "The full menu of Restaurant Marvento (dishes, bar and wines), organized by category and with the option to download the PDF. It opens from \"View full menu\" in the restaurant section.", "Ver la carta": "View the menu", "Bueno saber": "Good to know", "Funciona en computador y celular (se adapta a cada pantalla).": "Works on desktop and mobile (it adapts to each screen).", "Las fotos y videos cargan a medida que se necesitan, para que abra rápido.": "Photos and videos load as needed, so it opens fast.", "Los botones de Reservar y WhatsApp llevan al contacto directo del complejo.": "The Book and WhatsApp buttons lead to the resort's direct contact.", "Visitar la web →": "Visit the site →"};
-var A={};
+var T={"Alojamiento": "Accommodation", "Frente al océano, servicio completo": "Oceanfront, full service", "desde $120.000 / noche": "from $120,000 / night", "Cabañas": "Cabins", "Entre el bosque, en familia": "In the forest, for families", "desde $95.000 / noche": "from $95,000 / night", "Domos": "Domes", "Bajo las estrellas, glamping": "Under the stars, glamping", "desde $140.000 / noche": "from $140,000 / night", "A pasos del mar, al aire libre": "Steps from the sea, outdoors", "desde $25.000 / noche": "from $25,000 / night", "Experiencias": "Experiences", "Frente a la playa, con una de las mejores vistas de Matanzas.": "On the beachfront, with one of the best views in Matanzas.", "Ver restaurant": "View restaurant", "Ver carta": "View menu", "Descargar PDF": "Download PDF", "Windsurf, surf, bike park y tenis": "Windsurf, surf, bike park & tennis", "Bienestar entre el bosque y el mar": "Wellness between forest and sea", "Matrimonios y encuentros corporativos": "Weddings & corporate gatherings", "Actividades": "Activities", "Eventos": "Events", "Tenis": "Tennis", "Cómo llegar": "Getting here", "Contacto": "Contact", "Reservar": "Book now", "Inicio": "Home", "Complejo frente al mar": "Oceanfront retreat", "entre mar y bosque": "between sea and forest", "Diseñado para disfrutar la naturaleza y desconectar del ritmo diario, a pasos del océano.": "Designed to enjoy nature and disconnect from the daily pace, steps from the ocean.", "Descubre": "Discover", "El lugar": "The place", "Un entorno ideal para quienes buscan experiencias auténticas entre": "An ideal setting for those seeking authentic experiences between", "mar y bosque": "sea and forest", "Estamos ubicados en el corazón de Matanzas, con accesos cómodos, vistas abiertas al océano y todo a pasos, sin necesidad de auto. Una pausa real frente al Pacífico.": "We're in the heart of Matanzas, with easy access, open ocean views and everything within walking distance — no car needed. A true pause facing the Pacific.", "Elige tu estilo de estadía": "Choose your style of stay", "Habitaciones con vista al mar, baño privado y terraza.": "Rooms with sea view, private bathroom and terrace.", "Ver habitaciones": "View rooms", "Rodeadas de naturaleza, con vistas abiertas.": "Surrounded by nature, with open views.", "Ver más": "View more", "En el bosque, para una noche distinta.": "In the forest, for a different kind of night.", "Ver domos": "View domes", "Con baño privado, a pasos de la playa.": "With private bathroom, steps from the beach.", "Cocina": "Cuisine", "frente al mar.": "by the sea.", "Productos del mar y de la zona, servidos con vista directa al Pacífico. Pescados, mariscos y preparaciones de temporada. Los huéspedes del hotel disfrutan de un 10% de descuento.": "Seafood and local produce, served with direct Pacific views. Fish, shellfish and seasonal dishes. Hotel guests enjoy a 10% discount.", "La carta": "The menu", "Sabores de Matanzas": "Flavors of Matanzas", "Ver carta completa →": "View full menu →", "Experiencias y servicios": "Experiences & services", "Todo a pasos, sin salir del complejo": "Everything within reach, without leaving the resort", "Bici, trekking, surf y deportes de viento entre mar y bosque.": "Biking, trekking, surfing and wind sports between sea and forest.", "Ver": "View", "Tinajas de agua caliente al aire libre, masajes y descanso.": "Outdoor hot tubs, massages and relaxation.", "Matrimonios y celebraciones frente al Pacífico.": "Weddings and celebrations facing the Pacific.", "Cancha de tenis para jugar al aire libre, entre mar y bosque.": "Tennis court to play outdoors, between sea and forest.", "Vive OMZ": "Experience OMZ", "El lugar, en movimiento": "The place, in motion", "Frente al océano": "Oceanfront", "Mar abierto,": "Open sea,", "calma de bosque.": "forest calm.", "Un complejo pensado para que cada visita se sienta distinta: aire de mar, sombra de bosque y la libertad de moverse caminando. Vistas abiertas al Pacífico desde cada rincón.": "A resort designed so every visit feels different: sea air, forest shade and the freedom to get around on foot. Open Pacific views from every corner.", "Condiciones naturales": "Natural conditions", "Viento y olas,": "Wind and waves,", "todo el año.": "all year round.", "Matanzas es reconocido a nivel mundial por sus condiciones para los deportes de viento y mar.": "Matanzas is world-renowned for its conditions for wind and water sports.", "Lo que dicen quienes vuelven": "What returning guests say", "Combinación de mar, bosque, tranquilidad, buena comida y noches silenciosas. Habitación amplia, limpia y bien equipada.": "A blend of sea, forest, calm, good food and quiet nights. A spacious, clean and well-equipped room.", "Más que un lugar para dormir es una experiencia inolvidable, desde que llegas hasta el check out.": "More than a place to sleep, it's an unforgettable experience, from arrival to check-out.", "Lugar de espléndidas vistas, nos invita al relajo total. Cumple todas las expectativas.": "A place with splendid views that invites total relaxation. It meets every expectation.", "A pasos del mar,": "Steps from the sea,", "fácil de encontrar.": "easy to find.", "Fundo San Luis, Lagunillas s/n, Matanzas. A unas 2 horas de Santiago por la ruta de la costa. Abre la ruta en tu app favorita:": "Fundo San Luis, Lagunillas s/n, Matanzas. About 2 hours from Santiago via the coastal route. Open the route in your favorite app:", "Abrir en Google Maps": "Open in Google Maps", "Abrir en Waze": "Open in Waze", "Abrir en Apple Maps": "Open in Apple Maps", "Mar, bosque y calma frente al océano. Una pausa real en el corazón de Matanzas.": "Sea, forest and calm facing the ocean. A true pause in the heart of Matanzas.", "Fantástico": "Fantastic", "Ubicación": "Location", "Cómo llegar →": "Getting here →", "Síguenos": "Follow us", "© 2026 Olas de Matanzas. Todos los derechos reservados.": "© 2026 Olas de Matanzas. All rights reserved.", "Hotel · Cabañas · Domos · Camping": "Hotel · Cabins · Domes · Camping", "Cerrar ✕": "Close ✕", "Escríbenos": "Write to us"};
+var A={"Página de Cabañas — disponible próximamente": "Cabins page — coming soon", "Página de Domos — disponible próximamente": "Domes page — coming soon", "Página de Camping — disponible próximamente": "Camping page — coming soon", "Actividades — más información próximamente": "Activities — more info coming soon", "Spa OMZ — más información próximamente": "Spa OMZ — more info coming soon", "Eventos — más información próximamente": "Events — more info coming soon", "Tenis — más información próximamente": "Tennis — more info coming soon"};
 var WA={"es": ["Escríbenos", "¿Tienes dudas?", "Reserva ahora", "¿Te ayudamos?"], "en": ["Write to us", "Questions?", "Book now", "Need help?"]};
-var TITLE={"es": "Olas de Matanzas — Resumen del sitio web", "en": "Olas de Matanzas — Website overview"};
+var TITLE={"es": "OMZ Olas de Matanzas | Hotel, Cabañas, Domos y Camping en Matanzas", "en": "OMZ Olas de Matanzas | Hotel, Cabins, Domes & Camping in Matanzas, Chile"};
 var orig=new Map();
 function walk(lang){
   var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentNode;if(!p)return 2;var t=p.nodeName;if(t==='SCRIPT'||t==='STYLE'||t==='NOSCRIPT')return 2;return 1;}}),n;
