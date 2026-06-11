@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Olas de Matanzas — Complejo frente al mar · Matanzas, Chile</title>
-<meta name="description" content="Complejo turístico frente al mar en Matanzas, Chile. Hotel, cabañas, domos y camping entre mar y bosque. Windsurf, kitesurf, wingfoil y surf.">
+<title>Cabaña Las Brisas — Olas de Matanzas</title>
+<meta name="description" content="Cabaña Las Brisas en Olas de Matanzas: 5 personas, 75 m², hot tub y vista al mar en Matanzas, Chile.">
 <link rel="icon" type="image/png" href="assets/a-956e8caaf162.png">
 <link rel="apple-touch-icon" href="assets/a-59e77ee6aef2.png">
 <style>
@@ -240,11 +240,9 @@ p{color:var(--text)}
 .stay--lg{grid-column:span 7;min-height:clamp(380px,46vw,560px)}
 .stay--sm{grid-column:span 5;min-height:clamp(380px,46vw,560px)}
 .stay--third{grid-column:span 4;min-height:clamp(320px,34vw,440px)}
-.stay--half{grid-column:span 6;min-height:clamp(320px,40vw,470px)}
 @media(max-width:860px){
   .stay--lg,.stay--sm{grid-column:span 12;min-height:74vw}
   .stay--third{grid-column:span 12;min-height:74vw}
-.stay--half{grid-column:span 12;min-height:74vw}
 }
 
 /* =========================================================
@@ -338,6 +336,9 @@ p{color:var(--text)}
 .spec .k{font-family:var(--sans);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
 .spec .v{font-family:var(--serif);font-size:2.2rem;color:var(--head);margin-top:6px}
 .spec .v small{font-family:var(--sans);font-size:.92rem;color:var(--text)}
+.bedbox{margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}
+.bedbox .eyebrow{margin-bottom:12px;display:block}
+.bedbox p{font-family:var(--serif);font-size:1.15rem;color:var(--head);line-height:1.7}
 @media(max-width:860px){.room{grid-template-columns:1fr;gap:30px}.room__info{position:static}}
 
 /* includes */
@@ -441,53 +442,6 @@ p{color:var(--text)}
   .m-label{padding:14px 0 2px}
 }
 
-.xp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.4vw,18px)}
-.xp{position:relative;display:block;overflow:hidden;text-decoration:none;cursor:pointer;min-height:clamp(360px,29vw,450px)}
-.xp__media{position:absolute;inset:0;overflow:hidden}
-.xp__media img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
-.xp:hover .xp__media img{transform:scale(1.06)}
-.xp__media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,30,35,0) 40%,rgba(20,30,35,.74))}
-.xp__body{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:28px 28px 26px;color:#fff}
-.xp__name{font-family:var(--serif);font-size:clamp(1.6rem,2.3vw,2rem);font-weight:500;color:#fff;letter-spacing:.02em;line-height:1}
-.xp__line{font-family:var(--sans);font-size:.9rem;color:rgba(255,255,255,.86);margin-top:7px;max-width:34ch}
-.xp__go{margin-top:15px;display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#fff}
-.xp__go svg{transition:transform .45s var(--ease)}
-.xp:hover .xp__go svg{transform:translateX(5px)}
-@media(max-width:1000px){.xp-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.xp-grid{grid-template-columns:1fr}}
-
-.rgal{padding:clamp(8px,1.6vw,24px) 0 clamp(54px,7vw,88px)}
-.rgal__head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;max-width:var(--maxw);margin:0 auto;padding:0 var(--gut) clamp(22px,3vw,32px)}
-.rgal__ey{display:flex;align-items:center;gap:12px;color:var(--slate);margin-bottom:10px}
-.rgal__ey .ln{width:34px;height:1px;background:#c9bca4}
-.rgal__ey .lbl{font-size:.7rem;letter-spacing:.26em;text-transform:uppercase}
-.rgal__head h2{font-family:var(--serif);font-weight:500;color:var(--head);font-size:clamp(2rem,3.4vw,2.8rem);line-height:1}
-.rgal__nav{display:flex;gap:10px;flex:0 0 auto}
-.rgal__btn{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--slate);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease)}
-.rgal__btn:hover{background:var(--slate);color:var(--cream-soft);border-color:var(--slate)}
-.rgal__rail{display:flex;gap:18px;overflow-x:auto;padding:4px var(--gut) 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch;cursor:grab}
-.rgal__rail::-webkit-scrollbar{display:none}
-.rgal__slide{flex:0 0 auto;width:clamp(260px,30vw,430px);scroll-snap-align:start;margin:0;cursor:pointer;overflow:hidden;aspect-ratio:3/2;background:var(--paper-2)}
-.rgal__slide img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s var(--ease)}
-.rgal__slide:hover img{transform:scale(1.05)}
-@media(max-width:680px){.rgal__slide{width:78vw}}
-
-.alt__cta{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--slate);text-decoration:none;border-bottom:1.5px solid var(--slate);padding-bottom:5px;transition:opacity .3s var(--ease)}
-.alt__cta:hover{opacity:.6}
-.rgal__link{align-self:flex-end;font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);text-decoration:none;border-bottom:1.5px solid var(--slate);padding-bottom:4px;white-space:nowrap}
-.rgal__link:hover{opacity:.6}
-
-.ratings{background:var(--paper);padding:clamp(28px,3.6vw,44px) var(--gut);border-top:1px solid var(--line)}
-.ratings__in{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:center;gap:clamp(26px,5vw,60px);flex-wrap:wrap}
-.rt{display:flex;align-items:center;gap:13px}
-.rt__logo{height:32px;width:auto;display:block}
-.rt__name{font-family:var(--sans);font-weight:700;font-size:1.02rem;letter-spacing:.005em;color:#00AA6C}
-.rt__col{display:flex;flex-direction:column;line-height:1.05}
-.rt__score{font-family:var(--serif);font-size:1.45rem;font-weight:600;color:var(--head)}
-.rt__score small{font-family:var(--sans);font-size:.78rem;color:var(--muted);font-weight:600;margin-left:3px}
-.rt__lbl{font-family:var(--sans);font-size:.7rem;letter-spacing:.04em;color:var(--muted);margin-top:3px}
-.rt__div{width:1px;height:40px;background:var(--line)}
-@media(max-width:520px){.rt__div{display:none}}
-
 .howto{display:flex;flex-direction:column;gap:9px;margin-top:8px}
 .howto__t{font-family:var(--sans);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cream-mut);margin-bottom:3px}
 .howto a{display:inline-flex;align-items:center;gap:9px;color:var(--cream-soft);font-size:.95rem;width:max-content;transition:color .3s var(--ease)}
@@ -526,36 +480,9 @@ p{color:var(--text)}
 @media(prefers-reduced-motion:reduce){.wa-fab{animation:none}}
 @media(max-width:480px){.wa-fab__txt{display:none}.wa-fab{padding:15px}}
 
-.reels{padding:clamp(54px,7vw,92px) 0;background:var(--paper)}
-.reels__head{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut) clamp(22px,3vw,32px);text-align:center}
-.reels__ey{font-family:var(--sans);font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--slate);display:block;margin-bottom:10px}
-.reels__head h2{font-family:var(--serif);font-weight:500;color:var(--head);font-size:clamp(2rem,3.6vw,2.9rem);line-height:1}
-.reels__rail{display:flex;gap:16px;overflow-x:auto;padding:4px var(--gut) 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.reels__rail::-webkit-scrollbar{display:none}
-.reel{flex:0 0 auto;width:clamp(216px,22vw,268px);aspect-ratio:9/16;position:relative;overflow:hidden;background:var(--paper-2);cursor:pointer}
-.reel video,.reel__poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.reel__poster{z-index:1}
-.reel video{z-index:2;opacity:0;transition:opacity .55s var(--ease)}
-.reel.playing video{opacity:1}
-.reel::after{content:"";position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,rgba(20,30,35,0) 62%,rgba(20,30,35,.42));pointer-events:none}
-.reel__play{position:absolute;z-index:4;left:50%;top:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.65);display:flex;align-items:center;justify-content:center;color:#fff;transition:opacity .4s var(--ease)}
-.reel.playing .reel__play{opacity:0}
-.vlb{position:fixed;inset:0;z-index:300;background:rgba(16,24,28,.93);display:none;align-items:center;justify-content:center;padding:20px}
-.vlb.open{display:flex}
-.vlb video{width:auto;max-width:min(94vw,420px);max-height:90vh;aspect-ratio:9/16;background:#000;display:block}
-.vlb__x{position:absolute;top:18px;right:20px;background:none;border:0;color:#fff;font-family:var(--sans);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
-
-.hero__slides{position:absolute;inset:0;background:#1a2a30}
-.hero__slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease;will-change:opacity}
-.hero__slide.is-active{opacity:1}
-.hero__slide img{width:100%;height:100%;object-fit:cover;animation:kbz 9s linear infinite alternate;will-change:transform}
-@keyframes kbz{from{transform:scale(1.06)}to{transform:scale(1.30)}}
-@media(prefers-reduced-motion:reduce){.hero__slide img{animation:none;transform:scale(1)}}
-
 .langsw{display:inline-flex;align-items:center;gap:1px;margin-right:16px;vertical-align:middle}
 .langsw button{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.08em;color:var(--muted);background:none;border:0;cursor:pointer;padding:6px 7px;transition:color .2s var(--ease)}
-.langsw button:hover{color:var(--head)}
-.langsw button.is-on{color:var(--head)}
+.langsw button:hover,.langsw button.is-on{color:var(--head)}
 .langsw__sep{color:var(--line);font-size:.72rem}
 @media(max-width:980px){.langsw{display:none}}
 .langsw-m{display:none}
@@ -574,14 +501,14 @@ p{color:var(--text)}
   </a>
   <div class="nav__links">
     <div class="navx" data-navx>
-      <a href="#" class="navx__trigger" aria-haspopup="true" aria-expanded="false">Alojamiento<svg class="navx__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+      <a href="#" class="navx__trigger active" aria-haspopup="true" aria-expanded="false">Alojamiento<svg class="navx__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
       <div class="navx__panel navx__panel--mega" role="menu">
         <a href="hotel.html" class="navx__card" role="menuitem">
           <img class="navx__card-thumb" src="assets/a-0d48ff388fba.jpg" alt="Habitación de hotel con vista al mar" loading="lazy" decoding="async"><span class="navx__card-name">Hotel</span>
           <span class="navx__card-desc">Frente al océano, servicio completo</span>
           <span class="navx__card-price">desde $120.000 / noche</span>
         </a>
-        <a href="cabanas.html" class="navx__card" role="menuitem">
+        <a href="cabanas.html" class="navx__card" role="menuitem" aria-current="page">
           <img class="navx__card-thumb" src="assets/a-4797037977da.jpg" alt="Cabaña moderna frente al océano" loading="lazy" decoding="async"><span class="navx__card-name">Cabañas</span>
           <span class="navx__card-desc">Entre el bosque, en familia</span>
           <span class="navx__card-price">desde $95.000 / noche</span>
@@ -592,7 +519,7 @@ p{color:var(--text)}
           <span class="navx__card-price">desde $140.000 / noche</span>
         </a>
         <a href="camping.html" class="navx__card" role="menuitem">
-          <img class="navx__card-thumb" src="assets/a-b82caf97021b.jpg" alt="Zona de camping entre el bosque" loading="lazy" decoding="async"><span class="navx__card-name">Camping</span>
+          <img class="navx__card-thumb" src="assets/camp-1.jpg" alt="Zona de camping entre el bosque" loading="lazy" decoding="async"><span class="navx__card-name">Camping</span>
           <span class="navx__card-desc">A pasos del mar, al aire libre</span>
           <span class="navx__card-price">desde $25.000 / noche</span>
         </a>
@@ -608,7 +535,7 @@ p{color:var(--text)}
       </div>
     </div>
     <a href="#como-llegar">Cómo llegar</a>
-    <a href="#contacto">Contacto</a>
+    <a href="inicio.html#contacto">Contacto</a>
   </div>
   <div class="langsw" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><span class="langsw__sep">/</span><button type="button" data-lang="en">EN</button></div>
   <a href="#contacto" class="nav__cta">Reservar</a>
@@ -624,7 +551,7 @@ p{color:var(--text)}
     <a href="inicio.html">Inicio</a>
     <span class="m-label">Alojamiento</span>
     <a href="hotel.html" class="m-sub">Hotel</a>
-    <a href="cabanas.html" class="m-sub">Cabañas</a>
+    <a href="cabanas.html" class="m-sub active">Cabañas</a>
     <a href="domos.html" class="m-sub">Domos</a>
     <a href="camping.html" class="m-sub">Camping</a>
     <a href="restaurant.html">Restaurant</a>
@@ -633,7 +560,7 @@ p{color:var(--text)}
     <a href="spa.html" class="m-sub">Spa OMZ</a>
     <a href="eventos.html" class="m-sub">Eventos</a>
     <a href="#como-llegar">Cómo llegar</a>
-    <a href="#contacto">Contacto</a>
+    <a href="inicio.html#contacto">Contacto</a>
   </nav>
   <div class="nav__mobile-foot"><div class="langsw-m" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
     <a href="#contacto" class="nav__mobile-cta">Reservar</a>
@@ -641,261 +568,126 @@ p{color:var(--text)}
   </div>
 </div>
 
-<!-- HERO -->
-<header class="hero">
-  <div class="hero__slides">
-     <div class="hero__slide is-active"><img src="assets/hero-0.webp" alt="Windsurfista sobre una gran ola en Matanzas" decoding="async" loading="eager" fetchpriority="high"></div>
-     <div class="hero__slide"><img src="assets/hero-2.webp" alt="Cabaña de OMZ entre flores frente al mar" decoding="async" loading="lazy"></div>
-     <div class="hero__slide"><img src="assets/hero-3.webp" alt="Interior de cabaña con vista al océano" decoding="async" loading="lazy"></div>
-     <div class="hero__slide"><img src="assets/hero-4.webp" alt="Habitación del hotel OMZ" decoding="async" loading="lazy"></div>
-     <div class="hero__slide"><img src="assets/hero-1.webp" alt="Cabalgata por la playa" decoding="async" loading="lazy"></div>
-     <div class="hero__slide"><img src="assets/hero-5.webp" alt="Mountain bike en el bosque de Matanzas" decoding="async" loading="lazy"></div>
-     <div class="hero__slide"><img src="assets/hero-6.webp" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></div>
-   </div>
-   <div class="hero__veil"></div>
-  <div class="hero__in">
-    <span class="hero__eyebrow">Complejo frente al mar</span>
-    <img src="assets/a-0fe6af4c2acd.png" alt="Olas de Matanzas" class="hero__logo" decoding="async" loading="lazy">
-    <div class="hero__flank"><span class="ln"></span><i>entre mar y bosque</i><span class="ln"></span></div>
-    <p class="hero__sub">Diseñado para disfrutar la naturaleza y desconectar del ritmo diario, a pasos del océano.</p>
+<!-- PAGE HERO -->
+<header class="phero">
+  <img src="assets/caba-brisas-1.jpg" alt="Cabaña Las Brisas en Olas de Matanzas" decoding="async" loading="lazy">
+  <div class="phero__in">
+    <span class="crumb">Inicio · Cabañas · Las Brisas</span>
+    <h1>Las Brisas</h1>
   </div>
-  <div class="hero__cue">Descubre</div>
 </header>
 
-<!-- STATEMENT -->
-<section class="section" style="padding-bottom:clamp(20px,2.5vw,40px)">
-  <div class="wrap statement">
-    <div class="flank up" style="color:var(--slate);margin-bottom:26px"><span class="ln"></span><span class="lbl">El lugar</span><span class="ln"></span></div>
-    <h2 class="up d1">Un entorno ideal para quienes buscan experiencias auténticas entre <em>mar y bosque</em>.</h2>
-    <p class="up d2">Estamos ubicados en el corazón de Matanzas, con accesos cómodos, vistas abiertas al océano y todo a pasos, sin necesidad de auto. Una pausa real frente al Pacífico.</p>
+<!-- INTRO -->
+<section class="section" style="padding-bottom:clamp(40px,6vw,72px)">
+  <div class="wrap intro2">
+    <div class="flank up" style="color:var(--slate);margin-bottom:22px"><span class="ln"></span><span class="lbl">Cabaña</span><span class="ln"></span></div>
+    <h2 class="up d1">Balcón, hot tub privado, chimenea y terraza con vista al mar.</h2>
+    <p class="up d2">Capacidad para 5 personas · 75 m². Incluye acceso al Bike Park y la cancha de tenis, y un 10% de descuento en el Restaurant Marvento.</p>
   </div>
 </section>
 
-<!-- STAYS -->
-<section class="section" id="estilos" style="padding-top:clamp(32px,4vw,56px)">
+<!-- ROOM -->
+<section class="section" style="padding-top:0">
+  <div class="wrap room">
+    <div class="room__g">
+      <div class="big wipe" style="grid-column:1 / -1"><figure data-lb="assets/caba-brisas-1.jpg" style="aspect-ratio:16/10;height:auto"><img src="assets/caba-brisas-1.jpg" alt="" decoding="async" loading="lazy"></figure></div>
+      <figure class="wipe d1" data-lb="assets/caba-brisas-2.jpg" style="aspect-ratio:4/3"><img src="assets/caba-brisas-2.jpg" alt="" decoding="async" loading="lazy"></figure>
+      <figure class="wipe d2" data-lb="assets/caba-brisas-3.jpg" style="aspect-ratio:4/3"><img src="assets/caba-brisas-3.jpg" alt="" decoding="async" loading="lazy"></figure>
+      <figure class="wipe d1" data-lb="assets/caba-brisas-4.jpg" style="aspect-ratio:4/3"><img src="assets/caba-brisas-4.jpg" alt="" decoding="async" loading="lazy"></figure>
+      <figure class="wipe d2" data-lb="assets/caba-brisas-5.jpg" style="aspect-ratio:4/3"><img src="assets/caba-brisas-5.jpg" alt="" decoding="async" loading="lazy"></figure>
+      <figure class="wipe d1" data-lb="assets/caba-brisas-6.jpg" style="aspect-ratio:4/3"><img src="assets/caba-brisas-6.jpg" alt="" decoding="async" loading="lazy"></figure>
+      <figure class="wipe d2" data-lb="assets/caba-brisas-7.jpg" style="aspect-ratio:4/3"><img src="assets/caba-brisas-7.jpg" alt="" decoding="async" loading="lazy"></figure>
+      <figure class="wipe d1" data-lb="assets/caba-brisas-8.jpg" style="aspect-ratio:4/3"><img src="assets/caba-brisas-8.jpg" alt="" decoding="async" loading="lazy"></figure>
+      <figure class="wipe d2" data-lb="assets/caba-brisas-9.jpg" style="aspect-ratio:4/3"><img src="assets/caba-brisas-9.jpg" alt="" decoding="async" loading="lazy"></figure>
+    </div>
+    <div class="room__info">
+      <span class="eyebrow up">La cabaña</span>
+      <h2 class="up d1" style="margin-top:12px">Las Brisas</h2>
+      <p class="up d2">Balcón, hot tub privado, chimenea y terraza con vista al mar.</p>
+      <div class="room__specs up d2">
+        <div class="spec"><div class="k">Capacidad</div><div class="v">5 <small>personas</small></div></div>
+        <div class="spec"><div class="k">Superficie</div><div class="v">75 <small>m²</small></div></div>
+      </div>
+      <div class="bedbox up d2">
+        <span class="eyebrow">Camas</span>
+        <p>Dormitorio 1 · 1 cama individual + 1 cama doble<br>Dormitorio 2 · 1 cama doble</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RATES -->
+<section class="section" style="padding-top:0">
   <div class="wrap">
-    <div class="stays__head">
-      <div class="flank up" style="color:var(--slate);margin-bottom:18px"><span class="ln"></span><span class="lbl">Alojamiento</span><span class="ln"></span></div>
-      <h2 class="up d1">Elige tu estilo de estadía</h2>
+    <div class="stays__head" style="text-align:center;margin-bottom:clamp(40px,5vw,60px)">
+      <div class="flank up" style="color:var(--slate);margin-bottom:16px"><span class="ln"></span><span class="lbl">Temporadas y tarifas</span><span class="ln"></span></div>
+      <h2 class="up d1" style="font-size:clamp(2rem,4.4vw,3.2rem);font-weight:400">Planifica tu reserva</h2>
     </div>
-    <div class="stays">
-      <a href="hotel.html" class="stay stay--lg wipe">
-        <div class="stay__media"><img src="assets/a-0d48ff388fba.jpg" alt="Habitación de hotel con vista al mar" decoding="async" loading="lazy"></div>
-        <div class="stay__body">
-          <div class="stay__name">Hotel</div>
-          <div class="stay__line">Habitaciones con vista al mar, baño privado y terraza.</div>
-          <span class="stay__go">Ver habitaciones <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
-        </div>
-      </a>
-      <a href="cabanas.html" class="stay stay--sm wipe d1">
-        <div class="stay__media"><img src="assets/a-4797037977da.jpg" alt="Cabaña moderna frente al océano" decoding="async" loading="lazy"></div>
-        <div class="stay__body">
-          <div class="stay__name">Cabañas</div>
-          <div class="stay__line">Rodeadas de naturaleza, con vistas abiertas.</div>
-          <span class="stay__go">Ver más <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
-        </div>
-      </a>
-      <a href="domos.html" class="stay stay--half wipe">
-        <div class="stay__media"><img src="assets/a-dcabbb4bb3f0.jpg" alt="Interior de domo en el bosque" decoding="async" loading="lazy"></div>
-        <div class="stay__body">
-          <div class="stay__name">Domos</div>
-          <div class="stay__line">En el bosque, para una noche distinta.</div>
-          <span class="stay__go">Ver domos <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
-        </div>
-      </a>
-      <a href="camping.html" class="stay stay--half wipe d1">
-        <div class="stay__media"><img src="assets/a-b82caf97021b.jpg" alt="Zona de camping entre el bosque" decoding="async" loading="lazy"></div>
-        <div class="stay__body">
-          <div class="stay__name">Camping</div>
-          <div class="stay__line">Con baño privado, a pasos de la playa.</div>
-          <span class="stay__go">Ver más <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
-        </div>
-      </a>
+    <div class="rates up d1">
+      <div class="seasons">
+        <span class="eyebrow">Temporadas y condiciones</span>
+        <div class="season"><span class="sn">Temporada Alta</span><span class="sw">Septiembre – Abril</span></div>
+        <div class="season"><span class="sn">Temporada Baja</span><span class="sw">Mayo – Agosto</span></div>
+        <p class="rnote">Los fines de semana largos se consideran temporada alta. Reserva mínima: fin de semana completo o semana completa de vacaciones.</p>
+      </div>
+      <div class="tariffs">
+        <span class="eyebrow">Valor por noche</span>
+        <div class="prow"><span class="pl">Temporada Alta</span><span class="pv">$227.000 <small>/ noche</small></span></div>
+        <div class="prow"><span class="pl">Temporada Baja</span><span class="pv">$190.000 <small>/ noche</small></span></div>
+        <a href="#contacto" class="btn" style="margin-top:26px;width:100%;justify-content:center;background:var(--cream-soft);color:var(--slate)">Reservar Las Brisas <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h13M10 1l4 4-4 4"/></svg></a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- RESTAURANT -->
-<section class="alt" id="restaurant">
-  <div class="alt__media wipe" data-parallax><img src="assets/a-d609497bd5ba.jpg" alt="Plato de mariscos con vista al mar en Restaurant Marvento" decoding="async" loading="lazy"></div>
-  <div class="alt__body">
-    <span class="eyebrow up">Restaurant Marvento</span>
-    <h2 class="up d1">Cocina<br>frente al mar.</h2>
-    <p class="up d2">Productos del mar y de la zona, servidos con vista directa al Pacífico. Pescados, mariscos y preparaciones de temporada. Los huéspedes del hotel disfrutan de un 10% de descuento.</p>
-  </div>
-</section>
-
-<!-- RESTAURANT — GALERIA -->
-<section class="rgal" id="carta">
-  <div class="rgal__head">
-    <div>
-      <div class="rgal__ey up"><span class="ln"></span><span class="lbl">La carta</span></div>
-      <h2 class="up d1">Sabores de Matanzas</h2>
-    </div>
-    <a href="carta.html" class="rgal__link up d1">Ver carta completa →</a>
-  </div>
-  <div class="rgal__rail" id="rgalRail">
-    <figure class="rgal__slide" data-lb="assets/rest-01.jpg"><img src="assets/rest-01.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
-    <figure class="rgal__slide" data-lb="assets/rest-02.jpg"><img src="assets/rest-02.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
-    <figure class="rgal__slide" data-lb="assets/rest-03.jpg"><img src="assets/rest-03.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
-    <figure class="rgal__slide" data-lb="assets/rest-04.jpg"><img src="assets/rest-04.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
-    <figure class="rgal__slide" data-lb="assets/rest-05.jpg"><img src="assets/rest-05.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
-    <figure class="rgal__slide" data-lb="assets/rest-06.jpg"><img src="assets/rest-06.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
-    <figure class="rgal__slide" data-lb="assets/rest-07.jpg"><img src="assets/rest-07.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
-    <figure class="rgal__slide" data-lb="assets/rest-08.jpg"><img src="assets/rest-08.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
-    <figure class="rgal__slide" data-lb="assets/rest-09.jpg"><img src="assets/rest-09.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
-    <figure class="rgal__slide" data-lb="assets/rest-10.jpg"><img src="assets/rest-10.jpg" alt="Plato del Restaurant Marvento" decoding="async" loading="lazy"></figure>
-  </div>
-</section>
-
-<!-- EXPERIENCIAS Y SERVICIOS -->
-<section class="section" id="experiencias">
+<!-- AMENITIES -->
+<section class="section" style="padding-top:0">
   <div class="wrap">
-    <div class="stays__head">
-      <div class="flank up" style="color:var(--slate);margin-bottom:18px"><span class="ln"></span><span class="lbl">Experiencias y servicios</span><span class="ln"></span></div>
-      <h2 class="up d1">Todo a pasos, sin salir del complejo</h2>
+    <div style="text-align:center;margin-bottom:clamp(34px,4vw,48px)">
+      <span class="eyebrow up">Servicios</span>
+      <h2 class="up d1" style="font-size:clamp(1.8rem,3.6vw,2.6rem);font-weight:400;margin-top:12px">Equipamiento de la cabaña</h2>
     </div>
-    <div class="xp-grid">
-      <a id="actividades" href="actividades.html" class="xp wipe d1">
-        <div class="xp__media"><img src="assets/actividades.jpg" alt="Ciclista de montaña en el bosque de pinos" decoding="async" loading="lazy"></div>
-        <div class="xp__body">
-          <div class="xp__name">Actividades</div>
-          <div class="xp__line">Bici, trekking, surf y deportes de viento entre mar y bosque.</div>
-          <span class="xp__go">Ver <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
-        </div>
-      </a>
-      <a id="spa" href="spa.html" class="xp wipe d2">
-        <div class="xp__media"><img src="assets/spa.jpg" alt="Rincón de descanso del Spa OMZ" decoding="async" loading="lazy"></div>
-        <div class="xp__body">
-          <div class="xp__name">Spa OMZ</div>
-          <div class="xp__line">Tinajas de agua caliente al aire libre, masajes y descanso.</div>
-          <span class="xp__go">Ver <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
-        </div>
-      </a>
-      <a id="eventos" href="eventos.html" class="xp wipe d3">
-        <div class="xp__media"><img src="assets/eventos.jpg" alt="Pareja celebrando su matrimonio frente al mar" decoding="async" loading="lazy"></div>
-        <div class="xp__body">
-          <div class="xp__name">Eventos</div>
-          <div class="xp__line">Matrimonios y celebraciones frente al Pacífico.</div>
-          <span class="xp__go">Ver <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
-        </div>
-      </a>
-    </div>
+    <ul class="amen up d1">
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Hot Tub</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Chimenea</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Vistas al mar</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Terraza</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Balcón</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Cocina</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Microondas</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Utensilios de cocina</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Parrilla</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Refrigerador</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Baño privado</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Bañera</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Bañera o ducha</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Calefacción</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Futón</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Sofá</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Armario</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Veladores</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Ropa de cama</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Toallas</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Artículos de aseo gratis</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Enchufes cerca de la cama</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Parlante Bluetooth</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Muebles de exterior</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Suelo de madera o parquet</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Entrada privada</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Zona de comedor</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Zona de comedor exterior</span></li>
+      <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>Zona de estar</span></li>
+    </ul>
   </div>
 </section>
 
-<!-- VIVE OMZ (reels) -->
-<section class="reels" id="vive">
-  <div class="reels__head">
-    <span class="reels__ey up">Vive OMZ</span>
-    <h2 class="up d1">El lugar, en movimiento</h2>
-  </div>
-  <div class="reels__rail">
-    <div class="reel" data-reel="assets/reel-01.mp4">
-      <img class="reel__poster" src="assets/reel-01.jpg" alt="Olas de Matanzas en video" loading="lazy" decoding="async">
-      <video src="assets/reel-01.mp4" muted loop playsinline preload="none"></video>
-      <span class="reel__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-    </div>
-    <div class="reel" data-reel="assets/reel-02.mp4">
-      <img class="reel__poster" src="assets/reel-02.jpg" alt="Olas de Matanzas en video" loading="lazy" decoding="async">
-      <video src="assets/reel-02.mp4" muted loop playsinline preload="none"></video>
-      <span class="reel__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-    </div>
-    <div class="reel" data-reel="assets/reel-03.mp4">
-      <img class="reel__poster" src="assets/reel-03.jpg" alt="Olas de Matanzas en video" loading="lazy" decoding="async">
-      <video src="assets/reel-03.mp4" muted loop playsinline preload="none"></video>
-      <span class="reel__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-    </div>
-    <div class="reel" data-reel="assets/reel-04.mp4">
-      <img class="reel__poster" src="assets/reel-04.jpg" alt="Olas de Matanzas en video" loading="lazy" decoding="async">
-      <video src="assets/reel-04.mp4" muted loop playsinline preload="none"></video>
-      <span class="reel__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-    </div>
-    <div class="reel" data-reel="assets/reel-05.mp4">
-      <img class="reel__poster" src="assets/reel-05.jpg" alt="Olas de Matanzas en video" loading="lazy" decoding="async">
-      <video src="assets/reel-05.mp4" muted loop playsinline preload="none"></video>
-      <span class="reel__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-    </div>
-    <div class="reel" data-reel="assets/reel-06.mp4">
-      <img class="reel__poster" src="assets/reel-06.jpg" alt="Olas de Matanzas en video" loading="lazy" decoding="async">
-      <video src="assets/reel-06.mp4" muted loop playsinline preload="none"></video>
-      <span class="reel__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-    </div>
-    <div class="reel" data-reel="assets/reel-07.mp4">
-      <img class="reel__poster" src="assets/reel-07.jpg" alt="Olas de Matanzas en video" loading="lazy" decoding="async">
-      <video src="assets/reel-07.mp4" muted loop playsinline preload="none"></video>
-      <span class="reel__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-    </div>
-    <div class="reel" data-reel="assets/reel-08.mp4">
-      <img class="reel__poster" src="assets/reel-08.jpg" alt="Olas de Matanzas en video" loading="lazy" decoding="async">
-      <video src="assets/reel-08.mp4" muted loop playsinline preload="none"></video>
-      <span class="reel__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-    </div>
-  </div>
-</section>
-
-<!-- TICKER -->
-<div class="ticker" aria-hidden="true">
-  <div class="ticker__track">
-    <span class="ticker__item">Windsurf</span><span class="ticker__item">Kitesurf</span><span class="ticker__item">Wingfoil</span><span class="ticker__item">Surf</span>
-    <span class="ticker__item">Windsurf</span><span class="ticker__item">Kitesurf</span><span class="ticker__item">Wingfoil</span><span class="ticker__item">Surf</span>
-  </div>
-</div>
-
-<!-- ALT 1 — frente al mar -->
-<section class="alt">
-  <div class="alt__media wipe" data-parallax><img src="assets/a-26041856ab5c.jpg" alt="Terraza con reposeras y vista al mar" decoding="async" loading="lazy"></div>
-  <div class="alt__body">
-    <span class="eyebrow up">Frente al océano</span>
-    <h2 class="up d1">Mar abierto,<br>calma de bosque.</h2>
-    <p class="up d2">Un complejo pensado para que cada visita se sienta distinta: aire de mar, sombra de bosque y la libertad de moverse caminando. Vistas abiertas al Pacífico desde cada rincón.</p>
-  </div>
-</section>
-
-<!-- ALT 2 — viento y olas -->
-<section class="alt alt--rev">
-  <div class="alt__media wipe" data-parallax><img src="assets/a-1534a13b1884.jpg" alt="Surfista en el mar de Matanzas" decoding="async" loading="lazy"></div>
-  <div class="alt__body">
-    <span class="eyebrow up">Condiciones naturales</span>
-    <h2 class="up d1">Viento y olas,<br>todo el año.</h2>
-    <p class="up d2">Matanzas es reconocido a nivel mundial por sus condiciones para los deportes de viento y mar.</p>
-    <div class="alt__list">
-      <div class="up d2"><span>01</span>Windsurf</div>
-      <div class="up d2"><span>02</span>Kitesurf</div>
-      <div class="up d3"><span>03</span>Wingfoil</div>
-      <div class="up d3"><span>04</span>Surf</div>
-    </div>
-  </div>
-</section>
-
-
-<!-- TESTIMONIOS -->
-<section class="section testi">
+<!-- CTA -->
+<section class="section cta2">
   <div class="wrap">
-    <div class="testi__head">
-      <span class="eyebrow up">Experiencias</span>
-      <h2 class="up d1">Lo que dicen quienes vuelven</h2>
-    </div>
-    <div class="testi__grid">
-      <figure class="quote up d1">
-        <span class="quote__mk">”</span>
-        <blockquote class="quote__t">Combinación de mar, bosque, tranquilidad, buena comida y noches silenciosas. Habitación amplia, limpia y bien equipada.</blockquote>
-        <span class="rule"></span>
-        <figcaption class="quote__by"><div class="quote__n">Tito Ramírez</div><div class="quote__c">Buenos Aires, Argentina</div></figcaption>
-      </figure>
-      <figure class="quote up d2">
-        <span class="quote__mk">”</span>
-        <blockquote class="quote__t">Más que un lugar para dormir es una experiencia inolvidable, desde que llegas hasta el check out.</blockquote>
-        <span class="rule"></span>
-        <figcaption class="quote__by"><div class="quote__n">Mario Ruiz</div><div class="quote__c">Santiago, Chile</div></figcaption>
-      </figure>
-      <figure class="quote up d3">
-        <span class="quote__mk">”</span>
-        <blockquote class="quote__t">Lugar de espléndidas vistas, nos invita al relajo total. Cumple todas las expectativas.</blockquote>
-        <span class="rule"></span>
-        <figcaption class="quote__by"><div class="quote__n">Marta Arriaza</div><div class="quote__c">Viña del Mar, Chile</div></figcaption>
-      </figure>
-    </div>
+    <div class="flank up" style="color:var(--slate);margin-bottom:20px"><span class="ln"></span><span class="lbl">Reserva</span><span class="ln"></span></div>
+    <h2 class="up d1">Tu pausa frente al mar.</h2>
+    <p class="up d2">Reserva la cabaña Las Brisas y disfruta del bosque y el océano con todas las comodidades. Te ayudamos a coordinar tu estadía.</p>
+    <a href="#contacto" class="btn up d2">Reservar ahora <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h13M10 1l4 4-4 4"/></svg></a>
   </div>
 </section>
 
@@ -965,6 +757,7 @@ p{color:var(--text)}
 
 <div class="lb"><button class="lb__x">Cerrar ✕</button><img src="" alt="Imagen ampliada" decoding="async" loading="lazy"></div>
 <div class="toast"><span class="d"></span><span class="t-msg"></span></div>
+
 <script>
 /* OLAS DE MATANZAS — v2 interactions */
 (function () {
@@ -1067,80 +860,16 @@ p{color:var(--text)}
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') groups.forEach(function(g){ g.removeAttribute('data-open'); }); });
 })();
 </script>
-<script>
-(function(){
-  var rail=document.getElementById('rgalRail'); if(!rail) return;
-  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var lb=document.querySelector('.lb'), lbImg=lb?lb.querySelector('img'):null;
-  function openLb(src){ if(!lb||!lbImg)return; lbImg.src=src; lb.classList.add('open'); document.body.style.overflow='hidden'; }
-  var originals=[].slice.call(rail.children);
-  originals.forEach(function(s){
-    var c=s.cloneNode(true); c.setAttribute('aria-hidden','true');
-    c.addEventListener('click',function(){ var d=c.getAttribute('data-lb'); if(d) openLb(d); });
-    rail.appendChild(c);
-  });
-  if(reduce) return;
-  var first=originals[0], firstClone=rail.children[originals.length];
-  function loopW(){ return firstClone.offsetLeft - first.offsetLeft; }
-  var paused=false, resumeT;
-  function tick(){
-    if(!paused){
-      rail.scrollLeft += 0.5;
-      var L=loopW();
-      if(L>0 && rail.scrollLeft>=L) rail.scrollLeft-=L;
-    }
-    requestAnimationFrame(tick);
-  }
-  rail.addEventListener('mouseenter',function(){paused=true;});
-  rail.addEventListener('mouseleave',function(){paused=false;});
-  rail.addEventListener('pointerdown',function(){paused=true; clearTimeout(resumeT);});
-  window.addEventListener('pointerup',function(){ clearTimeout(resumeT); resumeT=setTimeout(function(){paused=false;},700); });
-  requestAnimationFrame(tick);
-})();
-</script>
 <a class="wa-fab" href="https://wa.me/56996434809?text=Hola%2C%20quisiera%20informaci%C3%B3n%20de%20Olas%20de%20Matanzas" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
   <img class="wa-fab__icon" src="assets/whatsapp.webp" alt="" aria-hidden="true">
   <span class="wa-fab__txt" data-wa-rot>Escríbenos</span>
 </a>
 <script>/*wa-rot*/(function(){var el=document.querySelector('[data-wa-rot]');if(!el)return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var i=0,DEF=['Escríbenos','¿Tienes dudas?','Reserva ahora','¿Te ayudamos?'];function M(){return window.__waMsgs||DEF;}setInterval(function(){el.style.opacity=0;setTimeout(function(){var m=M();i=(i+1)%m.length;el.textContent=m[i];el.style.opacity=1;},600);},4200);})();</script>
-<div class="vlb"><button class="vlb__x">Cerrar ✕</button><video controls playsinline></video></div>
-<script>/*reels*/(function(){
-  var cards=[].slice.call(document.querySelectorAll('.reel')); if(!cards.length)return;
-  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if('IntersectionObserver' in window && !reduce){
-    var ratios=new WeakMap();
-    function update(){
-      var best=null,bestR=0.5;
-      cards.forEach(function(c){var r=ratios.get(c)||0;if(r>bestR){bestR=r;best=c;}});
-      cards.forEach(function(c){
-        var v=c.querySelector('video');
-        if(c===best){ v.play().then(function(){c.classList.add('playing')}).catch(function(){}); }
-        else { v.pause(); c.classList.remove('playing'); }
-      });
-    }
-    var io=new IntersectionObserver(function(es){
-      es.forEach(function(en){ ratios.set(en.target, en.isIntersecting?en.intersectionRatio:0); });
-      update();
-    },{threshold:[0,.25,.5,.75,1]});
-    cards.forEach(function(c){io.observe(c)});
-  }
-  var vlb=document.querySelector('.vlb'), vv=vlb?vlb.querySelector('video'):null;
-  function openV(src){ if(!vlb)return; vv.src=src; vlb.classList.add('open'); vv.currentTime=0; vv.play().catch(function(){}); document.body.style.overflow='hidden'; }
-  function closeV(){ if(!vlb)return; vv.pause(); vlb.classList.remove('open'); document.body.style.overflow=''; }
-  cards.forEach(function(c){ c.addEventListener('click',function(){ openV(c.getAttribute('data-reel')); }); });
-  if(vlb){ vlb.addEventListener('click',function(e){ if(e.target===vlb||e.target.closest('.vlb__x')) closeV(); });
-    document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeV(); }); }
-})();</script>
-<script>/*hero-slider*/(function(){
-  var s=[].slice.call(document.querySelectorAll('.hero__slide'));if(s.length<2)return;
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  var i=0;setInterval(function(){s[i].classList.remove('is-active');i=(i+1)%s.length;s[i].classList.add('is-active');},6000);
-})();</script>
 <script>/*i18n*/(function(){
-var T={"Alojamiento": "Accommodation", "Frente al océano, servicio completo": "Oceanfront, full service", "desde $120.000 / noche": "from $120,000 / night", "Cabañas": "Cabins", "Entre el bosque, en familia": "In the forest, for families", "desde $95.000 / noche": "from $95,000 / night", "Domos": "Domes", "Bajo las estrellas, glamping": "Under the stars, glamping", "desde $140.000 / noche": "from $140,000 / night", "A pasos del mar, al aire libre": "Steps from the sea, outdoors", "desde $25.000 / noche": "from $25,000 / night", "Experiencias": "Experiences", "Actividades": "Activities", "Eventos": "Events", "Tenis": "Tennis", "Cómo llegar": "Getting here", "Contacto": "Contact", "Reservar": "Book now", "Inicio": "Home", "Complejo frente al mar": "Oceanfront retreat", "entre mar y bosque": "between sea and forest", "Diseñado para disfrutar la naturaleza y desconectar del ritmo diario, a pasos del océano.": "Designed to enjoy nature and disconnect from the daily pace, steps from the ocean.", "Descubre": "Discover", "El lugar": "The place", "Un entorno ideal para quienes buscan experiencias auténticas entre": "An ideal setting for those seeking authentic experiences between", "mar y bosque": "sea and forest", "Estamos ubicados en el corazón de Matanzas, con accesos cómodos, vistas abiertas al océano y todo a pasos, sin necesidad de auto. Una pausa real frente al Pacífico.": "We're in the heart of Matanzas, with easy access, open ocean views and everything within walking distance — no car needed. A true pause facing the Pacific.", "Elige tu estilo de estadía": "Choose your style of stay", "Habitaciones con vista al mar, baño privado y terraza.": "Rooms with sea view, private bathroom and terrace.", "Ver habitaciones": "View rooms", "Rodeadas de naturaleza, con vistas abiertas.": "Surrounded by nature, with open views.", "Ver más": "View more", "En el bosque, para una noche distinta.": "In the forest, for a different kind of night.", "Ver domos": "View domes", "Con baño privado, a pasos de la playa.": "With private bathroom, steps from the beach.", "Cocina": "Cuisine", "frente al mar.": "by the sea.", "Productos del mar y de la zona, servidos con vista directa al Pacífico. Pescados, mariscos y preparaciones de temporada. Los huéspedes del hotel disfrutan de un 10% de descuento.": "Seafood and local produce, served with direct Pacific views. Fish, shellfish and seasonal dishes. Hotel guests enjoy a 10% discount.", "La carta": "The menu", "Sabores de Matanzas": "Flavors of Matanzas", "Ver carta completa →": "View full menu →", "Experiencias y servicios": "Experiences & services", "Todo a pasos, sin salir del complejo": "Everything within reach, without leaving the resort", "Bici, trekking, surf y deportes de viento entre mar y bosque.": "Biking, trekking, surfing and wind sports between sea and forest.", "Ver": "View", "Tinajas de agua caliente al aire libre, masajes y descanso.": "Outdoor hot tubs, massages and relaxation.", "Matrimonios y celebraciones frente al Pacífico.": "Weddings and celebrations facing the Pacific.", "Cancha de tenis para jugar al aire libre, entre mar y bosque.": "Tennis court to play outdoors, between sea and forest.", "Vive OMZ": "Experience OMZ", "El lugar, en movimiento": "The place, in motion", "Frente al océano": "Oceanfront", "Mar abierto,": "Open sea,", "calma de bosque.": "forest calm.", "Un complejo pensado para que cada visita se sienta distinta: aire de mar, sombra de bosque y la libertad de moverse caminando. Vistas abiertas al Pacífico desde cada rincón.": "A resort designed so every visit feels different: sea air, forest shade and the freedom to get around on foot. Open Pacific views from every corner.", "Condiciones naturales": "Natural conditions", "Viento y olas,": "Wind and waves,", "todo el año.": "all year round.", "Matanzas es reconocido a nivel mundial por sus condiciones para los deportes de viento y mar.": "Matanzas is world-renowned for its conditions for wind and water sports.", "Lo que dicen quienes vuelven": "What returning guests say", "Combinación de mar, bosque, tranquilidad, buena comida y noches silenciosas. Habitación amplia, limpia y bien equipada.": "A blend of sea, forest, calm, good food and quiet nights. A spacious, clean and well-equipped room.", "Más que un lugar para dormir es una experiencia inolvidable, desde que llegas hasta el check out.": "More than a place to sleep, it's an unforgettable experience, from arrival to check-out.", "Lugar de espléndidas vistas, nos invita al relajo total. Cumple todas las expectativas.": "A place with splendid views that invites total relaxation. It meets every expectation.", "A pasos del mar,": "Steps from the sea,", "fácil de encontrar.": "easy to find.", "Fundo San Luis, Lagunillas s/n, Matanzas. A unas 2 horas de Santiago por la ruta de la costa. Abre la ruta en tu app favorita:": "Fundo San Luis, Lagunillas s/n, Matanzas. About 2 hours from Santiago via the coastal route. Open the route in your favorite app:", "Abrir en Google Maps": "Open in Google Maps", "Abrir en Waze": "Open in Waze", "Abrir en Apple Maps": "Open in Apple Maps", "Mar, bosque y calma frente al océano. Una pausa real en el corazón de Matanzas.": "Sea, forest and calm facing the ocean. A true pause in the heart of Matanzas.", "Fantástico": "Fantastic", "Ubicación": "Location", "Cómo llegar →": "Getting here →", "Síguenos": "Follow us", "© 2026 Olas de Matanzas. Todos los derechos reservados.": "© 2026 Olas de Matanzas. All rights reserved.", "Hotel · Cabañas · Domos · Camping": "Hotel · Cabins · Domes · Camping", "Cerrar ✕": "Close ✕", "Escríbenos": "Write to us"};
+var T={"Alojamiento": "Accommodation", "Frente al océano, servicio completo": "Oceanfront, full service", "desde $120.000 / noche": "from $120,000 / night", "Cabañas": "Cabins", "Entre el bosque, en familia": "In the forest, for families", "desde $95.000 / noche": "from $95,000 / night", "Domos": "Domes", "Bajo las estrellas, glamping": "Under the stars, glamping", "desde $140.000 / noche": "from $140,000 / night", "A pasos del mar, al aire libre": "Steps from the sea, outdoors", "desde $25.000 / noche": "from $25,000 / night", "Experiencias": "Experiences", "Actividades": "Activities", "Eventos": "Events", "Cómo llegar": "Getting here", "Contacto": "Contact", "Reservar": "Book now", "Inicio": "Home", "Hotel": "Hotel", "Camping": "Camping", "Restaurant": "Restaurant", "Spa OMZ": "Spa OMZ", "A pasos del mar,": "Steps from the sea,", "fácil de encontrar.": "easy to find.", "Fundo San Luis, Lagunillas s/n, Matanzas. A unas 2 horas de Santiago por la ruta de la costa. Abre la ruta en tu app favorita:": "Fundo San Luis, Lagunillas s/n, Matanzas. About 2 hours from Santiago via the coastal route. Open the route in your favorite app:", "Abrir en Google Maps": "Open in Google Maps", "Abrir en Waze": "Open in Waze", "Abrir en Apple Maps": "Open in Apple Maps", "Mar, bosque y calma frente al océano. Una pausa real en el corazón de Matanzas.": "Sea, forest and calm facing the ocean. A true pause in the heart of Matanzas.", "Fantástico": "Fantastic", "Ubicación": "Location", "Cómo llegar →": "Getting here →", "Síguenos": "Follow us", "© 2026 Olas de Matanzas. Todos los derechos reservados.": "© 2026 Olas de Matanzas. All rights reserved.", "Hotel · Cabañas · Domos · Camping": "Hotel · Cabins · Domes · Camping", "Cerrar ✕": "Close ✕", "Escríbenos": "Write to us", "Inicio · Cabañas · Las Brisas": "Home · Cabins · Las Brisas", "Cabaña": "Cabin", "Balcón, hot tub privado, chimenea y terraza con vista al mar.": "Balcony, private hot tub, fireplace and a sea-view terrace.", "Capacidad para 5 personas · 75 m². Incluye acceso al Bike Park y la cancha de tenis, y un 10% de descuento en el Restaurant Marvento.": "Sleeps 5 · 75 m². Includes access to the Bike Park and tennis court, and 10% off at Restaurant Marvento.", "La cabaña": "The cabin", "Capacidad": "Capacity", "personas": "guests", "Superficie": "Area", "Camas": "Beds", "Dormitorio 1 · 1 cama individual + 1 cama doble": "Bedroom 1 · 1 single + 1 double bed", "Dormitorio 2 · 1 cama doble": "Bedroom 2 · 1 double bed", "Dormitorio 1 · 1 cama individual + 1 cama doble<br>Dormitorio 2 · 1 cama doble": "Bedroom 1 · 1 single + 1 double bed<br>Bedroom 2 · 1 double bed", "Temporadas y tarifas": "Seasons & rates", "Planifica tu reserva": "Plan your booking", "Temporadas y condiciones": "Seasons & conditions", "Temporada Alta": "High season", "Septiembre – Abril": "September – April", "Temporada Baja": "Low season", "Mayo – Agosto": "May – August", "Los fines de semana largos se consideran temporada alta. Reserva mínima: fin de semana completo o semana completa de vacaciones.": "Long weekends count as high season. Minimum stay: a full weekend or a full holiday week.", "Valor por noche": "Price per night", "/ noche": "/ night", "Reservar Las Brisas": "Book Las Brisas", "Servicios": "Amenities", "Equipamiento de la cabaña": "Cabin amenities", "Hot Tub": "Hot tub", "Chimenea": "Fireplace", "Vistas al mar": "Sea views", "Terraza": "Terrace", "Balcón": "Balcony", "Cocina": "Kitchen", "Microondas": "Microwave", "Utensilios de cocina": "Kitchenware", "Parrilla": "Grill", "Refrigerador": "Refrigerator", "Baño privado": "Private bathroom", "Bañera": "Bathtub", "Bañera o ducha": "Bath or shower", "Calefacción": "Heating", "Futón": "Futon", "Sofá": "Sofa", "Armario": "Wardrobe", "Veladores": "Bedside tables", "Ropa de cama": "Bed linen", "Toallas": "Towels", "Artículos de aseo gratis": "Free toiletries", "Enchufes cerca de la cama": "Outlets near the bed", "Parlante Bluetooth": "Bluetooth speaker", "Muebles de exterior": "Outdoor furniture", "Suelo de madera o parquet": "Wood or parquet floor", "Entrada privada": "Private entrance", "Zona de comedor": "Dining area", "Zona de comedor exterior": "Outdoor dining area", "Zona de estar": "Living area", "Reserva": "Booking", "Tu pausa frente al mar.": "Your pause by the sea.", "Reserva la cabaña Las Brisas y disfruta del bosque y el océano con todas las comodidades. Te ayudamos a coordinar tu estadía.": "Book the Las Brisas cabin and enjoy the forest and the ocean with every comfort. We'll help you coordinate your stay.", "Reservar ahora": "Book now"};
 var A={"Página de Cabañas — disponible próximamente": "Cabins page — coming soon", "Página de Domos — disponible próximamente": "Domes page — coming soon", "Página de Camping — disponible próximamente": "Camping page — coming soon", "Actividades — más información próximamente": "Activities — more info coming soon", "Spa OMZ — más información próximamente": "Spa OMZ — more info coming soon", "Eventos — más información próximamente": "Events — more info coming soon", "Tenis — más información próximamente": "Tennis — more info coming soon"};
 var WA={"es": ["Escríbenos", "¿Tienes dudas?", "Reserva ahora", "¿Te ayudamos?"], "en": ["Write to us", "Questions?", "Book now", "Need help?"]};
-var TITLE={"es": "Olas de Matanzas — Complejo frente al mar · Matanzas, Chile", "en": "Olas de Matanzas — Oceanfront retreat · Matanzas, Chile"};
+var TITLE={"es": "Cabaña Las Brisas — Olas de Matanzas", "en": "Las Brisas Cabin — Olas de Matanzas"};
 var orig=new Map();
 function walk(lang){
   var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentNode;if(!p)return 2;var t=p.nodeName;if(t==='SCRIPT'||t==='STYLE'||t==='NOSCRIPT')return 2;return 1;}}),n;
