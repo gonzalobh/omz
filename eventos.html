@@ -1089,6 +1089,9 @@ setLang(url||saved||(((navigator.language||'es').slice(0,2)==='en')?'en':'es'));
 .rwz-nights{display:none;margin-top:6px;padding:12px 16px;background:var(--cream-soft);border:1px solid var(--line);border-radius:3px;text-align:center;font-family:var(--serif);font-size:1.25rem;color:var(--head)}
 .rwz-nights.show{display:block}
 .rwz-nights b{font-weight:600}
+.rwz-maxhint{display:inline-block;margin:-6px 0 16px;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+.rwz-maxhint.full{color:var(--slate)}
+.rwz-stepper button[disabled]{opacity:.35;cursor:not-allowed}
 .rwz-stepper{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#fff}
 .rwz-stepper button{width:46px;height:46px;border:0;background:#fff;font-size:1.3rem;color:var(--slate);cursor:pointer;line-height:1}
 .rwz-stepper button:hover{background:var(--paper-2)}
@@ -1149,6 +1152,7 @@ setLang(url||saved||(((navigator.language||'es').slice(0,2)==='en')?'en':'es'));
       </div>
       <div class="rwz-step" data-step="3">
         <h2 data-k="q3"></h2><p class="rwz-sub" data-k="s3"></p>
+        <div class="rwz-maxhint" id="rwz-maxhint"></div>
         <div class="rwz-field"><label data-k="adults"></label><div class="rwz-stepper"><button data-pp="ad" data-d="-1">−</button><span id="rwz-ad">2</span><button data-pp="ad" data-d="1">+</button></div></div>
         <div class="rwz-field"><label data-k="kids"></label><div class="rwz-stepper"><button data-pp="ni" data-d="-1">−</button><span id="rwz-ni">0</span><button data-pp="ni" data-d="1">+</button></div></div>
       </div>
@@ -1231,6 +1235,7 @@ setLang(url||saved||(((navigator.language||'es').slice(0,2)==='en')?'en':'es'));
     });
     $('#rwz-meta').textContent='';
     renderMeta();
+    updateMaxHint();
     if(step===2) renderNights();
     if(step===5) buildSummary();
   }
@@ -1240,6 +1245,10 @@ setLang(url||saved||(((navigator.language||'es').slice(0,2)==='en')?'en':'es'));
   function fmt(x){if(!x)return '—';var p=x.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
   function alojLabel(){var d=t();if(st.type==='Cabañas'){var name=st.cab||d.nopref2;return (lang()==='en'?'Cabin ':'Cabaña ')+name;}var map={Hotel:d.t_hotel,Domos:d.t_dom,Camping:d.t_camp};return map[st.type]||st.type;}
   function persons(){var d=t();var s=st.ad+' '+(st.ad===1?d.adult:d.adults_);if(st.ni>0)s+=', '+st.ni+' '+(st.ni===1?d.kid:d.kids_);return s;}
+  function caps(){return {"Los Pájaros":2,"La Luna":2,"Los Lobos":4,"Las Gaviotas":4,"La Sirena":4,"Chagual":4,"Las Brisas":5,"Los Pelícanos":6};}
+  function maxCap(){if(st.type==='Hotel')return 2;if(st.type==='Domos'||st.type==='Camping')return 4;if(st.type==='Cabañas'){return caps()[st.cab]||6;}return 12;}
+  function clampGuests(){var m=maxCap();if(st.ad<1)st.ad=1;if(st.ni<0)st.ni=0;while(st.ad+st.ni>m){if(st.ni>0)st.ni--;else if(st.ad>1)st.ad--;else break;}$('#rwz-ad').textContent=st.ad;$('#rwz-ni').textContent=st.ni;}
+  function updateMaxHint(){var m=maxCap(),el=$('#rwz-maxhint');if(!el)return;el.textContent=(lang()==='en'?('Maximum '+m+' guests'):('Máximo '+m+' personas'));var full=(st.ad+st.ni)>=m;el.classList.toggle('full',full);document.querySelectorAll('#rwz-overlay [data-pp][data-d="1"]').forEach(function(btn){btn.disabled=full;});}
   function show(n){
     step=n;
     document.querySelectorAll('#rwz-overlay .rwz-step').forEach(function(el){el.classList.toggle('active',+el.dataset.step===n)});
@@ -1249,6 +1258,7 @@ setLang(url||saved||(((navigator.language||'es').slice(0,2)==='en')?'en':'es'));
     $('#rwz-next').style.display=n<MAX?'inline-flex':'none';
     $('#rwz-send').style.display=n===MAX?'inline-flex':'none';
     if(n===2)renderNights();
+    if(n===3){clampGuests();updateMaxHint();}
     if(n===5)buildSummary();
     $('#rwz-card')&&$('#rwz-card').scrollTo(0,0);
     validate();
@@ -1296,7 +1306,7 @@ setLang(url||saved||(((navigator.language||'es').slice(0,2)==='en')?'en':'es'));
   $('#rwz-cabsel').addEventListener('change',function(e){st.cab=e.target.value;});
   $('#rwz-din').addEventListener('change',function(e){st.din=e.target.value;$('#rwz-dout').min=st.din;validate();});
   $('#rwz-dout').addEventListener('change',function(e){st.dout=e.target.value;validate();});
-  document.querySelectorAll('#rwz-overlay [data-pp]').forEach(function(b){b.addEventListener('click',function(){var k=b.dataset.pp,dd=+b.dataset.d,min=(k==='ad')?1:0;st[k]=Math.max(min,st[k]+dd);$('#rwz-'+k).textContent=st[k];});});
+  document.querySelectorAll('#rwz-overlay [data-pp]').forEach(function(b){b.addEventListener('click',function(){var k=b.dataset.pp,dd=+b.dataset.d,min=(k==='ad')?1:0;var nv=st[k]+dd;if(nv<min)return;if(dd>0&&(st.ad+st.ni+dd)>maxCap())return;st[k]=nv;$('#rwz-'+k).textContent=st[k];updateMaxHint();});});
   $('#rwz-name').addEventListener('input',function(e){st.name=e.target.value;validate();});
   $('#rwz-contact').addEventListener('input',function(e){st.contact=e.target.value;});
   $('#rwz-notes').addEventListener('input',function(e){st.notes=e.target.value;});
