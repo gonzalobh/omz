@@ -1027,9 +1027,9 @@ setLang(url||saved||(((navigator.language||'es').slice(0,2)==='en')?'en':'es'));
           <label data-k="which"></label>
           <select id="rwz-cabsel">
             <option value="" data-k="nopref"></option>
-            <option>Los Pájaros · 2</option><option>La Luna · 2</option><option>Los Lobos · 4</option>
-            <option>Las Gaviotas · 4</option><option>La Sirena · 4</option><option>Chagual · 4</option>
-            <option>Las Brisas · 5</option><option>Los Pelícanos · 6</option>
+            <option value="Los Pájaros" data-cap="2"></option><option value="La Luna" data-cap="2"></option><option value="Los Lobos" data-cap="4"></option>
+            <option value="Las Gaviotas" data-cap="4"></option><option value="La Sirena" data-cap="4"></option><option value="Chagual" data-cap="4"></option>
+            <option value="Las Brisas" data-cap="5"></option><option value="Los Pelícanos" data-cap="6"></option>
           </select>
         </div>
       </div>
@@ -1120,6 +1120,10 @@ setLang(url||saved||(((navigator.language||'es').slice(0,2)==='en')?'en':'es'));
     document.querySelectorAll('#rwz-overlay [data-k]').forEach(function(el){
       var k=el.getAttribute('data-k'); if(d[k]!=null) el.textContent=d[k];
     });
+    document.querySelectorAll('#rwz-cabsel option[data-cap]').forEach(function(o){
+      var cap=o.getAttribute('data-cap');
+      o.textContent=o.value+(lang()==='en'?(' · Max. '+cap+' guests'):(' · Máx. '+cap+' personas'));
+    });
     $('#rwz-meta').textContent='';
     renderMeta();
     if(step===2) renderNights();
@@ -1129,7 +1133,7 @@ setLang(url||saved||(((navigator.language||'es').slice(0,2)==='en')?'en':'es'));
   function nights(){if(!st.din||!st.dout)return 0;var a=new Date(st.din),b=new Date(st.dout);return Math.max(0,Math.round((b-a)/86400000));}
   function renderNights(){var d=t(),n=nights(),box=$('#rwz-nights');if(n>0){$('#rwz-nnum').textContent=n;$('#rwz-nword').textContent=(n===1?d.night:d.nights);box.classList.add('show');}else box.classList.remove('show');}
   function fmt(x){if(!x)return '—';var p=x.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
-  function alojLabel(){var d=t();if(st.type==='Cabañas'){var name=st.cab?st.cab.split(' · ')[0]:d.nopref2;return (lang()==='en'?'Cabin ':'Cabaña ')+name;}var map={Hotel:d.t_hotel,Domos:d.t_dom,Camping:d.t_camp};return map[st.type]||st.type;}
+  function alojLabel(){var d=t();if(st.type==='Cabañas'){var name=st.cab||d.nopref2;return (lang()==='en'?'Cabin ':'Cabaña ')+name;}var map={Hotel:d.t_hotel,Domos:d.t_dom,Camping:d.t_camp};return map[st.type]||st.type;}
   function persons(){var d=t();var s=st.ad+' '+(st.ad===1?d.adult:d.adults_);if(st.ni>0)s+=', '+st.ni+' '+(st.ni===1?d.kid:d.kids_);return s;}
   function show(n){
     step=n;
