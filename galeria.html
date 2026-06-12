@@ -429,7 +429,7 @@ p{color:var(--text)}
 .navx[data-open] .navx__panel--mega{transform:translateX(-50%)}
 .nav.scrolled .navx__panel--mega{top:66px}
 @media(max-width:1100px){.navx__panel--mega{grid-template-columns:repeat(2,1fr);width:min(560px,94vw)}}
-.navx__panel--exp{grid-template-columns:repeat(4,1fr);width:min(1040px,94vw)}
+.navx__panel--exp{grid-template-columns:repeat(3,1fr);width:min(820px,94vw)}
 @media(max-width:1100px){.navx__panel--exp{grid-template-columns:repeat(2,1fr);width:min(560px,94vw)}}
 /* restaurant mega panel — horizontal, matches accommodation panel height */
 .navx__panel--rest{display:grid;grid-template-columns:minmax(0,320px) 1fr;align-items:center;width:min(680px,94vw);min-height:230px;padding:14px;gap:18px}
@@ -521,10 +521,12 @@ p{color:var(--text)}
 <style id="gal-style">
 .wrapG{max-width:1320px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
 .gintro{text-align:center;color:var(--text);font-size:1rem;max-width:640px;margin:0 auto 26px}
-.gfilters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:32px}
-.gfilter{padding:9px 16px;border:1px solid var(--line);border-radius:30px;background:transparent;cursor:pointer;font-size:.78rem;letter-spacing:.06em;color:var(--slate);font-family:var(--sans);font-weight:500;transition:all .2s ease}
-.gfilter:hover{border-color:var(--slate)}
-.gfilter.on{background:var(--slate);color:var(--cream-soft);border-color:var(--slate)}
+.gfilters{display:flex;flex-wrap:wrap;gap:clamp(14px,2.5vw,30px);justify-content:center;margin-bottom:36px}
+.gfilter{padding:6px 2px 11px;border:0;background:transparent;cursor:pointer;font-size:.8rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-family:var(--sans);font-weight:600;position:relative;transition:color .25s ease}
+.gfilter::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--line);transition:height .25s ease,background .25s ease}
+.gfilter:hover{color:var(--slate)}
+.gfilter.on{color:var(--head)}
+.gfilter.on::after{height:3px;background:var(--slate)}
 .gwrap{column-count:4;column-gap:14px}
 @media(max-width:1100px){.gwrap{column-count:3}}
 @media(max-width:760px){.gwrap{column-count:2}}
@@ -611,12 +613,9 @@ p{color:var(--text)}
           <img class="navx__card-thumb" src="assets/eventos.jpg" alt="Eventos frente al mar" loading="lazy" decoding="async"><span class="navx__card-name">Eventos</span>
           <span class="navx__card-desc">Matrimonios y encuentros corporativos</span>
         </a>
-        <a href="galeria.html" class="navx__card" role="menuitem">
-          <img class="navx__card-thumb" src="assets/amb-01.jpg" alt="Galería de fotos de Olas de Matanzas" loading="lazy" decoding="async"><span class="navx__card-name">Galería</span>
-          <span class="navx__card-desc">Todas las fotos, por espacio</span>
-        </a>
       </div>
     </div>
+    <a href="galeria.html" aria-current="page">Galería</a>
     <a href="#como-llegar">Cómo llegar</a>
     <a href="inicio.html#contacto">Contacto</a>
   </div>
@@ -645,7 +644,7 @@ p{color:var(--text)}
     <a href="actividades.html" class="m-sub">Actividades</a>
     <a href="spa.html" class="m-sub">Spa OMZ</a>
     <a href="eventos.html" class="m-sub">Eventos</a>
-    <a href="galeria.html" class="m-sub">Galería</a>
+    <a href="galeria.html" aria-current="page">Galería</a>
     <a href="#como-llegar">Cómo llegar</a>
     <a href="inicio.html#contacto">Contacto</a>
   </nav>
