@@ -589,7 +589,7 @@ p{color:var(--text)}
     <a href="inicio.html#contacto">Contacto</a>
   </div>
   <div class="langsw" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><span class="langsw__sep">/</span><button type="button" data-lang="en">EN</button></div>
-  <a href="#contacto" class="nav__cta">Reservar</a>
+  <a href="#contacto" class="nav__cta" data-reserve>Reservar</a>
   <button class="nav__burger" aria-label="Menú"><span></span><span></span><span></span></button>
 </nav>
 
@@ -617,7 +617,7 @@ p{color:var(--text)}
     <a href="inicio.html#contacto">Contacto</a>
   </nav>
   <div class="nav__mobile-foot">
-    <a href="#contacto" class="nav__mobile-cta">Reservar</a>
+    <a href="#contacto" class="nav__mobile-cta" data-reserve>Reservar</a>
     <div class="nav__mobile-contact">
       <a href="tel:+56996434809"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+56 9 9643 4809</a>
       <a href="mailto:info@omz.cl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>info@omz.cl</a>
@@ -738,7 +738,7 @@ p{color:var(--text)}
     <div class="flank up" style="color:var(--slate);margin-bottom:20px"><span class="ln"></span><span class="lbl">Reserva</span><span class="ln"></span></div>
     <h2 class="up d1">¿Listo para desconectar?</h2>
     <p class="up d2">Escríbenos y reserva tu domo entre el bosque de pinos. Te ayudamos a planificar tu estadía.</p>
-    <a href="#contacto" class="btn up d2">Reservar ahora <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h13M10 1l4 4-4 4"/></svg></a>
+    <a href="#contacto" class="btn up d2" data-reserve>Reservar ahora <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h13M10 1l4 4-4 4"/></svg></a>
   </div>
 </section>
 
@@ -946,5 +946,263 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-lang
 var url=new URLSearchParams(location.search).get('lang');var saved=null;try{saved=localStorage.getItem('omz_lang');}catch(e){}
 setLang(url||saved||(((navigator.language||'es').slice(0,2)==='en')?'en':'es'));
 })();</script>
+<!-- ===== RESERVATION WIZARD (rwz) ===== -->
+<style id="rwz-style">
+.rwz-overlay{position:fixed;inset:0;z-index:9990;background:rgba(20,28,33,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:16px;padding-top:max(16px,env(safe-area-inset-top));padding-bottom:max(16px,env(safe-area-inset-bottom))}
+.rwz-overlay.open{display:flex;animation:rwzfade .3s ease}
+@keyframes rwzfade{from{opacity:0}to{opacity:1}}
+.rwz-card{font-family:var(--sans);width:100%;max-width:560px;max-height:92vh;max-height:92dvh;background:var(--paper);border:1px solid var(--line);border-radius:5px;box-shadow:0 40px 90px -40px rgba(20,30,36,.7);overflow-y:auto;-webkit-overflow-scrolling:touch;color:var(--ink);position:relative}
+.rwz-close{position:absolute;top:12px;right:12px;z-index:3;width:40px;height:40px;border:0;background:rgba(244,239,230,.85);border-radius:50%;cursor:pointer;color:var(--slate);display:flex;align-items:center;justify-content:center}
+.rwz-close:hover{background:var(--paper-2)}
+.rwz-prog{display:flex;gap:6px;padding:20px 24px 0}
+.rwz-prog i{flex:1;height:3px;border-radius:2px;background:var(--line);transition:background .4s ease}
+.rwz-prog i.on{background:var(--slate)}
+.rwz-meta{padding:14px 26px 0;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.rwz-body{padding:4px 26px 24px}
+.rwz-card h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.5rem,5vw,1.9rem);color:var(--head);line-height:1.15;margin:6px 0 4px}
+.rwz-sub{color:var(--text);font-size:.92rem;line-height:1.5;margin-bottom:18px}
+.rwz-step{display:none}
+.rwz-step.active{display:block;animation:rwzstep .35s ease}
+@keyframes rwzstep{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.rwz-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rwz-opt{display:flex;flex-direction:column;gap:3px;padding:15px;border:1px solid var(--line);border-radius:3px;background:var(--cream-soft);cursor:pointer;transition:all .22s ease;text-align:left}
+.rwz-opt:hover{border-color:var(--slate)}
+.rwz-opt.sel{border-color:var(--slate);background:#fff;box-shadow:inset 0 0 0 1px var(--slate)}
+.rwz-opt b{font-family:var(--serif);font-size:1.2rem;font-weight:500;color:var(--head)}
+.rwz-opt small{color:var(--muted);font-size:.76rem}
+.rwz-card label{display:block;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--slate);margin:0 0 7px}
+.rwz-row{display:flex;gap:12px}.rwz-row>div{flex:1}
+.rwz-field{margin-bottom:15px}
+.rwz-card input,.rwz-card select,.rwz-card textarea{width:100%;font-family:var(--sans);font-size:16px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:3px;padding:12px 13px;transition:border .2s ease}
+.rwz-card input:focus,.rwz-card select:focus,.rwz-card textarea:focus{outline:none;border-color:var(--slate)}
+.rwz-card textarea{resize:vertical;min-height:70px}
+.rwz-nights{display:none;margin-top:6px;padding:12px 16px;background:var(--cream-soft);border:1px solid var(--line);border-radius:3px;text-align:center;font-family:var(--serif);font-size:1.25rem;color:var(--head)}
+.rwz-nights.show{display:block}
+.rwz-nights b{font-weight:600}
+.rwz-stepper{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#fff}
+.rwz-stepper button{width:46px;height:46px;border:0;background:#fff;font-size:1.3rem;color:var(--slate);cursor:pointer;line-height:1}
+.rwz-stepper button:hover{background:var(--paper-2)}
+.rwz-stepper span{width:50px;text-align:center;font-family:var(--serif);font-size:1.3rem;color:var(--head)}
+.rwz-summary{background:var(--cream-soft);border:1px solid var(--line);border-radius:3px;padding:6px 18px}
+.rwz-summary .ln{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-top:1px solid var(--line);font-size:.92rem}
+.rwz-summary .ln:first-child{border-top:0}
+.rwz-summary .k{color:var(--muted);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding-top:4px;white-space:nowrap}
+.rwz-summary .v{color:var(--head);font-family:var(--serif);font-size:1.12rem;text-align:right}
+.rwz-err{color:#b4534b;font-size:.8rem;margin-top:6px;display:none}.rwz-err.show{display:block}
+.rwz-note{text-align:center;color:var(--muted);font-size:.78rem;margin-top:12px;line-height:1.5}
+.rwz-nav{display:flex;gap:10px;margin-top:20px}
+.rwz-btn{font-family:var(--sans);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding:15px 20px;border-radius:3px;border:1px solid var(--slate);cursor:pointer;transition:all .22s ease;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px}
+.rwz-ghost{background:transparent;color:var(--slate)}.rwz-ghost:hover{background:var(--slate);color:var(--cream-soft)}
+.rwz-solid{background:var(--slate);color:var(--cream-soft);flex:1}.rwz-solid:hover{background:var(--slate-deep)}
+.rwz-wa{background:#25d366;border-color:#25d366;color:#fff;flex:1}.rwz-wa:hover{background:#1da851;border-color:#1da851}
+.rwz-btn[disabled]{opacity:.4;cursor:not-allowed}
+@media(max-width:480px){
+  .rwz-overlay{padding:0}
+  .rwz-card{max-width:100%;max-height:100vh;max-height:100dvh;height:100%;border-radius:0;border:0}
+  .rwz-opts{grid-template-columns:1fr}
+  .rwz-body{padding:4px 20px 22px}
+  .rwz-prog,.rwz-meta{padding-left:20px;padding-right:20px}
+}
+</style>
+<div class="rwz-overlay" id="rwz-overlay" role="dialog" aria-modal="true" aria-label="Reservar">
+  <div class="rwz-card" role="document">
+    <button class="rwz-close" id="rwz-close" aria-label="Cerrar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="rwz-prog"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+    <div class="rwz-meta" id="rwz-meta"></div>
+    <div class="rwz-body">
+      <div class="rwz-step active" data-step="1">
+        <h2 data-k="q1"></h2><p class="rwz-sub" data-k="s1"></p>
+        <div class="rwz-opts" id="rwz-types">
+          <div class="rwz-opt" data-type="Hotel"><b data-k="t_hotel"></b><small data-k="d_hotel"></small></div>
+          <div class="rwz-opt" data-type="Cabañas"><b data-k="t_cab"></b><small data-k="d_cab"></small></div>
+          <div class="rwz-opt" data-type="Domos"><b data-k="t_dom"></b><small data-k="d_dom"></small></div>
+          <div class="rwz-opt" data-type="Camping"><b data-k="t_camp"></b><small data-k="d_camp"></small></div>
+        </div>
+        <div class="rwz-field" id="rwz-cabpick" style="margin-top:15px;display:none">
+          <label data-k="which"></label>
+          <select id="rwz-cabsel">
+            <option value="" data-k="nopref"></option>
+            <option>Los Pájaros · 2</option><option>La Luna · 2</option><option>Los Lobos · 4</option>
+            <option>Las Gaviotas · 4</option><option>La Sirena · 4</option><option>Chagual · 4</option>
+            <option>Las Brisas · 5</option><option>Los Pelícanos · 6</option>
+          </select>
+        </div>
+      </div>
+      <div class="rwz-step" data-step="2">
+        <h2 data-k="q2"></h2><p class="rwz-sub" data-k="s2"></p>
+        <div class="rwz-row">
+          <div class="rwz-field"><label data-k="in"></label><input type="date" id="rwz-din"></div>
+          <div class="rwz-field"><label data-k="out"></label><input type="date" id="rwz-dout"></div>
+        </div>
+        <div class="rwz-err" id="rwz-dateerr" data-k="dateerr"></div>
+        <div class="rwz-nights" id="rwz-nights"><b id="rwz-nnum">0</b> <span id="rwz-nword"></span></div>
+      </div>
+      <div class="rwz-step" data-step="3">
+        <h2 data-k="q3"></h2><p class="rwz-sub" data-k="s3"></p>
+        <div class="rwz-field"><label data-k="adults"></label><div class="rwz-stepper"><button data-pp="ad" data-d="-1">−</button><span id="rwz-ad">2</span><button data-pp="ad" data-d="1">+</button></div></div>
+        <div class="rwz-field"><label data-k="kids"></label><div class="rwz-stepper"><button data-pp="ni" data-d="-1">−</button><span id="rwz-ni">0</span><button data-pp="ni" data-d="1">+</button></div></div>
+      </div>
+      <div class="rwz-step" data-step="4">
+        <h2 data-k="q4"></h2><p class="rwz-sub" data-k="s4"></p>
+        <div class="rwz-field"><label data-k="name"></label><input type="text" id="rwz-name"></div>
+        <div class="rwz-field"><label data-k="contact"></label><input type="text" id="rwz-contact"></div>
+        <div class="rwz-field"><label data-k="comments"></label><textarea id="rwz-notes"></textarea></div>
+        <div class="rwz-err" id="rwz-nameerr" data-k="nameerr"></div>
+      </div>
+      <div class="rwz-step" data-step="5">
+        <h2 data-k="q5"></h2><p class="rwz-sub" data-k="s5"></p>
+        <div class="rwz-summary" id="rwz-summary"></div>
+        <div class="rwz-note" data-k="note"></div>
+      </div>
+      <div class="rwz-nav">
+        <button class="rwz-btn rwz-ghost" id="rwz-back" style="display:none" data-k="back"></button>
+        <button class="rwz-btn rwz-solid" id="rwz-next" disabled data-k="next"></button>
+        <button class="rwz-btn rwz-wa" id="rwz-send" style="display:none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.595zm5.586-5.443c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413z"/></svg>
+          <span data-k="send"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  if(window.__rwzInit) return; window.__rwzInit=true;
+  var WA="56996434809";
+  var L={
+    es:{meta:["Alojamiento","Fechas","Personas","Contacto","Resumen"],
+      q1:"¿Qué te gustaría reservar?",s1:"Elige el tipo de alojamiento frente al mar.",
+      t_hotel:"Hotel",d_hotel:"Frente al mar",t_cab:"Cabañas",d_cab:"Hot tub privado",
+      t_dom:"Domos",d_dom:"Glamping",t_camp:"Camping",d_camp:"Bajo el bosque",
+      which:"¿Cuál cabaña?",nopref:"Sin preferencia / la que esté disponible",
+      q2:"¿Qué fechas?",s2:"Indícanos tu llegada y salida.",in:"Llegada",out:"Salida",
+      dateerr:"La salida debe ser posterior a la llegada.",night:"noche",nights:"noches",
+      q3:"¿Cuántas personas?",s3:"Para asignarte el espacio adecuado.",adults:"Adultos",kids:"Niños",
+      q4:"Tus datos",s4:"Para que recepción pueda confirmarte.",name:"Nombre",contact:"Teléfono o email",comments:"Comentarios (opcional)",
+      nameerr:"Completa al menos tu nombre.",
+      q5:"Revisa tu solicitud",s5:"Al enviar se abrirá WhatsApp con este mensaje listo para recepción.",
+      note:"No es una reserva confirmada: recepción te responde por WhatsApp para confirmar disponibilidad.",
+      back:"← Atrás",next:"Continuar →",send:"Enviar por WhatsApp",
+      sumA:"Alojamiento",sumIn:"Llegada",sumOut:"Salida",sumP:"Personas",sumN:"Nombre",sumC:"Contacto",sumCom:"Comentarios",
+      adult:"adulto",adults_:"adultos",kid:"niño",kids_:"niños",nopref2:"Sin preferencia",
+      wa_hi:"Hola OMZ 👋, quisiera solicitar una reserva:",wa_thx:"¡Gracias!"},
+    en:{meta:["Lodging","Dates","Guests","Contact","Summary"],
+      q1:"What would you like to book?",s1:"Choose your beachfront accommodation.",
+      t_hotel:"Hotel",d_hotel:"Beachfront",t_cab:"Cabins",d_cab:"Private hot tub",
+      t_dom:"Domes",d_dom:"Glamping",t_camp:"Camping",d_camp:"In the forest",
+      which:"Which cabin?",nopref:"No preference / whichever is available",
+      q2:"Which dates?",s2:"Tell us your check-in and check-out.",in:"Check-in",out:"Check-out",
+      dateerr:"Check-out must be after check-in.",night:"night",nights:"nights",
+      q3:"How many guests?",s3:"So we can assign the right space.",adults:"Adults",kids:"Children",
+      q4:"Your details",s4:"So reception can confirm your stay.",name:"Name",contact:"Phone or email",comments:"Comments (optional)",
+      nameerr:"Please enter at least your name.",
+      q5:"Review your request",s5:"On send, WhatsApp opens with this message ready for reception.",
+      note:"This is not a confirmed booking: reception replies on WhatsApp to confirm availability.",
+      back:"← Back",next:"Continue →",send:"Send via WhatsApp",
+      sumA:"Lodging",sumIn:"Check-in",sumOut:"Check-out",sumP:"Guests",sumN:"Name",sumC:"Contact",sumCom:"Comments",
+      adult:"adult",adults_:"adults",kid:"child",kids_:"children",nopref2:"No preference",
+      wa_hi:"Hello OMZ 👋, I'd like to request a booking:",wa_thx:"Thank you!"}
+  };
+  function lang(){return (document.documentElement.lang==='en')?'en':'es';}
+  function t(){return L[lang()];}
+  var st={type:"",cab:"",din:"",dout:"",ad:2,ni:0,name:"",contact:"",notes:""};
+  var step=1,MAX=5;
+  var $=function(s){return document.querySelector(s)};
+  var ov=$('#rwz-overlay');
+
+  function applyTexts(){
+    var d=t();
+    document.querySelectorAll('#rwz-overlay [data-k]').forEach(function(el){
+      var k=el.getAttribute('data-k'); if(d[k]!=null) el.textContent=d[k];
+    });
+    $('#rwz-meta').textContent='';
+    renderMeta();
+    if(step===2) renderNights();
+    if(step===5) buildSummary();
+  }
+  function renderMeta(){var d=t();$('#rwz-meta').textContent=(lang()==='en'?'Step ':'Paso ')+step+(lang()==='en'?' of ':' de ')+MAX+' · '+d.meta[step-1];}
+  function nights(){if(!st.din||!st.dout)return 0;var a=new Date(st.din),b=new Date(st.dout);return Math.max(0,Math.round((b-a)/86400000));}
+  function renderNights(){var d=t(),n=nights(),box=$('#rwz-nights');if(n>0){$('#rwz-nnum').textContent=n;$('#rwz-nword').textContent=(n===1?d.night:d.nights);box.classList.add('show');}else box.classList.remove('show');}
+  function fmt(x){if(!x)return '—';var p=x.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+  function alojLabel(){var d=t();if(st.type==='Cabañas'){var name=st.cab?st.cab.split(' · ')[0]:d.nopref2;return (lang()==='en'?'Cabin ':'Cabaña ')+name;}var map={Hotel:d.t_hotel,Domos:d.t_dom,Camping:d.t_camp};return map[st.type]||st.type;}
+  function persons(){var d=t();var s=st.ad+' '+(st.ad===1?d.adult:d.adults_);if(st.ni>0)s+=', '+st.ni+' '+(st.ni===1?d.kid:d.kids_);return s;}
+  function show(n){
+    step=n;
+    document.querySelectorAll('#rwz-overlay .rwz-step').forEach(function(el){el.classList.toggle('active',+el.dataset.step===n)});
+    document.querySelectorAll('#rwz-overlay .rwz-prog i').forEach(function(el,i){el.classList.toggle('on',i<n)});
+    renderMeta();
+    $('#rwz-back').style.display=n>1?'inline-flex':'none';
+    $('#rwz-next').style.display=n<MAX?'inline-flex':'none';
+    $('#rwz-send').style.display=n===MAX?'inline-flex':'none';
+    if(n===2)renderNights();
+    if(n===5)buildSummary();
+    $('#rwz-card')&&$('#rwz-card').scrollTo(0,0);
+    validate();
+  }
+  function validate(){
+    var ok=true,d=t();
+    if(step===1)ok=!!st.type;
+    if(step===2){ok=!!st.din&&!!st.dout&&nights()>0;$('#rwz-dateerr').classList.toggle('show',!!st.din&&!!st.dout&&nights()<=0);renderNights();}
+    if(step===4)ok=st.name.trim().length>0;
+    $('#rwz-next').disabled=!ok;return ok;
+  }
+  function buildSummary(){
+    var d=t(),rows=[[d.sumA,alojLabel()],[d.sumIn,fmt(st.din)],[d.sumOut,fmt(st.dout)+' · '+nights()+' '+(nights()===1?d.night:d.nights)],[d.sumP,persons()],[d.sumN,st.name||'—'],[d.sumC,st.contact||'—']];
+    if(st.notes.trim())rows.push([d.sumCom,st.notes.trim()]);
+    $('#rwz-summary').innerHTML=rows.map(function(r){return '<div class="ln"><span class="k">'+r[0]+'</span><span class="v">'+r[1]+'</span></div>'}).join('');
+  }
+  function waLink(){
+    var d=t();
+    var msg=d.wa_hi+'\n\n'+
+      '• '+d.sumA+': '+alojLabel()+'\n'+
+      '• '+d.sumIn+': '+fmt(st.din)+'\n'+
+      '• '+d.sumOut+': '+fmt(st.dout)+' ('+nights()+' '+(nights()===1?d.night:d.nights)+')\n'+
+      '• '+d.sumP+': '+persons()+'\n'+
+      '• '+d.sumN+': '+st.name+'\n'+
+      '• '+d.sumC+': '+(st.contact||'—')+
+      (st.notes.trim()?('\n• '+d.sumCom+': '+st.notes.trim()):'')+
+      '\n\n'+d.wa_thx;
+    return 'https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
+  }
+  function openWiz(cab){
+    st={type:"",cab:"",din:"",dout:"",ad:2,ni:0,name:"",contact:"",notes:""};
+    document.querySelectorAll('#rwz-types .rwz-opt').forEach(function(x){x.classList.remove('sel')});
+    $('#rwz-cabpick').style.display='none';$('#rwz-cabsel').value='';
+    $('#rwz-din').value='';$('#rwz-dout').value='';$('#rwz-ad').textContent='2';$('#rwz-ni').textContent='0';
+    $('#rwz-name').value='';$('#rwz-contact').value='';$('#rwz-notes').value='';
+    if(cab){st.type='Cabañas';document.querySelector('#rwz-types .rwz-opt[data-type="Cabañas"]').classList.add('sel');$('#rwz-cabpick').style.display='block';
+      var opt=[].slice.call($('#rwz-cabsel').options).filter(function(o){return o.value.indexOf(cab)===0;})[0];
+      if(opt){$('#rwz-cabsel').value=opt.value;st.cab=opt.value;}}
+    applyTexts();show(1);
+    ov.classList.add('open');document.body.style.overflow='hidden';
+  }
+  function closeWiz(){ov.classList.remove('open');document.body.style.overflow='';}
+
+  $('#rwz-types').addEventListener('click',function(e){var o=e.target.closest('.rwz-opt');if(!o)return;document.querySelectorAll('#rwz-types .rwz-opt').forEach(function(x){x.classList.remove('sel')});o.classList.add('sel');st.type=o.dataset.type;$('#rwz-cabpick').style.display=(st.type==='Cabañas')?'block':'none';if(st.type!=='Cabañas'){st.cab='';$('#rwz-cabsel').value='';}validate();});
+  $('#rwz-cabsel').addEventListener('change',function(e){st.cab=e.target.value;});
+  $('#rwz-din').addEventListener('change',function(e){st.din=e.target.value;$('#rwz-dout').min=st.din;validate();});
+  $('#rwz-dout').addEventListener('change',function(e){st.dout=e.target.value;validate();});
+  document.querySelectorAll('#rwz-overlay [data-pp]').forEach(function(b){b.addEventListener('click',function(){var k=b.dataset.pp,dd=+b.dataset.d,min=(k==='ad')?1:0;st[k]=Math.max(min,st[k]+dd);$('#rwz-'+k).textContent=st[k];});});
+  $('#rwz-name').addEventListener('input',function(e){st.name=e.target.value;validate();});
+  $('#rwz-contact').addEventListener('input',function(e){st.contact=e.target.value;});
+  $('#rwz-notes').addEventListener('input',function(e){st.notes=e.target.value;});
+  $('#rwz-next').addEventListener('click',function(){if(!validate())return;if(step<MAX)show(step+1);});
+  $('#rwz-back').addEventListener('click',function(){if(step>1)show(step-1);});
+  $('#rwz-send').addEventListener('click',function(){window.open(waLink(),'_blank');});
+  $('#rwz-close').addEventListener('click',closeWiz);
+  ov.addEventListener('click',function(e){if(e.target===ov)closeWiz();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&ov.classList.contains('open'))closeWiz();});
+  // re-apply texts when language changes
+  document.addEventListener('click',function(e){if(e.target.closest('[data-lang]'))setTimeout(applyTexts,0);});
+  // triggers
+  document.addEventListener('click',function(e){var b=e.target.closest('[data-reserve]');if(b){e.preventDefault();openWiz(b.getAttribute('data-reserve-cabana'));}});
+  // expose
+  window.openReserveWizard=openWiz;
+  // give the card an id for scroll reset
+  ov.querySelector('.rwz-card').id='rwz-card';
+})();
+</script>
+<!-- ===== /RESERVATION WIZARD ===== -->
+
 </body>
 </html>
