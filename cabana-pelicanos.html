@@ -1000,6 +1000,8 @@ setLang(url||saved||(((navigator.language||'es').slice(0,2)==='en')?'en':'es'));
 .rwz-solid{background:var(--slate);color:var(--cream-soft);flex:1}.rwz-solid:hover{background:var(--slate-deep)}
 .rwz-wa{background:#25d366;border-color:#25d366;color:#fff;flex:1}.rwz-wa:hover{background:#1da851;border-color:#1da851}
 .rwz-btn[disabled]{opacity:.4;cursor:not-allowed}
+.rwz-grouplink{display:block;margin:16px auto 0;background:none;border:0;color:var(--slate);font-family:var(--sans);font-size:.82rem;text-decoration:underline;text-underline-offset:3px;cursor:pointer;letter-spacing:.02em}
+.rwz-grouplink:hover{color:var(--slate-deep)}
 @media(max-width:480px){
   .rwz-overlay{padding:0}
   .rwz-card{max-width:100%;max-height:100vh;max-height:100dvh;height:100%;border-radius:0;border:0}
@@ -1031,6 +1033,7 @@ setLang(url||saved||(((navigator.language||'es').slice(0,2)==='en')?'en':'es'));
             <option value="Las Brisas" data-cap="5"></option><option value="Los Pelícanos" data-cap="6"></option>
           </select>
         </div>
+        <button type="button" class="rwz-grouplink" data-group-reserve data-k="grouplink"></button>
       </div>
       <div class="rwz-step" data-step="2">
         <h2 data-k="q2"></h2><p class="rwz-sub" data-k="s2"></p>
@@ -1087,7 +1090,7 @@ setLang(url||saved||(((navigator.language||'es').slice(0,2)==='en')?'en':'es'));
       nameerr:"Completa al menos tu nombre.",
       q5:"Revisa tu solicitud",s5:"Al enviar se abrirá WhatsApp con este mensaje listo para recepción.",
       note:"No es una reserva confirmada: recepción te responde por WhatsApp para confirmar disponibilidad.",
-      back:"← Atrás",next:"Continuar →",send:"Enviar por WhatsApp",
+      back:"← Atrás",next:"Continuar →",send:"Enviar por WhatsApp",grouplink:"¿Reserva para grupos o eventos?",
       sumA:"Alojamiento",sumIn:"Llegada",sumOut:"Salida",sumP:"Personas",sumN:"Nombre",sumC:"Contacto",sumCom:"Comentarios",
       adult:"adulto",adults_:"adultos",kid:"niño",kids_:"niños",nopref2:"Sin preferencia",
       wa_hi:"Hola OMZ 👋, quisiera solicitar una reserva:",wa_thx:"¡Gracias!"},
@@ -1103,7 +1106,7 @@ setLang(url||saved||(((navigator.language||'es').slice(0,2)==='en')?'en':'es'));
       nameerr:"Please enter at least your name.",
       q5:"Review your request",s5:"On send, WhatsApp opens with this message ready for reception.",
       note:"This is not a confirmed booking: reception replies on WhatsApp to confirm availability.",
-      back:"← Back",next:"Continue →",send:"Send via WhatsApp",
+      back:"← Back",next:"Continue →",send:"Send via WhatsApp",grouplink:"Booking for groups or events?",
       sumA:"Lodging",sumIn:"Check-in",sumOut:"Check-out",sumP:"Guests",sumN:"Name",sumC:"Contact",sumCom:"Comments",
       adult:"adult",adults_:"adults",kid:"child",kids_:"children",nopref2:"No preference",
       wa_hi:"Hello OMZ 👋, I'd like to request a booking:",wa_thx:"Thank you!"}
@@ -1212,12 +1215,210 @@ setLang(url||saved||(((navigator.language||'es').slice(0,2)==='en')?'en':'es'));
   // triggers
   document.addEventListener('click',function(e){var b=e.target.closest('[data-reserve]');if(b){e.preventDefault();openWiz(b.getAttribute('data-reserve-cabana'));}});
   // expose
-  window.openReserveWizard=openWiz;
+  window.openReserveWizard=openWiz;window.closeReserveWizard=closeWiz;
   // give the card an id for scroll reset
   ov.querySelector('.rwz-card').id='rwz-card';
 })();
 </script>
 <!-- ===== /RESERVATION WIZARD ===== -->
+
+<!-- ===== GROUP / EVENTS WIZARD (grp) ===== -->
+<style id="grp-style">
+.grp-overlay{position:fixed;inset:0;z-index:9991;background:rgba(20,28,33,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:16px;padding-top:max(16px,env(safe-area-inset-top));padding-bottom:max(16px,env(safe-area-inset-bottom))}
+.grp-overlay.open{display:flex;animation:grpfade .3s ease}
+@keyframes grpfade{from{opacity:0}to{opacity:1}}
+.grp-card{font-family:var(--sans);width:100%;max-width:580px;max-height:92vh;max-height:92dvh;background:var(--paper);border:1px solid var(--line);border-radius:5px;box-shadow:0 40px 90px -40px rgba(20,30,36,.7);overflow-y:auto;-webkit-overflow-scrolling:touch;color:var(--ink);position:relative}
+.grp-close{position:absolute;top:12px;right:12px;z-index:3;width:40px;height:40px;border:0;background:rgba(244,239,230,.85);border-radius:50%;cursor:pointer;color:var(--slate);display:flex;align-items:center;justify-content:center}
+.grp-close:hover{background:var(--paper-2)}
+.grp-head{padding:22px 26px 0}.grp-eyebrow{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--slate)}
+.grp-prog{display:flex;gap:6px;padding:12px 26px 0}.grp-prog i{flex:1;height:3px;border-radius:2px;background:var(--line);transition:.4s}.grp-prog i.on{background:var(--slate)}
+.grp-meta{padding:12px 26px 0;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.grp-body{padding:4px 26px 24px}
+.grp-card h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.5rem,5vw,1.9rem);color:var(--head);line-height:1.15;margin:6px 0 4px}
+.grp-sub{color:var(--text);font-size:.92rem;line-height:1.5;margin-bottom:18px}
+.grp-step{display:none}.grp-step.active{display:block;animation:grpstep .35s ease}
+@keyframes grpstep{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.grp-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grp-opt{padding:15px;border:1px solid var(--line);border-radius:3px;background:var(--cream-soft);cursor:pointer;transition:.22s;text-align:left;font-family:var(--serif);font-size:1.16rem;color:var(--head)}
+.grp-opt:hover{border-color:var(--slate)}.grp-opt.sel{border-color:var(--slate);background:#fff;box-shadow:inset 0 0 0 1px var(--slate)}
+.grp-card label{display:block;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--slate);margin:0 0 7px}
+.grp-field{margin-bottom:15px}
+.grp-card input,.grp-card textarea{width:100%;font-family:var(--sans);font-size:16px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:3px;padding:12px 13px}
+.grp-card input:focus,.grp-card textarea:focus{outline:none;border-color:var(--slate)}
+.grp-card textarea{resize:vertical;min-height:70px}
+.grp-row{display:flex;gap:12px}.grp-row>div{flex:1}
+.grp-check{display:flex;align-items:center;gap:9px;font-size:.9rem;color:var(--text);cursor:pointer;margin-top:4px}.grp-check input{width:auto}
+.grp-chips{display:flex;flex-wrap:wrap;gap:9px}
+.grp-chip{padding:11px 15px;border:1px solid var(--line);border-radius:30px;background:var(--cream-soft);cursor:pointer;font-size:.85rem;color:var(--slate);transition:.2s}
+.grp-chip:hover{border-color:var(--slate)}.grp-chip.on{background:var(--slate);color:var(--cream-soft);border-color:var(--slate)}
+.grp-nights{display:none;margin-top:6px;padding:11px 16px;background:var(--cream-soft);border:1px solid var(--line);border-radius:3px;text-align:center;font-family:var(--serif);font-size:1.2rem;color:var(--head)}.grp-nights.show{display:block}.grp-nights b{font-weight:600}
+.grp-summary{background:var(--cream-soft);border:1px solid var(--line);border-radius:3px;padding:4px 18px;margin-top:10px}
+.grp-summary .ln{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-top:1px solid var(--line);font-size:.9rem}.grp-summary .ln:first-child{border-top:0}
+.grp-summary .k{color:var(--muted);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;white-space:nowrap;padding-top:3px}
+.grp-summary .v{color:var(--head);font-family:var(--serif);font-size:1.06rem;text-align:right}
+.grp-err{color:#b4534b;font-size:.8rem;margin-top:6px;display:none}.grp-err.show{display:block}
+.grp-note{text-align:center;color:var(--muted);font-size:.78rem;margin-top:12px;line-height:1.5}
+.grp-nav{display:flex;gap:10px;margin-top:20px}
+.grp-btn{font-family:var(--sans);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding:15px 20px;border-radius:3px;border:1px solid var(--slate);cursor:pointer;transition:.22s;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px}
+.grp-ghost{background:transparent;color:var(--slate)}.grp-ghost:hover{background:var(--slate);color:var(--cream-soft)}
+.grp-solid{background:var(--slate);color:var(--cream-soft);flex:1}.grp-solid:hover{background:var(--slate-deep)}
+.grp-wa{background:#25d366;border-color:#25d366;color:#fff;flex:1}.grp-wa:hover{background:#1da851;border-color:#1da851}
+.grp-btn[disabled]{opacity:.4;cursor:not-allowed}
+@media(max-width:480px){.grp-overlay{padding:0}.grp-card{max-width:100%;max-height:100vh;max-height:100dvh;height:100%;border-radius:0;border:0}.grp-opts{grid-template-columns:1fr}.grp-body{padding:4px 20px 22px}.grp-prog,.grp-meta,.grp-head{padding-left:20px;padding-right:20px}}
+</style>
+<div class="grp-overlay" id="grp-overlay" role="dialog" aria-modal="true" aria-label="Reservar para grupos y eventos">
+  <div class="grp-card">
+    <button class="grp-close" id="grp-close" aria-label="Cerrar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="grp-head"><span class="grp-eyebrow" data-gk="eyebrow"></span></div>
+    <div class="grp-prog"><i class="on"></i><i></i><i></i><i></i></div>
+    <div class="grp-meta" id="grp-meta"></div>
+    <div class="grp-body">
+      <div class="grp-step active" data-step="1">
+        <h2 data-gk="q1"></h2><p class="grp-sub" data-gk="s1"></p>
+        <div class="grp-opts" id="grp-types">
+          <div class="grp-opt" data-type="Matrimonio" data-gk="t_wed"></div>
+          <div class="grp-opt" data-type="Corporativo" data-gk="t_corp"></div>
+          <div class="grp-opt" data-type="Familiar / Grupo" data-gk="t_fam"></div>
+          <div class="grp-opt" data-type="Retiro" data-gk="t_ret"></div>
+        </div>
+        <div class="grp-field" style="margin-top:16px"><label data-gk="people"></label><input type="number" id="grp-people" min="1" max="300"></div>
+      </div>
+      <div class="grp-step" data-step="2">
+        <h2 data-gk="q2"></h2><p class="grp-sub" data-gk="s2"></p>
+        <div class="grp-row"><div class="grp-field"><label data-gk="from"></label><input type="date" id="grp-din"></div><div class="grp-field"><label data-gk="to"></label><input type="date" id="grp-dout"></div></div>
+        <label class="grp-check"><input type="checkbox" id="grp-flex"> <span data-gk="flex"></span></label>
+        <div class="grp-err" id="grp-dateerr" data-gk="dateerr"></div>
+        <div class="grp-nights" id="grp-nights"><b id="grp-nnum">0</b> <span id="grp-nword"></span></div>
+      </div>
+      <div class="grp-step" data-step="3">
+        <h2 data-gk="q3"></h2><p class="grp-sub" data-gk="s3"></p>
+        <div class="grp-chips" id="grp-needs">
+          <div class="grp-chip" data-need="Varias cabañas"></div><div class="grp-chip" data-need="Hotel"></div>
+          <div class="grp-chip" data-need="Domos"></div><div class="grp-chip" data-need="Camping"></div>
+          <div class="grp-chip" data-need="Salón de eventos"></div><div class="grp-chip" data-need="Sala Atma"></div>
+          <div class="grp-chip" data-need="Restaurant / Catering"></div><div class="grp-chip" data-need="Spa"></div>
+        </div>
+      </div>
+      <div class="grp-step" data-step="4">
+        <h2 data-gk="q4"></h2><p class="grp-sub" data-gk="s4"></p>
+        <div class="grp-field"><label data-gk="name"></label><input type="text" id="grp-name"></div>
+        <div class="grp-field"><label data-gk="org"></label><input type="text" id="grp-org"></div>
+        <div class="grp-field"><label data-gk="contact"></label><input type="text" id="grp-contact"></div>
+        <div class="grp-field"><label data-gk="comments"></label><textarea id="grp-notes"></textarea></div>
+        <div class="grp-err" id="grp-nameerr" data-gk="nameerr"></div>
+        <div class="grp-summary" id="grp-summary"></div>
+        <div class="grp-note" data-gk="note"></div>
+      </div>
+      <div class="grp-nav">
+        <button class="grp-btn grp-ghost" id="grp-back" style="display:none" data-gk="back"></button>
+        <button class="grp-btn grp-solid" id="grp-next" disabled data-gk="next"></button>
+        <button class="grp-btn grp-wa" id="grp-send" style="display:none">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 2.667c-7.364 0-13.334 5.97-13.334 13.333 0 2.353.617 4.658 1.788 6.687L2.667 29.333l6.823-1.789a13.27 13.27 0 0 0 6.511 1.69h.005c7.36 0 13.33-5.97 13.33-13.334 0-3.562-1.387-6.91-3.906-9.43a13.24 13.24 0 0 0-9.428-3.904zm0 24.355h-.004a11.07 11.07 0 0 1-5.638-1.544l-.404-.24-4.05 1.062 1.08-3.948-.263-.418a11.03 11.03 0 0 1-1.69-5.89c0-6.12 4.98-11.1 11.107-11.1a11.03 11.03 0 0 1 7.847 3.255 11.03 11.03 0 0 1 3.25 7.85c0 6.122-4.98 11.103-11.105 11.103zm6.09-8.31c-.334-.167-1.975-.975-2.28-1.086-.306-.111-.529-.167-.751.167-.223.334-.863 1.086-1.058 1.309-.195.223-.39.25-.724.084-.334-.167-1.41-.52-2.686-1.658-.993-.886-1.663-1.98-1.858-2.314-.195-.334-.021-.514.146-.681.15-.149.334-.39.501-.585.167-.195.223-.334.334-.557.111-.223.056-.418-.028-.585-.084-.167-.751-1.81-1.029-2.479-.271-.651-.546-.563-.751-.573l-.64-.011c-.223 0-.585.084-.891.418-.306.334-1.169 1.142-1.169 2.785 0 1.643 1.196 3.23 1.363 3.453.167.223 2.354 3.595 5.704 5.04.797.344 1.419.55 1.904.704.8.254 1.528.218 2.104.132.642-.096 1.975-.807 2.253-1.586.278-.78.278-1.448.195-1.587-.083-.139-.306-.223-.64-.39z"/></svg>
+          <span data-gk="send"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  if(window.__grpInit)return;window.__grpInit=true;
+  var WA="56996434809";
+  var NEEDS={es:{"Varias cabañas":"Varias cabañas","Hotel":"Hotel","Domos":"Domos","Camping":"Camping","Salón de eventos":"Salón de eventos","Sala Atma":"Sala Atma","Restaurant / Catering":"Restaurant / Catering","Spa":"Spa"},
+    en:{"Varias cabañas":"Several cabins","Hotel":"Hotel","Domos":"Domes","Camping":"Camping","Salón de eventos":"Event hall","Sala Atma":"Sala Atma","Restaurant / Catering":"Restaurant / Catering","Spa":"Spa"}};
+  var L={es:{eyebrow:"Grupos & Eventos",meta:["Tu evento","Fechas","Necesidades","Contacto"],
+    q1:"¿Qué quieres celebrar?",s1:"Cuéntanos el tipo de evento o grupo y cuántos serán.",
+    t_wed:"Matrimonio",t_corp:"Corporativo",t_fam:"Familiar / Grupo",t_ret:"Retiro",
+    people:"Cantidad aproximada de personas",
+    q2:"¿Para cuándo?",s2:"Si aún no tienes fecha exacta, marca \"por definir\".",from:"Desde",to:"Hasta",
+    flex:"Fecha flexible / por definir",dateerr:"La fecha de término debe ser posterior.",night:"noche",nights:"noches",
+    q3:"¿Qué necesitan?",s3:"Marca todo lo que les interese (opcional).",
+    q4:"Tus datos",s4:"Te enviamos una cotización a la medida.",name:"Nombre",org:"Empresa / organización (opcional)",contact:"Teléfono o email",comments:"Comentarios (opcional)",
+    nameerr:"Completa al menos tu nombre.",note:"Recepción de eventos te responde por WhatsApp con una propuesta y disponibilidad.",
+    back:"← Atrás",next:"Continuar →",send:"Solicitar cotización",
+    sumEv:"Evento",sumP:"Personas",sumD:"Fechas",sumNeeds:"Necesidades",sumN:"Nombre",sumOrg:"Organización",sumC:"Contacto",sumCom:"Comentarios",
+    approx:"aprox.",tbd:"Por definir",wa_hi:"Hola OMZ 👋, quisiera una cotización para un grupo / evento:",wa_thx:"¡Gracias!"},
+   en:{eyebrow:"Groups & Events",meta:["Your event","Dates","Needs","Contact"],
+    q1:"What are you celebrating?",s1:"Tell us the type of event or group and how many of you there'll be.",
+    t_wed:"Wedding",t_corp:"Corporate",t_fam:"Family / Group",t_ret:"Retreat",
+    people:"Approximate number of guests",
+    q2:"When for?",s2:"If you don't have an exact date yet, tick \"to be defined\".",from:"From",to:"To",
+    flex:"Flexible date / to be defined",dateerr:"The end date must be later.",night:"night",nights:"nights",
+    q3:"What do you need?",s3:"Select anything you're interested in (optional).",
+    q4:"Your details",s4:"We'll send you a tailored quote.",name:"Name",org:"Company / organization (optional)",contact:"Phone or email",comments:"Comments (optional)",
+    nameerr:"Please enter at least your name.",note:"Our events desk replies on WhatsApp with a proposal and availability.",
+    back:"← Back",next:"Continue →",send:"Request a quote",
+    sumEv:"Event",sumP:"Guests",sumD:"Dates",sumNeeds:"Needs",sumN:"Name",sumOrg:"Organization",sumC:"Contact",sumCom:"Comments",
+    approx:"approx.",tbd:"To be defined",wa_hi:"Hello OMZ 👋, I'd like a quote for a group / event:",wa_thx:"Thank you!"}};
+  function lang(){return document.documentElement.lang==='en'?'en':'es';}
+  function t(){return L[lang()];}
+  var st={type:"",people:"",din:"",dout:"",flex:false,needs:[],name:"",org:"",contact:"",notes:""};
+  var step=1,MAX=4;var $=function(s){return document.querySelector(s)};var ov=$('#grp-overlay');
+  function applyTexts(){var d=t();
+    document.querySelectorAll('#grp-overlay [data-gk]').forEach(function(el){var k=el.getAttribute('data-gk');if(d[k]!=null)el.textContent=d[k];});
+    document.querySelectorAll('#grp-needs .grp-chip').forEach(function(c){c.textContent=NEEDS[lang()][c.getAttribute('data-need')];});
+    $('#grp-people').setAttribute('placeholder',lang()==='en'?'e.g. 80':'Ej. 80');
+    $('#grp-org').setAttribute('placeholder',lang()==='en'?'If applicable':'Si aplica');
+    $('#grp-contact').setAttribute('placeholder',lang()==='en'?'+56 9 ... or you@email.com':'+56 9 ... o tu@email.com');
+    $('#grp-notes').setAttribute('placeholder',lang()==='en'?'Event details, requirements, budget…':'Detalles del evento, requerimientos, presupuesto…');
+    renderMeta();if(step===2)renderNights();if(step===4)buildSummary();
+  }
+  function renderMeta(){var d=t();$('#grp-meta').textContent=(lang()==='en'?'Step ':'Paso ')+step+(lang()==='en'?' of ':' de ')+MAX+' · '+d.meta[step-1];}
+  function nights(){if(st.flex||!st.din||!st.dout)return 0;var a=new Date(st.din),b=new Date(st.dout);return Math.max(0,Math.round((b-a)/86400000));}
+  function renderNights(){var d=t(),n=nights(),box=$('#grp-nights');if(n>0&&!st.flex){$('#grp-nnum').textContent=n;$('#grp-nword').textContent=n===1?d.night:d.nights;box.classList.add('show');}else box.classList.remove('show');}
+  function fmt(x){if(!x)return '—';var p=x.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+  function dateLabel(){var d=t();if(st.flex)return d.tbd;if(st.din&&st.dout)return fmt(st.din)+' → '+fmt(st.dout)+' ('+nights()+' '+(nights()===1?d.night:d.nights)+')';return '—';}
+  function typeLabel(){var d=t();var m={"Matrimonio":d.t_wed,"Corporativo":d.t_corp,"Familiar / Grupo":d.t_fam,"Retiro":d.t_ret};return m[st.type]||st.type;}
+  function needsLabel(){return st.needs.map(function(v){return NEEDS[lang()][v];}).join(', ');}
+  function validate(){var ok=true;
+    if(step===1)ok=!!st.type&&(+st.people>0);
+    if(step===2){if(st.flex)ok=true;else{ok=!!st.din&&!!st.dout&&nights()>0;$('#grp-dateerr').classList.toggle('show',!!st.din&&!!st.dout&&nights()<=0);}renderNights();}
+    if(step===4)ok=st.name.trim().length>0;
+    $('#grp-next').disabled=!ok;return ok;}
+  function buildSummary(){var d=t();var rows=[[d.sumEv,typeLabel()],[d.sumP,(st.people||'—')+(st.people?(' '+d.approx):'')],[d.sumD,dateLabel()]];
+    if(st.needs.length)rows.push([d.sumNeeds,needsLabel()]);rows.push([d.sumN,st.name||'—']);
+    if(st.org.trim())rows.push([d.sumOrg,st.org.trim()]);rows.push([d.sumC,st.contact||'—']);
+    $('#grp-summary').innerHTML=rows.map(function(r){return '<div class="ln"><span class="k">'+r[0]+'</span><span class="v">'+r[1]+'</span></div>'}).join('');}
+  function waLink(){var d=t();
+    var msg=d.wa_hi+'\n\n'+'• '+d.sumEv+': '+typeLabel()+'\n'+'• '+d.sumP+': '+st.people+' ('+d.approx+')\n'+'• '+d.sumD+': '+dateLabel()+'\n'+
+      (st.needs.length?('• '+d.sumNeeds+': '+needsLabel()+'\n'):'')+'• '+d.sumN+': '+st.name+'\n'+
+      (st.org.trim()?('• '+d.sumOrg+': '+st.org.trim()+'\n'):'')+'• '+d.sumC+': '+(st.contact||'—')+
+      (st.notes.trim()?('\n• '+d.sumCom+': '+st.notes.trim()):'')+'\n\n'+d.wa_thx;
+    return 'https://wa.me/'+WA+'?text='+encodeURIComponent(msg);}
+  function show(n){step=n;
+    document.querySelectorAll('#grp-overlay .grp-step').forEach(function(e){e.classList.toggle('active',+e.dataset.step===n)});
+    document.querySelectorAll('#grp-overlay .grp-prog i').forEach(function(e,i){e.classList.toggle('on',i<n)});
+    renderMeta();$('#grp-back').style.display=n>1?'inline-flex':'none';$('#grp-next').style.display=n<MAX?'inline-flex':'none';$('#grp-send').style.display=n===MAX?'inline-flex':'none';
+    if(n===2)renderNights();if(n===4)buildSummary();ov.querySelector('.grp-card').scrollTo(0,0);validate();}
+  function openGrp(){st={type:"",people:"",din:"",dout:"",flex:false,needs:[],name:"",org:"",contact:"",notes:""};
+    document.querySelectorAll('#grp-types .grp-opt').forEach(function(x){x.classList.remove('sel')});
+    document.querySelectorAll('#grp-needs .grp-chip').forEach(function(x){x.classList.remove('on')});
+    $('#grp-people').value='';$('#grp-din').value='';$('#grp-dout').value='';$('#grp-din').disabled=false;$('#grp-dout').disabled=false;$('#grp-flex').checked=false;
+    $('#grp-name').value='';$('#grp-org').value='';$('#grp-contact').value='';$('#grp-notes').value='';
+    applyTexts();show(1);ov.classList.add('open');document.body.style.overflow='hidden';}
+  function closeGrp(){ov.classList.remove('open');document.body.style.overflow='';}
+  $('#grp-types').addEventListener('click',function(e){var o=e.target.closest('.grp-opt');if(!o)return;document.querySelectorAll('#grp-types .grp-opt').forEach(function(x){x.classList.remove('sel')});o.classList.add('sel');st.type=o.dataset.type;validate();});
+  $('#grp-people').addEventListener('input',function(e){st.people=e.target.value;validate();});
+  $('#grp-din').addEventListener('change',function(e){st.din=e.target.value;$('#grp-dout').min=st.din;validate();});
+  $('#grp-dout').addEventListener('change',function(e){st.dout=e.target.value;validate();});
+  $('#grp-flex').addEventListener('change',function(e){st.flex=e.target.checked;$('#grp-din').disabled=st.flex;$('#grp-dout').disabled=st.flex;validate();});
+  $('#grp-needs').addEventListener('click',function(e){var c=e.target.closest('.grp-chip');if(!c)return;c.classList.toggle('on');var v=c.dataset.need,i=st.needs.indexOf(v);if(i>=0)st.needs.splice(i,1);else st.needs.push(v);});
+  $('#grp-name').addEventListener('input',function(e){st.name=e.target.value;validate();});
+  $('#grp-org').addEventListener('input',function(e){st.org=e.target.value;});
+  $('#grp-contact').addEventListener('input',function(e){st.contact=e.target.value;});
+  $('#grp-notes').addEventListener('input',function(e){st.notes=e.target.value;});
+  $('#grp-next').addEventListener('click',function(){if(!validate())return;if(step<MAX)show(step+1);});
+  $('#grp-back').addEventListener('click',function(){if(step>1)show(step-1);});
+  $('#grp-send').addEventListener('click',function(){window.open(waLink(),'_blank');});
+  $('#grp-close').addEventListener('click',closeGrp);
+  ov.addEventListener('click',function(e){if(e.target===ov)closeGrp();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&ov.classList.contains('open'))closeGrp();});
+  document.addEventListener('click',function(e){if(e.target.closest('[data-lang]'))setTimeout(applyTexts,0);});
+  document.addEventListener('click',function(e){if(e.target.closest('[data-group-reserve]')){e.preventDefault();if(window.closeReserveWizard)window.closeReserveWizard();openGrp();}});
+  window.openGroupWizard=openGrp;
+})();
+</script>
+<!-- ===== /GROUP WIZARD ===== -->
 
 </body>
 </html>
