@@ -133,18 +133,18 @@ p{color:var(--text)}
   .nav__mobile-top{display:flex;align-items:center;justify-content:space-between;height:46px}
   .nav__mobile-logo{height:32px;width:auto}
   .nav__mobile-close{background:none;border:0;color:var(--ink);cursor:pointer;padding:8px;margin-right:-8px;display:flex}
-  .nav__mobile-links{display:flex;flex-direction:column;margin-top:6px;flex:1;justify-content:center}
-  .nav__mobile-links a{font-family:var(--serif);font-size:clamp(2.1rem,9vw,3rem);font-weight:500;color:var(--head);
-    letter-spacing:.01em;line-height:1;padding:18px 0;border-top:1px solid var(--line);display:flex;align-items:baseline;gap:18px;
-    opacity:0;transform:translateY(16px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
-  .nav__mobile-links a:last-child{border-bottom:1px solid var(--line)}
-  .nav__mobile-links .ix{font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.1em;color:var(--muted);transform:translateY(-.5em)}
-  .nav__mobile.open .nav__mobile-links a{opacity:1;transform:none}
-  .nav__mobile.open .nav__mobile-links a:nth-child(1){transition-delay:.10s}
-  .nav__mobile.open .nav__mobile-links a:nth-child(2){transition-delay:.16s}
-  .nav__mobile.open .nav__mobile-links a:nth-child(3){transition-delay:.22s}
-  .nav__mobile.open .nav__mobile-links a:nth-child(4){transition-delay:.28s}
-  .nav__mobile.open .nav__mobile-links a:nth-child(5){transition-delay:.34s}
+  .nav__mobile-links{display:flex;flex-direction:column;margin-top:8px;flex:1;justify-content:flex-start;overflow-y:auto;overflow-x:hidden;scrollbar-width:none}
+  .nav__mobile-links::-webkit-scrollbar{display:none}
+  .m-link,.m-acc__head{font-family:var(--serif);font-size:1.65rem;font-weight:500;color:var(--head);line-height:1.05;padding:17px 2px;display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;list-style:none;text-decoration:none}
+  .m-link,.m-acc{border-top:1px solid var(--line)}
+  .nav__mobile-links>:last-child{border-bottom:1px solid var(--line)}
+  .m-acc__head{border:0}
+  .m-acc__head::-webkit-details-marker{display:none}
+  .m-chev{width:15px;height:15px;color:var(--muted);transition:transform .28s var(--ease);flex:0 0 auto}
+  details.m-acc[open] .m-chev{transform:rotate(180deg)}
+  .m-acc__panel{padding:0 0 10px;animation:mAccIn .28s var(--ease)}
+  .m-acc__panel a{display:block;font-family:var(--serif);font-size:1.16rem;color:var(--text);padding:9px 0 9px 6px;text-decoration:none;border:0}
+  @keyframes mAccIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
   .nav__mobile-foot{opacity:0;transform:translateY(16px);transition:opacity .5s var(--ease) .42s,transform .5s var(--ease) .42s}
   .nav__mobile.open .nav__mobile-foot{opacity:1;transform:none}
   .nav__mobile-cta{display:flex;align-items:center;justify-content:center;width:100%;background:var(--slate);color:var(--cream-soft);
@@ -457,14 +457,6 @@ p{color:var(--text)}
 .navx__panel:not(.navx__panel--mega) a:hover{background:var(--paper-2)}
 .m-label{font-family:var(--sans);font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);
   display:block;padding:20px 0 2px}
-@media (max-width:860px){
-  .nav__mobile-links{overflow-y:auto;justify-content:flex-start!important;gap:0!important;padding-top:6px}
-  .nav__mobile-links a{font-size:clamp(1.55rem,7.5vw,2rem)!important;padding:11px 0!important;border-top:none!important;border-bottom:none!important}
-  .nav__mobile-links a:last-child{border-bottom:none!important}
-  .nav__mobile-links .m-sub{font-size:clamp(1.12rem,5.4vw,1.42rem)!important;padding:6px 0 6px 2px!important;color:var(--text)!important}
-  .nav__mobile-links .m-sub.active{color:var(--head)!important}
-  .m-label{padding:14px 0 2px}
-}
 
 .howto{display:flex;flex-direction:column;gap:9px;margin-top:8px}
 .howto__t{font-family:var(--sans);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cream-mut);margin-bottom:3px}
@@ -487,7 +479,6 @@ p{color:var(--text)}
 .getto__map{position:relative;aspect-ratio:4/3;border:1px solid var(--line);overflow:hidden;background:var(--paper-3)}
 .getto__map iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(.82) sepia(.16) brightness(1.06) contrast(.9)}
 @media(max-width:860px){.getto__in{grid-template-columns:1fr;gap:26px} .getto__map{aspect-ratio:16/10}}
-
 
 
 
@@ -600,23 +591,35 @@ p{color:var(--text)}
     <button class="nav__mobile-close" aria-label="Cerrar menú"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
   </div>
   <nav class="nav__mobile-links">
-    <a href="inicio.html">Inicio</a>
-    <span class="m-label">Alojamiento</span>
-    <a href="hotel.html" class="m-sub">Hotel</a>
-    <a href="cabanas.html" class="m-sub">Cabañas</a>
-    <a href="domos.html" class="m-sub active">Domos</a>
-    <a href="camping.html" class="m-sub">Camping</a>
-    <span class="m-label">Restaurant</span>
-    <a href="restaurant.html" class="m-sub">Ver restaurant</a>
-    <a href="carta.html" class="m-sub">Ver carta</a>
-    <a href="carta.pdf" target="_blank" rel="noopener" class="m-sub">Descargar PDF</a>
-    <span class="m-label">Experiencias</span>
-    <a href="actividades.html" class="m-sub">Actividades</a>
-    <a href="spa.html" class="m-sub">Spa OMZ</a>
-    <a href="eventos.html" class="m-sub">Eventos</a>
-    <a href="galeria.html">Galería</a>
-    <a href="#como-llegar">Cómo llegar</a>
-    <a href="inicio.html#contacto">Contacto</a>
+    <a href="inicio.html" class="m-link">Inicio</a>
+    <details name="omz-mnav" class="m-acc">
+      <summary class="m-acc__head">Alojamiento<svg class="m-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="m-acc__panel">
+        <a href="hotel.html">Hotel</a>
+        <a href="cabanas.html">Cabañas</a>
+        <a href="domos.html">Domos</a>
+        <a href="camping.html">Camping</a>
+      </div>
+    </details>
+    <details name="omz-mnav" class="m-acc">
+      <summary class="m-acc__head">Restaurant<svg class="m-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="m-acc__panel">
+        <a href="restaurant.html">Ver restaurant</a>
+        <a href="carta.html">Ver carta</a>
+        <a href="carta.pdf" target="_blank" rel="noopener">Descargar PDF</a>
+      </div>
+    </details>
+    <details name="omz-mnav" class="m-acc">
+      <summary class="m-acc__head">Experiencias<svg class="m-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="m-acc__panel">
+        <a href="actividades.html">Actividades</a>
+        <a href="spa.html">Spa OMZ</a>
+        <a href="eventos.html">Eventos</a>
+      </div>
+    </details>
+    <a href="galeria.html" class="m-link">Galería</a>
+    <a href="#como-llegar" class="m-link">Cómo llegar</a>
+    <a href="#contacto" class="m-link">Contacto</a>
   </nav>
   <div class="nav__mobile-foot">
     <a href="#contacto" class="nav__mobile-cta" data-reserve>Reservar</a>
