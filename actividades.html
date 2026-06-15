@@ -130,7 +130,7 @@ p{color:var(--text)}
   .nav__mobile{position:fixed;inset:0;z-index:65;background:var(--paper);transform:translateY(-101%);
     transition:transform .62s var(--ease);display:flex;flex-direction:column;padding:18px var(--gut) 34px}
   .nav__mobile.open{transform:none}
-  .nav__mobile-top{display:flex;align-items:center;justify-content:space-between;height:46px}
+  .nav__mobile-top{display:flex;align-items:center;justify-content:space-between;min-height:46px}
   .nav__mobile-logo{height:32px;width:auto}
   .nav__mobile-close{background:none;border:0;color:var(--ink);cursor:pointer;padding:8px;margin-right:-8px;display:flex}
   .nav__mobile-links{display:flex;flex-direction:column;margin-top:8px;flex:1;justify-content:flex-start;overflow-y:auto;overflow-x:hidden;scrollbar-width:none}
@@ -152,6 +152,12 @@ p{color:var(--text)}
   .nav__mobile-contact{display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:22px}
   .nav__mobile-contact a{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-style:normal;font-size:.98rem;letter-spacing:.01em;color:var(--head);padding:9px 12px}
   .nav__mobile-contact a svg{color:var(--slate);flex:0 0 auto}
+.nav__mobile-top-r{display:flex;align-items:center;gap:12px}
+.nav__mobile-top-r .langsw-m{margin-top:0!important;display:flex}
+.nav__mobile-top-r .langsw-m button{padding:6px 11px;font-size:.76rem;letter-spacing:.1em}
+.nav__mobile-contact--row{flex-direction:row!important;gap:0!important;margin-top:14px!important;align-items:center;justify-content:center}
+.nav__mobile-contact--row a{padding:5px 5px!important;font-size:.86rem}
+.nmc-dot{color:var(--muted);margin:0 5px;align-self:center}
 }
 
 /* =========================================================
@@ -621,7 +627,7 @@ p{color:var(--text)}
 <div class="nav__mobile">
   <div class="nav__mobile-top">
     <img src="assets/a-4d11247dadf2.png" alt="Olas de Matanzas" class="nav__mobile-logo" decoding="async" loading="lazy">
-    <button class="nav__mobile-close" aria-label="Cerrar menú"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+    <div class="nav__mobile-top-r"><div class="langsw-m" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div><button class="nav__mobile-close" aria-label="Cerrar menú"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>
   </div>
   <nav class="nav__mobile-links">
     <a href="inicio.html" class="m-link">Inicio</a>
@@ -656,11 +662,11 @@ p{color:var(--text)}
   </nav>
   <div class="nav__mobile-foot">
     <a href="#contacto" class="nav__mobile-cta" data-reserve>Reservar</a>
-    <div class="nav__mobile-contact">
-      <a href="tel:+56996434809"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+56 9 9643 4809</a>
-      <a href="mailto:info@omz.cl"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>info@omz.cl</a>
+    <div class="nav__mobile-contact nav__mobile-contact--row">
+      <a href="tel:+56996434809">+56 9 9643 4809</a>
+      <span class="nmc-dot">·</span>
+      <a href="mailto:info@omz.cl">info@omz.cl</a>
     </div>
-    <div class="langsw-m" role="group" aria-label="Idioma / Language"><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button></div>
   </div>
 </div>
 
