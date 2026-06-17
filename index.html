@@ -1239,11 +1239,19 @@ p{color:var(--text)}
 <div class="vlb"><button class="vlb__x">Cerrar ✕</button><video controls playsinline></video></div>
 <script>/*reels*/(function(){
   var cards=[].slice.call(document.querySelectorAll('.reel')); if(!cards.length)return;
-  cards.forEach(function(c){
-    var v=c.querySelector('video'); if(!v)return;
-    c.addEventListener('mouseenter',function(){ v.play().then(function(){c.classList.add('playing')}).catch(function(){}); });
-    c.addEventListener('mouseleave',function(){ v.pause(); v.currentTime=0; c.classList.remove('playing'); });
-  });
+  var _desk=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if(_desk){
+    // desktop: autoplay de los reels visibles en el riel; pausa los que salen de vista
+    var _io=new IntersectionObserver(function(es){es.forEach(function(en){var v=en.target.querySelector('video');if(!v)return;if(en.isIntersecting&&en.intersectionRatio>=0.5){v.play().then(function(){en.target.classList.add('playing')}).catch(function(){});}else{v.pause();en.target.classList.remove('playing');}});},{threshold:[0,0.5,1]});
+    cards.forEach(function(c){ if(c.querySelector('video')) _io.observe(c); });
+  } else {
+    // movil/touch: igual que ahora (hover/tap; el tap abre el lightbox)
+    cards.forEach(function(c){
+      var v=c.querySelector('video'); if(!v)return;
+      c.addEventListener('mouseenter',function(){ v.play().then(function(){c.classList.add('playing')}).catch(function(){}); });
+      c.addEventListener('mouseleave',function(){ v.pause(); v.currentTime=0; c.classList.remove('playing'); });
+    });
+  }
   var vlb=document.querySelector('.vlb'), vv=vlb?vlb.querySelector('video'):null;
   function openV(src){ if(!vlb)return; vv.src=src; vlb.classList.add('open'); vv.currentTime=0; vv.play().catch(function(){}); document.body.style.overflow='hidden'; }
   function closeV(){ if(!vlb)return; vv.pause(); vlb.classList.remove('open'); document.body.style.overflow=''; }
