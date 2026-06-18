@@ -439,7 +439,11 @@ p{color:var(--text)}
 .cabacard__cap small{font-family:var(--sans);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .cabacard__blurb{color:var(--text);font-size:.97rem;line-height:1.7;margin-bottom:22px;flex:1}
 .cabacard__foot{display:flex;justify-content:space-between;align-items:center;padding-top:18px;border-top:1px solid var(--line)}
-.cabacard__price{font-family:var(--serif);font-size:1.5rem;color:var(--head)}
+.cabacard__price{display:flex;flex-direction:column;gap:3px}
+.cabacard__rate{display:flex;align-items:baseline;gap:9px}
+.cabacard__season{font-family:var(--sans);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;min-width:30px}
+.cabacard__amt{font-family:var(--serif);font-size:1.3rem;color:var(--head);line-height:1.12}
+.cabacard__per{font-family:var(--sans);font-size:.68rem;color:var(--muted);margin-top:2px;letter-spacing:.02em}
 .cabacard__price small{font-family:var(--sans);font-size:.78rem;color:var(--muted)}
 .cabacard__go{font-family:var(--sans);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--slate);display:inline-flex;align-items:center;gap:8px}
 .cabacard:hover .cabacard__go svg{transform:translateX(4px);transition:transform .4s var(--ease)}
@@ -718,7 +722,7 @@ p{color:var(--text)}
           </div>
           <p class="cabacard__blurb">Hot tub privado, cocina totalmente equipada y terraza con vista al mar.</p>
           <div class="cabacard__foot">
-            <span class="cabacard__price">$175.500 <small>/ noche</small></span>
+            <span class="cabacard__price"><span class="cabacard__rate"><span class="cabacard__season">Baja</span><span class="cabacard__amt">$160.000</span></span><span class="cabacard__rate"><span class="cabacard__season">Alta</span><span class="cabacard__amt">$189.000</span></span><span class="cabacard__per">por noche</span></span>
             <span class="cabacard__go">Ver detalle <svg width="15" height="9" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
           </div>
         </div>
@@ -732,7 +736,7 @@ p{color:var(--text)}
           </div>
           <p class="cabacard__blurb">Zona de comedor, cocina totalmente equipada, hot tub privado y terraza con vista al mar.</p>
           <div class="cabacard__foot">
-            <span class="cabacard__price">$180.500 <small>/ noche</small></span>
+            <span class="cabacard__price"><span class="cabacard__rate"><span class="cabacard__season">Baja</span><span class="cabacard__amt">$165.000</span></span><span class="cabacard__rate"><span class="cabacard__season">Alta</span><span class="cabacard__amt">$195.000</span></span><span class="cabacard__per">por noche</span></span>
             <span class="cabacard__go">Ver detalle <svg width="15" height="9" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
           </div>
         </div>
@@ -746,7 +750,7 @@ p{color:var(--text)}
           </div>
           <p class="cabacard__blurb">Terraza con vista al mar, chimenea, cocina equipada, quincho con parrilla y hot tub privado.</p>
           <div class="cabacard__foot">
-            <span class="cabacard__price">$199.500 <small>/ noche</small></span>
+            <span class="cabacard__price"><span class="cabacard__rate"><span class="cabacard__season">Baja</span><span class="cabacard__amt">$180.000</span></span><span class="cabacard__rate"><span class="cabacard__season">Alta</span><span class="cabacard__amt">$215.000</span></span><span class="cabacard__per">por noche</span></span>
             <span class="cabacard__go">Ver detalle <svg width="15" height="9" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
           </div>
         </div>
@@ -760,7 +764,7 @@ p{color:var(--text)}
           </div>
           <p class="cabacard__blurb">Habitaciones con vista al mar, hot tub privado, cocina equipada, chimenea y terraza.</p>
           <div class="cabacard__foot">
-            <span class="cabacard__price">$199.500 <small>/ noche</small></span>
+            <span class="cabacard__price"><span class="cabacard__rate"><span class="cabacard__season">Baja</span><span class="cabacard__amt">$180.000</span></span><span class="cabacard__rate"><span class="cabacard__season">Alta</span><span class="cabacard__amt">$215.000</span></span><span class="cabacard__per">por noche</span></span>
             <span class="cabacard__go">Ver detalle <svg width="15" height="9" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
           </div>
         </div>
@@ -774,7 +778,7 @@ p{color:var(--text)}
           </div>
           <p class="cabacard__blurb">Amplia terraza con vista al mar, chimenea, cocina equipada, habitaciones con vista al mar y hot tub privado.</p>
           <div class="cabacard__foot">
-            <span class="cabacard__price">$199.500 <small>/ noche</small></span>
+            <span class="cabacard__price"><span class="cabacard__rate"><span class="cabacard__season">Baja</span><span class="cabacard__amt">$180.000</span></span><span class="cabacard__rate"><span class="cabacard__season">Alta</span><span class="cabacard__amt">$215.000</span></span><span class="cabacard__per">por noche</span></span>
             <span class="cabacard__go">Ver detalle <svg width="15" height="9" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
           </div>
         </div>
@@ -788,7 +792,7 @@ p{color:var(--text)}
           </div>
           <p class="cabacard__blurb">Hot tub privado, amplias terrazas con vista al mar, cocina equipada y chimenea.</p>
           <div class="cabacard__foot">
-            <span class="cabacard__price">$199.500 <small>/ noche</small></span>
+            <span class="cabacard__price"><span class="cabacard__rate"><span class="cabacard__season">Baja</span><span class="cabacard__amt">$180.000</span></span><span class="cabacard__rate"><span class="cabacard__season">Alta</span><span class="cabacard__amt">$215.000</span></span><span class="cabacard__per">por noche</span></span>
             <span class="cabacard__go">Ver detalle <svg width="15" height="9" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
           </div>
         </div>
@@ -802,7 +806,7 @@ p{color:var(--text)}
           </div>
           <p class="cabacard__blurb">Balcón, hot tub privado, chimenea y terraza con vista al mar.</p>
           <div class="cabacard__foot">
-            <span class="cabacard__price">$210.500 <small>/ noche</small></span>
+            <span class="cabacard__price"><span class="cabacard__rate"><span class="cabacard__season">Baja</span><span class="cabacard__amt">$190.000</span></span><span class="cabacard__rate"><span class="cabacard__season">Alta</span><span class="cabacard__amt">$227.000</span></span><span class="cabacard__per">por noche</span></span>
             <span class="cabacard__go">Ver detalle <svg width="15" height="9" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
           </div>
         </div>
@@ -816,7 +820,7 @@ p{color:var(--text)}
           </div>
           <p class="cabacard__blurb">Sofá, chimenea, hot tub y cocina totalmente equipada.</p>
           <div class="cabacard__foot">
-            <span class="cabacard__price">$220.500 <small>/ noche</small></span>
+            <span class="cabacard__price"><span class="cabacard__rate"><span class="cabacard__season">Baja</span><span class="cabacard__amt">$200.000</span></span><span class="cabacard__rate"><span class="cabacard__season">Alta</span><span class="cabacard__amt">$238.000</span></span><span class="cabacard__per">por noche</span></span>
             <span class="cabacard__go">Ver detalle <svg width="15" height="9" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5h13M10 1l4 4-4 4"/></svg></span>
           </div>
         </div>
