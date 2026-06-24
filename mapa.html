@@ -1,0 +1,337 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mapa interactivo · OMZ Olas de Matanzas</title>
+<meta name="description" content="Mapa interactivo del complejo OMZ Olas de Matanzas: cabañas, camping, hotel, restaurante y servicios. Busca un lugar, explora una zona y mira fotos.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Mulish:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4efe6;--slate:#3d545b;--slate-deep:#2e434a;--head:#415a63;--ink:#313f47;--cream:#efe8da;--line:#d9cfbd}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Mulish',system-ui,sans-serif}
+a{color:inherit}
+/* site header */
+.shead{position:sticky;top:0;z-index:80;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:11px clamp(14px,3vw,42px);background:rgba(244,239,230,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.shead__logo img{height:38px;display:block}
+.shead__nav{display:flex;gap:clamp(12px,1.7vw,26px);align-items:center}
+.shead__nav a{font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink);text-decoration:none;font-weight:500}
+.shead__nav a.active,.shead__nav a:hover{color:var(--slate)}
+.shead__cta{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;background:var(--slate);color:#fff;padding:10px 18px;text-decoration:none;white-space:nowrap}
+.shead__cta:hover{background:var(--slate-deep)}
+.head{text-align:center;max-width:880px;margin:clamp(16px,3vw,30px) auto clamp(12px,2vw,18px);padding:0 16px}
+.head .kick{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--slate);font-weight:700}
+.head h1{font-family:'Cormorant Garamond',serif;font-weight:500;color:var(--head);font-size:clamp(1.8rem,4vw,2.8rem);margin:.2em 0 .12em}
+.head p{color:#6c685f;font-size:.95rem;margin:0}
+.legend{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:0 auto 12px;max-width:1320px;padding:0 16px}
+.legend span{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:#6c685f}
+.legend i{width:12px;height:12px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
+.cI{background:#3d545b}.cC{background:#9c6b3f}.cB{background:#b8682f}.cS{background:#3f7d86}.cT{background:#5d8a4f}
+.mapouter{position:relative;max-width:1320px;margin:0 auto;padding:0 clamp(0px,2vw,16px)}
+.ctrl{position:absolute;top:0;left:clamp(0px,2vw,16px);right:clamp(0px,2vw,16px);z-index:30;display:flex;gap:10px;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;padding:14px 16px 36px;background:linear-gradient(to bottom,rgba(244,239,230,.96),rgba(244,239,230,.82) 48%,rgba(244,239,230,0));pointer-events:none}
+.ctrl>*{pointer-events:auto}
+.zones{display:flex;gap:8px;flex-wrap:wrap}
+.zbtn{border:1px solid var(--line);background:#fff;color:var(--head);font-weight:700;font-size:.78rem;letter-spacing:.03em;padding:9px 14px;border-radius:0;cursor:pointer;transition:.18s;font-family:inherit}
+.zbtn:hover{border-color:var(--slate);color:var(--slate)}
+.zbtn.on{background:var(--slate);color:#fff;border-color:var(--slate)}
+.zbtn.reset{background:transparent;border-style:dashed}
+.search{position:relative;min-width:220px;flex:1;max-width:330px}
+.search input{width:100%;border:1px solid var(--line);background:#fff;border-radius:0;padding:10px 16px 10px 40px;font-family:inherit;font-size:.9rem;color:var(--ink)}
+.search input:focus{outline:none;border-color:var(--slate)}
+.search>svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);opacity:.5}
+.results{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border:1px solid var(--line);border-radius:0;box-shadow:0 18px 40px -16px rgba(0,0,0,.35);max-height:300px;overflow:auto;z-index:40;display:none}
+.results.show{display:block}
+.results button{display:flex;width:100%;align-items:center;gap:10px;border:0;background:none;padding:9px 14px;cursor:pointer;font-family:inherit;font-size:.88rem;color:var(--ink);text-align:left}
+.results button:hover{background:var(--cream)}
+.results .dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+.results .cat{margin-left:auto;font-size:.7rem;color:#9a9384;text-transform:uppercase;letter-spacing:.08em}
+.results .grp{padding:6px 14px 3px;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:#a7a08f;font-weight:800}
+.mapwrap{position:relative;border-radius:0;overflow:hidden;box-shadow:0 26px 64px -30px rgba(0,0,0,.5);background:#cfdbd9}
+.vp{position:relative;overflow:hidden;cursor:grab;touch-action:none}
+.vp.drag{cursor:grabbing}
+.stage{position:relative;will-change:transform;transform-origin:0 0;line-height:0}
+.stage img{width:100%;height:auto;display:block;-webkit-user-drag:none;user-select:none;image-rendering:auto}
+.mask{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .5s;pointer-events:none}
+.mask path{fill:rgba(26,36,40,.62)}
+.hs{position:absolute;width:1.45%;aspect-ratio:1;min-width:13px;min-height:13px;transform:translate(-50%,-50%);border-radius:50%;border:3px solid #fff;background:var(--d);box-shadow:0 0 0 1.5px var(--d),0 2px 8px rgba(0,0,0,.6);cursor:pointer;transition:opacity .35s,filter .35s,transform .15s;z-index:3}
+.hs::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--d)}
+.hs::before{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--d);opacity:.5;animation:pp 2.6s ease-out infinite}
+@keyframes pp{0%{transform:scale(.65);opacity:.55}70%{transform:scale(2);opacity:0}100%{opacity:0}}
+.hs.sit{width:1.35%}.hs.sit::before{display:none}
+.hs:hover{transform:translate(-50%,-50%) scale(1.32);z-index:8}
+.hs.off{opacity:.18;filter:grayscale(.7)}
+.hs.focus{z-index:9}.hs.focus::before{animation:pf 1.3s ease-out infinite;border-width:3px;opacity:.8}
+@keyframes pf{0%{transform:scale(.6);opacity:.85}75%{transform:scale(2.6);opacity:0}100%{opacity:0}}
+.tip{position:absolute;transform:translate(-50%,calc(-100% - 14px));background:var(--slate-deep);color:#fff;padding:8px 14px;border-radius:0;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .14s;z-index:55;box-shadow:0 12px 30px -10px rgba(0,0,0,.5)}
+.tip .tn{font-size:clamp(.92rem,1.4vw,1.15rem);font-weight:700}
+.tip::after{content:"";position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--slate-deep);border-bottom:0}
+.tip.show{opacity:1}
+.zsum{position:absolute;left:14px;bottom:14px;background:rgba(46,67,74,.92);color:#fff;padding:10px 16px;border-radius:0;font-size:.85rem;max-width:74%;opacity:0;transform:translateY(8px);transition:.3s;z-index:25;pointer-events:none}
+.zsum.show{opacity:1;transform:none}
+.zsum b{font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:600;display:block;margin-bottom:2px}
+/* panel */
+.panel{position:absolute;top:14px;right:14px;width:330px;max-width:calc(100% - 28px);background:#fff;border-radius:0;overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,.55);z-index:35;transform:translateX(calc(100% + 30px));opacity:0;transition:transform .4s cubic-bezier(.4,0,.2,1),opacity .3s}
+.panel.open{transform:none;opacity:1}
+.panel__x{position:absolute;top:9px;right:9px;width:30px;height:30px;border-radius:0;border:0;background:rgba(0,0,0,.5);color:#fff;font-size:1.1rem;cursor:pointer;line-height:1;z-index:4}
+.gal{position:relative;background:var(--cream)}
+.gal__img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+.gal__nav{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;background:rgba(0,0,0,.42);color:#fff;font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;z-index:2}
+.gal__prev{left:8px}.gal__next{right:8px}
+.gal__nav:hover{background:rgba(0,0,0,.64)}
+.gal__dots{position:absolute;bottom:8px;left:0;right:0;display:flex;gap:6px;justify-content:center;z-index:2}
+.gal__dot{width:7px;height:7px;border-radius:50%;border:0;background:rgba(255,255,255,.55);cursor:pointer;padding:0}
+.gal__dot.on{background:#fff}
+.panel__band{height:8px}
+.panel__b{padding:15px 17px 17px}
+.panel__cat{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--tc2)}
+.panel__t{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.5rem;color:var(--head);margin:.08em 0 .3em}
+.panel__meta{margin-bottom:8px}
+.panel__g{font-size:.84rem;color:#7a7466}
+.panel__prices{display:flex;gap:9px;margin:0 0 11px}
+.panel__prices>div{flex:1;border:1px solid var(--line);padding:8px 10px}
+.panel__prices span{display:block;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:#9a9384;font-weight:800;margin-bottom:2px}
+.panel__prices b{font-size:1.02rem;color:var(--ink)}
+.panel__prices small{color:#9a9384;font-size:.64rem;margin-left:3px}
+.panel__d{font-size:.9rem;color:#6c685f;line-height:1.5;margin:0 0 13px}
+.panel__cta{display:block;text-align:center;background:var(--slate);color:#fff;text-decoration:none;font-weight:700;padding:12px;border-radius:0;transition:.18s;font-size:.92rem}
+.panel__cta:hover{background:var(--slate-deep)}
+.panel__map{display:flex;align-items:center;justify-content:center;gap:7px;text-align:center;margin-top:8px;color:var(--head);font-weight:700;font-size:.84rem;text-decoration:none;border:1px solid var(--line);padding:10px;border-radius:0;transition:.18s}
+.panel__map:hover{border-color:var(--slate);color:var(--slate)}
+/* zoom bar */
+.zoombar{max-width:1320px;margin:14px auto 0;display:flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap;padding:0 16px}
+.zoombar .zlab{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--slate);font-weight:800}
+.zstep{width:34px;height:34px;border:1px solid var(--line);background:#fff;color:var(--head);font-size:1.25rem;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
+.zstep:hover{border-color:var(--slate);color:var(--slate)}
+.zrange{-webkit-appearance:none;appearance:none;width:min(440px,52vw);height:4px;background:var(--line);cursor:pointer;outline:none}
+.zrange::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:2px;background:var(--slate);cursor:pointer;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.45)}
+.zrange::-moz-range-thumb{width:18px;height:18px;border-radius:2px;background:var(--slate);border:2px solid #fff;cursor:pointer}
+.zreset{border:1px solid var(--line);background:transparent;border-style:dashed;color:var(--head);font-weight:700;font-size:.8rem;padding:8px 15px;cursor:pointer}
+.zreset:hover{border-color:var(--slate);color:var(--slate)}
+.note{max-width:1320px;margin:16px auto 0;font-size:.84rem;color:#8a8478;padding:0 16px;text-align:center}
+/* footer */
+.sfoot{background:var(--slate-deep);color:#e8e2d6;padding:clamp(26px,5vw,44px) clamp(16px,4vw,48px);margin-top:34px;display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+.sfoot a{color:#fff;text-decoration:none}.sfoot a:hover{text-decoration:underline}
+.sfoot__c{font-size:.9rem;opacity:.9}
+@media(max-width:860px){.shead__nav{display:none}}
+@media(max-width:640px){
+ .ctrl{position:static;background:none;padding:0 0 12px;gap:9px;flex-direction:column;align-items:stretch}
+ .zones{justify-content:center}
+ .zbtn{font-size:.74rem;padding:9px 12px}
+ .search{max-width:100%;min-width:0}
+ .mapouter{padding:0 12px}
+ .panel{position:fixed;top:auto;bottom:0;right:0;left:0;width:100%;max-width:100%;border-radius:0;transform:translateY(110%);max-height:85vh;overflow:auto;z-index:200;box-shadow:0 -16px 40px -16px rgba(0,0,0,.5)}
+ .panel.open{transform:none}
+ .gal__img{aspect-ratio:16/9}
+ .head h1{font-size:1.7rem}
+}
+</style></head>
+<body>
+<header class="shead">
+  <a class="shead__logo" href="inicio.html" aria-label="Olas de Matanzas — inicio"><img src="assets/a-4d11247dadf2.png" alt="Olas de Matanzas"></a>
+  <nav class="shead__nav">
+    <a href="cabanas.html">Alojamiento</a>
+    <a href="restaurant.html">Restaurant</a>
+    <a href="actividades.html">Experiencias</a>
+    <a href="galeria.html">Galería</a>
+    <a href="mapa.html" class="active">Mapa interactivo</a>
+    <a href="inicio.html#como-llegar">Cómo llegar</a>
+  </nav>
+  <a class="shead__cta" href="inicio.html#contacto">Reservar</a>
+</header>
+
+<div class="head">
+  <div class="kick">Mapa interactivo</div>
+  <h1>Complejo turístico OMZ</h1>
+  <p>Busca un lugar, explora una zona, o toca un punto para ver su ficha y fotos.</p>
+</div>
+<div class="legend">
+  <span><i class="cI"></i>Instalaciones</span><span><i class="cC"></i>Cabañas</span>
+  <span><i class="cB"></i>Baños</span><span><i class="cS"></i>Servicios</span><span><i class="cT"></i>Sitios de camping</span>
+</div>
+
+<div class="mapouter">
+<div class="ctrl">
+  <div class="zones" id="zones"></div>
+  <div class="search">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3d545b" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    <input id="q" type="text" placeholder="Selecciona…" autocomplete="off">
+    <div class="results" id="res"></div>
+  </div>
+</div>
+<div class="mapwrap">
+  <div class="vp" id="vp">
+    <div class="stage" id="stage">
+      <img src="assets/mapa-omz.jpg" alt="Mapa del complejo OMZ Olas de Matanzas" draggable="false">
+      <svg class="mask" id="mask" viewBox="0 0 100 100" preserveAspectRatio="none"><path id="mpath" d=""/></svg>
+    </div>
+    <div class="zsum" id="zsum"></div>
+    <div class="panel" id="panel"></div>
+  </div>
+</div>
+<div class="tip" id="tip"></div>
+</div>
+<div class="zoombar">
+  <span class="zlab">Zoom</span>
+  <button class="zstep" id="zout" aria-label="Alejar">−</button>
+  <input id="zslider" class="zrange" type="range" min="1" max="3.2" step="0.02" value="1" aria-label="Zoom">
+  <button class="zstep" id="zin" aria-label="Acercar">+</button>
+  <button class="zreset" id="zrs">Ver todo</button>
+</div>
+<div class="note">Toca un punto para ver su ficha · elige una zona para enfocarla · usa el buscador para ir directo a un lugar.</div>
+
+<footer class="sfoot">
+  <div>© 2026 Olas de Matanzas · Matanzas, Navidad, Chile</div>
+  <div class="sfoot__c"><a href="tel:+56996434809">+56 9 9643 4809</a> · <a href="mailto:info@omz.cl">info@omz.cl</a></div>
+</footer>
+
+<script>
+var D={"img": "assets/mapa-omz.jpg", "spots": [{"x": 55.87, "y": 63.09, "n": "Hotel", "c": "Instalación"}, {"x": 67.3, "y": 57.53, "n": "Restaurant Marvento", "c": "Instalación"}, {"x": 71.68, "y": 46.52, "n": "Spa OMZ", "c": "Instalación"}, {"x": 83.55, "y": 61.81, "n": "Escuela de Surf OMZ", "c": "Instalación"}, {"x": 68.78, "y": 66.44, "n": "Tiendas, cafetería y heladería", "c": "Instalación"}, {"x": 75.41, "y": 54.95, "n": "Juegos infantiles", "c": "Instalación"}, {"x": 50.68, "y": 45.05, "n": "Granja de animales", "c": "Instalación"}, {"x": 45.4, "y": 34.08, "n": "Cancha de Tenis", "c": "Instalación"}, {"x": 63.42, "y": 62.04, "n": "Fogón Restaurante", "c": "Instalación"}, {"x": 76.18, "y": 42.88, "n": "Hot-Tubs", "c": "Instalación"}, {"x": 83.7, "y": 50.61, "n": "Cabaña Los Pájaros", "c": "Cabaña"}, {"x": 85.71, "y": 44.8, "n": "Cabaña Los Lobos", "c": "Cabaña"}, {"x": 87.3, "y": 37.44, "n": "Cabaña Los Pelícanos", "c": "Cabaña"}, {"x": 78.6, "y": 40.05, "n": "Cabaña Las Gaviotas", "c": "Cabaña"}, {"x": 83.0, "y": 34.1, "n": "Cabaña La Sirena", "c": "Cabaña"}, {"x": 90.76, "y": 48.81, "n": "Cabaña La Luna", "c": "Cabaña"}, {"x": 93.77, "y": 41.9, "n": "Cabaña Chagual", "c": "Cabaña"}, {"x": 96.39, "y": 34.14, "n": "Cabaña Las Brisas", "c": "Cabaña"}, {"x": 29.16, "y": 74.67, "n": "Baños Los Peumos", "c": "Baños"}, {"x": 27.42, "y": 92.76, "n": "Baños Los Boldos", "c": "Baños"}, {"x": 9.57, "y": 73.55, "n": "Baños Los Maquis", "c": "Baños"}, {"x": 32.38, "y": 84.09, "n": "Recepción camping", "c": "Camping"}, {"x": 16.23, "y": 78.98, "n": "Fogón", "c": "Camping"}, {"x": 4.42, "y": 85.47, "n": "Quincho", "c": "Camping"}, {"x": 42.63, "y": 28.91, "n": "Casa Bosque", "c": "Camping"}, {"x": 26.15, "y": 74.72, "n": "Sitio de camping 1", "c": "Sitio"}, {"x": 24.01, "y": 71.89, "n": "Sitio de camping 2", "c": "Sitio"}, {"x": 20.86, "y": 71.03, "n": "Sitio de camping 3", "c": "Sitio"}, {"x": 18.32, "y": 68.99, "n": "Sitio de camping 4", "c": "Sitio"}, {"x": 15.76, "y": 67.96, "n": "Sitio de camping 5", "c": "Sitio"}, {"x": 12.61, "y": 68.43, "n": "Sitio de camping 6", "c": "Sitio"}, {"x": 9.67, "y": 66.97, "n": "Sitio de camping 7", "c": "Sitio"}, {"x": 27.05, "y": 81.25, "n": "Sitio de camping 11", "c": "Sitio"}, {"x": 23.38, "y": 83.29, "n": "Sitio de camping 12", "c": "Sitio"}, {"x": 20.41, "y": 83.91, "n": "Sitio de camping 13", "c": "Sitio"}, {"x": 19.05, "y": 81.4, "n": "Sitio de camping 14", "c": "Sitio"}, {"x": 24.58, "y": 95.49, "n": "Sitio de camping 15", "c": "Sitio"}, {"x": 21.94, "y": 95.06, "n": "Sitio de camping 16", "c": "Sitio"}, {"x": 19.68, "y": 93.27, "n": "Sitio de camping 17", "c": "Sitio"}, {"x": 17.8, "y": 91.19, "n": "Sitio de camping 18", "c": "Sitio"}, {"x": 15.17, "y": 92.23, "n": "Sitio de camping 21", "c": "Sitio"}, {"x": 13.43, "y": 90.34, "n": "Sitio de camping 22", "c": "Sitio"}, {"x": 10.82, "y": 91.09, "n": "Sitio de camping 23", "c": "Sitio"}, {"x": 8.51, "y": 87.31, "n": "Sitio de camping 24", "c": "Sitio"}, {"x": 16.06, "y": 81.73, "n": "Sitio de camping 25", "c": "Sitio"}, {"x": 12.91, "y": 81.63, "n": "Sitio de camping 26", "c": "Sitio"}, {"x": 12.84, "y": 75.57, "n": "Sitio de camping 27", "c": "Sitio"}], "caba": {"Cabaña Los Pájaros": {"guests": "2", "desc": "Hot tub privado, cocina totalmente equipada y terraza con vista al mar.", "alta": "$189.000", "baja": "$160.000", "slug": "pajaros", "url": "cabana-pajaros.html", "imgs": ["assets/caba-pajaros-1.jpg", "assets/caba-pajaros-2.jpg", "assets/caba-pajaros-3.jpg", "assets/caba-pajaros-4.jpg"]}, "Cabaña La Luna": {"guests": "2", "desc": "Zona de comedor, cocina totalmente equipada, hot tub privado y terraza con vista al mar.", "alta": "$195.000", "baja": "$165.000", "slug": "luna", "url": "cabana-luna.html", "imgs": ["assets/caba-luna-1.jpg", "assets/caba-luna-2.jpg", "assets/caba-luna-3.jpg", "assets/caba-luna-4.jpg", "assets/caba-luna-5.jpg"]}, "Cabaña Los Lobos": {"guests": "4", "desc": "Terraza con vista al mar, chimenea, cocina equipada, quincho con parrilla y hot tub privado.", "alta": "$215.000", "baja": "$180.000", "slug": "lobos", "url": "cabana-lobos.html", "imgs": ["assets/caba-lobos-1.jpg", "assets/caba-lobos-2.jpg", "assets/caba-lobos-3.jpg", "assets/caba-lobos-4.jpg", "assets/caba-lobos-5.jpg"]}, "Cabaña Las Gaviotas": {"guests": "4", "desc": "Habitaciones con vista al mar, hot tub privado, cocina equipada, chimenea y terraza.", "alta": "$215.000", "baja": "$180.000", "slug": "gaviotas", "url": "cabana-gaviotas.html", "imgs": ["assets/caba-gaviotas-1.jpg", "assets/caba-gaviotas-2.jpg", "assets/caba-gaviotas-3.jpg", "assets/caba-gaviotas-4.jpg", "assets/caba-gaviotas-5.jpg"]}, "Cabaña La Sirena": {"guests": "4", "desc": "Amplia terraza con vista al mar, chimenea, cocina equipada, habitaciones con vista al mar y hot tub privado.", "alta": "$215.000", "baja": "$180.000", "slug": "sirena", "url": "cabana-sirena.html", "imgs": ["assets/caba-sirena-1.jpg", "assets/caba-sirena-2.jpg", "assets/caba-sirena-3.jpg", "assets/caba-sirena-4.jpg", "assets/caba-sirena-5.jpg"]}, "Cabaña Chagual": {"guests": "4", "desc": "Hot tub privado, amplias terrazas con vista al mar, cocina equipada y chimenea.", "alta": "$215.000", "baja": "$180.000", "slug": "chagual", "url": "cabana-chagual.html", "imgs": ["assets/caba-chagual-1.jpg", "assets/caba-chagual-2.jpg", "assets/caba-chagual-3.jpg", "assets/caba-chagual-4.jpg", "assets/caba-chagual-5.jpg"]}, "Cabaña Las Brisas": {"guests": "5", "desc": "Balcón, hot tub privado, chimenea y terraza con vista al mar.", "alta": "$227.000", "baja": "$190.000", "slug": "brisas", "url": "cabana-brisas.html", "imgs": ["assets/caba-brisas-1.jpg", "assets/caba-brisas-2.jpg", "assets/caba-brisas-3.jpg", "assets/caba-brisas-4.jpg", "assets/caba-brisas-5.jpg"]}, "Cabaña Los Pelícanos": {"guests": "6", "desc": "Sofá, chimenea, hot tub y cocina totalmente equipada.", "alta": "$238.000", "baja": "$200.000", "slug": "pelicanos", "url": "cabana-pelicanos.html", "imgs": ["assets/caba-pelicanos-1.jpg", "assets/caba-pelicanos-2.jpg", "assets/caba-pelicanos-3.jpg", "assets/caba-pelicanos-4.jpg"]}}, "desc": {"Hotel": "Habitaciones con vista al mar, a pasos de la playa.", "Restaurant Marvento": "Restaurante del complejo, cocina de mar.", "Spa OMZ": "Espacio de relajo y bienestar.", "Escuela de Surf OMZ": "Clases y arriendo de equipo frente a la ola.", "Tiendas, cafetería y heladería": "Tienda, cafetería y heladería.", "Juegos infantiles": "Zona de juegos para los más chicos.", "Granja de animales": "Granja con animales para visitar.", "Cancha de Tenis": "Cancha de tenis del complejo.", "Fogón Restaurante": "Fogón del restaurante.", "Hot-Tubs": "Tinajas de agua caliente con vista.", "Baños Los Peumos": "Baños del camping.", "Baños Los Boldos": "Baños del camping.", "Baños Los Maquis": "Baños del camping.", "Recepción camping": "Recepción y check-in del camping.", "Fogón": "Fogón común del camping.", "Quincho": "Quincho con parrillas.", "Casa Bosque": "Casa en el bosque."}, "sitdesc": "Sitio de camping con acceso a baños, fogón, quincho y recepción.", "zones": {"camping": {"label": "Camping", "members": ["Baños Los Peumos", "Baños Los Boldos", "Baños Los Maquis", "Recepción camping", "Fogón", "Quincho", "Casa Bosque", "Sitio de camping 1", "Sitio de camping 2", "Sitio de camping 3", "Sitio de camping 4", "Sitio de camping 5", "Sitio de camping 6", "Sitio de camping 7", "Sitio de camping 11", "Sitio de camping 12", "Sitio de camping 13", "Sitio de camping 14", "Sitio de camping 15", "Sitio de camping 16", "Sitio de camping 17", "Sitio de camping 18", "Sitio de camping 21", "Sitio de camping 22", "Sitio de camping 23", "Sitio de camping 24", "Sitio de camping 25", "Sitio de camping 26", "Sitio de camping 27"], "box": {"x0": 1.92, "y0": 25.42, "x1": 45.13, "y1": 98.99}, "sum": "22 sitios · 3 baños · recepción · fogón · quincho"}, "cabanas": {"label": "Cabañas", "members": ["Cabaña Los Pájaros", "Cabaña Los Lobos", "Cabaña Los Pelícanos", "Cabaña Las Gaviotas", "Cabaña La Sirena", "Cabaña La Luna", "Cabaña Chagual", "Cabaña Las Brisas"], "box": {"x0": 73.65, "y0": 30.65, "x1": 98.89, "y1": 54.1}, "sum": "8 cabañas · desde $189.000 alta / $160.000 baja la noche"}, "hotel": {"label": "Hotel y servicios", "members": ["Hotel", "Restaurant Marvento", "Spa OMZ", "Tiendas, cafetería y heladería", "Fogón Restaurante", "Hot-Tubs", "Granja de animales", "Juegos infantiles"], "box": {"x0": 48.18, "y0": 41.56, "x1": 77.91, "y1": 69.94}, "sum": "Hotel · restaurante · spa · tiendas · juegos · granja"}, "playa": {"label": "Playa y deportes", "members": ["Cancha de Tenis", "Escuela de Surf OMZ", "Casa Bosque"], "box": {"x0": 40.13, "y0": 25.42, "x1": 86.05, "y1": 65.3}, "sum": "Escuela de surf · cancha de tenis · casa bosque"}}, "_crop": {"T": 10.8, "B": 76.5, "span": 65.7}, "maps": "https://www.google.com/maps/dir/?api=1&destination=-33.9636,-71.8756"};
+var SP=D.spots,CABA=D.caba,DESC=D.desc,ZONES=D.zones,SITDESC=D.sitdesc,MAPS=D.maps;
+var COL={'Instalación':'#3d545b','Cabaña':'#9c6b3f','Baños':'#b8682f','Camping':'#3f7d86','Sitio':'#5d8a4f'};
+var TC ={'Instalación':'#aebfc1','Cabaña':'#e3c6a4','Baños':'#f0c39e','Camping':'#a9d2d6','Sitio':'#bcd9af'};
+var CATLBL={'Instalación':'Instalación','Cabaña':'Cabaña','Baños':'Baños','Camping':'Servicio camping','Sitio':'Camping'};
+var stage=document.getElementById('stage'),vp=document.getElementById('vp'),tip=document.getElementById('tip');
+var mask=document.getElementById('mask'),mpath=document.getElementById('mpath'),panel=document.getElementById('panel'),zsum=document.getElementById('zsum');
+var scale=1,tx=0,ty=0,hs=[],zslider;
+function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function slugOf(s){return CABA[s.n]?CABA[s.n].slug:s.n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
+function syncSlider(){if(zslider)zslider.value=scale;}
+function apply(anim){stage.style.transition=anim?'transform .55s cubic-bezier(.4,0,.2,1)':'none';stage.style.transform='translate('+tx+'%,'+ty+'%) scale('+scale+')';}
+function setView(cx,cy,s,anim){s=clamp(s,1,3.2);tx=clamp(50-cx*s,(1-s)*100,0);ty=clamp(50-cy*s,(1-s)*100,0);scale=s;apply(anim!==false);syncSlider();}
+function fitBox(b,anim){var bw=b.x1-b.x0,bh=b.y1-b.y0;var s=clamp(Math.min(100/bw,100/bh)*0.9,1,2.6);setView((b.x0+b.x1)/2,(b.y0+b.y1)/2,s,anim);}
+function resetView(){scale=1;tx=0;ty=0;apply(true);syncSlider();clearZone();closePanel();history.replaceState(null,'',location.pathname);}
+
+SP.forEach(function(s){
+  var d=document.createElement('div');
+  d.className='hs'+(s.c==='Sitio'?' sit':'');
+  d.style.left=s.x+'%';d.style.top=s.y+'%';d.style.setProperty('--d',COL[s.c]);
+  d.dataset.n=s.n;d._s=s;
+  d.addEventListener('mouseenter',function(){showTip(s);});
+  d.addEventListener('mouseleave',hideTip);
+  d.addEventListener('click',function(e){e.stopPropagation();selectSpot(s,false);});
+  stage.appendChild(d);hs.push(d);
+});
+function showTip(s){if(dragging)return;tip.innerHTML='<span class="tn">'+s.n+'</span>';
+  var fx=s.x/100,fy=s.y/100;tip.style.left=(tx/100+fx*scale)*100+'%';tip.style.top=(ty/100+fy*scale)*100+'%';tip.classList.add('show');}
+function hideTip(){tip.classList.remove('show');}
+function focusHS(s){hs.forEach(function(h){h.classList.toggle('focus',h._s===s);});}
+function clearFocus(){hs.forEach(function(h){h.classList.remove('focus');});}
+
+function selectSpot(s,fromSearch){
+  clearZone();hideTip();
+  var sc=clamp(fromSearch?2.7:2.4,1,3.2);
+  var mob=window.innerWidth<=640;
+  var px=mob?0.5:0.34, py=mob?0.30:0.46;
+  tx=clamp(px*100-s.x*sc,(1-sc)*100,0);ty=clamp(py*100-s.y*sc,(1-sc)*100,0);scale=sc;apply(true);syncSlider();
+  focusHS(s);openPanel(s);
+  history.replaceState(null,'','?lugar='+slugOf(s));
+}
+
+/* gallery */
+var galImgs=[],galIdx=0;
+function buildGallery(imgs){galImgs=imgs;galIdx=0;
+  var dots=imgs.map(function(_,i){return '<button class="gal__dot'+(i===0?' on':'')+'" data-i="'+i+'" aria-label="Foto '+(i+1)+'"></button>';}).join('');
+  var multi=imgs.length>1;
+  return '<div class="gal"><img class="gal__img" id="galImg" src="'+imgs[0]+'" alt="">'+
+    (multi?'<button class="gal__nav gal__prev" id="galPrev" aria-label="Anterior">‹</button><button class="gal__nav gal__next" id="galNext" aria-label="Siguiente">›</button><div class="gal__dots">'+dots+'</div>':'')+'</div>';
+}
+function galGo(i){if(!galImgs.length)return;galIdx=(i+galImgs.length)%galImgs.length;
+  var im=document.getElementById('galImg');if(im)im.src=galImgs[galIdx];
+  [].forEach.call(panel.querySelectorAll('.gal__dot'),function(d){d.classList.toggle('on',+d.dataset.i===galIdx);});}
+
+function openPanel(s){
+  var c=CABA[s.n],col=COL[s.c];
+  var h='<button class="panel__x" onclick="resetView()" aria-label="Cerrar">×</button>';
+  if(c){
+    h+=buildGallery(c.imgs);
+    h+='<div class="panel__b" style="--tc2:'+col+'">';
+    h+='<div class="panel__cat">Cabaña</div><div class="panel__t">'+s.n.replace('Cabaña ','')+'</div>';
+    h+='<div class="panel__meta"><span class="panel__g">Hasta '+c.guests+' personas</span></div>';
+    h+='<div class="panel__prices"><div><span>Temporada alta</span><b>'+c.alta+'</b><small>/ noche</small></div><div><span>Temporada baja</span><b>'+c.baja+'</b><small>/ noche</small></div></div>';
+    h+='<p class="panel__d">'+c.desc+'</p>';
+    h+='<a class="panel__cta" href="'+c.url+'">Ver cabaña y reservar →</a>';
+    h+='<a class="panel__map" href="'+MAPS+'" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg> Cómo llegar</a>';
+    h+='</div>';
+    panel.innerHTML=h;panel.classList.add('open');
+    var pv=document.getElementById('galPrev'),nx=document.getElementById('galNext');
+    if(pv)pv.onclick=function(){galGo(galIdx-1);};
+    if(nx)nx.onclick=function(){galGo(galIdx+1);};
+    [].forEach.call(panel.querySelectorAll('.gal__dot'),function(d){d.onclick=function(){galGo(+d.dataset.i);};});
+  }else{
+    h+='<div class="panel__band" style="background:'+col+'"></div>';
+    h+='<div class="panel__b" style="--tc2:'+col+'">';
+    h+='<div class="panel__cat">'+CATLBL[s.c]+'</div><div class="panel__t">'+s.n+'</div>';
+    h+='<p class="panel__d">'+(s.c==='Sitio'?SITDESC:(DESC[s.n]||''))+'</p>';
+    h+='<a class="panel__map" href="'+MAPS+'" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg> Cómo llegar</a>';
+    h+='</div>';
+    panel.innerHTML=h;panel.classList.add('open');
+  }
+}
+function closePanel(){panel.classList.remove('open');clearFocus();}
+
+/* zones */
+var zwrap=document.getElementById('zones');
+Object.keys(ZONES).forEach(function(k){
+  var b=document.createElement('button');b.className='zbtn';b.textContent=ZONES[k].label;
+  b.onclick=function(){activateZone(k);};zwrap.appendChild(b);b._k=k;
+});
+var rb=document.createElement('button');rb.className='zbtn reset';rb.textContent='Ver todo';rb.onclick=resetView;zwrap.appendChild(rb);
+function activateZone(k){
+  closePanel();var z=ZONES[k];
+  hs.forEach(function(h){h.classList.toggle('off',z.members.indexOf(h.dataset.n)<0);});
+  var b=z.box;mpath.setAttribute('d','M0 0H100V100H0Z M'+b.x0+' '+b.y0+'H'+b.x1+'V'+b.y1+'H'+b.x0+'Z');
+  mask.style.opacity='1';fitBox(b,true);
+  [].forEach.call(zwrap.children,function(x){x.classList.toggle('on',x._k===k);});
+  zsum.innerHTML='<b>'+z.label+'</b>'+z.sum;zsum.classList.add('show');
+  history.replaceState(null,'',location.pathname);
+}
+function clearZone(){hs.forEach(function(h){h.classList.remove('off');});mask.style.opacity='0';
+  [].forEach.call(zwrap.children,function(x){x.classList.remove('on');});zsum.classList.remove('show');}
+
+/* search */
+var q=document.getElementById('q'),res=document.getElementById('res');
+var order={'Cabaña':0,'Instalación':1,'Camping':2,'Baños':3,'Sitio':4};
+var GRP={'Cabaña':'Cabañas','Instalación':'Instalaciones','Camping':'Servicios','Baños':'Baños','Sitio':'Sitios de camping'};
+function renderRes(term){
+  term=(term||'').toLowerCase();
+  var items=SP.filter(function(s){return s.n.toLowerCase().indexOf(term)>=0;});
+  items.sort(function(a,b){return (order[a.c]-order[b.c])||a.n.localeCompare(b.n);});
+  if(!items.length){res.classList.remove('show');return;}
+  var html='',lastc=null;
+  items.slice(0,40).forEach(function(s){
+    if(s.c!==lastc){html+='<div class="grp">'+GRP[s.c]+'</div>';lastc=s.c;}
+    html+='<button data-n="'+encodeURIComponent(s.n)+'"><span class="dot" style="background:'+COL[s.c]+'"></span>'+s.n+'<span class="cat">'+CATLBL[s.c]+'</span></button>';
+  });
+  res.innerHTML=html;res.classList.add('show');
+  [].forEach.call(res.querySelectorAll('button'),function(btn){
+    btn.onclick=function(){var n=decodeURIComponent(btn.dataset.n);var s=SP.find(function(x){return x.n===n;});
+      q.value=n;res.classList.remove('show');selectSpot(s,true);};
+  });
+}
+q.addEventListener('input',function(){renderRes(q.value);});
+q.addEventListener('focus',function(){renderRes(q.value);});
+document.addEventListener('click',function(e){if(!e.target.closest('.search'))res.classList.remove('show');});
+
+/* zoom controls */
+zslider=document.getElementById('zslider');
+zslider.addEventListener('input',function(){var cx=(50-tx)/scale,cy=(50-ty)/scale;setView(cx,cy,parseFloat(zslider.value),false);});
+function zoomBy(f){var cx=(50-tx)/scale,cy=(50-ty)/scale;setView(cx,cy,scale*f,true);}
+document.getElementById('zin').onclick=function(){zoomBy(1.25);};
+document.getElementById('zout').onclick=function(){zoomBy(1/1.25);};
+document.getElementById('zrs').onclick=resetView;
+vp.addEventListener('wheel',function(e){e.preventDefault();var cx=(50-tx)/scale,cy=(50-ty)/scale;setView(cx,cy,scale*(e.deltaY<0?1.12:0.89),false);},{passive:false});
+
+/* drag pan + click-outside */
+var dragging=false,sx,sy,stx,sty,moved=0;
+vp.addEventListener('pointerdown',function(e){if(e.target.closest('.hs')||e.target.closest('.panel'))return;
+  dragging=true;moved=0;sx=e.clientX;sy=e.clientY;stx=tx;sty=ty;vp.classList.add('drag');vp.setPointerCapture(e.pointerId);hideTip();});
+vp.addEventListener('pointermove',function(e){if(!dragging)return;var dx=e.clientX-sx,dy=e.clientY-sy;moved+=Math.abs(dx)+Math.abs(dy);
+  var r=vp.getBoundingClientRect();tx=clamp(stx+dx/r.width*100,(1-scale)*100,0);ty=clamp(sty+dy/r.height*100,(1-scale)*100,0);apply(false);});
+vp.addEventListener('pointerup',function(){dragging=false;vp.classList.remove('drag');});
+vp.addEventListener('pointercancel',function(){dragging=false;vp.classList.remove('drag');});
+vp.addEventListener('click',function(e){if(moved>6)return;if(panel.classList.contains('open')&&!e.target.closest('.panel')&&!e.target.closest('.hs'))resetView();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&(panel.classList.contains('open')||scale>1))resetView();});
+
+/* deep-link on load */
+(function(){var lp=new URLSearchParams(location.search).get('lugar');if(!lp)return;
+  var s=SP.find(function(x){return slugOf(x)===lp;});if(s)setTimeout(function(){selectSpot(s,true);},350);})();
+</script>
+</body></html>
