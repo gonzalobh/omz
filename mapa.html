@@ -1639,7 +1639,6 @@ function zoomBy(f){var cx=(50-tx)/scale,cy=(50-ty)/scale;setView(cx,cy,scale*f,t
 document.getElementById('zin').onclick=function(){zoomBy(1.25);};
 document.getElementById('zout').onclick=function(){zoomBy(1/1.25);};
 document.getElementById('zrs').onclick=resetView;
-vp.addEventListener('wheel',function(e){e.preventDefault();var cx=(50-tx)/scale,cy=(50-ty)/scale;setView(cx,cy,scale*(e.deltaY<0?1.12:0.89),false);},{passive:false});
 
 var dragging=false,sx,sy,stx,sty,moved=0;
 vp.addEventListener('pointerdown',function(e){if(e.target.closest('.hs')||e.target.closest('.panel'))return;
