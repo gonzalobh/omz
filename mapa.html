@@ -601,7 +601,7 @@ p{color:var(--text)}
 .omzmap .results .dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
 .omzmap .results .cat{margin-left:auto;font-size:.7rem;color:#9a9384;text-transform:uppercase;letter-spacing:.08em}
 .omzmap .results .grp{padding:6px 14px 3px;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:#a7a08f;font-weight:800}
-.omzmap .mapwrap{position:relative;border-radius:0;overflow:hidden;box-shadow:0 26px 64px -30px rgba(0,0,0,.5);background:#cfdbd9}
+.omzmap .mapwrap{position:relative;border-radius:0;overflow:visible;box-shadow:0 26px 64px -30px rgba(0,0,0,.5);background:#cfdbd9}
 .omzmap .vp{position:relative;overflow:hidden;cursor:grab;touch-action:none}
 .omzmap .vp.drag{cursor:grabbing}
 .omzmap .stage{position:relative;will-change:transform;transform-origin:0 0;line-height:0}
@@ -625,7 +625,7 @@ p{color:var(--text)}
 @keyframes omzpf{0%{transform:scale(.6);opacity:.85}75%{transform:scale(2.6);opacity:0}100%{opacity:0}}
 .omzmap .tip{position:absolute;transform:translate(-50%,calc(-100% - 30px));background:var(--slate-deep);color:#fff;padding:8px 14px;border-radius:0;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .14s;z-index:55;box-shadow:0 12px 30px -10px rgba(0,0,0,.5)}
 .omzmap .tip .tn{font-size:clamp(.92rem,1.4vw,1.15rem);font-weight:700}
-.omzmap .tip::after{content:"";position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--slate-deep);border-bottom:0}
+.omzmap .tip::after{content:"";position:absolute;left:calc(50% + var(--ax,0px));bottom:-6px;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--slate-deep);border-bottom:0}
 .omzmap .tip.show{opacity:1}
 .omzmap .zsum{position:absolute;left:14px;bottom:14px;background:rgba(46,67,74,.92);color:#fff;padding:10px 16px;border-radius:0;font-size:.85rem;max-width:74%;opacity:0;transform:translateY(8px);transition:.3s;z-index:25;pointer-events:none}
 .omzmap .zsum.show{opacity:1;transform:none}
@@ -1584,7 +1584,10 @@ SP.forEach(function(s){
   stage.appendChild(d);hs.push(d);
 });
 function showTip(s){if(dragging)return;if(selSpot&&s!==selSpot)return;tip.innerHTML='<span class="tn">'+s.n+'</span>';
-  var fx=s.x/100,fy=s.y/100;tip.style.left=(tx/100+fx*scale)*100+'%';tip.style.top=(ty/100+fy*scale)*100+'%';tip.classList.add('show');}
+  var fx=s.x/100,fy=s.y/100;tip.style.top=(ty/100+fy*scale)*100+'%';tip.classList.add('show');
+  var host=tip.offsetParent||vp,W=host.clientWidth||vp.clientWidth,px=(tx/100+fx*scale)*W;
+  var tw=tip.offsetWidth,pad=8,c=Math.max(tw/2+pad,Math.min(W-tw/2-pad,px));
+  tip.style.left=c+'px';tip.style.setProperty('--ax',(px-c)+'px');}
 function hideTip(){if(selSpot)return;tip.classList.remove('show');}
 function killTip(){tip.classList.remove('show');}
 function focusHS(s){hs.forEach(function(h){h.classList.toggle('focus',h._s===s);});}
