@@ -626,6 +626,16 @@ p{color:var(--text)}
 .omzmap .tourstart svg{margin-top:1px}
 .omzmap .tour{position:absolute;inset:0;z-index:36;pointer-events:none;opacity:0;transition:opacity .25s}
 .omzmap .tour.open{opacity:1}
+.omzmap .tour__veil{position:absolute;inset:0;background:rgba(20,28,33,.62);opacity:0;transition:opacity .45s var(--ease);pointer-events:none}
+.omzmap .tour.welcome .tour__veil{opacity:1;pointer-events:auto}
+.omzmap .tour__card{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%) scale(.96);width:min(460px,84%);text-align:center;color:#fff;opacity:0;transition:opacity .45s var(--ease),transform .45s var(--ease);pointer-events:none}
+.omzmap .tour.welcome .tour__card{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.omzmap .tour.welcome .tour__cardbtn{pointer-events:auto}
+.omzmap .tour__ey{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:14px}
+.omzmap .tour__card h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(1.9rem,4vw,2.8rem);line-height:1.05;margin:0 0 10px}
+.omzmap .tour__card p{font-size:clamp(.9rem,1.6vw,1.02rem);line-height:1.5;color:rgba(255,255,255,.88);margin:0 auto;max-width:34ch}
+.omzmap .tour__cardbtn{margin-top:20px;background:#fff;color:var(--slate-deep);border:0;font-family:inherit;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;padding:13px 26px;cursor:pointer;transition:.2s}
+.omzmap .tour__cardbtn:hover{background:#ffd9a0}
 .omzmap .tour__prog{position:absolute;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.22)}
 .omzmap .tour__prog i{display:block;height:100%;width:0;background:#fff}
 .omzmap .tour__bar{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;background:rgba(46,67,74,.96);padding:8px 10px;box-shadow:0 12px 30px -10px rgba(0,0,0,.5);pointer-events:auto}
@@ -844,6 +854,13 @@ p{color:var(--text)}
       </div>
       <div class="tip" id="tip"></div>
       <div class="tour" id="tour" aria-hidden="true">
+        <div class="tour__veil"></div>
+        <div class="tour__card">
+          <span class="tour__ey" id="tourEy">Tour virtual</span>
+          <h3 id="tourCardT"></h3>
+          <p id="tourCardS"></p>
+          <button class="tour__cardbtn" id="tourCardBtn" type="button" style="display:none"></button>
+        </div>
         <div class="tour__prog"><i id="tourProg"></i></div>
         <div class="tour__bar">
           <button class="tour__nav" id="tourPrev" type="button" aria-label="Anterior">&#8249;</button>
@@ -1541,7 +1558,7 @@ var scale=1,tx=0,ty=0,hs=[],zslider;
 function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
 function slugOf(s){return CABA[s.n]?CABA[s.n].slug:s.n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
 function syncSlider(){if(zslider)zslider.value=scale;}
-function apply(anim){stage.style.transition=anim?'transform .55s cubic-bezier(.4,0,.2,1)':'none';stage.style.transform='translate('+tx+'%,'+ty+'%) scale('+scale+')';}
+function apply(anim){stage.style.transition=anim?((TR&&TR.on)?'transform 1.15s cubic-bezier(.45,.05,.25,1)':'transform .55s cubic-bezier(.4,0,.2,1)'):'none';stage.style.transform='translate('+tx+'%,'+ty+'%) scale('+scale+')';}
 function setView(cx,cy,s,anim){s=clamp(s,1,3.2);tx=clamp(50-cx*s,(1-s)*100,0);ty=clamp(50-cy*s,(1-s)*100,0);scale=s;apply(anim!==false);syncSlider();}
 function fitBox(b,anim){var bw=b.x1-b.x0,bh=b.y1-b.y0;var s=clamp(Math.min(100/bw,100/bh)*0.9,1,2.6);setView((b.x0+b.x1)/2,(b.y0+b.y1)/2,s,anim);}
 function resetView(){scale=1;tx=0;ty=0;apply(true);syncSlider();clearZone();closePanel();history.replaceState(null,'',location.pathname);}
@@ -1633,7 +1650,9 @@ function openPanel(s){
 function closePanel(){panel.classList.remove('open');panel.classList.remove('left');clearFocus();scrim.classList.remove('on');selSpot=null;killTip();exitBtn.classList.remove('show');}
 
 var zwrap=document.getElementById('zones');
-Object.keys(ZONES).forEach(function(k){
+var ZONE_ORDER=['hotel','cabanas','camping','domos','spa','deportes'];
+ZONE_ORDER.forEach(function(k){
+  if(!ZONES[k])return;
   var b=document.createElement('button');b.className='zbtn';b.textContent=zlabel(ZONES[k]);
   b.onclick=function(){activateZone(k);};zwrap.appendChild(b);b._k=k;
 });
@@ -1714,38 +1733,52 @@ applyLang();
 
 /* ===== Tour virtual (por zonas) ===== */
 var TR_STEPS=[
-  {zone:null,t:{es:'Bienvenido a OMZ',en:'Welcome to OMZ'},s:{es:'Un recorrido por el complejo, frente al mar de Matanzas.',en:'A tour of the resort, on the Matanzas seafront.'}},
-  {zone:'camping'},{zone:'domos'},{zone:'cabanas'},{zone:'hotel'},{zone:'spa'},{zone:'deportes'},
-  {zone:null,t:{es:'¿Listo para venir?',en:'Ready to visit?'},s:{es:'Reserva tu estadía frente al mar de Matanzas.',en:'Book your stay on the Matanzas seafront.'}}
+  {zone:null,dur:2600,t:{es:'Bienvenido a OMZ',en:'Welcome to OMZ'},s:{es:'Un recorrido por el complejo, frente al mar de Matanzas.',en:'A tour of the resort, on the Matanzas seafront.'}},
+  {zone:'hotel'},{zone:'cabanas'},{zone:'camping'},{zone:'domos'},{zone:'spa'},{zone:'deportes'},
+  {zone:null,outro:true,dur:3000,t:{es:'¿Listo para venir?',en:'Ready to visit?'},s:{es:'Reserva tu estadía frente al mar de Matanzas.',en:'Book your stay on the Matanzas seafront.'}}
 ];
-var TR={on:false,i:0,timer:null,playing:false,DUR:4800};
+var TR={on:false,i:0,timer:null,playing:false,DUR:4500};
 var TRrm=window.matchMedia('(prefers-reduced-motion: reduce)');
 var trEl=document.getElementById('tour'),trProg=document.getElementById('tourProg'),
     trCount=document.getElementById('tourCount'),trPlayBtn=document.getElementById('tourPlay'),
-    trStart=document.getElementById('tourStart'),trLabel=document.getElementById('tourStartLabel');
-function trFull(step){resetView();zsum.innerHTML='<b>'+step.t[L()]+'</b>'+step.s[L()];zsum.classList.add('show');}
+    trStart=document.getElementById('tourStart'),trLabel=document.getElementById('tourStartLabel'),
+    trEy=document.getElementById('tourEy'),trCardT=document.getElementById('tourCardT'),
+    trCardS=document.getElementById('tourCardS'),trCardBtn=document.getElementById('tourCardBtn');
 function trRender(){
-  var step=TR_STEPS[TR.i];
-  if(step.zone)activateZone(step.zone);else trFull(step);
+  var step=TR_STEPS[TR.i], dur=step.dur||TR.DUR;
+  if(step.zone){
+    trEl.classList.remove('welcome','is-outro');
+    activateZone(step.zone);
+  }else{
+    resetView();
+    zsum.classList.remove('show');
+    if(trCardT)trCardT.textContent=step.t[L()];
+    if(trCardS)trCardS.textContent=step.s[L()];
+    var isOutro=!!step.outro;
+    trEl.classList.toggle('is-outro',isOutro);
+    if(trCardBtn){trCardBtn.style.display=isOutro?'inline-flex':'none';trCardBtn.textContent=(L()==='en'?'Book now':'Reservar');}
+    trEl.classList.add('welcome');
+  }
   if(trCount)trCount.textContent=(TR.i+1)+' / '+TR_STEPS.length;
   if(trProg){trProg.style.transition='none';trProg.style.width='0%';void trProg.offsetWidth;
-    if(TR.playing){trProg.style.transition='width '+TR.DUR+'ms linear';trProg.style.width='100%';}}
+    if(TR.playing){trProg.style.transition='width '+dur+'ms linear';trProg.style.width='100%';}}
   clearTimeout(TR.timer);
-  if(TR.playing)TR.timer=setTimeout(function(){if(TR.i>=TR_STEPS.length-1)trPause();else trGo(TR.i+1);},TR.DUR);
+  if(TR.playing)TR.timer=setTimeout(function(){if(TR.i>=TR_STEPS.length-1)trPause();else trGo(TR.i+1);},dur);
 }
 function trGo(i){TR.i=Math.max(0,Math.min(TR_STEPS.length-1,i));trRender();}
 function trPlay(){TR.playing=true;if(trPlayBtn)trPlayBtn.innerHTML='&#10074;&#10074;';trRender();}
 function trPause(){TR.playing=false;clearTimeout(TR.timer);if(trProg){var w=getComputedStyle(trProg).width;trProg.style.transition='none';trProg.style.width=w;}if(trPlayBtn)trPlayBtn.innerHTML='&#9658;';}
 function trBegin(){TR.on=true;TR.i=0;trEl.classList.add('open');trEl.setAttribute('aria-hidden','false');if(trStart)trStart.classList.add('on');if(TRrm.matches){TR.playing=false;if(trPlayBtn)trPlayBtn.innerHTML='&#9658;';trRender();}else trPlay();}
-function trStop(){TR.on=false;TR.playing=false;clearTimeout(TR.timer);trEl.classList.remove('open');trEl.setAttribute('aria-hidden','true');if(trStart)trStart.classList.remove('on');zsum.classList.remove('show');resetView();}
+function trStop(){TR.on=false;TR.playing=false;clearTimeout(TR.timer);trEl.classList.remove('open','welcome','is-outro');trEl.setAttribute('aria-hidden','true');if(trStart)trStart.classList.remove('on');zsum.classList.remove('show');resetView();}
 if(trStart)trStart.addEventListener('click',function(e){e.preventDefault();if(TR.on)trStop();else trBegin();});
 if(trPlayBtn)trPlayBtn.addEventListener('click',function(){TR.playing?trPause():trPlay();});
 var trPrevBtn=document.getElementById('tourPrev'),trNextBtn=document.getElementById('tourNext'),trExitBtn=document.getElementById('tourExit');
 if(trPrevBtn)trPrevBtn.addEventListener('click',function(){trPause();trGo(TR.i-1);});
 if(trNextBtn)trNextBtn.addEventListener('click',function(){if(TR.i>=TR_STEPS.length-1)trGo(0);else{trPause();trGo(TR.i+1);}});
 if(trExitBtn)trExitBtn.addEventListener('click',trStop);
+if(trCardBtn)trCardBtn.addEventListener('click',function(){trStop();if(window.openReserveWizard)window.openReserveWizard();});
 document.addEventListener('pointerdown',function(e){if(TR.on&&!e.target.closest('#tour')&&!e.target.closest('#tourStart'))trStop();},true);
-function trSyncLabel(){if(trLabel)trLabel.textContent=(L()==='en'?'Virtual tour':'Tour virtual');}
+function trSyncLabel(){if(trLabel)trLabel.textContent=(L()==='en'?'Virtual tour':'Tour virtual');if(trEy)trEy.textContent=(L()==='en'?'Virtual tour':'Tour virtual');}
 trSyncLabel();
 document.addEventListener('click',function(e){if(e.target.closest('[data-lang]'))setTimeout(function(){trSyncLabel();if(TR.on)trRender();},30);});
 })();
