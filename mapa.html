@@ -621,6 +621,20 @@ p{color:var(--text)}
 .omzmap .tip.show{opacity:1}
 .omzmap .zsum{position:absolute;left:14px;bottom:14px;background:rgba(46,67,74,.92);color:#fff;padding:10px 16px;border-radius:0;font-size:.85rem;max-width:74%;opacity:0;transform:translateY(8px);transition:.3s;z-index:25;pointer-events:none}
 .omzmap .zsum.show{opacity:1;transform:none}
+.omzmap .tourstart{display:inline-flex;align-items:center;gap:7px;background:var(--slate);color:#fff;border:1px solid var(--slate);font-family:inherit;font-weight:700;font-size:.78rem;letter-spacing:.03em;padding:9px 16px;cursor:pointer;transition:.2s}
+.omzmap .tourstart:hover{background:var(--slate-deep);border-color:var(--slate-deep)}
+.omzmap .tourstart svg{margin-top:1px}
+.omzmap .tour{position:absolute;inset:0;z-index:36;pointer-events:none;opacity:0;transition:opacity .25s}
+.omzmap .tour.open{opacity:1}
+.omzmap .tour__prog{position:absolute;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.22)}
+.omzmap .tour__prog i{display:block;height:100%;width:0;background:#fff}
+.omzmap .tour__bar{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;background:rgba(46,67,74,.96);padding:8px 10px;box-shadow:0 12px 30px -10px rgba(0,0,0,.5);pointer-events:auto}
+.omzmap .tour__nav{width:38px;height:38px;border:0;background:rgba(255,255,255,.12);color:#fff;font-size:1.1rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.omzmap .tour__nav:hover{background:rgba(255,255,255,.26)}
+.omzmap .tour__count{color:rgba(255,255,255,.85);font-size:.8rem;letter-spacing:.05em;padding:0 6px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.omzmap .tour__exit{border:0;background:transparent;color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;padding:0 8px}
+.omzmap .tour__exit:hover{color:#ffd9a0}
+@media(max-width:640px){.omzmap .tour__bar{bottom:8px;gap:6px;padding:6px 8px}.omzmap .tour__nav{width:34px;height:34px}}
 .omzmap .zsum b{font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:600;display:block;margin-bottom:2px}
 .omzmap .panel{position:absolute;top:64px;right:14px;width:330px;max-width:calc(100% - 28px);background:#fff;border-radius:0;overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,.55);z-index:35;transform:translateX(calc(100% + 30px));opacity:0;transition:transform .4s cubic-bezier(.4,0,.2,1),opacity .3s}
 .omzmap .panel.open{transform:none;opacity:1}
@@ -829,6 +843,16 @@ p{color:var(--text)}
         <button class="omzexit" id="omzexit" type="button" onclick="omzReset()">Salir</button>
       </div>
       <div class="tip" id="tip"></div>
+      <div class="tour" id="tour" aria-hidden="true">
+        <div class="tour__prog"><i id="tourProg"></i></div>
+        <div class="tour__bar">
+          <button class="tour__nav" id="tourPrev" type="button" aria-label="Anterior">&#8249;</button>
+          <button class="tour__nav" id="tourPlay" type="button" aria-label="Pausar">&#10074;&#10074;</button>
+          <button class="tour__nav" id="tourNext" type="button" aria-label="Siguiente">&#8250;</button>
+          <span class="tour__count" id="tourCount"></span>
+          <button class="tour__exit" id="tourExit" type="button">Salir &#10005;</button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="zoombar">
@@ -837,6 +861,7 @@ p{color:var(--text)}
     <input id="zslider" class="zrange" type="range" min="1" max="3.2" step="0.02" value="1" aria-label="Zoom">
     <button class="zstep" id="zin" aria-label="Acercar">+</button>
     <button class="zreset" id="zrs">Ver todo</button>
+    <button class="tourstart" id="tourStart" type="button"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg> <span id="tourStartLabel">Tour virtual</span></button>
   </div>
   <div class="note">Toca un punto para ver su ficha · elige una zona para enfocarla · usa el buscador para ir directo a un lugar.</div>
 </div>
@@ -1686,6 +1711,43 @@ new MutationObserver(applyLang).observe(document.documentElement,{attributes:tru
 applyLang();
 (function(){var lp=new URLSearchParams(location.search).get('lugar');if(!lp)return;
   var s=SP.find(function(x){return slugOf(x)===lp;});if(s)setTimeout(function(){selectSpot(s,true);},350);})();
+
+/* ===== Tour virtual (por zonas) ===== */
+var TR_STEPS=[
+  {zone:null,t:{es:'Bienvenido a OMZ',en:'Welcome to OMZ'},s:{es:'Un recorrido por el complejo, frente al mar de Matanzas.',en:'A tour of the resort, on the Matanzas seafront.'}},
+  {zone:'camping'},{zone:'domos'},{zone:'cabanas'},{zone:'hotel'},{zone:'spa'},{zone:'deportes'},
+  {zone:null,t:{es:'¿Listo para venir?',en:'Ready to visit?'},s:{es:'Reserva tu estadía frente al mar de Matanzas.',en:'Book your stay on the Matanzas seafront.'}}
+];
+var TR={on:false,i:0,timer:null,playing:false,DUR:4800};
+var TRrm=window.matchMedia('(prefers-reduced-motion: reduce)');
+var trEl=document.getElementById('tour'),trProg=document.getElementById('tourProg'),
+    trCount=document.getElementById('tourCount'),trPlayBtn=document.getElementById('tourPlay'),
+    trStart=document.getElementById('tourStart'),trLabel=document.getElementById('tourStartLabel');
+function trFull(step){resetView();zsum.innerHTML='<b>'+step.t[L()]+'</b>'+step.s[L()];zsum.classList.add('show');}
+function trRender(){
+  var step=TR_STEPS[TR.i];
+  if(step.zone)activateZone(step.zone);else trFull(step);
+  if(trCount)trCount.textContent=(TR.i+1)+' / '+TR_STEPS.length;
+  if(trProg){trProg.style.transition='none';trProg.style.width='0%';void trProg.offsetWidth;
+    if(TR.playing){trProg.style.transition='width '+TR.DUR+'ms linear';trProg.style.width='100%';}}
+  clearTimeout(TR.timer);
+  if(TR.playing)TR.timer=setTimeout(function(){if(TR.i>=TR_STEPS.length-1)trPause();else trGo(TR.i+1);},TR.DUR);
+}
+function trGo(i){TR.i=Math.max(0,Math.min(TR_STEPS.length-1,i));trRender();}
+function trPlay(){TR.playing=true;if(trPlayBtn)trPlayBtn.innerHTML='&#10074;&#10074;';trRender();}
+function trPause(){TR.playing=false;clearTimeout(TR.timer);if(trProg){var w=getComputedStyle(trProg).width;trProg.style.transition='none';trProg.style.width=w;}if(trPlayBtn)trPlayBtn.innerHTML='&#9658;';}
+function trBegin(){TR.on=true;TR.i=0;trEl.classList.add('open');trEl.setAttribute('aria-hidden','false');if(trStart)trStart.classList.add('on');if(TRrm.matches){TR.playing=false;if(trPlayBtn)trPlayBtn.innerHTML='&#9658;';trRender();}else trPlay();}
+function trStop(){TR.on=false;TR.playing=false;clearTimeout(TR.timer);trEl.classList.remove('open');trEl.setAttribute('aria-hidden','true');if(trStart)trStart.classList.remove('on');zsum.classList.remove('show');resetView();}
+if(trStart)trStart.addEventListener('click',function(e){e.preventDefault();if(TR.on)trStop();else trBegin();});
+if(trPlayBtn)trPlayBtn.addEventListener('click',function(){TR.playing?trPause():trPlay();});
+var trPrevBtn=document.getElementById('tourPrev'),trNextBtn=document.getElementById('tourNext'),trExitBtn=document.getElementById('tourExit');
+if(trPrevBtn)trPrevBtn.addEventListener('click',function(){trPause();trGo(TR.i-1);});
+if(trNextBtn)trNextBtn.addEventListener('click',function(){if(TR.i>=TR_STEPS.length-1)trGo(0);else{trPause();trGo(TR.i+1);}});
+if(trExitBtn)trExitBtn.addEventListener('click',trStop);
+document.addEventListener('pointerdown',function(e){if(TR.on&&!e.target.closest('#tour')&&!e.target.closest('#tourStart'))trStop();},true);
+function trSyncLabel(){if(trLabel)trLabel.textContent=(L()==='en'?'Virtual tour':'Tour virtual');}
+trSyncLabel();
+document.addEventListener('click',function(e){if(e.target.closest('[data-lang]'))setTimeout(function(){trSyncLabel();if(TR.on)trRender();},30);});
 })();
 </script>
 </body>
