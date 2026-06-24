@@ -19,4 +19,6 @@
   <url><loc>https://omz-lake.vercel.app/cabana-pelicanos.html</loc><lastmod>2026-06-11</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://omz-lake.vercel.app/politicas.html</loc><lastmod>2026-06-12</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
   <url><loc>https://omz-lake.vercel.app/galeria.html</loc><lastmod>2026-06-12</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://omz-lake.vercel.app/mapa.html</loc><lastmod>2026-06-24</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://omz-lake.vercel.app/carta.html</loc><lastmod>2026-06-24</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
 </urlset>
