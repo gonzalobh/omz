@@ -627,7 +627,7 @@ p{color:var(--text)}
 .omzmap .hs.sit{width:1.35%}.omzmap .hs.sit::before{display:none}
 .omzmap .hs:hover{transform:translate(-50%,-50%) scale(1.32);z-index:8}
 .omzmap .hs.off{opacity:.18;filter:grayscale(.7)}
-.omzmap .hs.focus{z-index:10}.omzmap .hs.focus::before{animation:omzpf 1.3s ease-out infinite;border-width:3px;opacity:.8}
+.omzmap .hs.focus{z-index:10;transform:translate(-50%,-50%) scale(1.35);box-shadow:0 0 0 2px #fff,0 0 0 5px var(--d),0 3px 12px rgba(0,0,0,.55)}.omzmap .hs.focus::before{border-width:3px}
 @keyframes omzpf{0%{transform:scale(.6);opacity:.85}75%{transform:scale(2.6);opacity:0}100%{opacity:0}}
 .omzmap .tip{position:absolute;transform:translate(-50%,calc(-100% - 30px));background:var(--slate-deep);color:#fff;padding:8px 14px;border-radius:0;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .14s;z-index:55;box-shadow:0 12px 30px -10px rgba(0,0,0,.5)}
 .omzmap .tip .tn{font-size:clamp(.92rem,1.4vw,1.15rem);font-weight:700}
