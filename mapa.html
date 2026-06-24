@@ -600,6 +600,8 @@ p{color:var(--text)}
 .omzmap .stage img{width:100%;height:auto;display:block;-webkit-user-drag:none;user-select:none;image-rendering:auto;max-width:none}
 .omzmap .mask{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .5s;pointer-events:none}
 .omzmap .mask path{fill:rgba(26,36,40,.62)}
+.omzmap .scrim{position:absolute;inset:0;background:rgba(18,26,28,.42);opacity:0;transition:opacity .35s;pointer-events:none;z-index:2}
+.omzmap .scrim.on{opacity:1}
 .omzmap .hs{position:absolute;width:1.45%;aspect-ratio:1;min-width:13px;min-height:13px;transform:translate(-50%,-50%);border-radius:50%;border:3px solid #fff;background:var(--d);box-shadow:0 0 0 1.5px var(--d),0 2px 8px rgba(0,0,0,.6);cursor:pointer;transition:opacity .35s,filter .35s,transform .15s;z-index:3;padding:0}
 .omzmap .hs::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--d)}
 .omzmap .hs::before{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid var(--d);opacity:.5;animation:omzpp 2.6s ease-out infinite}
@@ -607,7 +609,7 @@ p{color:var(--text)}
 .omzmap .hs.sit{width:1.35%}.omzmap .hs.sit::before{display:none}
 .omzmap .hs:hover{transform:translate(-50%,-50%) scale(1.32);z-index:8}
 .omzmap .hs.off{opacity:.18;filter:grayscale(.7)}
-.omzmap .hs.focus{z-index:9}.omzmap .hs.focus::before{animation:omzpf 1.3s ease-out infinite;border-width:3px;opacity:.8}
+.omzmap .hs.focus{z-index:10}.omzmap .hs.focus::before{animation:omzpf 1.3s ease-out infinite;border-width:3px;opacity:.8}
 @keyframes omzpf{0%{transform:scale(.6);opacity:.85}75%{transform:scale(2.6);opacity:0}100%{opacity:0}}
 .omzmap .tip{position:absolute;transform:translate(-50%,calc(-100% - 14px));background:var(--slate-deep);color:#fff;padding:8px 14px;border-radius:0;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .14s;z-index:55;box-shadow:0 12px 30px -10px rgba(0,0,0,.5)}
 .omzmap .tip .tn{font-size:clamp(.92rem,1.4vw,1.15rem);font-weight:700}
@@ -618,6 +620,8 @@ p{color:var(--text)}
 .omzmap .zsum b{font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:600;display:block;margin-bottom:2px}
 .omzmap .panel{position:absolute;top:14px;right:14px;width:330px;max-width:calc(100% - 28px);background:#fff;border-radius:0;overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,.55);z-index:35;transform:translateX(calc(100% + 30px));opacity:0;transition:transform .4s cubic-bezier(.4,0,.2,1),opacity .3s}
 .omzmap .panel.open{transform:none;opacity:1}
+.omzmap .panel.left{right:auto;left:14px;transform:translateX(calc(-100% - 30px))}
+.omzmap .panel.left.open{transform:none}
 .omzmap .panel__x{position:absolute;top:9px;right:9px;width:30px;height:30px;border-radius:0;border:0;background:rgba(0,0,0,.5);color:#fff;font-size:1.1rem;cursor:pointer;line-height:1;z-index:4}
 .omzmap .gal{position:relative;background:var(--cream)}
 .omzmap .gal__img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
@@ -814,6 +818,7 @@ p{color:var(--text)}
         <div class="stage" id="stage">
           <img src="assets/mapa-omz.jpg" alt="Mapa del complejo OMZ Olas de Matanzas" draggable="false">
           <svg class="mask" id="mask" viewBox="0 0 100 100" preserveAspectRatio="none"><path id="mpath" d=""/></svg>
+          <div class="scrim" id="scrim"></div>
         </div>
         <div class="zsum" id="zsum"></div>
         <div class="panel" id="panel"></div>
@@ -1491,7 +1496,7 @@ var SP=D.spots,CABA=D.caba,DESC=D.desc,ZONES=D.zones,SITDESC=D.sitdesc,MAPS=D.ma
 var COL={'Instalación':'#3d545b','Cabaña':'#9c6b3f','Baños':'#b8682f','Camping':'#3f7d86','Sitio':'#5d8a4f'};
 var CATLBL={'Instalación':'Instalación','Cabaña':'Cabaña','Baños':'Baños','Camping':'Servicio camping','Sitio':'Camping'};
 var stage=document.getElementById('stage'),vp=document.getElementById('vp'),tip=document.getElementById('tip');
-var mask=document.getElementById('mask'),mpath=document.getElementById('mpath'),panel=document.getElementById('panel'),zsum=document.getElementById('zsum');
+var mask=document.getElementById('mask'),mpath=document.getElementById('mpath'),panel=document.getElementById('panel'),zsum=document.getElementById('zsum'),scrim=document.getElementById('scrim');
 var scale=1,tx=0,ty=0,hs=[],zslider;
 function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
 function slugOf(s){return CABA[s.n]?CABA[s.n].slug:s.n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
@@ -1521,9 +1526,11 @@ function clearFocus(){hs.forEach(function(h){h.classList.remove('focus');});}
 function selectSpot(s,fromSearch){
   clearZone();hideTip();
   var sc=clamp(fromSearch?2.7:2.4,1,3.2);var mob=window.innerWidth<=640;
-  var px=mob?0.5:0.34, py=mob?0.30:0.46;
+  var rightSide=!mob && s.x>50;
+  var px=mob?0.5:(rightSide?0.64:0.34), py=mob?0.30:0.46;
   tx=clamp(px*100-s.x*sc,(1-sc)*100,0);ty=clamp(py*100-s.y*sc,(1-sc)*100,0);scale=sc;apply(true);syncSlider();
-  focusHS(s);hs.forEach(function(h){h.classList.toggle('off',h._s!==s);});openPanel(s);
+  panel.classList.toggle('left',rightSide);
+  focusHS(s);scrim.classList.add('on');openPanel(s);
   history.replaceState(null,'','?lugar='+slugOf(s));
 }
 
@@ -1567,7 +1574,7 @@ function openPanel(s){
     panel.innerHTML=h;panel.classList.add('open');
   }
 }
-function closePanel(){panel.classList.remove('open');clearFocus();hs.forEach(function(h){h.classList.remove('off');});}
+function closePanel(){panel.classList.remove('open');panel.classList.remove('left');clearFocus();scrim.classList.remove('on');}
 
 var zwrap=document.getElementById('zones');
 Object.keys(ZONES).forEach(function(k){
@@ -1575,8 +1582,10 @@ Object.keys(ZONES).forEach(function(k){
   b.onclick=function(){activateZone(k);};zwrap.appendChild(b);b._k=k;
 });
 var rb=document.createElement('button');rb.className='zbtn reset';rb.textContent='Ver todo';rb.onclick=resetView;zwrap.appendChild(rb);
+var activeZone=null;
 function activateZone(k){
-  closePanel();var z=ZONES[k];
+  if(activeZone===k){resetView();return;}
+  closePanel();var z=ZONES[k];activeZone=k;
   hs.forEach(function(h){h.classList.toggle('off',z.members.indexOf(h.dataset.n)<0);});
   var b=z.box;mpath.setAttribute('d','M0 0H100V100H0Z M'+b.x0+' '+b.y0+'H'+b.x1+'V'+b.y1+'H'+b.x0+'Z');
   mask.style.opacity='1';fitBox(b,true);
@@ -1584,7 +1593,7 @@ function activateZone(k){
   zsum.innerHTML='<b>'+z.label+'</b>'+z.sum;zsum.classList.add('show');
   history.replaceState(null,'',location.pathname);
 }
-function clearZone(){hs.forEach(function(h){h.classList.remove('off');});mask.style.opacity='0';
+function clearZone(){activeZone=null;hs.forEach(function(h){h.classList.remove('off');});mask.style.opacity='0';
   [].forEach.call(zwrap.children,function(x){x.classList.remove('on');});zsum.classList.remove('show');}
 
 var q=document.getElementById('q'),res=document.getElementById('res');
