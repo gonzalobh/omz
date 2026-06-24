@@ -1638,7 +1638,7 @@ function renderRes(term){
   var html='',lastc=null;
   items.slice(0,40).forEach(function(s){
     if(s.c!==lastc){html+='<div class="grp">'+grpL(s.c)+'</div>';lastc=s.c;}
-    html+='<button data-n="'+encodeURIComponent(s.n)+'"><span class="dot" style="background:'+COL[s.c]+'"></span>'+s.n+'<span class="cat">'+catL(s.c)+'</span></button>';
+    html+='<button data-n="'+encodeURIComponent(s.n)+'">'+s.n+'<span class="cat">'+catL(s.c)+'</span></button>';
   });
   res.innerHTML=html;res.classList.add('show');
   [].forEach.call(res.querySelectorAll('button'),function(btn){
