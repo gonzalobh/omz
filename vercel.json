@@ -1,0 +1,5 @@
+{
+  "redirects": [
+    { "source": "/carta.pdf", "destination": "/carta.html", "permanent": true }
+  ]
+}
